@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC">
+
+    <!-- Header Toolbar -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#2563EB"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Statistics"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Prediction Accuracy Trend Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Prediction Accuracy Trend"
+                        android:textColor="#0F172A"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Simulated Line Chart -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:layout_marginTop="24dp">
+
+                        <!-- Y-Axis Labels -->
+                        <TextView android:id="@+id/y100" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="100" android:textColor="#94A3B8" android:textSize="12sp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+                        <TextView android:id="@+id/y95" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="95" android:textColor="#94A3B8" android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/y90" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/y100" />
+                        <TextView android:id="@+id/y90" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="90" android:textColor="#94A3B8" android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/y85" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/y95" />
+                        <TextView android:id="@+id/y85" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="85" android:textColor="#94A3B8" android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/y80" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/y90" />
+                        <TextView android:id="@+id/y80" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="80" android:textColor="#94A3B8" android:textSize="12sp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" />
+
+                        <!-- Grid Lines -->
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="#F1F5F9" app:layout_constraintBottom_toBottomOf="@+id/y100" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y100" android:layout_marginStart="8dp" />
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="#F1F5F9" app:layout_constraintBottom_toBottomOf="@+id/y95" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y95" android:layout_marginStart="8dp" />
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="#F1F5F9" app:layout_constraintBottom_toBottomOf="@+id/y90" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y90" android:layout_marginStart="8dp" />
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="#F1F5F9" app:layout_constraintBottom_toBottomOf="@+id/y85" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y85" android:layout_marginStart="8dp" />
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="#F1F5F9" app:layout_constraintBottom_toBottomOf="@+id/y80" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y80" android:layout_marginStart="8dp" />
+
+                        <!-- The Line (Simulated with an image or SVG path if possible, but let's use a Placeholder or complex drawing) -->
+                        <!-- For simplicity and exact design, I will use a custom view or a set of circles and lines -->
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="32dp"
+                            android:src="@drawable/bg_chart_line_placeholder"
+                            app:layout_constraintBottom_toBottomOf="@+id/y80"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/y100" />
+
+                        <!-- X-Axis Labels -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal"
+                            android:layout_marginStart="32dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/y80">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Jan" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Feb" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Mar" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Apr" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="May" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Jun" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Assessments by Category Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Assessments by Category"
+                        android:textColor="#0F172A"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Horizontal Bar Chart -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:orientation="vertical">
+
+                        <!-- Cardiac -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="24dp">
+                            <TextView
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:text="Cardiac"
+                                android:textColor="#64748B"
+                                android:textSize="14sp" />
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="24dp"
+                                android:layout_weight="0.8"
+                                android:background="@drawable/bg_bar_chart" />
+                            <View android:layout_width="0dp" android:layout_height="24dp" android:layout_weight="0.2" />
+                        </LinearLayout>
+
+                        <!-- Diabetes -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="24dp">
+                            <TextView
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:text="Diabetes"
+                                android:textColor="#64748B"
+                                android:textSize="14sp" />
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="24dp"
+                                android:layout_weight="0.5"
+                                android:background="@drawable/bg_bar_chart" />
+                            <View android:layout_width="0dp" android:layout_height="24dp" android:layout_weight="0.5" />
+                        </LinearLayout>
+
+                        <!-- Oncology -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="24dp">
+                            <TextView
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:text="Oncology"
+                                android:textColor="#64748B"
+                                android:textSize="14sp" />
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="24dp"
+                                android:layout_weight="0.25"
+                                android:background="@drawable/bg_bar_chart" />
+                            <View android:layout_width="0dp" android:layout_height="24dp" android:layout_weight="0.75" />
+                        </LinearLayout>
+
+                        <!-- Renal -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+                            <TextView
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:text="Renal"
+                                android:textColor="#64748B"
+                                android:textSize="14sp" />
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="24dp"
+                                android:layout_weight="0.15"
+                                android:background="@drawable/bg_bar_chart" />
+                            <View android:layout_width="0dp" android:layout_height="24dp" android:layout_weight="0.85" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_home"
+                app:tint="#94A3B8" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textColor="#94A3B8"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_cases"
+                app:tint="#94A3B8" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cases"
+                android:textColor="#94A3B8"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_reports"
+                app:tint="#2563EB" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reports"
+                android:textColor="#2563EB"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_profile"
+                app:tint="#94A3B8" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="#94A3B8"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

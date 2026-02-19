@@ -1,0 +1,21 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="150dp"
+    android:viewportWidth="300"
+    android:viewportHeight="150">
+    <!-- Simulated Accuracy Line Chart -->
+    <path
+        android:pathData="M30,100 L80,70 L130,130 L180,80 L230,50 L280,90"
+        android:strokeColor="#2563EB"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- Data Points -->
+    <path android:fillColor="#FFFFFF" android:strokeColor="#2563EB" android:strokeWidth="2" android:pathData="M30,100 m-4,0 a4,4 0 1,1 8,0 a4,4 0 1,1 -8,0" />
+    <path android:fillColor="#FFFFFF" android:strokeColor="#2563EB" android:strokeWidth="2" android:pathData="M80,70 m-4,0 a4,4 0 1,1 8,0 a4,4 0 1,1 -8,0" />
+    <path android:fillColor="#FFFFFF" android:strokeColor="#2563EB" android:strokeWidth="2" android:pathData="M130,130 m-4,0 a4,4 0 1,1 8,0 a4,4 0 1,1 -8,0" />
+    <path android:fillColor="#FFFFFF" android:strokeColor="#2563EB" android:strokeWidth="2" android:pathData="M180,80 m-4,0 a4,4 0 1,1 8,0 a4,4 0 1,1 -8,0" />
+    <path android:fillColor="#FFFFFF" android:strokeColor="#2563EB" android:strokeWidth="2" android:pathData="M230,50 m-4,0 a4,4 0 1,1 8,0 a4,4 0 1,1 -8,0" />
+    <path android:fillColor="#FFFFFF" android:strokeColor="#2563EB" android:strokeWidth="2" android:pathData="M280,90 m-4,0 a4,4 0 1,1 8,0 a4,4 0 1,1 -8,0" />
+</vector>
