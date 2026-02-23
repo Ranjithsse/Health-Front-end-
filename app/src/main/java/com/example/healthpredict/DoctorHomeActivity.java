@@ -81,6 +81,12 @@ public class DoctorHomeActivity extends AppCompatActivity {
             cardNewAssessment.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, NewCaseOneActivity.class)));
         }
 
+        // View All (Recent Patients)
+        TextView tvViewAllPatients = findViewById(R.id.tvViewAllPatients);
+        if (tvViewAllPatients != null) {
+            tvViewAllPatients.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorCasesActivity.class)));
+        }
+
         // Cases
         View navCases = findViewById(R.id.navCases);
         if (navCases != null) {

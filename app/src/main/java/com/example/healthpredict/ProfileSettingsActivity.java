@@ -17,12 +17,13 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         setupToolbar();
         setupSensitivityDropdown();
         setupDeleteAccount();
+        setupBottomNavigation();
     }
 
     private void setupToolbar() {
         View btnBack = findViewById(R.id.btnBack);
         if (btnBack != null) {
-            btnBack.setOnClickListener(v -> onBackPressed());
+            btnBack.setOnClickListener(v -> finish());
         }
     }
 
@@ -52,8 +53,43 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autoCompleteSensitivity);
         if (autoCompleteTextView != null) {
             autoCompleteTextView.setAdapter(adapter);
-            // Ensure the dropdown shows on click even if there's text
             autoCompleteTextView.setOnClickListener(v -> autoCompleteTextView.showDropDown());
+        }
+    }
+
+    private void setupBottomNavigation() {
+        View navHome = findViewById(R.id.navHome);
+        if (navHome != null) {
+            navHome.setOnClickListener(v -> {
+                Intent intent = new Intent(ProfileSettingsActivity.this, DoctorHomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            });
+        }
+
+        View navCases = findViewById(R.id.navCases);
+        if (navCases != null) {
+            navCases.setOnClickListener(v -> {
+                Intent intent = new Intent(ProfileSettingsActivity.this, DoctorCasesActivity.class);
+                startActivity(intent);
+            });
+        }
+
+        View navReports = findViewById(R.id.navReports);
+        if (navReports != null) {
+            navReports.setOnClickListener(v -> {
+                Intent intent = new Intent(ProfileSettingsActivity.this, ReportsActivity.class);
+                startActivity(intent);
+            });
+        }
+
+        View navProfile = findViewById(R.id.navProfile);
+        if (navProfile != null) {
+            navProfile.setOnClickListener(v -> {
+                Intent intent = new Intent(ProfileSettingsActivity.this, DoctorProfileActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            });
         }
     }
 }

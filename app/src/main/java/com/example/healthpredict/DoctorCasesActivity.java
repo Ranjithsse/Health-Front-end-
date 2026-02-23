@@ -38,6 +38,17 @@ public class DoctorCasesActivity extends AppCompatActivity {
             });
         }
 
+        View navProfile = findViewById(R.id.navProfile);
+        if (navProfile != null) {
+            navProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DoctorCasesActivity.this, DoctorProfileActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
         setupCases();
     }
 

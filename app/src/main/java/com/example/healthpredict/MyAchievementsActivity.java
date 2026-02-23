@@ -1,5 +1,6 @@
 package com.example.healthpredict;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ public class MyAchievementsActivity extends AppCompatActivity {
 
         setupToolbar();
         setupBadges();
+        setupBottomNavigation();
         
         View btnBackToProfile = findViewById(R.id.btnBackToProfile);
         if (btnBackToProfile != null) {
@@ -27,7 +29,7 @@ public class MyAchievementsActivity extends AppCompatActivity {
     private void setupToolbar() {
         View btnBack = findViewById(R.id.btnBack);
         if (btnBack != null) {
-            btnBack.setOnClickListener(v -> onBackPressed());
+            btnBack.setOnClickListener(v -> finish());
         }
     }
 
@@ -68,5 +70,43 @@ public class MyAchievementsActivity extends AppCompatActivity {
         tvTitle.setText(title);
         tvDesc.setText(desc);
         tvDate.setText(date);
+    }
+
+    private void setupBottomNavigation() {
+        View navHome = findViewById(R.id.navHome);
+        if (navHome != null) {
+            navHome.setOnClickListener(v -> {
+                Intent intent = new Intent(MyAchievementsActivity.this, DoctorHomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            });
+        }
+
+        View navCases = findViewById(R.id.navCases);
+        if (navCases != null) {
+            navCases.setOnClickListener(v -> {
+                Intent intent = new Intent(MyAchievementsActivity.this, DoctorCasesActivity.class);
+                startActivity(intent);
+            });
+        }
+
+        View navReports = findViewById(R.id.navReports);
+        if (navReports != null) {
+            navReports.setOnClickListener(v -> {
+                Intent intent = new Intent(MyAchievementsActivity.this, ReportsActivity.class);
+                startActivity(intent);
+            });
+        }
+
+        // navProfile is already the current section (Achievements is under Profile)
+        // No logic needed or it can navigate back to the main Profile screen
+        View navProfile = findViewById(R.id.navProfile);
+        if (navProfile != null) {
+            navProfile.setOnClickListener(v -> {
+                Intent intent = new Intent(MyAchievementsActivity.this, DoctorProfileActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            });
+        }
     }
 }

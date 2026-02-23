@@ -70,8 +70,8 @@ public class ReportsActivity extends AppCompatActivity {
         findViewById(R.id.navProfile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // startActivity(new Intent(ReportsActivity.this, ProfileActivity.class));
-                // finish();
+                startActivity(new Intent(ReportsActivity.this, DoctorProfileActivity.class));
+                finish();
             }
         });
     }

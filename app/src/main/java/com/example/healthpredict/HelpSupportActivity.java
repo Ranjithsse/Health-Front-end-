@@ -1,5 +1,6 @@
 package com.example.healthpredict;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ public class HelpSupportActivity extends AppCompatActivity {
         setupToolbar();
         setupFAQs();
         setupEmailSupport();
+        setupBottomNavigation();
 
         View btnBackFooter = findViewById(R.id.btnBackFooter);
         if (btnBackFooter != null) {
@@ -27,7 +29,7 @@ public class HelpSupportActivity extends AppCompatActivity {
     private void setupToolbar() {
         View btnBack = findViewById(R.id.btnBack);
         if (btnBack != null) {
-            btnBack.setOnClickListener(v -> onBackPressed());
+            btnBack.setOnClickListener(v -> finish());
         }
     }
 
@@ -75,5 +77,41 @@ public class HelpSupportActivity extends AppCompatActivity {
             divider.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
             ivChevron.setRotation(isExpanded ? 0 : 180);
         });
+    }
+
+    private void setupBottomNavigation() {
+        View navHome = findViewById(R.id.navHome);
+        if (navHome != null) {
+            navHome.setOnClickListener(v -> {
+                Intent intent = new Intent(HelpSupportActivity.this, DoctorHomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            });
+        }
+
+        View navCases = findViewById(R.id.navCases);
+        if (navCases != null) {
+            navCases.setOnClickListener(v -> {
+                Intent intent = new Intent(HelpSupportActivity.this, DoctorCasesActivity.class);
+                startActivity(intent);
+            });
+        }
+
+        View navReports = findViewById(R.id.navReports);
+        if (navReports != null) {
+            navReports.setOnClickListener(v -> {
+                Intent intent = new Intent(HelpSupportActivity.this, ReportsActivity.class);
+                startActivity(intent);
+            });
+        }
+
+        View navProfile = findViewById(R.id.navProfile);
+        if (navProfile != null) {
+            navProfile.setOnClickListener(v -> {
+                Intent intent = new Intent(HelpSupportActivity.this, DoctorProfileActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            });
+        }
     }
 }
