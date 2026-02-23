@@ -27,6 +27,17 @@ public class DoctorCasesActivity extends AppCompatActivity {
             });
         }
 
+        View navReports = findViewById(R.id.navReports);
+        if (navReports != null) {
+            navReports.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DoctorCasesActivity.this, ReportsActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
         setupCases();
     }
 

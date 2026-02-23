@@ -146,6 +146,110 @@
             android:exported="false" />
 
         <activity
+            android:name=".NewCaseSevenActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseEightActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseNineActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseTenActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseElevenActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseTwelveActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseThirteenActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseFourteenActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseFifteenActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseSixteenActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseSeventeenActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseEighteenActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseNineteenActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NewCaseTwentyActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AiPredictionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".OneYearPredictionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ThreeYearPredictionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".FiveYearPredictionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".RiskScoreActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".RiskFactorsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AiExplainabilityActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ModelConfidenceActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ModelConfidenceDetailsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".PredictionAccuracyActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ClinicalRecommendationsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ProviderNotesActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
     </application>

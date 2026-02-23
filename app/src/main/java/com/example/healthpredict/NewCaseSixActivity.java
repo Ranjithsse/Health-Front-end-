@@ -3,11 +3,12 @@ package com.example.healthpredict;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +34,8 @@ public class NewCaseSixActivity extends AppCompatActivity {
         View btnReview = findViewById(R.id.btnReview);
         if (btnReview != null) {
             btnReview.setOnClickListener(v -> {
-                // Logic for Review (Final step) will go here
-                // For now, maybe navigate to a results page or show a summary
+                Intent intent = new Intent(NewCaseSixActivity.this, NewCaseSevenActivity.class);
+                startActivity(intent);
             });
         }
     }
@@ -82,13 +83,16 @@ public class NewCaseSixActivity extends AppCompatActivity {
         
         if (btnGlucose != null) {
             btnGlucose.setOnClickListener(v -> {
-                String[] options = {"Normal (<100)", "Prediabetes (100-125)", "Diabetes (>=126)"};
-                new MaterialAlertDialogBuilder(this)
-                    .setTitle("Select Fasting Glucose Level")
-                    .setItems(options, (dialog, which) -> {
-                        tvGlucose.setText(options[which]);
-                    })
-                    .show();
+                PopupMenu popup = new PopupMenu(this, btnGlucose);
+                popup.getMenu().add("Normal (<100)");
+                popup.getMenu().add("Pre-diabetic (100-125)");
+                popup.getMenu().add("Diabetic (126+)");
+
+                popup.setOnMenuItemClickListener(item -> {
+                    tvGlucose.setText(item.getTitle());
+                    return true;
+                });
+                popup.show();
             });
         }
     }
