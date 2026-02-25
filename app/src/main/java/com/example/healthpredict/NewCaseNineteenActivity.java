@@ -12,12 +12,14 @@ public class NewCaseNineteenActivity extends AppCompatActivity {
 
     private MaterialCardView cardYes;
     private MaterialCardView cardNo;
+    private CaseData caseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_nineteen);
 
+        caseData = CaseData.getInstance();
         cardYes = findViewById(R.id.cardYes);
         cardNo = findViewById(R.id.cardNo);
 
@@ -35,10 +37,16 @@ public class NewCaseNineteenActivity extends AppCompatActivity {
 
     private void setupSelectionLogic() {
         if (cardYes != null) {
-            cardYes.setOnClickListener(v -> selectCard(cardYes, cardNo));
+            cardYes.setOnClickListener(v -> {
+                selectCard(cardYes, cardNo);
+                caseData.adjuvantTherapyRequired = true;
+            });
         }
         if (cardNo != null) {
-            cardNo.setOnClickListener(v -> selectCard(cardNo, cardYes));
+            cardNo.setOnClickListener(v -> {
+                selectCard(cardNo, cardYes);
+                caseData.adjuvantTherapyRequired = false;
+            });
         }
     }
 

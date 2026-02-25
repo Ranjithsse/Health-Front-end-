@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DoctorNotificationsActivity extends AppCompatActivity {
 
@@ -23,7 +27,33 @@ public class DoctorNotificationsActivity extends AppCompatActivity {
             });
         }
 
+        setupRecyclerView();
         setupBottomNavigation();
+    }
+
+    private void setupRecyclerView() {
+        RecyclerView rvNotifications = findViewById(R.id.rvNotifications);
+        rvNotifications.setLayoutManager(new LinearLayoutManager(this));
+
+        List<Notification> notifications = new ArrayList<>();
+        notifications.add(new Notification(
+                "Risk Assessment Complete",
+                "AI analysis for Case #1024 is ready.",
+                "10 min ago",
+                Notification.Type.SUCCESS));
+        notifications.add(new Notification(
+                "Health Report Ready",
+                "PDF report for Sarah Johnson is available for download.",
+                "1 hour ago",
+                Notification.Type.INFO));
+        notifications.add(new Notification(
+                "Elevated Risk Detected",
+                "Case #1021 shows elevated cardiovascular risk markers.",
+                "Yesterday",
+                Notification.Type.ALERT));
+
+        NotificationAdapter adapter = new NotificationAdapter(notifications);
+        rvNotifications.setAdapter(adapter);
     }
 
     private void setupBottomNavigation() {

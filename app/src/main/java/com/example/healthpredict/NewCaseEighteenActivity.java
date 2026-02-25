@@ -12,12 +12,14 @@ public class NewCaseEighteenActivity extends AppCompatActivity {
 
     private MaterialCardView cardIntensive;
     private MaterialCardView cardStandard;
+    private CaseData caseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_eighteen);
 
+        caseData = CaseData.getInstance();
         cardIntensive = findViewById(R.id.cardIntensive);
         cardStandard = findViewById(R.id.cardStandard);
 
@@ -35,10 +37,16 @@ public class NewCaseEighteenActivity extends AppCompatActivity {
 
     private void setupSelectionLogic() {
         if (cardIntensive != null) {
-            cardIntensive.setOnClickListener(v -> selectCard(cardIntensive, cardStandard));
+            cardIntensive.setOnClickListener(v -> {
+                selectCard(cardIntensive, cardStandard);
+                caseData.monitoringLevel = "Intensive";
+            });
         }
         if (cardStandard != null) {
-            cardStandard.setOnClickListener(v -> selectCard(cardStandard, cardIntensive));
+            cardStandard.setOnClickListener(v -> {
+                selectCard(cardStandard, cardIntensive);
+                caseData.monitoringLevel = "Standard";
+            });
         }
     }
 

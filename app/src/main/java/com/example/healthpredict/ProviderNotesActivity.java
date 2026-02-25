@@ -7,32 +7,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ProviderNotesActivity extends AppCompatActivity {
 
+    private CaseData caseData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider_notes);
 
+        caseData = CaseData.getInstance();
         final EditText etNotes = findViewById(R.id.etProviderNotes);
 
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
 
         findViewById(R.id.btnGenerateReport).setOnClickListener(v -> {
-            String notes = etNotes.getText().toString();
+            // 1. Capture the provider notes
+            caseData.providerNotes = etNotes.getText().toString();
             
-            // In a real app, these would come from previous screens or a database.
-            // Passing sample processed data to simulate "details being processed".
-            Intent intent = new Intent(ProviderNotesActivity.this, FinalReportActivity.class);
-            intent.putExtra("PATIENT_NAME", "Robert Wilson");
-            intent.putExtra("PATIENT_ID", "1024");
-            intent.putExtra("PATIENT_AGE", "45");
-            intent.putExtra("PATIENT_GENDER", "Male");
-            intent.putExtra("PREDICTION_TEXT", "98.2% Stability Probability\n(1-Year)");
-            intent.putExtra("RISK_LEVEL", "Low");
-            intent.putExtra("PROTOCOL", "ACE Inhibitors");
-            intent.putExtra("INTERVENTION", "Non-Invasive");
-            intent.putExtra("MONITORING", "Standard");
-            intent.putExtra("PROVIDER_NOTES", notes.isEmpty() ? "No notes added." : notes);
+            // 2. Set the current date if not set
+            if (caseData.date.isEmpty()) {
+                caseData.date = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(new java.util.Date());
+            }
 
+            // 3. Save the finalized case to history so it appears in Home, Cases, and Reports
+            HistoryManager.getInstance().addCase(caseData);
+            
+            // 4. Navigate to FinalReportActivity
+            Intent intent = new Intent(ProviderNotesActivity.this, FinalReportActivity.class);
             startActivity(intent);
         });
     }

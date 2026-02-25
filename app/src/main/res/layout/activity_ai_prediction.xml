@@ -94,13 +94,13 @@
             android:textColor="#0F172A"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tvDescription"
+            app:layout_constraintBottom_toTopOf="@+id/tvStatus"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/circleBackground" />
 
         <TextView
-            android:id="@+id/tvDescription"
+            android:id="@+id/tvStatus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="48dp"
@@ -109,45 +109,48 @@
             android:text="Gathering clinical data..."
             android:textColor="#64748B"
             android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar"
+            app:layout_constraintBottom_toTopOf="@+id/progressIndicator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
         <!-- Progress Section -->
         <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/progressBar"
+            android:id="@+id/progressIndicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="48dp"
             android:layout_marginTop="48dp"
             android:progress="0"
             app:indicatorColor="#2563EB"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDescription"
+            app:layout_constraintBottom_toTopOf="@+id/resultContainer"
+            app:layout_constraintTop_toBottomOf="@id/tvStatus"
             app:trackColor="#E2E8F0"
             app:trackCornerRadius="4dp"
             app:trackThickness="8dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/resultContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Extracting features"
-            android:textColor="#94A3B8"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="@id/progressBar"
-            app:layout_constraintTop_toBottomOf="@id/progressBar" />
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressIndicator">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Calculating risk"
-            android:textColor="#94A3B8"
-            android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="@id/progressBar"
-            app:layout_constraintTop_toBottomOf="@id/progressBar" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnViewReport"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="View Risk Report"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="#2563EB"
+                app:cornerRadius="12dp"
+                android:letterSpacing="0"/>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

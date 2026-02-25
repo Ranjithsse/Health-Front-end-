@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Treatment Planning"
+            android:text="Case Review"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -83,7 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Review and confirm all parameters."
+                        android:text="Final review before AI analysis."
                         android:textColor="#3B82F6"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="AI will analyze all health parameters"
+                android:text="AI will analyze all parameters and files"
                 android:textColor="#64748B"
                 android:textSize="15sp" />
 
@@ -129,7 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="20dp"
-                        android:text="Input Summary"
+                        android:text="Summary of Details"
                         android:textColor="#0F172A"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -139,107 +139,133 @@
                         android:layout_height="1dp"
                         android:background="#F1F5F9" />
 
-                    <!-- Protocol Row -->
-                    <RelativeLayout
+                    <!-- Patient Info Row -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp">
+                        android:orientation="vertical"
+                        android:padding="16dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Protocol"
+                            android:text="PATIENT"
                             android:textColor="#64748B"
-                            android:textSize="14sp" />
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/tvSummaryPatient"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="ACE Inhibitors, 10mg"
+                            android:layout_marginTop="4dp"
+                            android:text="P-1024 (Alex Morgan)"
                             android:textColor="#1E293B"
-                            android:textSize="14sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
-                    </RelativeLayout>
+                    </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginHorizontal="20dp"
-                        android:background="#F1F5F9" />
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F1F5F9" android:layout_marginHorizontal="16dp"/>
 
-                    <!-- Intervention Row -->
-                    <RelativeLayout
+                    <!-- Vitals Row -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp">
+                        android:orientation="vertical"
+                        android:padding="16dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Intervention"
+                            android:text="VITALS &amp; DEMOGRAPHICS"
                             android:textColor="#64748B"
-                            android:textSize="14sp" />
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/tvSummaryVitals"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="Non-Invasive"
+                            android:layout_marginTop="4dp"
+                            android:text="120/80 mmHg, Male, O+"
                             android:textColor="#1E293B"
-                            android:textSize="14sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
-                    </RelativeLayout>
+                    </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginHorizontal="20dp"
-                        android:background="#F1F5F9" />
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F1F5F9" android:layout_marginHorizontal="16dp"/>
 
-                    <!-- Monitoring Row -->
-                    <RelativeLayout
+                    <!-- Medical System Row -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp">
+                        android:orientation="vertical"
+                        android:padding="16dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Monitoring"
+                            android:text="PRIMARY SYSTEM"
                             android:textColor="#64748B"
-                            android:textSize="14sp" />
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/tvSummarySystem"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="Standard"
+                            android:layout_marginTop="4dp"
+                            android:text="Cardiovascular"
                             android:textColor="#1E293B"
-                            android:textSize="14sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
-                    </RelativeLayout>
+                    </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginHorizontal="20dp"
-                        android:background="#F1F5F9" />
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F1F5F9" android:layout_marginHorizontal="16dp"/>
 
-                    <!-- Adjuvant Row -->
-                    <RelativeLayout
+                    <!-- Files Row -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp">
+                        android:orientation="vertical"
+                        android:padding="16dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Adjuvant"
+                            android:text="UPLOADED FILES"
                             android:textColor="#64748B"
-                            android:textSize="14sp" />
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvSummaryFiles"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="patient_mri_scans.dicom"
+                            android:textColor="#2563EB"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F1F5F9" android:layout_marginHorizontal="16dp"/>
+
+                    <!-- Plan Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="None"
-                            android:textColor="#1E293B"
-                            android:textSize="14sp"
+                            android:text="TREATMENT PLAN"
+                            android:textColor="#64748B"
+                            android:textSize="11sp"
                             android:textStyle="bold" />
-                    </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvSummaryPlan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Surgical, Intensive, Adjuvant Required"
+                            android:textColor="#1E293B"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

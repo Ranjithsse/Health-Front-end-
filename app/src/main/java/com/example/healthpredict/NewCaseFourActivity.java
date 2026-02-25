@@ -9,10 +9,16 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class NewCaseFourActivity extends AppCompatActivity {
 
+    private CaseData caseData;
+    private TextView tvPhysicalActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_four);
+
+        caseData = CaseData.getInstance();
+        tvPhysicalActivity = findViewById(R.id.tvPhysicalActivity);
 
         setupToolbar();
         setupPhysicalActivitySelection();
@@ -25,6 +31,9 @@ public class NewCaseFourActivity extends AppCompatActivity {
         View btnNext = findViewById(R.id.btnNext);
         if (btnNext != null) {
             btnNext.setOnClickListener(v -> {
+                if (tvPhysicalActivity != null) {
+                    caseData.physicalActivity = tvPhysicalActivity.getText().toString();
+                }
                 Intent intent = new Intent(NewCaseFourActivity.this, NewCaseFiveActivity.class);
                 startActivity(intent);
             });
@@ -40,7 +49,6 @@ public class NewCaseFourActivity extends AppCompatActivity {
 
     private void setupPhysicalActivitySelection() {
         View btnPhysicalActivity = findViewById(R.id.btnPhysicalActivity);
-        TextView tvPhysicalActivity = findViewById(R.id.tvPhysicalActivity);
         
         if (btnPhysicalActivity != null) {
             btnPhysicalActivity.setOnClickListener(v -> {
@@ -48,7 +56,9 @@ public class NewCaseFourActivity extends AppCompatActivity {
                 new MaterialAlertDialogBuilder(this)
                     .setTitle("Select Physical Activity Level")
                     .setItems(options, (dialog, which) -> {
-                        tvPhysicalActivity.setText(options[which]);
+                        if (tvPhysicalActivity != null) {
+                            tvPhysicalActivity.setText(options[which]);
+                        }
                     })
                     .show();
             });

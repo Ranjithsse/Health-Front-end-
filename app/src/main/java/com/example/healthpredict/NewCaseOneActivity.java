@@ -3,6 +3,7 @@ package com.example.healthpredict;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -14,13 +15,19 @@ import java.util.TimeZone;
 public class NewCaseOneActivity extends AppCompatActivity {
 
     private TextView tvDate;
+    private EditText etPatientId;
+    private CaseData caseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_one);
 
+        caseData = CaseData.getInstance();
+        caseData.reset(); // Starting a new case
+
         tvDate = findViewById(R.id.tvDate);
+        etPatientId = findViewById(R.id.etPatientId);
         View btnDatePicker = findViewById(R.id.btnDatePicker);
 
         if (btnDatePicker != null) {
@@ -35,6 +42,14 @@ public class NewCaseOneActivity extends AppCompatActivity {
         View btnNext = findViewById(R.id.btnNext);
         if (btnNext != null) {
             btnNext.setOnClickListener(v -> {
+                // Save data to singleton
+                if (etPatientId != null) {
+                    caseData.patientId = etPatientId.getText().toString();
+                }
+                if (tvDate != null) {
+                    caseData.date = tvDate.getText().toString();
+                }
+
                 // Navigate to activity_new_case_two.xml
                 Intent intent = new Intent(NewCaseOneActivity.this, NewCaseTwoActivity.class);
                 startActivity(intent);
@@ -49,11 +64,8 @@ public class NewCaseOneActivity extends AppCompatActivity {
                 .build();
 
         datePicker.addOnPositiveButtonClickListener(selection -> {
-            // Get the offset from our timezone and UTC.
             TimeZone timeZoneUTC = TimeZone.getDefault();
-            // It will be negative, so that's the -1
             int offsetFromUTC = timeZoneUTC.getOffset(new Date().getTime()) * -1;
-            // Create a date format, then a date object with our offset
             SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             Date date = new Date(selection + offsetFromUTC);
             tvDate.setText(simpleFormat.format(date));

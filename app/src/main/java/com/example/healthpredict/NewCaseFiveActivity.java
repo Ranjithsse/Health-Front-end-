@@ -15,12 +15,14 @@ public class NewCaseFiveActivity extends AppCompatActivity {
     private String selectedSystem = "Cardiovascular";
     private TextView tvSelectedSystem;
     private List<MaterialCardView> systemCards = new ArrayList<>();
+    private CaseData caseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_five);
 
+        caseData = CaseData.getInstance();
         tvSelectedSystem = findViewById(R.id.tvSelectedSystem);
         setupToolbar();
         setupSystemSelection();
@@ -33,6 +35,7 @@ public class NewCaseFiveActivity extends AppCompatActivity {
         View btnNext = findViewById(R.id.btnNext);
         if (btnNext != null) {
             btnNext.setOnClickListener(v -> {
+                caseData.primarySystem = selectedSystem;
                 Intent intent = new Intent(NewCaseFiveActivity.this, NewCaseSixActivity.class);
                 startActivity(intent);
             });
@@ -59,13 +62,14 @@ public class NewCaseFiveActivity extends AppCompatActivity {
             if (card != null) {
                 systemCards.add(card);
                 card.setOnClickListener(v -> {
-                    // Extract text from the card's child LinearLayout's TextView
                     View layout = card.getChildAt(0);
                     if (layout instanceof android.widget.LinearLayout) {
                         View textView = ((android.widget.LinearLayout) layout).getChildAt(1);
                         if (textView instanceof TextView) {
                             selectedSystem = ((TextView) textView).getText().toString();
-                            tvSelectedSystem.setText(selectedSystem);
+                            if (tvSelectedSystem != null) {
+                                tvSelectedSystem.setText(selectedSystem);
+                            }
                             updateSelectionUI(card);
                         }
                     }

@@ -1,6 +1,7 @@
 package com.example.healthpredict;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -58,10 +59,11 @@ public class DeleteAccountDoctorActivity extends AppCompatActivity {
 
     private void setupActionButtons() {
         btnPermanentlyDelete.setOnClickListener(v -> {
-            // Perform Account Deletion Logic here
-            Toast.makeText(this, "Account Deleted Permanently", Toast.LENGTH_LONG).show();
+            deleteAccountData();
             
-            // Navigate back to Login or Role Selection
+            Toast.makeText(this, "Account and data deleted permanently", Toast.LENGTH_LONG).show();
+            
+            // Navigate back to Role Selection and clear activity stack
             Intent intent = new Intent(this, RoleSelectionActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -72,5 +74,16 @@ public class DeleteAccountDoctorActivity extends AppCompatActivity {
         if (btnCancel != null) {
             btnCancel.setOnClickListener(v -> finish());
         }
+    }
+
+    private void deleteAccountData() {
+        // Clear SharedPreferences (Auth tokens, profile data, etc.)
+        SharedPreferences preferences = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+
+        // In a real app, you would also call an API to delete data from the server
+        // and delete local database files if any.
     }
 }

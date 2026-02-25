@@ -11,11 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 public class NewCaseEightActivity extends AppCompatActivity {
 
     private ActivityResultLauncher<String> filePickerLauncher;
+    private CaseData caseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_eight);
+
+        caseData = CaseData.getInstance();
 
         setupToolbar();
 
@@ -24,7 +27,7 @@ public class NewCaseEightActivity extends AppCompatActivity {
                 new ActivityResultContracts.GetContent(),
                 uri -> {
                     if (uri != null) {
-                        // Using a small delay or ensuring activity is in correct state before transition
+                        caseData.fileUri = uri.toString();
                         navigateToNine(uri);
                     }
                 }
@@ -35,16 +38,8 @@ public class NewCaseEightActivity extends AppCompatActivity {
             uploadArea.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Open file picker for all types of files (*/*)
                     filePickerLauncher.launch("*/*");
                 }
-            });
-        }
-
-        View btnUploadAnalyze = findViewById(R.id.btnUploadAnalyze);
-        if (btnUploadAnalyze != null) {
-            btnUploadAnalyze.setOnClickListener(v -> {
-                // This button is usually used after a file is selected
             });
         }
     }

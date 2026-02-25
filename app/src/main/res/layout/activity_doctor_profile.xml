@@ -180,18 +180,8 @@
                     <include
                         android:id="@+id/statAccuracy"
                         layout="@layout/view_profile_stat_card"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="8dp" />
-
-                    <include
-                        android:id="@+id/statAlerts"
-                        layout="@layout/view_profile_stat_card"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="8dp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
 

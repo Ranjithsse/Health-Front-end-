@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.List;
 
 public class ReportsActivity extends AppCompatActivity {
 
@@ -16,33 +17,33 @@ public class ReportsActivity extends AppCompatActivity {
 
         ImageView ivBack = findViewById(R.id.ivBack);
         if (ivBack != null) {
-            ivBack.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
+            ivBack.setOnClickListener(v -> finish());
+        }
+
+        // "+ New" Button Navigation
+        View btnNewReport = findViewById(R.id.btnNewReport);
+        if (btnNewReport != null) {
+            btnNewReport.setOnClickListener(v -> {
+                Intent intent = new Intent(ReportsActivity.this, NewCaseOneActivity.class);
+                startActivity(intent);
             });
         }
 
         // History Card Navigation
         View cardHistory = findViewById(R.id.cardHistory);
         if (cardHistory != null) {
-            cardHistory.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(ReportsActivity.this, DoctorCasesActivity.class));
-                }
+            cardHistory.setOnClickListener(v -> {
+                Intent intent = new Intent(ReportsActivity.this, DoctorCasesActivity.class);
+                startActivity(intent);
             });
         }
 
         // Analytics Card Navigation
         View cardAnalytics = findViewById(R.id.cardAnalytics);
         if (cardAnalytics != null) {
-            cardAnalytics.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(ReportsActivity.this, StatisticsActivity.class));
-                }
+            cardAnalytics.setOnClickListener(v -> {
+                Intent intent = new Intent(ReportsActivity.this, StatisticsActivity.class);
+                startActivity(intent);
             });
         }
 
@@ -50,99 +51,89 @@ public class ReportsActivity extends AppCompatActivity {
         setupRecentReports();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setupRecentReports(); // Refresh when returning
+    }
+
     private void setupBottomNavigation() {
-        findViewById(R.id.navHome).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ReportsActivity.this, DoctorHomeActivity.class));
+        View navHome = findViewById(R.id.navHome);
+        if (navHome != null) {
+            navHome.setOnClickListener(v -> {
+                Intent intent = new Intent(ReportsActivity.this, DoctorHomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
                 finish();
-            }
-        });
+            });
+        }
 
-        findViewById(R.id.navCases).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ReportsActivity.this, DoctorCasesActivity.class));
+        View navCases = findViewById(R.id.navCases);
+        if (navCases != null) {
+            navCases.setOnClickListener(v -> {
+                Intent intent = new Intent(ReportsActivity.this, DoctorCasesActivity.class);
+                startActivity(intent);
                 finish();
-            }
-        });
+            });
+        }
 
-        findViewById(R.id.navProfile).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ReportsActivity.this, DoctorProfileActivity.class));
+        View navProfile = findViewById(R.id.navProfile);
+        if (navProfile != null) {
+            navProfile.setOnClickListener(v -> {
+                Intent intent = new Intent(ReportsActivity.this, DoctorProfileActivity.class);
+                startActivity(intent);
                 finish();
-            }
-        });
+            });
+        }
     }
 
     private void setupRecentReports() {
-        // Report 1: Robert Wilson
-        View report1 = findViewById(R.id.report1);
-        if (report1 != null) {
-            ((TextView) report1.findViewById(R.id.tvPatientName)).setText("Robert Wilson");
-            ((TextView) report1.findViewById(R.id.tvReportDetail)).setText("Full Assessment • Jan 24, 2025");
-            
-            report1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ReportsActivity.this, FinalReportActivity.class);
-                    intent.putExtra("PATIENT_NAME", "Robert Wilson");
-                    intent.putExtra("PATIENT_ID", "1024");
-                    startActivity(intent);
-                }
-            });
-        }
+        List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
+        int[] itemIds = {R.id.report1, R.id.report2, R.id.report3, R.id.report4};
 
-        // Report 2: Sarah Johnson
-        View report2 = findViewById(R.id.report2);
-        if (report2 != null) {
-            ((TextView) report2.findViewById(R.id.tvPatientName)).setText("Sarah Johnson");
-            ((TextView) report2.findViewById(R.id.tvReportDetail)).setText("Risk Analysis • Jan 23, 2025");
-            
-            report2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ReportsActivity.this, FinalReportActivity.class);
-                    intent.putExtra("PATIENT_NAME", "Sarah Johnson");
-                    intent.putExtra("PATIENT_ID", "1023");
-                    startActivity(intent);
-                }
-            });
-        }
+        for (int i = 0; i < itemIds.length; i++) {
+            View itemView = findViewById(itemIds[i]);
+            if (itemView == null) continue;
 
-        // Report 3: Michael Brown
-        View report3 = findViewById(R.id.report3);
-        if (report3 != null) {
-            ((TextView) report3.findViewById(R.id.tvPatientName)).setText("Michael Brown");
-            ((TextView) report3.findViewById(R.id.tvReportDetail)).setText("Follow-up • Jan 22, 2025");
-            
-            report3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ReportsActivity.this, FinalReportActivity.class);
-                    intent.putExtra("PATIENT_NAME", "Michael Brown");
-                    intent.putExtra("PATIENT_ID", "1022");
-                    startActivity(intent);
-                }
-            });
-        }
+            if (i < history.size()) {
+                CaseData data = history.get(i);
+                itemView.setVisibility(View.VISIBLE);
+                
+                TextView tvName = itemView.findViewById(R.id.tvPatientName);
+                TextView tvDetail = itemView.findViewById(R.id.tvReportDetail);
 
-        // Report 4: Emily Davis
-        View report4 = findViewById(R.id.report4);
-        if (report4 != null) {
-            ((TextView) report4.findViewById(R.id.tvPatientName)).setText("Emily Davis");
-            ((TextView) report4.findViewById(R.id.tvReportDetail)).setText("Lab Results • Jan 20, 2025");
-            
-            report4.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ReportsActivity.this, FinalReportActivity.class);
-                    intent.putExtra("PATIENT_NAME", "Emily Davis");
-                    intent.putExtra("PATIENT_ID", "1021");
-                    startActivity(intent);
-                }
-            });
+                String name = data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId;
+                if (tvName != null) tvName.setText(name);
+                if (tvDetail != null) tvDetail.setText(data.primarySystem + " • " + data.date);
+
+                itemView.setOnClickListener(v -> {
+                    // Set as current case and view report
+                    CaseData singleton = CaseData.getInstance();
+                    singleton.reset();
+                    copyToSingleton(data, singleton);
+                    startActivity(new Intent(ReportsActivity.this, FinalReportActivity.class));
+                });
+            } else {
+                // If there's no real history but the view is visible (mock data), 
+                // we should still allow clicking it to see activity_final_report.xml
+                itemView.setOnClickListener(v -> {
+                    startActivity(new Intent(ReportsActivity.this, FinalReportActivity.class));
+                });
+            }
         }
+    }
+
+    private void copyToSingleton(CaseData source, CaseData target) {
+        target.patientId = source.patientId;
+        target.patientName = source.patientName;
+        target.date = source.date;
+        target.gender = source.gender;
+        target.primarySystem = source.primarySystem;
+        target.riskScore = source.riskScore;
+        target.riskLevel = source.riskLevel;
+        target.accuracy = source.accuracy;
+        target.providerNotes = source.providerNotes;
+        target.interventionType = source.interventionType;
+        target.monitoringLevel = source.monitoringLevel;
     }
 }

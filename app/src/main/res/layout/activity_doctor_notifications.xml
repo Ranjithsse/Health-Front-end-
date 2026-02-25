@@ -23,7 +23,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,231 +42,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNotifications"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
+        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Risk Assessment Complete -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:strokeColor="#E2E8F0"
-                app:strokeWidth="1dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/ivIcon1Container"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        app:cardBackgroundColor="#E1F9EB"
-                        app:cardCornerRadius="24dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_check_circle_fill" />
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <TextView
-                        android:id="@+id/tvTitle1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="Risk Assessment Complete"
-                        android:textColor="#0F172A"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/tvTime1"
-                        app:layout_constraintStart_toEndOf="@+id/ivIcon1Container"
-                        app:layout_constraintTop_toTopOf="@+id/ivIcon1Container" />
-
-                    <TextView
-                        android:id="@+id/tvTime1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10 min ago"
-                        android:textColor="#94A3B8"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/tvTitle1" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="AI analysis for Case #1024 is ready."
-                        android:textColor="#64748B"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/tvTitle1"
-                        app:layout_constraintTop_toBottomOf="@+id/tvTitle1" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Health Report Ready -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:strokeColor="#E2E8F0"
-                app:strokeWidth="1dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/ivIcon2Container"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        app:cardBackgroundColor="#E0F2FE"
-                        app:cardCornerRadius="24dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_report_fill" />
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <TextView
-                        android:id="@+id/tvTitle2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="Health Report Ready"
-                        android:textColor="#0F172A"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/tvTime2"
-                        app:layout_constraintStart_toEndOf="@+id/ivIcon2Container"
-                        app:layout_constraintTop_toTopOf="@+id/ivIcon2Container" />
-
-                    <TextView
-                        android:id="@+id/tvTime2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1 hour ago"
-                        android:textColor="#94A3B8"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/tvTitle2" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="PDF report for Sarah Johnson is available for download."
-                        android:textColor="#64748B"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/tvTitle2"
-                        app:layout_constraintTop_toBottomOf="@+id/tvTitle2" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Elevated Risk Detected -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:strokeColor="#E2E8F0"
-                app:strokeWidth="1dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/ivIcon3Container"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        app:cardBackgroundColor="#FEF2F2"
-                        app:cardCornerRadius="24dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_alert" />
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <TextView
-                        android:id="@+id/tvTitle3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="Elevated Risk Detected"
-                        android:textColor="#0F172A"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/tvTime3"
-                        app:layout_constraintStart_toEndOf="@+id/ivIcon3Container"
-                        app:layout_constraintTop_toTopOf="@+id/ivIcon3Container" />
-
-                    <TextView
-                        android:id="@+id/tvTime3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Yesterday"
-                        android:textColor="#94A3B8"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/tvTitle3" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Case #1021 shows elevated cardiovascular risk markers."
-                        android:textColor="#64748B"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/tvTitle3"
-                        app:layout_constraintTop_toBottomOf="@+id/tvTitle3" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:listitem="@layout/item_notification" />
 
     <!-- Bottom Navigation -->
     <LinearLayout
@@ -358,13 +145,14 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_profile"
-                app:tint="#94A3B8" />
+                app:tint="#2563EB" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profile"
-                android:textColor="#94A3B8"
-                android:textSize="12sp" />
+                android:textColor="#2563EB"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

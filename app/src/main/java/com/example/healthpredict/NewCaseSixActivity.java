@@ -16,11 +16,16 @@ public class NewCaseSixActivity extends AppCompatActivity {
 
     private String selectedBP = "";
     private List<MaterialCardView> bpCards = new ArrayList<>();
+    private CaseData caseData;
+    private TextView tvGlucose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_six);
+
+        caseData = CaseData.getInstance();
+        tvGlucose = findViewById(R.id.tvGlucose);
 
         setupToolbar();
         setupBPSelection();
@@ -34,6 +39,12 @@ public class NewCaseSixActivity extends AppCompatActivity {
         View btnReview = findViewById(R.id.btnReview);
         if (btnReview != null) {
             btnReview.setOnClickListener(v -> {
+                // Save data
+                caseData.bloodPressure = selectedBP;
+                if (tvGlucose != null) {
+                    caseData.glucoseLevel = tvGlucose.getText().toString();
+                }
+
                 Intent intent = new Intent(NewCaseSixActivity.this, NewCaseSevenActivity.class);
                 startActivity(intent);
             });
@@ -79,7 +90,6 @@ public class NewCaseSixActivity extends AppCompatActivity {
 
     private void setupGlucoseSelection() {
         View btnGlucose = findViewById(R.id.btnGlucose);
-        TextView tvGlucose = findViewById(R.id.tvGlucose);
         
         if (btnGlucose != null) {
             btnGlucose.setOnClickListener(v -> {
@@ -89,7 +99,9 @@ public class NewCaseSixActivity extends AppCompatActivity {
                 popup.getMenu().add("Diabetic (126+)");
 
                 popup.setOnMenuItemClickListener(item -> {
-                    tvGlucose.setText(item.getTitle());
+                    if (tvGlucose != null) {
+                        tvGlucose.setText(item.getTitle());
+                    }
                     return true;
                 });
                 popup.show();

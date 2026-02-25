@@ -1,19 +1,20 @@
 package com.example.healthpredict;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.card.MaterialCardView;
+import java.util.Calendar;
+import java.util.List;
 
 public class DoctorHomeActivity extends AppCompatActivity {
 
@@ -21,27 +22,25 @@ public class DoctorHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // 1. Fully cover the screen (immersive mode)
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
         
         setContentView(R.layout.activity_doctor_home);
 
-        // 2. Adjust Header Padding dynamically for status bar/notch
+        updateUI();
+
         View header = findViewById(R.id.header);
         View statusBarSpacer = findViewById(R.id.status_bar_spacer);
         if (header != null && statusBarSpacer != null) {
             ViewCompat.setOnApplyWindowInsetsListener(header, (v, insets) -> {
                 int statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
-                // Set the spacer height to exactly match the system's status bar/notch height
                 statusBarSpacer.getLayoutParams().height = statusBarHeight;
                 statusBarSpacer.requestLayout();
                 return insets;
             });
         }
 
-        // 3. Adjust Bottom Nav for gesture bar
         View bottomNav = findViewById(R.id.bottomNav);
         if (bottomNav != null) {
             ViewCompat.setOnApplyWindowInsetsListener(bottomNav, (v, insets) -> {
@@ -56,6 +55,34 @@ public class DoctorHomeActivity extends AppCompatActivity {
         setupRecentPatients();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setupRecentPatients(); 
+    }
+
+    private void updateUI() {
+        SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
+        String doctorName = prefs.getString("user_name", "Dr. Alex Morgan");
+        
+        TextView tvGreeting = findViewById(R.id.tvGreeting);
+        if (tvGreeting != null) {
+            Calendar calendar = Calendar.getInstance();
+            int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+            String timeGreeting;
+
+            if (hourOfDay >= 0 && hourOfDay < 12) {
+                timeGreeting = "Good Morning";
+            } else if (hourOfDay >= 12 && hourOfDay < 17) {
+                timeGreeting = "Good Afternoon";
+            } else {
+                timeGreeting = "Good Evening";
+            }
+
+            tvGreeting.setText(timeGreeting + ", " + doctorName);
+        }
+    }
+
     private void setupNavigation() {
         // Notification
         ImageView ivNotification = findViewById(R.id.ivNotification);
@@ -63,16 +90,13 @@ public class DoctorHomeActivity extends AppCompatActivity {
             ivNotification.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorNotificationsActivity.class)));
         }
 
-        // Search
+        // SEARCH BAR - Making the entire box clickable
         View searchBar = findViewById(R.id.searchBar);
         if (searchBar != null) {
-            searchBar.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorSearchActivity.class)));
-        }
-
-        // High Risk Alerts
-        View cardHighRiskAlerts = findViewById(R.id.cardHighRiskAlerts);
-        if (cardHighRiskAlerts != null) {
-            cardHighRiskAlerts.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, HighRiskAlertsActivity.class)));
+            searchBar.setOnClickListener(v -> {
+                Intent intent = new Intent(DoctorHomeActivity.this, DoctorSearchActivity.class);
+                startActivity(intent);
+            });
         }
 
         // New Assessment
@@ -81,25 +105,25 @@ public class DoctorHomeActivity extends AppCompatActivity {
             cardNewAssessment.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, NewCaseOneActivity.class)));
         }
 
-        // View All (Recent Patients)
+        // View All Patients
         TextView tvViewAllPatients = findViewById(R.id.tvViewAllPatients);
         if (tvViewAllPatients != null) {
             tvViewAllPatients.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorCasesActivity.class)));
         }
 
-        // Cases
+        // Bottom Nav - Cases
         View navCases = findViewById(R.id.navCases);
         if (navCases != null) {
             navCases.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorCasesActivity.class)));
         }
 
-        // Reports
+        // Bottom Nav - Reports
         View navReports = findViewById(R.id.navReports);
         if (navReports != null) {
             navReports.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, ReportsActivity.class)));
         }
 
-        // Profile
+        // Bottom Nav - Profile
         View navProfile = findViewById(R.id.navProfile);
         if (navProfile != null) {
             navProfile.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorProfileActivity.class)));
@@ -117,7 +141,7 @@ public class DoctorHomeActivity extends AppCompatActivity {
         View stat2 = findViewById(R.id.stat2);
         if (stat2 != null) {
             ((ImageView) stat2.findViewById(R.id.ivStatIcon)).setImageResource(R.drawable.ic_patients);
-            ((TextView) stat2.findViewById(R.id.tvStatValue)).setText("128");
+            ((TextView) stat2.findViewById(R.id.tvStatValue)).setText(String.valueOf(HistoryManager.getInstance().getCaseHistory().size() + 125));
             ((TextView) stat2.findViewById(R.id.tvStatLabel)).setText("Patients");
         }
 
@@ -130,49 +154,86 @@ public class DoctorHomeActivity extends AppCompatActivity {
     }
 
     private void setupRecentPatients() {
-        View patient1 = findViewById(R.id.p1);
-        if (patient1 != null) {
-            ((TextView) patient1.findViewById(R.id.tvInitial)).setText("R");
-            ((TextView) patient1.findViewById(R.id.tvPatientName)).setText("Robert Wilson");
-            ((TextView) patient1.findViewById(R.id.tvPatientDetail)).setText("P-1024 • Cardiac Risk");
-            ((TextView) patient1.findViewById(R.id.tvStatus)).setText("Low Risk");
-            ((MaterialCardView) patient1.findViewById(R.id.cardStatus)).setCardBackgroundColor(getResources().getColor(R.color.low_risk_bg));
-            ((TextView) patient1.findViewById(R.id.tvStatus)).setTextColor(getResources().getColor(R.color.low_risk_text));
-            patient1.setOnClickListener(v -> {
-                Intent intent = new Intent(DoctorHomeActivity.this, FinalReportActivity.class);
-                intent.putExtra("PATIENT_NAME", "Robert Wilson");
-                startActivity(intent);
-            });
-        }
+        List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
+        
+        int[] itemIds = {R.id.p1, R.id.p2, R.id.p3};
+        
+        for (int i = 0; i < itemIds.length; i++) {
+            View patientView = findViewById(itemIds[i]);
+            if (patientView == null) continue;
 
-        View patient2 = findViewById(R.id.p2);
-        if (patient2 != null) {
-            ((TextView) patient2.findViewById(R.id.tvInitial)).setText("S");
-            ((TextView) patient2.findViewById(R.id.tvPatientName)).setText("Sarah Johnson");
-            ((TextView) patient2.findViewById(R.id.tvPatientDetail)).setText("P-1023 • Pending Labs");
-            ((TextView) patient2.findViewById(R.id.tvStatus)).setText("Pending");
-            ((MaterialCardView) patient2.findViewById(R.id.cardStatus)).setCardBackgroundColor(getResources().getColor(R.color.pending_bg));
-            ((TextView) patient2.findViewById(R.id.tvStatus)).setTextColor(getResources().getColor(R.color.pending_text));
-            patient2.setOnClickListener(v -> {
-                Intent intent = new Intent(DoctorHomeActivity.this, FinalReportActivity.class);
-                intent.putExtra("PATIENT_NAME", "Sarah Johnson");
-                startActivity(intent);
-            });
-        }
+            if (i < history.size()) {
+                CaseData data = history.get(i);
+                patientView.setVisibility(View.VISIBLE);
+                
+                TextView tvInitial = patientView.findViewById(R.id.tvInitial);
+                TextView tvName = patientView.findViewById(R.id.tvPatientName);
+                TextView tvDetail = patientView.findViewById(R.id.tvPatientDetail);
+                TextView tvStatus = patientView.findViewById(R.id.tvStatus);
+                MaterialCardView cardStatus = patientView.findViewById(R.id.cardStatus);
 
-        View patient3 = findViewById(R.id.p3);
-        if (patient3 != null) {
-            ((TextView) patient3.findViewById(R.id.tvInitial)).setText("M");
-            ((TextView) patient3.findViewById(R.id.tvPatientName)).setText("Michael Brown");
-            ((TextView) patient3.findViewById(R.id.tvPatientDetail)).setText("P-1022 • Diabetes Screen");
-            ((TextView) patient3.findViewById(R.id.tvStatus)).setText("Moderate");
-            ((MaterialCardView) patient3.findViewById(R.id.cardStatus)).setCardBackgroundColor(getResources().getColor(R.color.moderate_bg));
-            ((TextView) patient3.findViewById(R.id.tvStatus)).setTextColor(getResources().getColor(R.color.moderate_text));
-            patient3.setOnClickListener(v -> {
-                Intent intent = new Intent(DoctorHomeActivity.this, FinalReportActivity.class);
-                intent.putExtra("PATIENT_NAME", "Michael Brown");
-                startActivity(intent);
-            });
+                String name = data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId;
+                if (tvInitial != null) tvInitial.setText(name.substring(0, 1).toUpperCase());
+                if (tvName != null) tvName.setText(name);
+                if (tvDetail != null) tvDetail.setText(data.patientId + " • " + data.primarySystem);
+                if (tvStatus != null) tvStatus.setText(data.riskLevel);
+                
+                if (cardStatus != null && tvStatus != null) {
+                    updateStatusStyle(cardStatus, tvStatus, data.riskLevel);
+                }
+
+                patientView.setOnClickListener(v -> {
+                    CaseData singleton = CaseData.getInstance();
+                    singleton.reset();
+                    copyToSingleton(data);
+                    startActivity(new Intent(DoctorHomeActivity.this, FinalReportActivity.class));
+                });
+            } else {
+                // If there's no real history but the view is visible (mock data), 
+                // we should still allow clicking it to see activity_final_report.xml
+                patientView.setOnClickListener(v -> {
+                    startActivity(new Intent(DoctorHomeActivity.this, FinalReportActivity.class));
+                });
+            }
+        }
+    }
+
+    private void copyToSingleton(CaseData data) {
+        CaseData singleton = CaseData.getInstance();
+        singleton.patientId = data.patientId;
+        singleton.patientName = data.patientName;
+        singleton.date = data.date;
+        singleton.gender = data.gender;
+        singleton.primarySystem = data.primarySystem;
+        singleton.riskScore = data.riskScore;
+        singleton.riskLevel = data.riskLevel;
+        singleton.accuracy = data.accuracy;
+        singleton.providerNotes = data.providerNotes;
+        singleton.oneYearPrediction = data.oneYearPrediction;
+        singleton.threeYearPrediction = data.threeYearPrediction;
+        singleton.fiveYearPrediction = data.fiveYearPrediction;
+    }
+
+    private void updateStatusStyle(MaterialCardView card, TextView tv, String risk) {
+        if (risk == null) return;
+        switch (risk) {
+            case "Low":
+                card.setCardBackgroundColor(Color.parseColor("#DCFCE7")); // light green
+                tv.setTextColor(Color.parseColor("#166534")); // dark green
+                break;
+            case "Moderate":
+                card.setCardBackgroundColor(Color.parseColor("#FEF9C3")); // light yellow
+                tv.setTextColor(Color.parseColor("#854D0E")); // dark yellow/brown
+                break;
+            case "High":
+            case "Critical":
+                card.setCardBackgroundColor(Color.parseColor("#FEE2E2")); // light red
+                tv.setTextColor(Color.parseColor("#991B1B")); // dark red
+                break;
+            default:
+                card.setCardBackgroundColor(Color.parseColor("#F1F5F9")); // light gray
+                tv.setTextColor(Color.parseColor("#475569")); // dark gray
+                break;
         }
     }
 }

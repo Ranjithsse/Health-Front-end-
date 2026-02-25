@@ -17,11 +17,15 @@ public class NewCaseTwoActivity extends AppCompatActivity {
     private String selectedGender = "";
     private String selectedBloodGroup = "";
     private List<MaterialCardView> bloodGroupCards = new ArrayList<>();
+    private CaseData caseData;
+    private TextView tvSmokingStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_two);
+
+        caseData = CaseData.getInstance();
 
         setupToolbar();
         setupGenderSelection();
@@ -31,6 +35,13 @@ public class NewCaseTwoActivity extends AppCompatActivity {
         View btnNext = findViewById(R.id.btnNext);
         if (btnNext != null) {
             btnNext.setOnClickListener(v -> {
+                // Save data to singleton
+                caseData.gender = selectedGender;
+                caseData.bloodGroup = selectedBloodGroup;
+                if (tvSmokingStatus != null) {
+                    caseData.smokingStatus = tvSmokingStatus.getText().toString();
+                }
+
                 Intent intent = new Intent(NewCaseTwoActivity.this, NewCaseThreeActivity.class);
                 startActivity(intent);
             });
@@ -110,7 +121,7 @@ public class NewCaseTwoActivity extends AppCompatActivity {
 
     private void setupSmokingStatusSelection() {
         View btnSmokingStatus = findViewById(R.id.btnSmokingStatus);
-        TextView tvSmokingStatus = findViewById(R.id.tvSmokingStatus);
+        tvSmokingStatus = findViewById(R.id.tvSmokingStatus);
         
         if (btnSmokingStatus != null) {
             btnSmokingStatus.setOnClickListener(v -> {

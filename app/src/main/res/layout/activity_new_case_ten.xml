@@ -63,27 +63,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/btnFullscreen"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_fullscreen"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="#CBD5E1" />
-
-        <ImageView
-            android:id="@+id/btnTune"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_tune"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnFullscreen"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="#CBD5E1" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- 3. Viewer Content Area (Pure Black) -->
@@ -160,41 +139,6 @@
             </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!-- Dynamic Slice Slider (Pill Shape) -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/sliderContainer"
-            android:layout_width="36dp"
-            android:layout_height="220dp"
-            android:layout_marginEnd="16dp"
-            app:cardBackgroundColor="#1F2937"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="0dp"
-            app:strokeColor="#374151"
-            app:strokeWidth="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <View
-                android:layout_width="4dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginVertical="24dp"
-                android:background="#374151" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/sliderThumb"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="-20dp"
-                app:cardBackgroundColor="#3B82F6"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="4dp"
-                app:strokeColor="#60A5FA"
-                app:strokeWidth="1dp"/>
-        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

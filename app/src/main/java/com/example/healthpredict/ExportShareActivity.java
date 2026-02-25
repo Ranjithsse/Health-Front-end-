@@ -34,15 +34,5 @@ public class ExportShareActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        findViewById(R.id.btnFinish).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ExportShareActivity.this, DoctorHomeActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 }

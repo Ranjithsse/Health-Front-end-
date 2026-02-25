@@ -124,7 +124,6 @@
                         android:hint="Enter Name or ID"
                         android:inputType="text"
                         android:paddingHorizontal="16dp"
-                        android:text="45"
                         android:textColor="#1E293B"
                         android:textSize="18sp" />
 
@@ -153,7 +152,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="2026-02-12"
+                            android:hint="YYYY-MM-DD"
                             android:textColor="#1E293B"
                             android:textSize="18sp" />
 

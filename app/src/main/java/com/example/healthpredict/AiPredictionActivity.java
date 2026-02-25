@@ -3,68 +3,73 @@ package com.example.healthpredict;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class AiPredictionActivity extends AppCompatActivity {
 
-    private LinearProgressIndicator progressBar;
-    private TextView tvDescription;
-    private int progressStatus = 0;
-    private final Handler handler = new Handler(Looper.getMainLooper());
+    private CaseData caseData;
+    private LinearProgressIndicator progressIndicator;
+    private TextView tvStatus;
+    private LinearLayout resultContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ai_prediction);
 
-        if (findViewById(R.id.btnBack) != null) {
-            findViewById(R.id.btnBack).setOnClickListener(v -> finish());
-        }
+        caseData = CaseData.getInstance();
 
-        progressBar = findViewById(R.id.progressBar);
-        tvDescription = findViewById(R.id.tvDescription);
+        progressIndicator = findViewById(R.id.progressIndicator);
+        tvStatus = findViewById(R.id.tvStatus);
+        resultContainer = findViewById(R.id.resultContainer);
 
-        startAnalyzing();
+        startPredictionSimulation();
     }
 
-    private void startAnalyzing() {
-        new Thread(() -> {
-            while (progressStatus < 100) {
-                progressStatus += 2;
-                handler.post(() -> {
-                    if (progressBar != null) {
-                        progressBar.setProgress(progressStatus);
-                    }
-                    updateStatusText(progressStatus);
-                });
-                try {
-                    Thread.sleep(60); // Faster progress for better UX
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            handler.post(() -> {
-                // Navigate to the next step in the flow
-                Intent intent = new Intent(AiPredictionActivity.this, OneYearPredictionActivity.class);
-                startActivity(intent);
-                finish();
-            });
-        }).start();
+    private void startPredictionSimulation() {
+        // Simulation of AI processing
+        new Handler().postDelayed(() -> {
+            if (tvStatus != null) tvStatus.setText("Analyzing Patient Demographics...");
+            if (progressIndicator != null) progressIndicator.setProgress(30, true);
+        }, 1000);
+
+        new Handler().postDelayed(() -> {
+            if (tvStatus != null) tvStatus.setText("Processing Medical History...");
+            if (progressIndicator != null) progressIndicator.setProgress(60, true);
+        }, 2000);
+
+        new Handler().postDelayed(() -> {
+            if (tvStatus != null) tvStatus.setText("Calculating Risk Scores...");
+            if (progressIndicator != null) progressIndicator.setProgress(90, true);
+        }, 3000);
+
+        new Handler().postDelayed(() -> {
+            if (progressIndicator != null) progressIndicator.setProgress(100, true);
+            generateResults();
+            navigateToOneYearPrediction();
+        }, 4000);
     }
 
-    private void updateStatusText(int status) {
-        if (tvDescription == null) return;
-        if (status < 25) {
-            tvDescription.setText("Gathering clinical data...");
-        } else if (status < 50) {
-            tvDescription.setText("Extracting health features...");
-        } else if (status < 75) {
-            tvDescription.setText("Analyzing risk patterns...");
-        } else {
-            tvDescription.setText("Finalizing health prediction...");
-        }
+    private void generateResults() {
+        // Mocking AI Results
+        caseData.riskScore = "98.2%";
+        caseData.riskLevel = "Low";
+        caseData.accuracy = "99.1%";
+        caseData.aiInsight = "Patient shows high stability probability based on current health markers and 1-year outlook.";
+    }
+
+    private void navigateToOneYearPrediction() {
+        if (tvStatus != null) tvStatus.setText("Analysis Complete");
+        
+        // Auto-navigate to 1-Year Prediction after a very brief pause to show 'Complete'
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(AiPredictionActivity.this, OneYearPredictionActivity.class);
+            startActivity(intent);
+            finish(); // Finish this activity so user doesn't go back to the 'analyzing' screen
+        }, 500);
     }
 }
