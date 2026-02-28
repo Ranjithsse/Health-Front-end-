@@ -16,6 +16,11 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.Calendar;
 import java.util.List;
 
+import com.example.healthpredict.network.RetrofitClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DoctorHomeActivity extends AppCompatActivity {
 
     @Override
@@ -52,13 +57,12 @@ public class DoctorHomeActivity extends AppCompatActivity {
 
         setupNavigation();
         setupStats();
-        setupRecentPatients();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setupRecentPatients(); 
+        fetchCasesFromServer(); 
     }
 
     private void updateUI() {
@@ -153,8 +157,28 @@ public class DoctorHomeActivity extends AppCompatActivity {
         }
     }
 
-    private void setupRecentPatients() {
-        List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
+    private void fetchCasesFromServer() {
+        RetrofitClient.getApiService().getCases().enqueue(new Callback<List<CaseData>>() {
+            @Override
+            public void onResponse(Call<List<CaseData>> call, Response<List<CaseData>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<CaseData> serverCases = response.body();
+                    updateRecentPatientsUI(serverCases);
+                } else {
+                    // Fallback to local history if server fails
+                    updateRecentPatientsUI(HistoryManager.getInstance().getCaseHistory());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CaseData>> call, Throwable t) {
+                // Fallback to local history
+                updateRecentPatientsUI(HistoryManager.getInstance().getCaseHistory());
+            }
+        });
+    }
+
+    private void updateRecentPatientsUI(List<CaseData> history) {
         
         int[] itemIds = {R.id.p1, R.id.p2, R.id.p3};
         

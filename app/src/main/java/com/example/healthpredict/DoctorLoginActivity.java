@@ -10,6 +10,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
+import com.example.healthpredict.network.AuthResponse;
+import com.example.healthpredict.network.LoginRequest;
+import com.example.healthpredict.network.RetrofitClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DoctorLoginActivity extends AppCompatActivity {
 
     @Override
@@ -34,25 +41,43 @@ public class DoctorLoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Simulate successful login and save session details
-                SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putBoolean("is_logged_in", true);
-                editor.putString("user_email", email);
-                
-                // For demonstration, we'll set a default name if it's a "new" login
-                // or keep existing one if they just re-logged.
-                String displayName = "Dr. " + (email.contains("@") ? email.split("@")[0] : "Morgan");
-                editor.putString("user_name", displayName);
-                editor.putString("user_specialty", "Internal Medicine");
-                editor.putString("user_hospital", "City Medical Center");
-                editor.apply();
+                // Show loading or disable button
+                btnSignIn.setEnabled(false);
 
-                // Navigate to DoctorHomeActivity
-                Intent intent = new Intent(DoctorLoginActivity.this, DoctorHomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
+                LoginRequest loginRequest = new LoginRequest(email, password);
+                RetrofitClient.getApiService().login(loginRequest).enqueue(new Callback<AuthResponse>() {
+                    @Override
+                    public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
+                        btnSignIn.setEnabled(true);
+                        if (response.isSuccessful() && response.body() != null) {
+                            AuthResponse authResponse = response.body();
+                            
+                            // Save session details
+                            SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putBoolean("is_logged_in", true);
+                            editor.putString("user_email", authResponse.user.email);
+                            editor.putString("user_name", authResponse.user.username);
+                            editor.apply();
+
+                            Toast.makeText(DoctorLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                            // Navigate to DoctorHomeActivity
+                            Intent intent = new Intent(DoctorLoginActivity.this, DoctorHomeActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(DoctorLoginActivity.this, "Invalid credentials or Server Error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AuthResponse> call, Throwable t) {
+                        btnSignIn.setEnabled(true);
+                        Toast.makeText(DoctorLoginActivity.this, "Network Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

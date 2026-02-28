@@ -14,13 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.healthpredict.network.RetrofitClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DoctorSearchActivity extends AppCompatActivity {
 
     private EditText etSearchInput;
     private RecyclerView rvSearchResults;
     private TextView tvNoResults;
     private SearchAdapter adapter;
-    private List<CaseData> fullHistory;
+    private List<CaseData> fullHistory = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +36,30 @@ public class DoctorSearchActivity extends AppCompatActivity {
         rvSearchResults = findViewById(R.id.rvSearchResults);
         tvNoResults = findViewById(R.id.tvNoResults);
 
-        fullHistory = HistoryManager.getInstance().getCaseHistory();
+        fetchFullHistoryFromServer();
         
-        setupRecyclerView();
         setupSearchLogic();
         setupNavigation();
+    }
+
+    private void fetchFullHistoryFromServer() {
+        RetrofitClient.getApiService().getCases().enqueue(new Callback<List<CaseData>>() {
+            @Override
+            public void onResponse(Call<List<CaseData>> call, Response<List<CaseData>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    fullHistory = response.body();
+                } else {
+                    fullHistory = HistoryManager.getInstance().getCaseHistory();
+                }
+                setupRecyclerView();
+            }
+
+            @Override
+            public void onFailure(Call<List<CaseData>> call, Throwable t) {
+                fullHistory = HistoryManager.getInstance().getCaseHistory();
+                setupRecyclerView();
+            }
+        });
     }
 
     private void setupRecyclerView() {

@@ -7,6 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.widget.Toast;
+import com.example.healthpredict.network.RetrofitClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class FinalReportActivity extends AppCompatActivity {
 
     private CaseData caseData;
@@ -65,8 +71,8 @@ public class FinalReportActivity extends AppCompatActivity {
         }
         
         findViewById(R.id.btnBackDashboard).setOnClickListener(v -> {
-            // Save to recent cases simulation
-            saveToHistory();
+            // Save to backend
+            saveToBackend();
             
             Intent intent = new Intent(FinalReportActivity.this, DoctorHomeActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -75,7 +81,26 @@ public class FinalReportActivity extends AppCompatActivity {
         });
     }
 
-    private void saveToHistory() {
-        HistoryManager.getInstance().addCase(caseData);
+    private void saveToBackend() {
+        // Show saving toast
+        Toast.makeText(this, "Saving to database...", Toast.LENGTH_SHORT).show();
+
+        RetrofitClient.getApiService().createCase(caseData).enqueue(new Callback<CaseData>() {
+            @Override
+            public void onResponse(Call<CaseData> call, Response<CaseData> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(FinalReportActivity.this, "Case saved successfully!", Toast.LENGTH_SHORT).show();
+                    // Also update local history for immediate UI feedback
+                    HistoryManager.getInstance().addCase(caseData);
+                } else {
+                    Toast.makeText(FinalReportActivity.this, "Failed to save case to server", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CaseData> call, Throwable t) {
+                Toast.makeText(FinalReportActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

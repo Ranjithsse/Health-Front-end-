@@ -8,6 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.card.MaterialCardView;
 import java.util.List;
 
+import com.example.healthpredict.network.RetrofitClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DoctorCasesActivity extends AppCompatActivity {
 
     @Override
@@ -40,18 +45,33 @@ public class DoctorCasesActivity extends AppCompatActivity {
                 startActivity(intent);
             });
         }
-
-        setupCases();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setupCases();
+        fetchCasesFromServer();
     }
 
-    private void setupCases() {
-        List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
+    private void fetchCasesFromServer() {
+        RetrofitClient.getApiService().getCases().enqueue(new Callback<List<CaseData>>() {
+            @Override
+            public void onResponse(Call<List<CaseData>> call, Response<List<CaseData>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    updateCasesUI(response.body());
+                } else {
+                    updateCasesUI(HistoryManager.getInstance().getCaseHistory());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CaseData>> call, Throwable t) {
+                updateCasesUI(HistoryManager.getInstance().getCaseHistory());
+            }
+        });
+    }
+
+    private void updateCasesUI(List<CaseData> history) {
         int[] itemIds = {R.id.case1, R.id.case2, R.id.case3, R.id.case4, R.id.case5};
 
         for (int i = 0; i < itemIds.length; i++) {

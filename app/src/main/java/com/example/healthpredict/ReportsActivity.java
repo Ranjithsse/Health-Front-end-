@@ -57,6 +57,11 @@ public class ReportsActivity extends AppCompatActivity {
         setupRecentReports(); // Refresh when returning
     }
 
+    private void setupRecentReports() {
+        List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
+        updateReportsUI(history);
+    }
+
     private void setupBottomNavigation() {
         View navHome = findViewById(R.id.navHome);
         if (navHome != null) {
@@ -87,8 +92,7 @@ public class ReportsActivity extends AppCompatActivity {
         }
     }
 
-    private void setupRecentReports() {
-        List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
+    private void updateReportsUI(List<CaseData> history) {
         int[] itemIds = {R.id.report1, R.id.report2, R.id.report3, R.id.report4};
 
         for (int i = 0; i < itemIds.length; i++) {
