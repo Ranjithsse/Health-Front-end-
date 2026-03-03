@@ -2,29 +2,27 @@ package com.example.healthpredict;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class FiveYearPredictionActivity extends AppCompatActivity {
-
-    private CaseData caseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_five_year_prediction);
 
-        caseData = CaseData.getInstance();
+        ImageView btnBack = findViewById(R.id.btnBack);
+        MaterialButton btnBackFooter = findViewById(R.id.btnBackFooter);
+        MaterialButton btnViewRiskAnalysis = findViewById(R.id.btnViewRiskAnalysis);
 
-        // Save 5-year data to CaseData
-        caseData.fiveYearPrediction = "72.1%";
-        caseData.fiveYearRisk = "Moderate";
+        btnBack.setOnClickListener(v -> finish());
+        btnBackFooter.setOnClickListener(v -> finish());
 
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
-        findViewById(R.id.btnBackFooter).setOnClickListener(v -> finish());
-
-        findViewById(R.id.btnViewRiskAnalysis).setOnClickListener(v -> {
-            Intent intent = new Intent(FiveYearPredictionActivity.this, RiskScoreActivity.class);
-            startActivity(intent);
+        btnViewRiskAnalysis.setOnClickListener(v -> {
+            startActivity(new Intent(FiveYearPredictionActivity.this, RiskScoreActivity.class));
         });
     }
 }

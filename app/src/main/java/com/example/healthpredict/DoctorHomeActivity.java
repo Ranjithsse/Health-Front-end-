@@ -90,19 +90,19 @@ public class DoctorHomeActivity extends AppCompatActivity {
             ivNotification.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorNotificationsActivity.class)));
         }
 
-        // SEARCH BAR - Making the entire box clickable
+        // SEARCH BAR
         View searchBar = findViewById(R.id.searchBar);
         if (searchBar != null) {
-            searchBar.setOnClickListener(v -> {
-                Intent intent = new Intent(DoctorHomeActivity.this, DoctorSearchActivity.class);
-                startActivity(intent);
-            });
+            searchBar.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorSearchActivity.class)));
         }
 
         // New Assessment
         View cardNewAssessment = findViewById(R.id.cardNewAssessment);
         if (cardNewAssessment != null) {
-            cardNewAssessment.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, NewCaseOneActivity.class)));
+            cardNewAssessment.setOnClickListener(v -> {
+                CaseData.getInstance().reset();
+                startActivity(new Intent(DoctorHomeActivity.this, NewCaseOneActivity.class));
+            });
         }
 
         // View All Patients
@@ -173,7 +173,7 @@ public class DoctorHomeActivity extends AppCompatActivity {
                 MaterialCardView cardStatus = patientView.findViewById(R.id.cardStatus);
 
                 String name = data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId;
-                if (tvInitial != null) tvInitial.setText(name.substring(0, 1).toUpperCase());
+                if (tvInitial != null && name != null && !name.isEmpty()) tvInitial.setText(name.substring(0, 1).toUpperCase());
                 if (tvName != null) tvName.setText(name);
                 if (tvDetail != null) tvDetail.setText(data.patientId + " • " + data.primarySystem);
                 if (tvStatus != null) tvStatus.setText(data.riskLevel);
@@ -183,57 +183,30 @@ public class DoctorHomeActivity extends AppCompatActivity {
                 }
 
                 patientView.setOnClickListener(v -> {
-                    CaseData singleton = CaseData.getInstance();
-                    singleton.reset();
-                    copyToSingleton(data);
+                    CaseData.getInstance().reset();
+                    CaseData.getInstance().copyFrom(data);
                     startActivity(new Intent(DoctorHomeActivity.this, FinalReportActivity.class));
                 });
             } else {
-                // If there's no real history but the view is visible (mock data), 
-                // we should still allow clicking it to see activity_final_report.xml
-                patientView.setOnClickListener(v -> {
-                    startActivity(new Intent(DoctorHomeActivity.this, FinalReportActivity.class));
-                });
+                patientView.setVisibility(View.GONE);
             }
         }
     }
 
-    private void copyToSingleton(CaseData data) {
-        CaseData singleton = CaseData.getInstance();
-        singleton.patientId = data.patientId;
-        singleton.patientName = data.patientName;
-        singleton.date = data.date;
-        singleton.gender = data.gender;
-        singleton.primarySystem = data.primarySystem;
-        singleton.riskScore = data.riskScore;
-        singleton.riskLevel = data.riskLevel;
-        singleton.accuracy = data.accuracy;
-        singleton.providerNotes = data.providerNotes;
-        singleton.oneYearPrediction = data.oneYearPrediction;
-        singleton.threeYearPrediction = data.threeYearPrediction;
-        singleton.fiveYearPrediction = data.fiveYearPrediction;
-    }
-
     private void updateStatusStyle(MaterialCardView card, TextView tv, String risk) {
         if (risk == null) return;
-        switch (risk) {
-            case "Low":
-                card.setCardBackgroundColor(Color.parseColor("#DCFCE7")); // light green
-                tv.setTextColor(Color.parseColor("#166534")); // dark green
-                break;
-            case "Moderate":
-                card.setCardBackgroundColor(Color.parseColor("#FEF9C3")); // light yellow
-                tv.setTextColor(Color.parseColor("#854D0E")); // dark yellow/brown
-                break;
-            case "High":
-            case "Critical":
-                card.setCardBackgroundColor(Color.parseColor("#FEE2E2")); // light red
-                tv.setTextColor(Color.parseColor("#991B1B")); // dark red
-                break;
-            default:
-                card.setCardBackgroundColor(Color.parseColor("#F1F5F9")); // light gray
-                tv.setTextColor(Color.parseColor("#475569")); // dark gray
-                break;
+        if (risk.equalsIgnoreCase("Low")) {
+            card.setCardBackgroundColor(Color.parseColor("#DCFCE7"));
+            tv.setTextColor(Color.parseColor("#166534"));
+        } else if (risk.equalsIgnoreCase("Moderate")) {
+            card.setCardBackgroundColor(Color.parseColor("#FEF9C3"));
+            tv.setTextColor(Color.parseColor("#854D0E"));
+        } else if (risk.equalsIgnoreCase("High") || risk.equalsIgnoreCase("Critical")) {
+            card.setCardBackgroundColor(Color.parseColor("#FEE2E2"));
+            tv.setTextColor(Color.parseColor("#991B1B"));
+        } else {
+            card.setCardBackgroundColor(Color.parseColor("#F1F5F9"));
+            tv.setTextColor(Color.parseColor("#475569"));
         }
     }
 }

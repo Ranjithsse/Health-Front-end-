@@ -97,6 +97,7 @@
                 android:paddingHorizontal="16dp">
 
                 <EditText
+                    android:id="@+id/etSearchInput"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -218,6 +219,7 @@
 
             <!-- Reports List -->
             <LinearLayout
+                android:id="@+id/reportsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -229,6 +231,17 @@
                 <include android:id="@+id/report4" layout="@layout/item_report" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvNoResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="No reports found"
+                android:textColor="#64748B"
+                android:textSize="16sp"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

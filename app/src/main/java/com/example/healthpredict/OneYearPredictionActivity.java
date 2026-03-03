@@ -2,29 +2,33 @@ package com.example.healthpredict;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class OneYearPredictionActivity extends AppCompatActivity {
-
-    private CaseData caseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_year_prediction);
 
-        caseData = CaseData.getInstance();
+        ImageView btnBack = findViewById(R.id.btnBack);
+        MaterialButton btnViewThreeYear = findViewById(R.id.btnViewThreeYear);
 
-        // Save 1-year data to CaseData
-        caseData.oneYearPrediction = "98.2%";
-        caseData.oneYearRisk = "Low";
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
-
-        findViewById(R.id.btnViewThreeYear).setOnClickListener(v -> {
-            Intent intent = new Intent(OneYearPredictionActivity.this, ThreeYearPredictionActivity.class);
-            startActivity(intent);
+        btnViewThreeYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OneYearPredictionActivity.this, ThreeYearPredictionActivity.class));
+            }
         });
     }
 }

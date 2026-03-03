@@ -14,15 +14,12 @@ public class KeyFeaturesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_key_features);
 
         MaterialButton btnContinue = findViewById(R.id.btnContinue);
-        if (btnContinue != null) {
-            btnContinue.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(KeyFeaturesActivity.this, RoleSelectionActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        }
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to the next screen, typically RoleSelectionActivity
+                startActivity(new Intent(KeyFeaturesActivity.this, RoleSelectionActivity.class));
+            }
+        });
     }
 }

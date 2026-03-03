@@ -3,7 +3,9 @@ package com.example.healthpredict;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class NewCaseSixteenActivity extends AppCompatActivity {
 
@@ -12,23 +14,29 @@ public class NewCaseSixteenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_sixteen);
 
-        setupToolbar();
-        setupButtons();
-    }
+        ImageView btnBackHeader = findViewById(R.id.btnBackHeader);
+        MaterialButton btnBack = findViewById(R.id.btnBack);
+        MaterialButton btnNext = findViewById(R.id.btnNext);
 
-    private void setupToolbar() {
-        View btnBack = findViewById(R.id.btnBackHeader);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> finish());
-        }
-    }
+        btnBackHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-    private void setupButtons() {
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
-        
-        findViewById(R.id.btnNext).setOnClickListener(v -> {
-            Intent intent = new Intent(NewCaseSixteenActivity.this, NewCaseSeventeenActivity.class);
-            startActivity(intent);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NewCaseSixteenActivity.this, NewCaseSeventeenActivity.class));
+            }
         });
     }
 }

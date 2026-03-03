@@ -2,38 +2,43 @@ package com.example.healthpredict;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class ProviderNotesActivity extends AppCompatActivity {
-
-    private CaseData caseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider_notes);
 
-        caseData = CaseData.getInstance();
-        final EditText etNotes = findViewById(R.id.etProviderNotes);
+        ImageView btnBack = findViewById(R.id.btnBack);
+        EditText etProviderNotes = findViewById(R.id.etProviderNotes);
+        MaterialButton btnGenerateReport = findViewById(R.id.btnGenerateReport);
 
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
-
-        findViewById(R.id.btnGenerateReport).setOnClickListener(v -> {
-            // 1. Capture the provider notes
-            caseData.providerNotes = etNotes.getText().toString();
-            
-            // 2. Set the current date if not set
-            if (caseData.date.isEmpty()) {
-                caseData.date = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(new java.util.Date());
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
+        });
 
-            // 3. Save the finalized case to history so it appears in Home, Cases, and Reports
-            HistoryManager.getInstance().addCase(caseData);
-            
-            // 4. Navigate to FinalReportActivity
-            Intent intent = new Intent(ProviderNotesActivity.this, FinalReportActivity.class);
-            startActivity(intent);
+        btnGenerateReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Save notes to singleton
+                CaseData.getInstance().providerNotes = etProviderNotes.getText().toString().trim();
+                
+                // Add this completed case to history so it appears in "Recent Patients"
+                HistoryManager.getInstance().addCase(CaseData.getInstance());
+                
+                // Navigate to FinalReportActivity
+                Intent intent = new Intent(ProviderNotesActivity.this, FinalReportActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }

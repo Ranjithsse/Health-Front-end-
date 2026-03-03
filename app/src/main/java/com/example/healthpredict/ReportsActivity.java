@@ -2,7 +2,10 @@ package com.example.healthpredict;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +13,17 @@ import java.util.List;
 
 public class ReportsActivity extends AppCompatActivity {
 
+    private EditText etSearchInput;
+    private TextView tvNoResults;
+    private final int[] reportItemIds = {R.id.report1, R.id.report2, R.id.report3, R.id.report4};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports);
+
+        etSearchInput = findViewById(R.id.etSearchInput);
+        tvNoResults = findViewById(R.id.tvNoResults);
 
         ImageView ivBack = findViewById(R.id.ivBack);
         if (ivBack != null) {
@@ -47,6 +57,7 @@ public class ReportsActivity extends AppCompatActivity {
             });
         }
 
+        setupSearch();
         setupBottomNavigation();
         setupRecentReports();
     }
@@ -55,6 +66,55 @@ public class ReportsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setupRecentReports(); // Refresh when returning
+        if (etSearchInput != null) {
+            filterReports(etSearchInput.getText().toString());
+        }
+    }
+
+    private void setupSearch() {
+        if (etSearchInput != null) {
+            etSearchInput.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    filterReports(s.toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {}
+            });
+        }
+    }
+
+    private void filterReports(String query) {
+        boolean anyFound = false;
+        String lowerQuery = query.toLowerCase().trim();
+
+        for (int id : reportItemIds) {
+            View itemView = findViewById(id);
+            if (itemView != null) {
+                TextView tvName = itemView.findViewById(R.id.tvPatientName);
+                TextView tvDetail = itemView.findViewById(R.id.tvReportDetail);
+                
+                if (tvName != null && tvDetail != null) {
+                    String name = tvName.getText().toString().toLowerCase();
+                    String detail = tvDetail.getText().toString().toLowerCase();
+                    
+                    if (lowerQuery.isEmpty() || name.contains(lowerQuery) || detail.contains(lowerQuery)) {
+                        itemView.setVisibility(View.VISIBLE);
+                        anyFound = true;
+                    } else {
+                        itemView.setVisibility(View.GONE);
+                    }
+                }
+            }
+        }
+
+        if (tvNoResults != null) {
+            tvNoResults.setVisibility(anyFound ? View.GONE : View.VISIBLE);
+        }
     }
 
     private void setupBottomNavigation() {
@@ -89,10 +149,9 @@ public class ReportsActivity extends AppCompatActivity {
 
     private void setupRecentReports() {
         List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
-        int[] itemIds = {R.id.report1, R.id.report2, R.id.report3, R.id.report4};
 
-        for (int i = 0; i < itemIds.length; i++) {
-            View itemView = findViewById(itemIds[i]);
+        for (int i = 0; i < reportItemIds.length; i++) {
+            View itemView = findViewById(reportItemIds[i]);
             if (itemView == null) continue;
 
             if (i < history.size()) {

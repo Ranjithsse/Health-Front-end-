@@ -4,56 +4,69 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class NewCaseEightActivity extends AppCompatActivity {
 
-    private ActivityResultLauncher<String> filePickerLauncher;
-    private CaseData caseData;
+    private ActivityResultLauncher<String[]> filePickerLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_eight);
 
-        caseData = CaseData.getInstance();
+        ImageView btnBack = findViewById(R.id.btnBack);
+        MaterialButton btnUploadAnalyze = findViewById(R.id.btnUploadAnalyze);
+        View uploadArea = findViewById(R.id.uploadArea);
 
-        setupToolbar();
-
-        // Initialize File Picker Launcher
+        // Initialize file picker
         filePickerLauncher = registerForActivityResult(
-                new ActivityResultContracts.GetContent(),
+                new ActivityResultContracts.OpenDocument(),
                 uri -> {
                     if (uri != null) {
-                        caseData.fileUri = uri.toString();
-                        navigateToNine(uri);
+                        handleFileSelection(uri);
                     }
                 }
         );
 
-        View uploadArea = findViewById(R.id.uploadArea);
+        btnBack.setOnClickListener(v -> finish());
+
         if (uploadArea != null) {
-            uploadArea.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    filePickerLauncher.launch("*/*");
-                }
+            uploadArea.setOnClickListener(v -> {
+                // Open file manager for all required formats
+                String[] mimeTypes = {
+                        "application/dicom",
+                        "image/*",
+                        "application/pdf",
+                        "application/zip",
+                        "application/x-zip-compressed",
+                        "application/octet-stream"
+                };
+                filePickerLauncher.launch(mimeTypes);
             });
         }
+
+        btnUploadAnalyze.setOnClickListener(v -> {
+            if (CaseData.getInstance().fileUri != null && !CaseData.getInstance().fileUri.isEmpty()) {
+                startActivity(new Intent(NewCaseEightActivity.this, NewCaseNineActivity.class));
+            } else {
+                Toast.makeText(this, "Please select a file first", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    private void navigateToNine(Uri uri) {
-        Intent intent = new Intent(this, NewCaseNineActivity.class);
-        intent.putExtra("FILE_URI", uri.toString());
-        startActivity(intent);
-    }
-
-    private void setupToolbar() {
-        View btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> finish());
-        }
+    private void handleFileSelection(Uri uri) {
+        // Save the URI to CaseData
+        CaseData.getInstance().fileUri = uri.toString();
+        
+        Toast.makeText(this, "File selected successfully!", Toast.LENGTH_SHORT).show();
+        
+        // After "uploading" (selecting), navigate to the next screen as requested
+        startActivity(new Intent(NewCaseEightActivity.this, NewCaseNineActivity.class));
     }
 }

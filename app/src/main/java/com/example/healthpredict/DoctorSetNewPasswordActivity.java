@@ -35,19 +35,36 @@ public class DoctorSetNewPasswordActivity extends AppCompatActivity {
                 String confirmPassword = etConfirmNewPassword.getText().toString().trim();
 
                 if (password.isEmpty()) {
-                    Toast.makeText(DoctorSetNewPasswordActivity.this, "Please enter a new password", Toast.LENGTH_SHORT).show();
+                    etNewPassword.setError("Password is required");
+                    etNewPassword.requestFocus();
+                    return;
+                }
+
+                if (password.length() < 6) {
+                    etNewPassword.setError("Password must be at least 6 characters");
+                    etNewPassword.requestFocus();
+                    return;
+                }
+
+                if (confirmPassword.isEmpty()) {
+                    etConfirmNewPassword.setError("Please confirm your password");
+                    etConfirmNewPassword.requestFocus();
                     return;
                 }
 
                 if (!password.equals(confirmPassword)) {
-                    Toast.makeText(DoctorSetNewPasswordActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    etConfirmNewPassword.setError("Passwords do not match");
+                    etConfirmNewPassword.requestFocus();
                     return;
                 }
 
-                Toast.makeText(DoctorSetNewPasswordActivity.this, "Password reset successful", Toast.LENGTH_SHORT).show();
+                // In a real application, you would update the password in your database here.
                 
+                Toast.makeText(DoctorSetNewPasswordActivity.this, "Password updated successfully", Toast.LENGTH_SHORT).show();
+
+                // Redirect to login screen
                 Intent intent = new Intent(DoctorSetNewPasswordActivity.this, DoctorLoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             }

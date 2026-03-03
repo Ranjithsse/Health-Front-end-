@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -23,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
-                android:text="Create Account"
+                android:text="@string/create_account"
                 android:textColor="#0F172A"
                 android:textSize="28sp"
                 android:textStyle="bold" />
@@ -33,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Join thousands of healthcare professionals"
+                android:text="@string/signup_subtitle"
                 android:textColor="#94A3B8"
                 android:textSize="16sp" />
 
@@ -42,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Full Name"
+                android:text="@string/full_name"
                 android:textColor="#475569"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -52,8 +51,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
+                android:autofillHints="name"
                 android:background="@drawable/bg_edittext"
-                android:hint="Dr. John Doe"
+                android:hint="@string/full_name_hint"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="16dp"
                 android:textColor="#1E293B"
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Hospital / Medical Center"
+                android:text="@string/hospital_label"
                 android:textColor="#475569"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -75,8 +75,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
+                android:autofillHints="organizationName"
                 android:background="@drawable/bg_edittext"
-                android:hint="City Medical Center"
+                android:hint="@string/hospital_hint"
                 android:inputType="text"
                 android:paddingHorizontal="16dp"
                 android:textColor="#1E293B"
@@ -88,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Email Address"
+                android:text="@string/email_address"
                 android:textColor="#475569"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -98,8 +99,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
+                android:autofillHints="emailAddress"
                 android:background="@drawable/bg_edittext"
-                android:hint="provider@hospital.com"
+                android:hint="@string/email_hint"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="16dp"
                 android:textColor="#1E293B"
@@ -111,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Password"
+                android:text="@string/password"
                 android:textColor="#475569"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -121,8 +123,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
+                android:autofillHints="newPassword"
                 android:background="@drawable/bg_edittext"
-                android:hint="Create a password"
+                android:hint="@string/password_signup_hint"
                 android:inputType="textPassword"
                 android:paddingHorizontal="16dp"
                 android:textColor="#1E293B"
@@ -146,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:lineSpacingExtra="2dp"
-                    android:text="I agree to the Terms of Service and Privacy Policy. I understand this is a clinical decision support tool."
+                    android:text="@string/terms_and_conditions"
                     android:textColor="#64748B"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -156,7 +159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="32dp"
-                android:text="Create Account"
+                android:text="@string/create_account"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -180,7 +183,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already have an account? "
+            android:text="@string/already_have_account"
             android:textColor="#64748B"
             android:textSize="14sp" />
 
@@ -188,7 +191,10 @@
             android:id="@+id/tvSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/sign_in"
             android:textColor="#2563EB"
             android:textSize="14sp"
             android:textStyle="bold" />

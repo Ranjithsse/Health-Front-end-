@@ -51,6 +51,7 @@
                 android:layout_marginBottom="24dp">
 
                 <EditText
+                    android:id="@+id/etSearchInput"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -61,12 +62,31 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
-            <!-- Case List -->
-            <include android:id="@+id/case1" layout="@layout/item_case" />
-            <include android:id="@+id/case2" layout="@layout/item_case" />
-            <include android:id="@+id/case3" layout="@layout/item_case" />
-            <include android:id="@+id/case4" layout="@layout/item_case" />
-            <include android:id="@+id/case5" layout="@layout/item_case" />
+            <!-- Case List Container -->
+            <LinearLayout
+                android:id="@+id/caseListContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include android:id="@+id/case1" layout="@layout/item_case" />
+                <include android:id="@+id/case2" layout="@layout/item_case" />
+                <include android:id="@+id/case3" layout="@layout/item_case" />
+                <include android:id="@+id/case4" layout="@layout/item_case" />
+                <include android:id="@+id/case5" layout="@layout/item_case" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvNoResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No patients found"
+                android:textColor="#94A3B8"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginTop="32dp"
+                android:visibility="gone" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

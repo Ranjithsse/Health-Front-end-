@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.card.MaterialCardView;
@@ -19,6 +20,7 @@ public class NewCaseTwoActivity extends AppCompatActivity {
     private List<MaterialCardView> bloodGroupCards = new ArrayList<>();
     private CaseData caseData;
     private TextView tvSmokingStatus;
+    private EditText etAge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class NewCaseTwoActivity extends AppCompatActivity {
 
         caseData = CaseData.getInstance();
 
+        etAge = findViewById(R.id.etAge);
         setupToolbar();
         setupGenderSelection();
         setupBloodGroupSelection();
@@ -38,6 +41,9 @@ public class NewCaseTwoActivity extends AppCompatActivity {
                 // Save data to singleton
                 caseData.gender = selectedGender;
                 caseData.bloodGroup = selectedBloodGroup;
+                if (etAge != null) {
+                    caseData.age = etAge.getText().toString().trim();
+                }
                 if (tvSmokingStatus != null) {
                     caseData.smokingStatus = tvSmokingStatus.getText().toString();
                 }

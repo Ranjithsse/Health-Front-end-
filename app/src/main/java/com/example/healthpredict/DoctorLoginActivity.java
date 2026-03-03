@@ -17,49 +17,35 @@ public class DoctorLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_login);
 
+        EditText etEmail = findViewById(R.id.etEmail);
         MaterialButton btnSignIn = findViewById(R.id.btnSignIn);
         TextView tvSignUp = findViewById(R.id.tvSignUp);
         TextView tvForgotPassword = findViewById(R.id.tvForgotPassword);
-        EditText etEmail = findViewById(R.id.etEmail);
-        EditText etPassword = findViewById(R.id.etPassword);
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = etEmail.getText().toString().trim();
-                String password = etPassword.getText().toString().trim();
-
-                if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(DoctorLoginActivity.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
+                
+                if (email.isEmpty()) {
+                    etEmail.setError("Email is required");
+                    etEmail.requestFocus();
                     return;
                 }
 
-                // Simulate successful login and save session details
+                // Save email to SharedPreferences
                 SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putBoolean("is_logged_in", true);
                 editor.putString("user_email", email);
-                
-                // For demonstration, we'll set a default name if it's a "new" login
-                // or keep existing one if they just re-logged.
-                String displayName = "Dr. " + (email.contains("@") ? email.split("@")[0] : "Morgan");
-                editor.putString("user_name", displayName);
-                editor.putString("user_specialty", "Internal Medicine");
-                editor.putString("user_hospital", "City Medical Center");
+                // For login simulation, we'll set a default name if not already present
+                if (!prefs.contains("user_name")) {
+                    editor.putString("user_name", "Doctor");
+                }
                 editor.apply();
 
-                // Navigate to DoctorHomeActivity
-                Intent intent = new Intent(DoctorLoginActivity.this, DoctorHomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                // Handle login and navigate to DoctorHomeActivity
+                startActivity(new Intent(DoctorLoginActivity.this, DoctorHomeActivity.class));
                 finish();
-            }
-        });
-
-        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DoctorLoginActivity.this, DoctorPassResetActivity.class));
             }
         });
 
@@ -67,6 +53,13 @@ public class DoctorLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DoctorLoginActivity.this, DoctorSignUpActivity.class));
+            }
+        });
+
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DoctorLoginActivity.this, DoctorPassResetActivity.class));
             }
         });
     }

@@ -83,6 +83,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvLevelInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -96,6 +97,7 @@
                         android:layout_marginTop="24dp">
 
                         <TextView
+                            android:id="@+id/tvNextLevelLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Next Level"
@@ -104,6 +106,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvXpProgress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -114,6 +117,7 @@
                     </RelativeLayout>
 
                     <ProgressBar
+                        android:id="@+id/pbLevelProgress"
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="8dp"
@@ -149,6 +153,7 @@
 
             <!-- Badge List -->
             <LinearLayout
+                android:id="@+id/badgeListContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -271,11 +276,15 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/navProfile"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"

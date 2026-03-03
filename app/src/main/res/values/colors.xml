@@ -27,4 +27,12 @@
     <color name="success_bg">#E1F9EB</color>
     <color name="info_bg">#E0F2FE</color>
     <color name="warning_bg">#FEF2F2</color>
+
+    <!-- Notification Colors -->
+    <color name="notif_green_bg">#E1F9EB</color>
+    <color name="notif_green_icon">#10B981</color>
+    <color name="notif_blue_bg">#EFF6FF</color>
+    <color name="notif_blue_icon">#2563EB</color>
+    <color name="notif_orange_bg">#FEF3C7</color>
+    <color name="notif_orange_icon">#D97706</color>
 </resources>

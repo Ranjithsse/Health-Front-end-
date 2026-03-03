@@ -31,14 +31,28 @@ public class DoctorPassResetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = etEmail.getText().toString().trim();
+
                 if (email.isEmpty()) {
-                    Toast.makeText(DoctorPassResetActivity.this, "Please enter your email address", Toast.LENGTH_SHORT).show();
+                    etEmail.setError("Email is required");
+                    etEmail.requestFocus();
                     return;
                 }
-                
-                // Navigate to Check Email screen
+
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    etEmail.setError("Please enter a valid email");
+                    etEmail.requestFocus();
+                    return;
+                }
+
+                // In a real application, you would trigger a Firebase or backend password reset here.
+                // For example:
+                // FirebaseAuth.getInstance().sendPasswordResetEmail(email)...
+
+                Toast.makeText(DoctorPassResetActivity.this, "Reset link sent to " + email, Toast.LENGTH_LONG).show();
+
+                // Navigate to DocPasCheckActivity and pass the email
                 Intent intent = new Intent(DoctorPassResetActivity.this, DocPasCheckActivity.class);
-                intent.putExtra("EMAIL_ADDRESS", email);
+                intent.putExtra("EMAIL", email);
                 startActivity(intent);
             }
         });

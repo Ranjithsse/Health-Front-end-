@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8FAFC">
@@ -19,6 +18,7 @@
             android:id="@+id/ivBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:contentDescription="@string/desc_back"
             android:src="@drawable/ic_back_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="Reports"
+            android:text="@string/nav_reports"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -80,11 +80,12 @@
                         android:id="@+id/ivDownload"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_download"
-                        app:tint="#475569"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
+                        android:contentDescription="@string/desc_back"
                         android:focusable="true"
-                        android:background="?attr/selectableItemBackgroundBorderless"/>
+                        android:src="@drawable/ic_download"
+                        app:tint="#475569" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -123,6 +124,7 @@
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center"
+                                android:contentDescription="@string/desc_logo"
                                 android:src="@drawable/ic_splash_logo"
                                 app:tint="@color/white" />
                         </com.google.android.material.card.MaterialCardView>
@@ -132,7 +134,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
-                            android:text="Health Monitor"
+                            android:text="@string/health_monitor"
                             android:textColor="#0F172A"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -278,6 +280,7 @@
                         android:background="#E0E7FF" />
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardPrediction"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -445,12 +448,13 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:contentDescription="@string/nav_home"
                 android:src="@drawable/ic_home"
                 app:tint="#94A3B8" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Home"
+                android:text="@string/nav_home"
                 android:textColor="#94A3B8"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -464,12 +468,13 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:contentDescription="@string/nav_cases"
                 android:src="@drawable/ic_cases"
                 app:tint="#94A3B8" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cases"
+                android:text="@string/nav_cases"
                 android:textColor="#94A3B8"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -483,12 +488,13 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:contentDescription="@string/nav_reports"
                 android:src="@drawable/ic_reports"
                 app:tint="#2563EB" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reports"
+                android:text="@string/nav_reports"
                 android:textColor="#2563EB"
                 android:textSize="11sp"
                 android:textStyle="bold" />
@@ -503,12 +509,13 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:contentDescription="@string/nav_profile"
                 android:src="@drawable/ic_profile"
                 app:tint="#94A3B8" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profile"
+                android:text="@string/nav_profile"
                 android:textColor="#94A3B8"
                 android:textSize="11sp" />
         </LinearLayout>

@@ -14,6 +14,7 @@ public class CaseData implements Serializable {
 
     // Page 2: Demographics
     public String gender = "";
+    public String age = "";
     public String bloodGroup = "";
     public String smokingStatus = "";
 
@@ -39,11 +40,15 @@ public class CaseData implements Serializable {
     public String vascularity = "Good";
     public String inflammation = "None";
 
+    // Page 15: Medication & Treatment
+    public String primaryMedication = "ACE Inhibitors";
+    public String treatmentType = "Preventative";
+
     // Page 17: Intervention Type
-    public String interventionType = "";
+    public String interventionType = "Non-Invasive";
 
     // Page 18: Monitoring Level
-    public String monitoringLevel = "";
+    public String monitoringLevel = "Standard Monitoring";
 
     // Page 19: Adjuvant Therapy
     public boolean adjuvantTherapyRequired = false;
@@ -76,11 +81,48 @@ public class CaseData implements Serializable {
         return instance;
     }
 
+    public void copyFrom(CaseData other) {
+        this.patientId = other.patientId;
+        this.patientName = other.patientName;
+        this.date = other.date;
+        this.gender = other.gender;
+        this.age = other.age;
+        this.bloodGroup = other.bloodGroup;
+        this.smokingStatus = other.smokingStatus;
+        this.medicalConditions = new ArrayList<>(other.medicalConditions);
+        this.physicalActivity = other.physicalActivity;
+        this.primarySystem = other.primarySystem;
+        this.bloodPressure = other.bloodPressure;
+        this.glucoseLevel = other.glucoseLevel;
+        this.fileUri = other.fileUri;
+        this.tissueDensity = other.tissueDensity;
+        this.calcification = other.calcification;
+        this.vascularity = other.vascularity;
+        this.inflammation = other.inflammation;
+        this.primaryMedication = other.primaryMedication;
+        this.treatmentType = other.treatmentType;
+        this.interventionType = other.interventionType;
+        this.monitoringLevel = other.monitoringLevel;
+        this.adjuvantTherapyRequired = other.adjuvantTherapyRequired;
+        this.riskScore = other.riskScore;
+        this.riskLevel = other.riskLevel;
+        this.accuracy = other.accuracy;
+        this.aiInsight = other.aiInsight;
+        this.oneYearPrediction = other.oneYearPrediction;
+        this.oneYearRisk = other.oneYearRisk;
+        this.threeYearPrediction = other.threeYearPrediction;
+        this.threeYearRisk = other.threeYearRisk;
+        this.fiveYearPrediction = other.fiveYearPrediction;
+        this.fiveYearRisk = other.fiveYearRisk;
+        this.providerNotes = other.providerNotes;
+    }
+
     public void reset() {
         patientId = "";
         patientName = "";
         date = "";
         gender = "";
+        age = "";
         bloodGroup = "";
         smokingStatus = "";
         medicalConditions.clear();
@@ -93,8 +135,10 @@ public class CaseData implements Serializable {
         calcification = "Minimal";
         vascularity = "Good";
         inflammation = "None";
-        interventionType = "";
-        monitoringLevel = "";
+        primaryMedication = "ACE Inhibitors";
+        treatmentType = "Preventative";
+        interventionType = "Non-Invasive";
+        monitoringLevel = "Standard Monitoring";
         adjuvantTherapyRequired = false;
         riskScore = "";
         riskLevel = "";
@@ -102,7 +146,10 @@ public class CaseData implements Serializable {
         aiInsight = "";
         providerNotes = "";
         oneYearPrediction = "98.2%";
+        oneYearRisk = "Low";
         threeYearPrediction = "85.5%";
+        threeYearRisk = "Moderate";
         fiveYearPrediction = "72.1%";
+        fiveYearRisk = "Moderate";
     }
 }

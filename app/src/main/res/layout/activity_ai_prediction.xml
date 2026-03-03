@@ -123,34 +123,11 @@
             android:layout_marginTop="48dp"
             android:progress="0"
             app:indicatorColor="#2563EB"
-            app:layout_constraintBottom_toTopOf="@+id/resultContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvStatus"
             app:trackColor="#E2E8F0"
             app:trackCornerRadius="4dp"
             app:trackThickness="8dp" />
-
-        <LinearLayout
-            android:id="@+id/resultContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:padding="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressIndicator">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnViewReport"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:text="View Risk Report"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:backgroundTint="#2563EB"
-                app:cornerRadius="12dp"
-                android:letterSpacing="0"/>
-        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

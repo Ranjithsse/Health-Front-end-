@@ -3,7 +3,9 @@ package com.example.healthpredict;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class NewCaseNineActivity extends AppCompatActivity {
 
@@ -12,31 +14,38 @@ public class NewCaseNineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_nine);
 
-        setupToolbar();
+        ImageView btnBack = findViewById(R.id.btnBack);
+        ImageView btnClose = findViewById(R.id.btnClose);
+        MaterialButton btnUploadAnalyze = findViewById(R.id.btnUploadAnalyze);
 
-        View btnClose = findViewById(R.id.btnClose);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         if (btnClose != null) {
-            btnClose.setOnClickListener(v -> onBackPressed());
-        }
-
-        View btnUploadAnalyze = findViewById(R.id.btnUploadAnalyze);
-        if (btnUploadAnalyze != null) {
-            btnUploadAnalyze.setOnClickListener(v -> {
-                // Navigate to Medical Imaging Viewer (Step 10)
-                String fileUri = getIntent().getStringExtra("FILE_URI");
-                Intent intent = new Intent(NewCaseNineActivity.this, NewCaseTenActivity.class);
-                if (fileUri != null) {
-                    intent.putExtra("FILE_URI", fileUri);
+            btnClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Navigate back to NewCaseEightActivity
+                    Intent intent = new Intent(NewCaseNineActivity.this, NewCaseEightActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
+                    finish();
                 }
-                startActivity(intent);
             });
         }
-    }
 
-    private void setupToolbar() {
-        View btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> onBackPressed());
-        }
+        btnUploadAnalyze.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Pass the file URI stored in CaseData to the viewer activity
+                Intent intent = new Intent(NewCaseNineActivity.this, NewCaseTenActivity.class);
+                intent.putExtra("FILE_URI", CaseData.getInstance().fileUri);
+                startActivity(intent);
+            }
+        });
     }
 }

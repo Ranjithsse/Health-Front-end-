@@ -1,3 +1,56 @@
 <resources>
     <string name="app_name">health predict</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_subtitle">Sign in to access your patients</string>
+    <string name="email_address">Email Address</string>
+    <string name="email_hint">provider@hospital.com</string>
+    <string name="password">Password</string>
+    <string name="password_hint">••••••••</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="dont_have_account">"Don\'t have an account? "</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="desc_logo">App Logo</string>
+    <string name="set_new_password">Set New Password</string>
+    <string name="set_new_password_subtitle">Create a new password for your account</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="desc_back">Back</string>
+    <string name="reset_password_title">Reset Password</string>
+    <string name="reset_password_subtitle">Enter your email to receive instructions</string>
+    <string name="send_reset_link">Send Reset Link</string>
+
+    <string name="create_account">Create Account</string>
+    <string name="signup_subtitle">Join thousands of healthcare professionals</string>
+    <string name="full_name">Full Name</string>
+    <string name="full_name_hint">Dr. John Doe</string>
+    <string name="hospital_label">Hospital / Medical Center</string>
+    <string name="hospital_hint">City Medical Center</string>
+    <string name="password_signup_hint">Create a password</string>
+    <string name="terms_and_conditions">I agree to the Terms of Service and Privacy Policy. I understand this is a clinical decision support tool.</string>
+    <string name="already_have_account">"Already have an account? "</string>
+
+    <string name="health_monitor">Health Monitor</string>
+    <string name="prediction_ai">PREDICTION • AI</string>
+    <string name="greeting_doctor">Good Morning, Dr. Morgan</string>
+    <string name="search_hint">Search patients, cases, reports...</string>
+    <string name="new_assessment">New Assessment</string>
+    <string name="new_assessment_subtitle">Start a new patient risk analysis</string>
+    <string name="recent_patients">Recent Patients</string>
+    <string name="view_all">View All</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_cases">Cases</string>
+    <string name="nav_reports">Reports</string>
+    <string name="nav_profile">Profile</string>
+    <string name="desc_notification">Notifications</string>
+    <string name="desc_add">Add New</string>
+    <string name="desc_chevron">Details</string>
+
+    <string name="patient_id_format">PATIENT #%1$s</string>
+    <string name="stability_prediction_format">%1$s Stability Probability\n(1-Year)</string>
+    <string name="risk_level_format">Risk Level: %1$s</string>
+    <string name="protocol_format">Protocol: %1$s</string>
+    <string name="intervention_format">Intervention: %1$s</string>
+    <string name="monitoring_format">Monitoring: %1$s</string>
 </resources>

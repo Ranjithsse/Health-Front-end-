@@ -134,7 +134,7 @@
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:backgroundTint="#93C5FD"
+        app:backgroundTint="#2563EB"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:letterSpacing="0"/>

@@ -1,104 +1,90 @@
 package com.example.healthpredict;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
 public class NewCaseNineteenActivity extends AppCompatActivity {
 
-    private MaterialCardView cardYes;
-    private MaterialCardView cardNo;
-    private CaseData caseData;
+    private boolean isAdjuvantTherapyRequired = false;
+    private MaterialCardView cardYes, cardNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_nineteen);
 
-        caseData = CaseData.getInstance();
+        ImageView btnBackHeader = findViewById(R.id.btnBackHeader);
+        MaterialButton btnBack = findViewById(R.id.btnBack);
+        MaterialButton btnNext = findViewById(R.id.btnNext);
         cardYes = findViewById(R.id.cardYes);
         cardNo = findViewById(R.id.cardNo);
 
-        setupToolbar();
-        setupSelectionLogic();
-        setupButtons();
-    }
-
-    private void setupToolbar() {
-        View btnBack = findViewById(R.id.btnBackHeader);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> finish());
-        }
-    }
-
-    private void setupSelectionLogic() {
-        if (cardYes != null) {
-            cardYes.setOnClickListener(v -> {
-                selectCard(cardYes, cardNo);
-                caseData.adjuvantTherapyRequired = true;
-            });
-        }
-        if (cardNo != null) {
-            cardNo.setOnClickListener(v -> {
-                selectCard(cardNo, cardYes);
-                caseData.adjuvantTherapyRequired = false;
-            });
-        }
-    }
-
-    private void selectCard(MaterialCardView selected, MaterialCardView unselected) {
-        updateCardStyles(selected, true);
-        updateCardStyles(unselected, false);
-    }
-
-    private void updateCardStyles(MaterialCardView card, boolean isSelected) {
-        if (card == null) return;
-
-        if (isSelected) {
-            card.setStrokeColor(android.graphics.Color.parseColor("#2563EB"));
-            card.setStrokeWidth(4);
-            card.setCardBackgroundColor(android.graphics.Color.parseColor("#F0F7FF"));
-            
-            View innerLayout = card.getChildAt(0);
-            if (innerLayout instanceof LinearLayout) {
-                LinearLayout layout = (LinearLayout) innerLayout;
-                if (layout.getChildCount() >= 2) {
-                    ((TextView) layout.getChildAt(0)).setTextColor(android.graphics.Color.parseColor("#1E3A8A"));
-                    ((TextView) layout.getChildAt(1)).setTextColor(android.graphics.Color.parseColor("#3B82F6"));
-                }
+        btnBackHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        cardYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isAdjuvantTherapyRequired = true;
+                updateUI();
+            }
+        });
+
+        cardNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isAdjuvantTherapyRequired = false;
+                updateUI();
+            }
+        });
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CaseData.getInstance().adjuvantTherapyRequired = isAdjuvantTherapyRequired;
+                startActivity(new Intent(NewCaseNineteenActivity.this, NewCaseTwentyActivity.class));
+            }
+        });
+
+        updateUI();
+    }
+
+    private void updateUI() {
+        if (isAdjuvantTherapyRequired) {
+            setSelected(cardYes);
+            setUnselected(cardNo);
         } else {
-            card.setStrokeColor(android.graphics.Color.parseColor("#E2E8F0"));
-            card.setStrokeWidth(2);
-            card.setCardBackgroundColor(android.graphics.Color.parseColor("#FFFFFF"));
-            
-            View innerLayout = card.getChildAt(0);
-            if (innerLayout instanceof LinearLayout) {
-                LinearLayout layout = (LinearLayout) innerLayout;
-                if (layout.getChildCount() >= 2) {
-                    ((TextView) layout.getChildAt(0)).setTextColor(android.graphics.Color.parseColor("#1E293B"));
-                    ((TextView) layout.getChildAt(1)).setTextColor(android.graphics.Color.parseColor("#94A3B8"));
-                }
-            }
+            setSelected(cardNo);
+            setUnselected(cardYes);
         }
     }
 
-    private void setupButtons() {
-        View btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> finish());
-        }
+    private void setSelected(MaterialCardView card) {
+        card.setCardBackgroundColor(Color.parseColor("#F0F7FF"));
+        card.setStrokeColor(Color.parseColor("#2563EB"));
+        card.setStrokeWidth(4);
+    }
 
-        View btnNext = findViewById(R.id.btnNext);
-        if (btnNext != null) {
-            btnNext.setOnClickListener(v -> {
-                Intent intent = new Intent(NewCaseNineteenActivity.this, NewCaseTwentyActivity.class);
-                startActivity(intent);
-            });
-        }
+    private void setUnselected(MaterialCardView card) {
+        card.setCardBackgroundColor(Color.WHITE);
+        card.setStrokeColor(Color.parseColor("#E2E8F0"));
+        card.setStrokeWidth(2);
     }
 }

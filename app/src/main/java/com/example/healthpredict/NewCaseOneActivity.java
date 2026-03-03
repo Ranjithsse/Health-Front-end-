@@ -44,7 +44,9 @@ public class NewCaseOneActivity extends AppCompatActivity {
             btnNext.setOnClickListener(v -> {
                 // Save data to singleton
                 if (etPatientId != null) {
-                    caseData.patientId = etPatientId.getText().toString();
+                    String input = etPatientId.getText().toString();
+                    caseData.patientId = input;
+                    caseData.patientName = input; // Since the input is Name / ID
                 }
                 if (tvDate != null) {
                     caseData.date = tvDate.getText().toString();

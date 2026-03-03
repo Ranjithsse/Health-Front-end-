@@ -1,6 +1,5 @@
 package com.example.healthpredict;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,16 +34,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         switch (notification.getType()) {
             case SUCCESS:
-                holder.ivIconContainer.setCardBackgroundColor(Color.parseColor("#E1F9EB"));
                 holder.ivIcon.setImageResource(R.drawable.ic_check_circle_fill);
-                break;
-            case INFO:
-                holder.ivIconContainer.setCardBackgroundColor(Color.parseColor("#E0F2FE"));
-                holder.ivIcon.setImageResource(R.drawable.ic_report_fill);
+                holder.iconContainer.setCardBackgroundColor(0xFFE1F9EB);
                 break;
             case ALERT:
-                holder.ivIconContainer.setCardBackgroundColor(Color.parseColor("#FEF2F2"));
-                holder.ivIcon.setImageResource(R.drawable.ic_alert);
+                holder.ivIcon.setImageResource(R.drawable.ic_alert_circle_fill);
+                holder.iconContainer.setCardBackgroundColor(0xFFFEE2E2);
+                break;
+            case INFO:
+                holder.ivIcon.setImageResource(R.drawable.ic_info_circle_fill);
+                holder.iconContainer.setCardBackgroundColor(0xFFE0F2FE);
                 break;
         }
     }
@@ -57,15 +56,15 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle, tvDescription, tvTime;
         ImageView ivIcon;
-        MaterialCardView ivIconContainer;
+        MaterialCardView iconContainer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvNotificationTitle);
-            tvDescription = itemView.findViewById(R.id.tvNotificationDescription);
+            tvDescription = itemView.findViewById(R.id.tvNotificationMessage);
             tvTime = itemView.findViewById(R.id.tvNotificationTime);
             ivIcon = itemView.findViewById(R.id.ivNotificationIcon);
-            ivIconContainer = itemView.findViewById(R.id.ivNotificationIconContainer);
+            iconContainer = itemView.findViewById(R.id.iconContainer);
         }
     }
 }

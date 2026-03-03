@@ -3,7 +3,9 @@ package com.example.healthpredict;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class NewCaseElevenActivity extends AppCompatActivity {
 
@@ -12,24 +14,21 @@ public class NewCaseElevenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_eleven);
 
-        setupToolbar();
-        setupButtons();
-    }
+        ImageView btnBack = findViewById(R.id.btnBack);
+        MaterialButton btnViewMicroStructure = findViewById(R.id.btnViewMicroStructure);
 
-    private void setupToolbar() {
-        View btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> finish());
-        }
-    }
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-    private void setupButtons() {
-        View btnViewMicroStructure = findViewById(R.id.btnViewMicroStructure);
-        if (btnViewMicroStructure != null) {
-            btnViewMicroStructure.setOnClickListener(v -> {
-                Intent intent = new Intent(this, NewCaseTwelveActivity.class);
-                startActivity(intent);
-            });
-        }
+        btnViewMicroStructure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NewCaseElevenActivity.this, NewCaseTwelveActivity.class));
+            }
+        });
     }
 }

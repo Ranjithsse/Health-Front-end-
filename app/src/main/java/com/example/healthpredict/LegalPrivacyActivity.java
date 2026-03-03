@@ -1,8 +1,11 @@
 package com.example.healthpredict;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class LegalPrivacyActivity extends AppCompatActivity {
 
@@ -11,14 +14,41 @@ public class LegalPrivacyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_legal_privacy);
 
-        View btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> onBackPressed());
-        }
+        ImageView btnBack = findViewById(R.id.btnBack);
+        MaterialButton btnBackFooter = findViewById(R.id.btnBackFooter);
 
-        View btnBackFooter = findViewById(R.id.btnBackFooter);
-        if (btnBackFooter != null) {
-            btnBackFooter.setOnClickListener(v -> finish());
-        }
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        btnBackFooter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        findViewById(R.id.navHome).setOnClickListener(v -> {
+            startActivity(new Intent(this, DoctorHomeActivity.class));
+            finish();
+        });
+
+        findViewById(R.id.navCases).setOnClickListener(v -> {
+            startActivity(new Intent(this, DoctorCasesActivity.class));
+            finish();
+        });
+
+        findViewById(R.id.navReports).setOnClickListener(v -> {
+            startActivity(new Intent(this, ReportsActivity.class));
+            finish();
+        });
+
+        findViewById(R.id.navProfile).setOnClickListener(v -> {
+            startActivity(new Intent(this, DoctorProfileActivity.class));
+            finish();
+        });
     }
 }

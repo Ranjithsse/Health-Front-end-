@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
+    android:layout_marginBottom="16dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="16dp"
-    app:cardElevation="0dp"
+    app:cardElevation="2dp"
     app:strokeColor="#F1F5F9"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/ivBadgeIconContainer"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             app:cardBackgroundColor="#FEF9C3"
-            app:cardCornerRadius="28dp"
+            app:cardCornerRadius="32dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,21 +28,20 @@
 
             <ImageView
                 android:id="@+id/ivBadgeIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_achievements"
-                app:tint="#CA8A04" />
+                android:src="@drawable/ic_star_badge" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/tvBadgeTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="First Analysis"
-            android:textColor="#1E293B"
-            android:textSize="18sp"
+            android:layout_marginStart="20dp"
+            android:text="Badge Title"
+            android:textColor="#0F172A"
+            android:textSize="19sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivBadgeIconContainer"
@@ -52,10 +51,10 @@
             android:id="@+id/tvBadgeDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Completed your first patient risk assessment"
+            android:layout_marginTop="4dp"
+            android:text="Badge description goes here."
             android:textColor="#64748B"
-            android:textSize="13sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvBadgeTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvBadgeTitle" />
@@ -64,10 +63,10 @@
             android:id="@+id/tvBadgeDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:text="JAN 10, 2025"
             android:textColor="#94A3B8"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tvBadgeTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvBadgeDesc" />

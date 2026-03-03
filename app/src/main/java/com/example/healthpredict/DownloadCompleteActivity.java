@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class DownloadCompleteActivity extends AppCompatActivity {
 
@@ -14,28 +15,28 @@ public class DownloadCompleteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_download_complete);
 
         ImageView ivBack = findViewById(R.id.ivBack);
-        if (ivBack != null) {
-            ivBack.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
-        }
+        MaterialButton btnViewReport = findViewById(R.id.btnViewReport);
+        MaterialButton btnBackHome = findViewById(R.id.btnBackHome);
 
-        findViewById(R.id.btnViewReport).setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Return to the previous report page
                 finish();
             }
         });
 
-        findViewById(R.id.btnBackHome).setOnClickListener(new View.OnClickListener() {
+        btnViewReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Logic to view the report
+            }
+        });
+
+        btnBackHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DownloadCompleteActivity.this, DoctorHomeActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             }

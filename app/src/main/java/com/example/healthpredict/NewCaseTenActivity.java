@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,13 @@ public class NewCaseTenActivity extends AppCompatActivity {
     
     private MaterialCardView cardAxial, cardSagittal, cardCoronal;
     private TextView tvAxial, tvSagittal, tvCoronal;
+
+    // Zoom components
+    private View sliderContainer;
+    private MaterialCardView sliderThumb;
+    private float currentScale = 1.0f;
+    private static final float MIN_SCALE = 0.5f;
+    private static final float MAX_SCALE = 3.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +53,13 @@ public class NewCaseTenActivity extends AppCompatActivity {
         tvSagittal = findViewById(R.id.tvSagittal);
         tvCoronal = findViewById(R.id.tvCoronal);
 
+        sliderContainer = findViewById(R.id.sliderContainer);
+        sliderThumb = findViewById(R.id.sliderThumb);
+
         setupToolbar();
         handleIntentData();
         setupTabSelection();
+        setupZoomSlider();
 
         View btnExtractTissue = findViewById(R.id.btnExtractTissue);
         if (btnExtractTissue != null) {
@@ -61,15 +74,12 @@ public class NewCaseTenActivity extends AppCompatActivity {
     }
 
     private void handleIntentData() {
-        // Retrieve the selected file URI from Step 8/9
         String fileUriString = getIntent().getStringExtra("FILE_URI");
         if (fileUriString != null) {
             Uri fileUri = Uri.parse(fileUriString);
-            // Display the selected file (assuming it's an image for the viewer)
             if (ivDicomImage != null) {
                 ivDicomImage.setImageURI(fileUri);
                 ivDicomImage.setVisibility(View.VISIBLE);
-                // We keep the mockup lines on top of the image as per design
             }
         }
     }
@@ -80,23 +90,65 @@ public class NewCaseTenActivity extends AppCompatActivity {
         cardCoronal.setOnClickListener(v -> updateMode("Coronal"));
     }
 
+    private void setupZoomSlider() {
+        if (sliderContainer == null || sliderThumb == null) return;
+
+        sliderContainer.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                float y = event.getY();
+                float height = v.getHeight();
+
+                // Constrain y within container bounds
+                if (y < 0) y = 0;
+                if (y > height) y = height;
+
+                // Move the thumb
+                // Center the thumb horizontally and position it vertically at touch point
+                // Note: sliderThumb is inside sliderContainer which is a FrameLayout/CardView
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) sliderThumb.getLayoutParams();
+                params.topMargin = (int) (y - (sliderThumb.getHeight() / 2f));
+                
+                // Keep thumb within container
+                if (params.topMargin < 0) params.topMargin = 0;
+                if (params.topMargin > height - sliderThumb.getHeight()) 
+                    params.topMargin = (int) (height - sliderThumb.getHeight());
+                
+                sliderThumb.setLayoutParams(params);
+
+                // Calculate zoom level based on thumb position
+                // Top is zoom in (MAX_SCALE), bottom is zoom out (MIN_SCALE)
+                float percentage = 1.0f - (y / height); // 1.0 at top, 0.0 at bottom
+                currentScale = MIN_SCALE + (percentage * (MAX_SCALE - MIN_SCALE));
+                
+                updateImageZoom();
+
+                return true;
+            }
+        });
+    }
+
+    private void updateImageZoom() {
+        if (ivDicomImage != null) {
+            ivDicomImage.setScaleX(currentScale);
+            ivDicomImage.setScaleY(currentScale);
+        }
+    }
+
     private void updateMode(String mode) {
-        // 1. Update Title and Labels
         tvViewerTitle.setText("Medical Imaging Viewer (" + mode + ")");
-        
-        // 2. Update Visual Overlays (Exact design colors from images)
         resetUI();
         if (mode.equals("Axial")) {
             setSelectedTab(cardAxial, tvAxial);
-            setOverlayColor("#3B82F6"); // Blue for Axial
+            setOverlayColor("#3B82F6");
             tvSliceLabel.setText("DICOM Render");
         } else if (mode.equals("Sagittal")) {
             setSelectedTab(cardSagittal, tvSagittal);
-            setOverlayColor("#10B981"); // Green for Sagittal
+            setOverlayColor("#10B981");
             tvSliceLabel.setText("Sagittal Slice");
         } else if (mode.equals("Coronal")) {
             setSelectedTab(cardCoronal, tvCoronal);
-            setOverlayColor("#EF4444"); // Red for Coronal
+            setOverlayColor("#EF4444");
             tvSliceLabel.setText("Coronal Slice");
         }
     }

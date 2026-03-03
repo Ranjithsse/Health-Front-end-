@@ -1,94 +1,86 @@
 package com.example.healthpredict;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class ProfileSettingsActivity extends AppCompatActivity {
+
+    private AutoCompleteTextView autoCompleteSensitivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
 
-        setupToolbar();
+        ImageView btnBack = findViewById(R.id.btnBack);
+        MaterialButton btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
+        autoCompleteSensitivity = findViewById(R.id.autoCompleteSensitivity);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileSettingsActivity.this, DeleteAccountDoctorActivity.class));
+            }
+        });
+
         setupSensitivityDropdown();
-        setupDeleteAccount();
-        setupBottomNavigation();
-    }
 
-    private void setupToolbar() {
-        View btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> finish());
-        }
-    }
+        findViewById(R.id.navHome).setOnClickListener(v -> {
+            startActivity(new Intent(this, DoctorHomeActivity.class));
+            finish();
+        });
 
-    private void setupDeleteAccount() {
-        View btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
-        if (btnDeleteAccount != null) {
-            btnDeleteAccount.setOnClickListener(v -> {
-                Intent intent = new Intent(ProfileSettingsActivity.this, DeleteAccountDoctorActivity.class);
-                startActivity(intent);
-            });
-        }
+        findViewById(R.id.navCases).setOnClickListener(v -> {
+            startActivity(new Intent(this, DoctorCasesActivity.class));
+            finish();
+        });
+
+        findViewById(R.id.navReports).setOnClickListener(v -> {
+            startActivity(new Intent(this, ReportsActivity.class));
+            finish();
+        });
+
+        findViewById(R.id.navProfile).setOnClickListener(v -> {
+            startActivity(new Intent(this, DoctorProfileActivity.class));
+            finish();
+        });
     }
 
     private void setupSensitivityDropdown() {
-        String[] sensitivityOptions = new String[]{
-                "Standard (Balanced)",
-                "High Sensitivity (Minimize False Negatives)",
-                "High Specificity (Minimize False Positives)"
+        String[] sensitivityOptions = {
+            "Standard (Balanced)", 
+            "High Sensitivity (Minimize False Negatives)", 
+            "High Specificity (Minimize False Positives)"
         };
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, sensitivityOptions);
+        
+        if (autoCompleteSensitivity != null) {
+            autoCompleteSensitivity.setAdapter(adapter);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_dropdown_item_1line,
-                sensitivityOptions
-        );
+            // Load saved preference
+            SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+            String savedSensitivity = prefs.getString("PredictionSensitivity", "Standard (Balanced)");
+            autoCompleteSensitivity.setText(savedSensitivity, false);
 
-        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autoCompleteSensitivity);
-        if (autoCompleteTextView != null) {
-            autoCompleteTextView.setAdapter(adapter);
-            autoCompleteTextView.setOnClickListener(v -> autoCompleteTextView.showDropDown());
-        }
-    }
-
-    private void setupBottomNavigation() {
-        View navHome = findViewById(R.id.navHome);
-        if (navHome != null) {
-            navHome.setOnClickListener(v -> {
-                Intent intent = new Intent(ProfileSettingsActivity.this, DoctorHomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-            });
-        }
-
-        View navCases = findViewById(R.id.navCases);
-        if (navCases != null) {
-            navCases.setOnClickListener(v -> {
-                Intent intent = new Intent(ProfileSettingsActivity.this, DoctorCasesActivity.class);
-                startActivity(intent);
-            });
-        }
-
-        View navReports = findViewById(R.id.navReports);
-        if (navReports != null) {
-            navReports.setOnClickListener(v -> {
-                Intent intent = new Intent(ProfileSettingsActivity.this, ReportsActivity.class);
-                startActivity(intent);
-            });
-        }
-
-        View navProfile = findViewById(R.id.navProfile);
-        if (navProfile != null) {
-            navProfile.setOnClickListener(v -> {
-                Intent intent = new Intent(ProfileSettingsActivity.this, DoctorProfileActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
+            autoCompleteSensitivity.setOnItemClickListener((parent, view, position, id) -> {
+                String selection = (String) parent.getItemAtPosition(position);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("PredictionSensitivity", selection);
+                editor.apply();
             });
         }
     }

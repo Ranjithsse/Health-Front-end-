@@ -3,7 +3,9 @@ package com.example.healthpredict;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class NewCaseTwelveActivity extends AppCompatActivity {
 
@@ -12,31 +14,29 @@ public class NewCaseTwelveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_case_twelve);
 
-        setupToolbar();
-        setupButtons();
-    }
+        ImageView btnBack = findViewById(R.id.btnBack);
+        MaterialButton btnContinueHeatmap = findViewById(R.id.btnContinueHeatmap);
+        MaterialButton btnBackOverview = findViewById(R.id.btnBackOverview);
 
-    private void setupToolbar() {
-        View btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> finish());
-        }
-    }
-
-    private void setupButtons() {
-        View btnContinueHeatmap = findViewById(R.id.btnContinueHeatmap);
-        if (btnContinueHeatmap != null) {
-            btnContinueHeatmap.setOnClickListener(v -> {
-                Intent intent = new Intent(NewCaseTwelveActivity.this, NewCaseThirteenActivity.class);
-                startActivity(intent);
-            });
-        }
-
-        View btnBackOverview = findViewById(R.id.btnBackOverview);
-        if (btnBackOverview != null) {
-            btnBackOverview.setOnClickListener(v -> {
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
-            });
-        }
+            }
+        });
+
+        btnContinueHeatmap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NewCaseTwelveActivity.this, NewCaseThirteenActivity.class));
+            }
+        });
+
+        btnBackOverview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

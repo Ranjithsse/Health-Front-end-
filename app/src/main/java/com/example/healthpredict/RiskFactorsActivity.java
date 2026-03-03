@@ -2,7 +2,10 @@ package com.example.healthpredict;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class RiskFactorsActivity extends AppCompatActivity {
 
@@ -11,11 +14,13 @@ public class RiskFactorsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_risk_factors);
 
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        ImageView btnBack = findViewById(R.id.btnBack);
+        MaterialButton btnViewExplainability = findViewById(R.id.btnViewExplainability);
 
-        findViewById(R.id.btnViewExplainability).setOnClickListener(v -> {
-            Intent intent = new Intent(RiskFactorsActivity.this, AiExplainabilityActivity.class);
-            startActivity(intent);
+        btnBack.setOnClickListener(v -> finish());
+
+        btnViewExplainability.setOnClickListener(v -> {
+            startActivity(new Intent(RiskFactorsActivity.this, AiExplainabilityActivity.class));
         });
     }
 }

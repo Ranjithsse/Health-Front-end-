@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.card.MaterialCardView;
 
 public class ExportShareActivity extends AppCompatActivity {
 
@@ -14,24 +15,19 @@ public class ExportShareActivity extends AppCompatActivity {
         setContentView(R.layout.activity_export_share);
 
         ImageView ivBack = findViewById(R.id.ivBack);
-        if (ivBack != null) {
-            ivBack.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
-        }
+        MaterialCardView cardDownloadPdf = findViewById(R.id.cardDownloadPdf);
 
-        findViewById(R.id.cardDownloadPdf).setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to DownloadReportActivity
-                Intent intent = new Intent(ExportShareActivity.this, DownloadReportActivity.class);
-                // Passing some default values or could be passed from FinalReportActivity to here
-                intent.putExtra("PATIENT_NAME", "Robert Wilson");
-                intent.putExtra("PATIENT_ID", "1024");
-                startActivity(intent);
+                finish();
+            }
+        });
+
+        cardDownloadPdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ExportShareActivity.this, DownloadReportActivity.class));
             }
         });
     }
