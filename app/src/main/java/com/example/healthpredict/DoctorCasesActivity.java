@@ -14,6 +14,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.healthpredict.network.RetrofitClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DoctorCasesActivity extends AppCompatActivity {
 
     private EditText etSearchInput;
@@ -52,13 +57,24 @@ public class DoctorCasesActivity extends AppCompatActivity {
             });
         }
 
+<<<<<<< HEAD
         setupSearch();
         setupNavigation();
+=======
+        View navProfile = findViewById(R.id.navProfile);
+        if (navProfile != null) {
+            navProfile.setOnClickListener(v -> {
+                Intent intent = new Intent(DoctorCasesActivity.this, DoctorProfileActivity.class);
+                startActivity(intent);
+            });
+        }
+>>>>>>> a41db9c9b76a4cedc18eb27294c386544b564c4b
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+<<<<<<< HEAD
         setupCaseList(); // Refresh list to show updated outcomes
         if (etSearchInput != null) {
             filterCases(etSearchInput.getText().toString());
@@ -70,6 +86,31 @@ public class DoctorCasesActivity extends AppCompatActivity {
             etSearchInput.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+=======
+        fetchCasesFromServer();
+    }
+
+    private void fetchCasesFromServer() {
+        RetrofitClient.getApiService().getCases().enqueue(new Callback<List<CaseData>>() {
+            @Override
+            public void onResponse(Call<List<CaseData>> call, Response<List<CaseData>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    updateCasesUI(response.body());
+                } else {
+                    updateCasesUI(HistoryManager.getInstance().getCaseHistory());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CaseData>> call, Throwable t) {
+                updateCasesUI(HistoryManager.getInstance().getCaseHistory());
+            }
+        });
+    }
+
+    private void updateCasesUI(List<CaseData> history) {
+        int[] itemIds = {R.id.case1, R.id.case2, R.id.case3, R.id.case4, R.id.case5};
+>>>>>>> a41db9c9b76a4cedc18eb27294c386544b564c4b
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
