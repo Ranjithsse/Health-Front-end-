@@ -31,13 +31,8 @@ public class DoctorSearchActivity extends AppCompatActivity {
     private EditText etSearchInput;
     private RecyclerView rvSearchResults;
     private TextView tvNoResults;
-<<<<<<< HEAD
-    private PatientSearchAdapter adapter;
-    private List<Patient> allPatients;
-=======
-    private SearchAdapter adapter;
+    private CaseSearchAdapter adapter;
     private List<CaseData> fullHistory = new ArrayList<>();
->>>>>>> a41db9c9b76a4cedc18eb27294c386544b564c4b
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,19 +72,14 @@ public class DoctorSearchActivity extends AppCompatActivity {
         rvSearchResults = findViewById(R.id.rvSearchResults);
         tvNoResults = findViewById(R.id.tvNoResults);
 
-<<<<<<< HEAD
+        fetchFullHistoryFromServer();
         setupRecyclerView();
         setupSearch();
-=======
-        fetchFullHistoryFromServer();
-        
-        setupSearchLogic();
->>>>>>> a41db9c9b76a4cedc18eb27294c386544b564c4b
         setupNavigation();
     }
 
     private void fetchFullHistoryFromServer() {
-        RetrofitClient.getApiService().getCases().enqueue(new Callback<List<CaseData>>() {
+        RetrofitClient.getApiService().getCases(null).enqueue(new Callback<List<CaseData>>() {
             @Override
             public void onResponse(Call<List<CaseData>> call, Response<List<CaseData>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -97,20 +87,17 @@ public class DoctorSearchActivity extends AppCompatActivity {
                 } else {
                     fullHistory = HistoryManager.getInstance().getCaseHistory();
                 }
-                setupRecyclerView();
             }
 
             @Override
             public void onFailure(Call<List<CaseData>> call, Throwable t) {
                 fullHistory = HistoryManager.getInstance().getCaseHistory();
-                setupRecyclerView();
             }
         });
     }
 
     private void setupRecyclerView() {
-        allPatients = createSamplePatients();
-        adapter = new PatientSearchAdapter(new ArrayList<>(), this::onPatientClicked);
+        adapter = new CaseSearchAdapter(new ArrayList<>(), this::onCaseClicked);
         rvSearchResults.setLayoutManager(new LinearLayoutManager(this));
         rvSearchResults.setAdapter(adapter);
     }
@@ -118,7 +105,8 @@ public class DoctorSearchActivity extends AppCompatActivity {
     private void setupSearch() {
         etSearchInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -126,19 +114,20 @@ public class DoctorSearchActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
     }
 
     private void filterPatients(String query) {
-        List<Patient> filteredList = new ArrayList<>();
-        if (query.isEmpty()) {
-            // Do not show any patients if the query is empty
-        } else {
-            for (Patient patient : allPatients) {
-                if (patient.getName().toLowerCase().contains(query.toLowerCase()) ||
-                    patient.getId().toLowerCase().contains(query.toLowerCase())) {
-                    filteredList.add(patient);
+        List<CaseData> filteredList = new ArrayList<>();
+        if (!query.isEmpty()) {
+            String lowerQuery = query.toLowerCase().trim();
+            for (CaseData data : fullHistory) {
+                String name = (data.patientName != null ? data.patientName : "").toLowerCase();
+                String id = (data.patientId != null ? data.patientId : "").toLowerCase();
+                if (name.contains(lowerQuery) || id.contains(lowerQuery)) {
+                    filteredList.add(data);
                 }
             }
         }
@@ -154,10 +143,12 @@ public class DoctorSearchActivity extends AppCompatActivity {
         }
     }
 
-    private void onPatientClicked(Patient patient) {
+    private void onCaseClicked(CaseData data) {
+        CaseData.getInstance().reset();
+        CaseData.getInstance().copyFrom(data);
         Intent intent = new Intent(this, PatientDetailActivity.class);
-        intent.putExtra("PATIENT_NAME", patient.getName());
-        intent.putExtra("PATIENT_ID", patient.getId());
+        intent.putExtra("PATIENT_NAME", data.patientName);
+        intent.putExtra("PATIENT_ID", data.patientId);
         startActivity(intent);
     }
 
@@ -173,28 +164,21 @@ public class DoctorSearchActivity extends AppCompatActivity {
 
         View navCases = findViewById(R.id.navCases);
         if (navCases != null) {
-            navCases.setOnClickListener(v -> startActivity(new Intent(DoctorSearchActivity.this, DoctorCasesActivity.class)));
+            navCases.setOnClickListener(
+                    v -> startActivity(new Intent(DoctorSearchActivity.this, DoctorCasesActivity.class)));
         }
 
         View navReports = findViewById(R.id.navReports);
         if (navReports != null) {
-            navReports.setOnClickListener(v -> startActivity(new Intent(DoctorSearchActivity.this, ReportsActivity.class)));
+            navReports.setOnClickListener(
+                    v -> startActivity(new Intent(DoctorSearchActivity.this, ReportsActivity.class)));
         }
 
         View navProfile = findViewById(R.id.navProfile);
         if (navProfile != null) {
-            navProfile.setOnClickListener(v -> startActivity(new Intent(DoctorSearchActivity.this, DoctorProfileActivity.class)));
+            navProfile.setOnClickListener(
+                    v -> startActivity(new Intent(DoctorSearchActivity.this, DoctorProfileActivity.class)));
         }
-    }
-
-    private List<Patient> createSamplePatients() {
-        List<Patient> patients = new ArrayList<>();
-        patients.add(new Patient("Robert Wilson", "1024"));
-        patients.add(new Patient("Jane Smith", "1025"));
-        patients.add(new Patient("John Doe", "1026"));
-        patients.add(new Patient("Emily Jones", "1027"));
-        patients.add(new Patient("Michael Brown", "1028"));
-        return patients;
     }
 
     // Patient data class
@@ -217,16 +201,16 @@ public class DoctorSearchActivity extends AppCompatActivity {
     }
 
     // Adapter for the RecyclerView
-    static class PatientSearchAdapter extends RecyclerView.Adapter<PatientSearchAdapter.ViewHolder> {
-        private List<Patient> patients;
-        private final OnPatientClickListener listener;
+    static class CaseSearchAdapter extends RecyclerView.Adapter<CaseSearchAdapter.ViewHolder> {
+        private List<CaseData> cases;
+        private final OnCaseClickListener listener;
 
-        public interface OnPatientClickListener {
-            void onPatientClick(Patient patient);
+        public interface OnCaseClickListener {
+            void onCaseClick(CaseData data);
         }
 
-        public PatientSearchAdapter(List<Patient> patients, OnPatientClickListener listener) {
-            this.patients = patients;
+        public CaseSearchAdapter(List<CaseData> cases, OnCaseClickListener listener) {
+            this.cases = cases;
             this.listener = listener;
         }
 
@@ -239,17 +223,17 @@ public class DoctorSearchActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Patient patient = patients.get(position);
-            holder.bind(patient, listener);
+            CaseData data = cases.get(position);
+            holder.bind(data, listener);
         }
 
         @Override
         public int getItemCount() {
-            return patients.size();
+            return cases.size();
         }
 
-        public void updateList(List<Patient> newList) {
-            patients = newList;
+        public void updateList(List<CaseData> newList) {
+            cases = newList;
             notifyDataSetChanged();
         }
 
@@ -263,10 +247,12 @@ public class DoctorSearchActivity extends AppCompatActivity {
                 tvPatientId = itemView.findViewById(R.id.tvPatientId);
             }
 
-            public void bind(final Patient patient, final OnPatientClickListener listener) {
-                tvPatientName.setText(patient.getName());
-                tvPatientId.setText("ID: " + patient.getId());
-                itemView.setOnClickListener(v -> listener.onPatientClick(patient));
+            public void bind(final CaseData data, final OnCaseClickListener listener) {
+                String name = data.patientName != null && !data.patientName.isEmpty() ? data.patientName
+                        : data.patientId;
+                tvPatientName.setText(name);
+                tvPatientId.setText("ID: " + data.patientId);
+                itemView.setOnClickListener(v -> listener.onCaseClick(data));
             }
         }
     }

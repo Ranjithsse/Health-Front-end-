@@ -12,10 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
-import com.google.android.material.card.MaterialCardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
+import com.example.healthpredict.network.ApiService;
 import com.example.healthpredict.network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,11 +30,11 @@ public class DoctorHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
-        
+
         setContentView(R.layout.activity_doctor_home);
 
         updateUI();
@@ -62,13 +66,13 @@ public class DoctorHomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fetchCasesFromServer(); 
+        fetchCasesFromServer();
     }
 
     private void updateUI() {
         SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
         String doctorName = prefs.getString("user_name", "Dr. Alex Morgan");
-        
+
         TextView tvGreeting = findViewById(R.id.tvGreeting);
         if (tvGreeting != null) {
             Calendar calendar = Calendar.getInstance();
@@ -91,13 +95,15 @@ public class DoctorHomeActivity extends AppCompatActivity {
         // Notification
         ImageView ivNotification = findViewById(R.id.ivNotification);
         if (ivNotification != null) {
-            ivNotification.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorNotificationsActivity.class)));
+            ivNotification.setOnClickListener(
+                    v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorNotificationsActivity.class)));
         }
 
         // SEARCH BAR
         View searchBar = findViewById(R.id.searchBar);
         if (searchBar != null) {
-            searchBar.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorSearchActivity.class)));
+            searchBar.setOnClickListener(
+                    v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorSearchActivity.class)));
         }
 
         // New Assessment
@@ -112,125 +118,105 @@ public class DoctorHomeActivity extends AppCompatActivity {
         // View All Patients
         TextView tvViewAllPatients = findViewById(R.id.tvViewAllPatients);
         if (tvViewAllPatients != null) {
-            tvViewAllPatients.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorCasesActivity.class)));
+            tvViewAllPatients.setOnClickListener(
+                    v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorCasesActivity.class)));
         }
 
         // Bottom Nav - Cases
         View navCases = findViewById(R.id.navCases);
         if (navCases != null) {
-            navCases.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorCasesActivity.class)));
+            navCases.setOnClickListener(
+                    v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorCasesActivity.class)));
         }
 
         // Bottom Nav - Reports
         View navReports = findViewById(R.id.navReports);
         if (navReports != null) {
-            navReports.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, ReportsActivity.class)));
+            navReports
+                    .setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, ReportsActivity.class)));
         }
 
         // Bottom Nav - Profile
         View navProfile = findViewById(R.id.navProfile);
         if (navProfile != null) {
-            navProfile.setOnClickListener(v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorProfileActivity.class)));
+            navProfile.setOnClickListener(
+                    v -> startActivity(new Intent(DoctorHomeActivity.this, DoctorProfileActivity.class)));
         }
     }
 
     private void setupStats() {
+        ApiService apiService = RetrofitClient.getApiService();
+        apiService.getDashboardStats().enqueue(new Callback<Map<String, Object>>() {
+            @Override
+            public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Map<String, Object> stats = response.body();
+                    updateStatsDisplay(stats);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, Object>> call, Throwable t) {
+                // Fallback to static or local stats
+            }
+        });
+    }
+
+    private void updateStatsDisplay(Map<String, Object> stats) {
         View stat1 = findViewById(R.id.stat1);
         if (stat1 != null) {
-            ((ImageView) stat1.findViewById(R.id.ivStatIcon)).setImageResource(R.drawable.ic_accuracy);
-            ((TextView) stat1.findViewById(R.id.tvStatValue)).setText("94.2%");
-            ((TextView) stat1.findViewById(R.id.tvStatLabel)).setText("Accuracy");
+            String accuracy = (String) stats.get("simulated_accuracy");
+            ((TextView) stat1.findViewById(R.id.tvStatValue)).setText(accuracy);
         }
 
         View stat2 = findViewById(R.id.stat2);
         if (stat2 != null) {
-            ((ImageView) stat2.findViewById(R.id.ivStatIcon)).setImageResource(R.drawable.ic_patients);
-            ((TextView) stat2.findViewById(R.id.tvStatValue)).setText(String.valueOf(HistoryManager.getInstance().getCaseHistory().size() + 125));
-            ((TextView) stat2.findViewById(R.id.tvStatLabel)).setText("Patients");
+            Object total = stats.get("total_patients");
+            ((TextView) stat2.findViewById(R.id.tvStatValue)).setText(String.valueOf(total));
         }
 
         View stat3 = findViewById(R.id.stat3);
         if (stat3 != null) {
-            ((ImageView) stat3.findViewById(R.id.ivStatIcon)).setImageResource(R.drawable.ic_month);
-            ((TextView) stat3.findViewById(R.id.tvStatValue)).setText("24");
-            ((TextView) stat3.findViewById(R.id.tvStatLabel)).setText("This Month");
+            Object monthly = stats.get("this_month_patients");
+            ((TextView) stat3.findViewById(R.id.tvStatValue)).setText(String.valueOf(monthly));
         }
     }
 
     private void fetchCasesFromServer() {
-        RetrofitClient.getApiService().getCases().enqueue(new Callback<List<CaseData>>() {
+        RetrofitClient.getApiService().getCases(null).enqueue(new Callback<List<CaseData>>() {
             @Override
             public void onResponse(Call<List<CaseData>> call, Response<List<CaseData>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<CaseData> serverCases = response.body();
                     updateRecentPatientsUI(serverCases);
                 } else {
-                    // Fallback to local history if server fails
                     updateRecentPatientsUI(HistoryManager.getInstance().getCaseHistory());
                 }
             }
 
             @Override
             public void onFailure(Call<List<CaseData>> call, Throwable t) {
-                // Fallback to local history
                 updateRecentPatientsUI(HistoryManager.getInstance().getCaseHistory());
             }
         });
     }
 
     private void updateRecentPatientsUI(List<CaseData> history) {
-        
-        int[] itemIds = {R.id.p1, R.id.p2, R.id.p3};
-        
-        for (int i = 0; i < itemIds.length; i++) {
-            View patientView = findViewById(itemIds[i]);
-            if (patientView == null) continue;
+        RecyclerView rvRecentPatients = findViewById(R.id.rvRecentPatients);
+        if (rvRecentPatients == null)
+            return;
 
-            if (i < history.size()) {
-                CaseData data = history.get(i);
-                patientView.setVisibility(View.VISIBLE);
-                
-                TextView tvInitial = patientView.findViewById(R.id.tvInitial);
-                TextView tvName = patientView.findViewById(R.id.tvPatientName);
-                TextView tvDetail = patientView.findViewById(R.id.tvPatientDetail);
-                TextView tvStatus = patientView.findViewById(R.id.tvStatus);
-                MaterialCardView cardStatus = patientView.findViewById(R.id.cardStatus);
+        // Limit to 3 recent patients for the home screen
+        List<CaseData> recentList = history.size() > 3 ? history.subList(0, 3) : history;
 
-                String name = data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId;
-                if (tvInitial != null && name != null && !name.isEmpty()) tvInitial.setText(name.substring(0, 1).toUpperCase());
-                if (tvName != null) tvName.setText(name);
-                if (tvDetail != null) tvDetail.setText(data.patientId + " • " + data.primarySystem);
-                if (tvStatus != null) tvStatus.setText(data.riskLevel);
-                
-                if (cardStatus != null && tvStatus != null) {
-                    updateStatusStyle(cardStatus, tvStatus, data.riskLevel);
-                }
+        SearchAdapter adapter = new SearchAdapter(recentList, data -> {
+            CaseData.getInstance().reset();
+            CaseData.getInstance().copyFrom(data);
+            startActivity(new Intent(DoctorHomeActivity.this, FinalReportActivity.class));
+        });
 
-                patientView.setOnClickListener(v -> {
-                    CaseData.getInstance().reset();
-                    CaseData.getInstance().copyFrom(data);
-                    startActivity(new Intent(DoctorHomeActivity.this, FinalReportActivity.class));
-                });
-            } else {
-                patientView.setVisibility(View.GONE);
-            }
-        }
+        rvRecentPatients.setLayoutManager(new LinearLayoutManager(this));
+        rvRecentPatients.setAdapter(adapter);
     }
 
-    private void updateStatusStyle(MaterialCardView card, TextView tv, String risk) {
-        if (risk == null) return;
-        if (risk.equalsIgnoreCase("Low")) {
-            card.setCardBackgroundColor(Color.parseColor("#DCFCE7"));
-            tv.setTextColor(Color.parseColor("#166534"));
-        } else if (risk.equalsIgnoreCase("Moderate")) {
-            card.setCardBackgroundColor(Color.parseColor("#FEF9C3"));
-            tv.setTextColor(Color.parseColor("#854D0E"));
-        } else if (risk.equalsIgnoreCase("High") || risk.equalsIgnoreCase("Critical")) {
-            card.setCardBackgroundColor(Color.parseColor("#FEE2E2"));
-            tv.setTextColor(Color.parseColor("#991B1B"));
-        } else {
-            card.setCardBackgroundColor(Color.parseColor("#F1F5F9"));
-            tv.setTextColor(Color.parseColor("#475569"));
-        }
-    }
 }

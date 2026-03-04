@@ -1,24 +1,34 @@
 package com.example.healthpredict;
 
 public class Notification {
-    public enum Type {
-        SUCCESS, INFO, ALERT
-    }
 
     private String title;
+    @com.google.gson.annotations.SerializedName("message")
     private String description;
+    @com.google.gson.annotations.SerializedName("created_at_human")
     private String time;
-    private Type type;
+    private String type; // SUCCESS, INFO, ALERT
 
-    public Notification(String title, String description, String time, Type type) {
+    public Notification(String title, String description, String time, String type) {
         this.title = title;
         this.description = description;
         this.time = time;
         this.type = type;
     }
 
-    public String getTitle() { return title; }
-    public String getDescription() { return description; }
-    public String getTime() { return time; }
-    public Type getType() { return type; }
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

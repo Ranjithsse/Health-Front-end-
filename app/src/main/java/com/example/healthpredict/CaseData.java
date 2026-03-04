@@ -8,27 +8,32 @@ import java.util.List;
 public class CaseData implements Serializable {
     private static CaseData instance;
 
+    @SerializedName("id")
+    public int id;
+
+    @SerializedName("status")
+    public String status = "";
+
     // Page 1: Assessment
     @SerializedName("patient_id")
     public String patientId = "";
-    
+
     @SerializedName("patient_name")
-    public String patientName = ""; 
-    
+    public String patientName = "";
+
     @SerializedName("date")
     public String date = "";
 
     // Page 2: Demographics
     @SerializedName("gender")
     public String gender = "";
-<<<<<<< HEAD
+
+    @SerializedName("age")
     public String age = "";
-=======
-    
+
     @SerializedName("blood_group")
->>>>>>> a41db9c9b76a4cedc18eb27294c386544b564c4b
     public String bloodGroup = "";
-    
+
     @SerializedName("smoking_status")
     public String smokingStatus = "";
 
@@ -47,7 +52,7 @@ public class CaseData implements Serializable {
     // Page 6: Vitals
     @SerializedName("blood_pressure")
     public String bloodPressure = "";
-    
+
     @SerializedName("glucose_level")
     public String glucoseLevel = "";
 
@@ -58,34 +63,29 @@ public class CaseData implements Serializable {
     // Page 14: Imaging Parameters
     @SerializedName("tissue_density")
     public String tissueDensity = "Normal";
-    
+
     @SerializedName("calcification")
     public String calcification = "Minimal";
-    
+
     @SerializedName("vascularity")
     public String vascularity = "Good";
-    
+
     @SerializedName("inflammation")
     public String inflammation = "None";
 
     // Page 15: Medication & Treatment
     public String primaryMedication = "ACE Inhibitors";
+    public String dosage = "";
+    public String duration = "";
     public String treatmentType = "Preventative";
 
     // Page 17: Intervention Type
-<<<<<<< HEAD
+    @SerializedName("intervention_type")
     public String interventionType = "Non-Invasive";
 
     // Page 18: Monitoring Level
-    public String monitoringLevel = "Standard Monitoring";
-=======
-    @SerializedName("intervention_type")
-    public String interventionType = "";
-
-    // Page 18: Monitoring Level
     @SerializedName("monitoring_level")
-    public String monitoringLevel = "";
->>>>>>> a41db9c9b76a4cedc18eb27294c386544b564c4b
+    public String monitoringLevel = "Standard Monitoring";
 
     // Page 19: Adjuvant Therapy
     @SerializedName("adjuvant_therapy_required")
@@ -94,40 +94,50 @@ public class CaseData implements Serializable {
     // AI Prediction Results
     @SerializedName("risk_score")
     public String riskScore = "";
-    
+
     @SerializedName("risk_level")
     public String riskLevel = "";
-    
+
     @SerializedName("accuracy")
     public String accuracy = "";
-    
+
     @SerializedName("ai_insight")
     public String aiInsight = "";
 
     // Multi-Year Outlook Data
     @SerializedName("one_year_prediction")
     public String oneYearPrediction = "98.2%";
-    
+
     @SerializedName("one_year_risk")
     public String oneYearRisk = "Low";
-    
+
+    @SerializedName("one_year_insight")
+    public String oneYearInsight = "";
+
     @SerializedName("three_year_prediction")
     public String threeYearPrediction = "85.5%";
-    
+
     @SerializedName("three_year_risk")
     public String threeYearRisk = "Moderate";
-    
+
+    @SerializedName("three_year_insight")
+    public String threeYearInsight = "";
+
     @SerializedName("five_year_prediction")
     public String fiveYearPrediction = "72.1%";
-    
+
     @SerializedName("five_year_risk")
     public String fiveYearRisk = "Moderate";
+
+    @SerializedName("five_year_insight")
+    public String fiveYearInsight = "";
 
     // Provider Notes
     @SerializedName("provider_notes")
     public String providerNotes = "";
 
-    public CaseData() {}
+    public CaseData() {
+    }
 
     public static synchronized CaseData getInstance() {
         if (instance == null) {
@@ -137,6 +147,8 @@ public class CaseData implements Serializable {
     }
 
     public void copyFrom(CaseData other) {
+        this.id = other.id;
+        this.status = other.status;
         this.patientId = other.patientId;
         this.patientName = other.patientName;
         this.date = other.date;
@@ -155,6 +167,8 @@ public class CaseData implements Serializable {
         this.vascularity = other.vascularity;
         this.inflammation = other.inflammation;
         this.primaryMedication = other.primaryMedication;
+        this.dosage = other.dosage;
+        this.duration = other.duration;
         this.treatmentType = other.treatmentType;
         this.interventionType = other.interventionType;
         this.monitoringLevel = other.monitoringLevel;
@@ -165,14 +179,19 @@ public class CaseData implements Serializable {
         this.aiInsight = other.aiInsight;
         this.oneYearPrediction = other.oneYearPrediction;
         this.oneYearRisk = other.oneYearRisk;
+        this.oneYearInsight = other.oneYearInsight;
         this.threeYearPrediction = other.threeYearPrediction;
         this.threeYearRisk = other.threeYearRisk;
+        this.threeYearInsight = other.threeYearInsight;
         this.fiveYearPrediction = other.fiveYearPrediction;
         this.fiveYearRisk = other.fiveYearRisk;
+        this.fiveYearInsight = other.fiveYearInsight;
         this.providerNotes = other.providerNotes;
     }
 
     public void reset() {
+        id = 0;
+        status = "";
         patientId = "";
         patientName = "";
         date = "";
@@ -191,6 +210,8 @@ public class CaseData implements Serializable {
         vascularity = "Good";
         inflammation = "None";
         primaryMedication = "ACE Inhibitors";
+        dosage = "";
+        duration = "";
         treatmentType = "Preventative";
         interventionType = "Non-Invasive";
         monitoringLevel = "Standard Monitoring";
@@ -202,9 +223,12 @@ public class CaseData implements Serializable {
         providerNotes = "";
         oneYearPrediction = "98.2%";
         oneYearRisk = "Low";
+        oneYearInsight = "";
         threeYearPrediction = "85.5%";
         threeYearRisk = "Moderate";
+        threeYearInsight = "";
         fiveYearPrediction = "72.1%";
         fiveYearRisk = "Moderate";
+        fiveYearInsight = "";
     }
 }

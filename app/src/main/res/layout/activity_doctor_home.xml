@@ -274,24 +274,12 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecentPatients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="vertical">
-
-                <include
-                    android:id="@+id/p1"
-                    layout="@layout/item_recent_patient" />
-
-                <include
-                    android:id="@+id/p2"
-                    layout="@layout/item_recent_patient" />
-
-                <include
-                    android:id="@+id/p3"
-                    layout="@layout/item_recent_patient" />
-            </LinearLayout>
+                android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

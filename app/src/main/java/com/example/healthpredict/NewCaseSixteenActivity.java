@@ -3,6 +3,7 @@ package com.example.healthpredict;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
@@ -17,6 +18,8 @@ public class NewCaseSixteenActivity extends AppCompatActivity {
         ImageView btnBackHeader = findViewById(R.id.btnBackHeader);
         MaterialButton btnBack = findViewById(R.id.btnBack);
         MaterialButton btnNext = findViewById(R.id.btnNext);
+        EditText etDosage = findViewById(R.id.etDosage);
+        EditText etDuration = findViewById(R.id.etDuration);
 
         btnBackHeader.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +38,11 @@ public class NewCaseSixteenActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CaseData data = CaseData.getInstance();
+                if (etDosage != null)
+                    data.dosage = etDosage.getText().toString();
+                if (etDuration != null)
+                    data.duration = etDuration.getText().toString();
                 startActivity(new Intent(NewCaseSixteenActivity.this, NewCaseSeventeenActivity.class));
             }
         });

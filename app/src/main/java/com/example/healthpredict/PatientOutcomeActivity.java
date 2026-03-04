@@ -1,7 +1,6 @@
 package com.example.healthpredict;
 
 import android.app.DatePickerDialog;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +11,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import com.example.healthpredict.network.RetrofitClient;
+import com.example.healthpredict.network.ApiService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PatientOutcomeActivity extends AppCompatActivity {
 
@@ -82,18 +88,42 @@ public class PatientOutcomeActivity extends AppCompatActivity {
             return;
         }
 
-        SharedPreferences prefs = getSharedPreferences("PatientOutcomes", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(patientId, status);
-        editor.apply();
+        TextView tvFollowUpDate = findViewById(R.id.tvFollowUpDate);
+        EditText etComplications = findViewById(R.id.etComplications);
+        String followUpDate = tvFollowUpDate.getText().toString();
+        String complications = etComplications != null ? etComplications.getText().toString() : "";
 
-        Toast.makeText(this, "Outcome saved for " + patientId, Toast.LENGTH_SHORT).show();
-        finish();
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("healthStatus", status);
+        updates.put("followUpDate", followUpDate);
+        updates.put("complications", complications);
+
+        ApiService apiService = RetrofitClient.getApiService();
+        apiService.updateCase(Integer.parseInt(patientId), updates).enqueue(new Callback<CaseData>() {
+            @Override
+            public void onResponse(Call<CaseData> call, Response<CaseData> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(PatientOutcomeActivity.this, "Outcome saved to server successfully",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(PatientOutcomeActivity.this, "Failed to save outcome: " + response.code(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CaseData> call, Throwable t) {
+                Toast.makeText(PatientOutcomeActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
     }
 
     private void showHealthStatusDialog(TextView tvHealthStatus) {
-        final String[] options = {"Successful Recovery", "Stable Condition", "Condition Declined", "Complications Arising"};
-        
+        final String[] options = { "Successful Recovery", "Stable Condition", "Condition Declined",
+                "Complications Arising" };
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select Health Status");
         builder.setItems(options, (dialog, which) -> {
@@ -112,7 +142,8 @@ public class PatientOutcomeActivity extends AppCompatActivity {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, selectedYear, selectedMonth, selectedDay) -> {
-                    String selectedDate = String.format(Locale.getDefault(), "%02d-%02d-%d", selectedDay, selectedMonth + 1, selectedYear);
+                    String selectedDate = String.format(Locale.getDefault(), "%02d-%02d-%d", selectedDay,
+                            selectedMonth + 1, selectedYear);
                     if (tvDate != null) {
                         tvDate.setText(selectedDate);
                         tvDate.setTextColor(Color.parseColor("#0F172A")); // Set to solid text color

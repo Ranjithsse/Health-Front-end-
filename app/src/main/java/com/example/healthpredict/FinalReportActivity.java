@@ -10,6 +10,7 @@ import com.google.android.material.button.MaterialButton;
 
 import android.widget.Toast;
 import com.example.healthpredict.network.RetrofitClient;
+import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,7 +43,6 @@ public class FinalReportActivity extends AppCompatActivity {
                 startActivity(intent);
             });
         }
-<<<<<<< HEAD
     }
 
     private void displayReportData() {
@@ -93,26 +93,19 @@ public class FinalReportActivity extends AppCompatActivity {
 
         if (btnBackDashboard != null) {
             btnBackDashboard.setOnClickListener(v -> {
+                // Save to backend
+                saveToBackend();
+                
                 Intent intent = new Intent(FinalReportActivity.this, DoctorHomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             });
         }
-=======
-        
-        findViewById(R.id.btnBackDashboard).setOnClickListener(v -> {
-            // Save to backend
-            saveToBackend();
-            
-            Intent intent = new Intent(FinalReportActivity.this, DoctorHomeActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            finish();
-        });
     }
 
     private void saveToBackend() {
+        CaseData caseData = CaseData.getInstance();
         // Show saving toast
         Toast.makeText(this, "Saving to database...", Toast.LENGTH_SHORT).show();
 
@@ -133,6 +126,5 @@ public class FinalReportActivity extends AppCompatActivity {
                 Toast.makeText(FinalReportActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
->>>>>>> a41db9c9b76a4cedc18eb27294c386544b564c4b
     }
 }

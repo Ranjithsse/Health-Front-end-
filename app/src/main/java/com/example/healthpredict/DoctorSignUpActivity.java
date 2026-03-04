@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
-import android.widget.EditText;
 import com.example.healthpredict.network.AuthResponse;
 import com.example.healthpredict.network.RegisterRequest;
 import com.example.healthpredict.network.RetrofitClient;
@@ -34,10 +33,6 @@ public class DoctorSignUpActivity extends AppCompatActivity {
         CheckBox cbTerms = findViewById(R.id.cbTerms);
         MaterialButton btnCreateAccount = findViewById(R.id.btnCreateAccount);
         TextView tvSignIn = findViewById(R.id.tvSignIn);
-        EditText etFullName = findViewById(R.id.etFullName);
-        EditText etHospital = findViewById(R.id.etHospital);
-        EditText etEmail = findViewById(R.id.etEmail);
-        EditText etPassword = findViewById(R.id.etPassword);
 
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +42,6 @@ public class DoctorSignUpActivity extends AppCompatActivity {
                 String email = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
 
-<<<<<<< HEAD
                 if (fullName.isEmpty()) {
                     etFullName.setError("Full name is required");
                     etFullName.requestFocus();
@@ -89,30 +83,10 @@ public class DoctorSignUpActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Save user info to SharedPreferences
-                SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("user_email", email);
-                editor.putString("user_name", fullName);
-                editor.apply();
-
-                Toast.makeText(DoctorSignUpActivity.this, "Account created successfully for " + fullName, Toast.LENGTH_LONG).show();
-
-                // Navigate to DoctorHomeActivity
-                Intent intent = new Intent(DoctorSignUpActivity.this, DoctorHomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-=======
-                if (email.isEmpty() || password.isEmpty() || fullName.isEmpty()) {
-                    Toast.makeText(DoctorSignUpActivity.this, "Please fill all required fields", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 btnCreateAccount.setEnabled(false);
 
-                // For username, we'll use email or full name without spaces
-                String username = email; 
+                // Use email as username for now
+                String username = email;
 
                 RegisterRequest request = new RegisterRequest(username, email, password, "Internal Medicine", hospital);
                 RetrofitClient.getApiService().signup(request).enqueue(new Callback<AuthResponse>() {
@@ -120,9 +94,17 @@ public class DoctorSignUpActivity extends AppCompatActivity {
                     public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                         btnCreateAccount.setEnabled(true);
                         if (response.isSuccessful()) {
+                            // Save user info to SharedPreferences
+                            SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("user_email", email);
+                            editor.putString("user_name", fullName);
+                            editor.putBoolean("is_logged_in", true);
+                            editor.apply();
+
                             Toast.makeText(DoctorSignUpActivity.this, "Account created successfully!", Toast.LENGTH_SHORT).show();
-                            
-                            // Navigate to DoctorHomeActivity (or Login)
+
+                            // Navigate to DoctorHomeActivity
                             Intent intent = new Intent(DoctorSignUpActivity.this, DoctorHomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
@@ -138,7 +120,6 @@ public class DoctorSignUpActivity extends AppCompatActivity {
                         Toast.makeText(DoctorSignUpActivity.this, "Network Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
->>>>>>> a41db9c9b76a4cedc18eb27294c386544b564c4b
             }
         });
 

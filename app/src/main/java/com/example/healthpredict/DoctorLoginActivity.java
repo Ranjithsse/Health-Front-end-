@@ -25,6 +25,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_login);
 
         EditText etEmail = findViewById(R.id.etEmail);
+        EditText etPassword = findViewById(R.id.etPassword);
         MaterialButton btnSignIn = findViewById(R.id.btnSignIn);
         TextView tvSignUp = findViewById(R.id.tvSignUp);
         TextView tvForgotPassword = findViewById(R.id.tvForgotPassword);
@@ -33,6 +34,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = etEmail.getText().toString().trim();
+                String password = etPassword.getText().toString().trim();
                 
                 if (email.isEmpty()) {
                     etEmail.setError("Email is required");
@@ -40,21 +42,12 @@ public class DoctorLoginActivity extends AppCompatActivity {
                     return;
                 }
 
-<<<<<<< HEAD
-                // Save email to SharedPreferences
-                SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("user_email", email);
-                // For login simulation, we'll set a default name if not already present
-                if (!prefs.contains("user_name")) {
-                    editor.putString("user_name", "Doctor");
+                if (password.isEmpty()) {
+                    etPassword.setError("Password is required");
+                    etPassword.requestFocus();
+                    return;
                 }
-                editor.apply();
 
-                // Handle login and navigate to DoctorHomeActivity
-                startActivity(new Intent(DoctorLoginActivity.this, DoctorHomeActivity.class));
-                finish();
-=======
                 // Show loading or disable button
                 btnSignIn.setEnabled(false);
 
@@ -92,7 +85,6 @@ public class DoctorLoginActivity extends AppCompatActivity {
                         Toast.makeText(DoctorLoginActivity.this, "Network Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
->>>>>>> a41db9c9b76a4cedc18eb27294c386544b564c4b
             }
         });
 

@@ -9,13 +9,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.healthpredict.network.RetrofitClient;
+import com.example.healthpredict.network.ApiService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import java.util.List;
+import android.widget.Toast;
+import java.util.ArrayList;
 
 public class ReportsActivity extends AppCompatActivity {
 
     private EditText etSearchInput;
     private TextView tvNoResults;
-    private final int[] reportItemIds = {R.id.report1, R.id.report2, R.id.report3, R.id.report4};
+    private final int[] reportItemIds = { R.id.report1, R.id.report2, R.id.report3, R.id.report4 };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +82,8 @@ public class ReportsActivity extends AppCompatActivity {
         if (etSearchInput != null) {
             etSearchInput.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -83,7 +91,8 @@ public class ReportsActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void afterTextChanged(Editable s) {}
+                public void afterTextChanged(Editable s) {
+                }
             });
         }
     }
@@ -97,11 +106,11 @@ public class ReportsActivity extends AppCompatActivity {
             if (itemView != null) {
                 TextView tvName = itemView.findViewById(R.id.tvPatientName);
                 TextView tvDetail = itemView.findViewById(R.id.tvReportDetail);
-                
+
                 if (tvName != null && tvDetail != null) {
                     String name = tvName.getText().toString().toLowerCase();
                     String detail = tvDetail.getText().toString().toLowerCase();
-                    
+
                     if (lowerQuery.isEmpty() || name.contains(lowerQuery) || detail.contains(lowerQuery)) {
                         itemView.setVisibility(View.VISIBLE);
                         anyFound = true;
@@ -118,8 +127,26 @@ public class ReportsActivity extends AppCompatActivity {
     }
 
     private void setupRecentReports() {
-        List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
-        updateReportsUI(history);
+        ApiService apiService = RetrofitClient.getApiService();
+        apiService.getCases("Completed").enqueue(new Callback<List<CaseData>>() {
+            @Override
+            public void onResponse(Call<List<CaseData>> call, Response<List<CaseData>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    updateReportsUI(response.body());
+                } else {
+                    // Fallback to local history if server fails
+                    List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
+                    updateReportsUI(history);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CaseData>> call, Throwable t) {
+                // Fallback to local history
+                List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
+                updateReportsUI(history);
+            }
+        });
     }
 
     private void setupBottomNavigation() {
@@ -152,28 +179,25 @@ public class ReportsActivity extends AppCompatActivity {
         }
     }
 
-<<<<<<< HEAD
-    private void setupRecentReports() {
-        List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
-=======
     private void updateReportsUI(List<CaseData> history) {
-        int[] itemIds = {R.id.report1, R.id.report2, R.id.report3, R.id.report4};
->>>>>>> a41db9c9b76a4cedc18eb27294c386544b564c4b
-
         for (int i = 0; i < reportItemIds.length; i++) {
             View itemView = findViewById(reportItemIds[i]);
-            if (itemView == null) continue;
+            if (itemView == null)
+                continue;
 
             if (i < history.size()) {
                 CaseData data = history.get(i);
                 itemView.setVisibility(View.VISIBLE);
-                
+
                 TextView tvName = itemView.findViewById(R.id.tvPatientName);
                 TextView tvDetail = itemView.findViewById(R.id.tvReportDetail);
 
-                String name = data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId;
-                if (tvName != null) tvName.setText(name);
-                if (tvDetail != null) tvDetail.setText(data.primarySystem + " • " + data.date);
+                String name = data.patientName != null && !data.patientName.isEmpty() ? data.patientName
+                        : data.patientId;
+                if (tvName != null)
+                    tvName.setText(name);
+                if (tvDetail != null)
+                    tvDetail.setText(data.primarySystem + " • " + data.date);
 
                 itemView.setOnClickListener(v -> {
                     // Set as current case and view report
@@ -183,7 +207,7 @@ public class ReportsActivity extends AppCompatActivity {
                     startActivity(new Intent(ReportsActivity.this, FinalReportActivity.class));
                 });
             } else {
-                // If there's no real history but the view is visible (mock data), 
+                // If there's no real history but the view is visible (mock data),
                 // we should still allow clicking it to see activity_final_report.xml
                 itemView.setOnClickListener(v -> {
                     startActivity(new Intent(ReportsActivity.this, FinalReportActivity.class));
@@ -193,6 +217,8 @@ public class ReportsActivity extends AppCompatActivity {
     }
 
     private void copyToSingleton(CaseData source, CaseData target) {
+        target.id = source.id;
+        target.status = source.status;
         target.patientId = source.patientId;
         target.patientName = source.patientName;
         target.date = source.date;

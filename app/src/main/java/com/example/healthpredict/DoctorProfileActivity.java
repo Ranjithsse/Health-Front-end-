@@ -10,17 +10,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.example.healthpredict.network.RetrofitClient;
+import com.example.healthpredict.network.ApiService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import java.util.Map;
+import android.widget.Toast;
 
 public class DoctorProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
-        
+
         setContentView(R.layout.activity_doctor_profile);
 
         View toolbar = findViewById(R.id.toolbar);
@@ -45,12 +52,51 @@ public class DoctorProfileActivity extends AppCompatActivity {
         setupStats();
         setupMenu();
         setupBottomNavigation();
+        loadStatsFromServer();
+    }
+
+    private void loadStatsFromServer() {
+        ApiService apiService = RetrofitClient.getApiService();
+        apiService.getDashboardStats().enqueue(new Callback<Map<String, Object>>() {
+            @Override
+            public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    updateStatsUI(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, Object>> call, Throwable t) {
+                // Fallback to static
+            }
+        });
+    }
+
+    private void updateStatsUI(Map<String, Object> stats) {
+        View statPatients = findViewById(R.id.statPatients);
+        if (statPatients != null) {
+            Object total = stats.get("total_patients");
+            ((TextView) statPatients.findViewById(R.id.tvStatValue)).setText(String.valueOf(total));
+        }
+
+        View statCases = findViewById(R.id.statCases);
+        if (statCases != null) {
+            Object active = stats.get("active_cases");
+            ((TextView) statCases.findViewById(R.id.tvStatValue)).setText(String.valueOf(active));
+        }
+
+        View statAccuracy = findViewById(R.id.statAccuracy);
+        if (statAccuracy != null) {
+            String accuracy = (String) stats.get("simulated_accuracy");
+            ((TextView) statAccuracy.findViewById(R.id.tvStatValue)).setText(accuracy);
+        }
     }
 
     private void setupStats() {
         View statPatients = findViewById(R.id.statPatients);
         if (statPatients != null) {
-            ((ImageView) statPatients.findViewById(R.id.ivStatIcon)).setImageResource(R.drawable.ic_stat_patients_themed);
+            ((ImageView) statPatients.findViewById(R.id.ivStatIcon))
+                    .setImageResource(R.drawable.ic_stat_patients_themed);
             ((TextView) statPatients.findViewById(R.id.tvStatValue)).setText("128");
             ((TextView) statPatients.findViewById(R.id.tvStatLabel)).setText("Patients");
         }
@@ -64,7 +110,8 @@ public class DoctorProfileActivity extends AppCompatActivity {
 
         View statAccuracy = findViewById(R.id.statAccuracy);
         if (statAccuracy != null) {
-            ((ImageView) statAccuracy.findViewById(R.id.ivStatIcon)).setImageResource(R.drawable.ic_stat_accuracy_themed);
+            ((ImageView) statAccuracy.findViewById(R.id.ivStatIcon))
+                    .setImageResource(R.drawable.ic_stat_accuracy_themed);
             ((TextView) statAccuracy.findViewById(R.id.tvStatValue)).setText("94.2%");
             ((TextView) statAccuracy.findViewById(R.id.tvStatLabel)).setText("Avg. Prediction Accuracy");
         }
@@ -80,7 +127,8 @@ public class DoctorProfileActivity extends AppCompatActivity {
         View menuNotifications = findViewById(R.id.menuNotifications);
         if (menuNotifications != null) {
             configureMenuItem(menuNotifications, "Notifications", R.drawable.ic_notification);
-            menuNotifications.setOnClickListener(v -> startActivity(new Intent(this, DoctorNotificationsActivity.class)));
+            menuNotifications
+                    .setOnClickListener(v -> startActivity(new Intent(this, DoctorNotificationsActivity.class)));
         }
 
         View menuAchievements = findViewById(R.id.menuAchievements);
@@ -114,8 +162,10 @@ public class DoctorProfileActivity extends AppCompatActivity {
     private void configureMenuItem(View view, String title, int iconRes) {
         TextView tvTitle = view.findViewById(R.id.tvMenuTitle);
         ImageView ivIcon = view.findViewById(R.id.ivMenuIcon);
-        if (tvTitle != null) tvTitle.setText(title);
-        if (ivIcon != null) ivIcon.setImageResource(iconRes);
+        if (tvTitle != null)
+            tvTitle.setText(title);
+        if (ivIcon != null)
+            ivIcon.setImageResource(iconRes);
     }
 
     private void setupBottomNavigation() {

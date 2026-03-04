@@ -10,6 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
+import com.example.healthpredict.network.RetrofitClient;
+import java.util.List;
+import java.util.Map;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MyAchievementsActivity extends AppCompatActivity {
 
     @Override
@@ -28,7 +35,7 @@ public class MyAchievementsActivity extends AppCompatActivity {
             btnBackToProfile.setOnClickListener(v -> finish());
         }
 
-        setupBadges();
+        fetchAchievements();
 
         findViewById(R.id.navHome).setOnClickListener(v -> {
             startActivity(new Intent(this, DoctorHomeActivity.class));
@@ -46,33 +53,46 @@ public class MyAchievementsActivity extends AppCompatActivity {
         });
     }
 
-    private void setupBadges() {
-        // First Analysis
-        View badge1 = findViewById(R.id.badgeFirstAnalysis);
-        if (badge1 != null) {
-            setupBadgeItem(badge1, R.drawable.ic_star_badge, "#FEF9C3", "First Analysis", 
-                    "Completed your first patient risk assessment", "JAN 10, 2025");
-        }
+    private void fetchAchievements() {
+        RetrofitClient.getApiService().getAchievements().enqueue(new Callback<List<Map<String, Object>>>() {
+            @Override
+            public void onResponse(Call<List<Map<String, Object>>> call, Response<List<Map<String, Object>>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    updateBadges(response.body());
+                }
+            }
 
-        // High Accuracy
-        View badge2 = findViewById(R.id.badgeHighAccuracy);
-        if (badge2 != null) {
-            setupBadgeItem(badge2, R.drawable.ic_target_badge, "#FEE2E2", "High Accuracy", 
-                    "Achieved >95% prediction accuracy streak", "JAN 15, 2025");
-        }
+            @Override
+            public void onFailure(Call<List<Map<String, Object>>> call, Throwable t) {
+                // Fallback or Toast
+            }
+        });
+    }
 
-        // Power User
-        View badge3 = findViewById(R.id.badgePowerUser);
-        if (badge3 != null) {
-            setupBadgeItem(badge3, R.drawable.ic_bolt_badge, "#DBEAFE", "Power User", 
-                    "Analyzed 50+ patient cases", "JAN 28, 2025");
-        }
+    private void updateBadges(List<Map<String, Object>> achievements) {
+        // Simple mapping for this demo/session
+        for (Map<String, Object> achieve : achievements) {
+            String id = (String) achieve.get("achievement_id");
+            String title = (String) achieve.get("title");
+            String desc = (String) achieve.get("description");
+            String color = (String) achieve.get("color_hex");
+            String date = (String) achieve.get("date_earned");
+            if (date == null)
+                date = "Unlocked";
 
-        // Risk Guardian
-        View badge4 = findViewById(R.id.badgeRiskGuardian);
-        if (badge4 != null) {
-            setupBadgeItem(badge4, R.drawable.ic_shield_check_badge, "#DCFCE7", "Risk Guardian", 
-                    "Identified 10 critical high-risk cases", "FEB 02, 2025");
+            View badgeView = null;
+            if ("first_analysis".equals(id))
+                badgeView = findViewById(R.id.badgeFirstAnalysis);
+            else if ("high_accuracy".equals(id))
+                badgeView = findViewById(R.id.badgeHighAccuracy);
+            else if ("power_user".equals(id))
+                badgeView = findViewById(R.id.badgePowerUser);
+            else if ("risk_guardian".equals(id))
+                badgeView = findViewById(R.id.badgeRiskGuardian);
+
+            if (badgeView != null) {
+                setupBadgeItem(badgeView, R.drawable.ic_star_badge, color, title, desc, date);
+            }
         }
     }
 
@@ -83,10 +103,20 @@ public class MyAchievementsActivity extends AppCompatActivity {
         TextView tvDesc = view.findViewById(R.id.tvBadgeDesc);
         TextView tvDate = view.findViewById(R.id.tvBadgeDate);
 
-        if (ivIcon != null) ivIcon.setImageResource(iconRes);
-        if (container != null) container.setCardBackgroundColor(Color.parseColor(bgColor));
-        if (tvTitle != null) tvTitle.setText(title);
-        if (tvDesc != null) tvDesc.setText(desc);
-        if (tvDate != null) tvDate.setText(date);
+        if (ivIcon != null)
+            ivIcon.setImageResource(iconRes);
+        if (container != null && bgColor != null) {
+            try {
+                container.setCardBackgroundColor(Color.parseColor(bgColor));
+            } catch (Exception e) {
+                container.setCardBackgroundColor(Color.parseColor("#FEF9C3"));
+            }
+        }
+        if (tvTitle != null)
+            tvTitle.setText(title);
+        if (tvDesc != null)
+            tvDesc.setText(desc);
+        if (tvDate != null)
+            tvDate.setText(date);
     }
 }

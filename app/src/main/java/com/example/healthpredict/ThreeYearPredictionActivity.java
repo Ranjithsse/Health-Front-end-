@@ -7,6 +7,10 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
+import android.widget.TextView;
+import com.example.healthpredict.CaseData;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
+
 public class ThreeYearPredictionActivity extends AppCompatActivity {
 
     @Override
@@ -17,6 +21,29 @@ public class ThreeYearPredictionActivity extends AppCompatActivity {
         ImageView btnBack = findViewById(R.id.btnBack);
         MaterialButton btnBackFooter = findViewById(R.id.btnBackFooter);
         MaterialButton btnViewFiveYear = findViewById(R.id.btnViewFiveYear);
+
+        TextView tvProbability = findViewById(R.id.tvProbability); // I should check if this ID exists or add it
+        CircularProgressIndicator circularProgress = findViewById(R.id.circularProgress);
+        TextView tvAnalysisDescription = findViewById(R.id.tvAnalysisDescription); // I should check if this ID exists
+                                                                                   // or add it
+
+        CaseData caseData = CaseData.getInstance();
+
+        if (caseData != null) {
+            String prob = caseData.threeYearPrediction != null ? caseData.threeYearPrediction : "0%";
+            if (tvProbability != null)
+                tvProbability.setText(prob);
+
+            try {
+                int progress = Integer.parseInt(prob.replace("%", "").trim());
+                if (circularProgress != null)
+                    circularProgress.setProgress(progress);
+            } catch (Exception ignored) {
+            }
+
+            if (tvAnalysisDescription != null)
+                tvAnalysisDescription.setText(caseData.threeYearInsight);
+        }
 
         btnBack.setOnClickListener(v -> finish());
         btnBackFooter.setOnClickListener(v -> finish());

@@ -15,6 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.healthpredict.network.RetrofitClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import android.widget.Toast;
 
 public class DoctorNotificationsActivity extends AppCompatActivity {
 
@@ -30,23 +35,34 @@ public class DoctorNotificationsActivity extends AppCompatActivity {
 
         setupRecyclerView();
         setupBottomNavigation();
+        fetchNotifications();
+    }
+
+    private void fetchNotifications() {
+        RetrofitClient.getApiService().getNotifications().enqueue(new Callback<List<Notification>>() {
+            @Override
+            public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    updateNotifications(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Notification>> call, Throwable t) {
+                // Fallback to empty
+            }
+        });
+    }
+
+    private void updateNotifications(List<Notification> notifications) {
+        RecyclerView rvNotifications = findViewById(R.id.rvNotifications);
+        NotificationAdapter adapter = new NotificationAdapter(notifications);
+        rvNotifications.setAdapter(adapter);
     }
 
     private void setupRecyclerView() {
         RecyclerView rvNotifications = findViewById(R.id.rvNotifications);
         rvNotifications.setLayoutManager(new LinearLayoutManager(this));
-
-        List<Notification> notifications = getSampleNotifications();
-        NotificationAdapter adapter = new NotificationAdapter(notifications);
-        rvNotifications.setAdapter(adapter);
-    }
-
-    private List<Notification> getSampleNotifications() {
-        List<Notification> notifications = new ArrayList<>();
-        notifications.add(new Notification("Risk Assessment Complete", "AI analysis for Case #1024 is ready.", "10 min ago", R.drawable.ic_check, R.color.notif_green_bg, R.color.notif_green_icon));
-        notifications.add(new Notification("Health Report Ready", "PDF report for Sarah Johnson is available for download.", "1 hour ago", R.drawable.ic_description, R.color.notif_blue_bg, R.color.notif_blue_icon));
-        notifications.add(new Notification("Elevated Risk Detected", "Case #1021 shows elevated cardiovascular risk markers.", "Yesterday", R.drawable.ic_warning, R.color.notif_orange_bg, R.color.notif_orange_icon));
-        return notifications;
     }
 
     private void setupBottomNavigation() {
@@ -82,32 +98,6 @@ public class DoctorNotificationsActivity extends AppCompatActivity {
                 startActivity(intent);
             });
         }
-    }
-
-    // Notification Data Class
-    static class Notification {
-        private final String title;
-        private final String message;
-        private final String time;
-        private final int iconResId;
-        private final int bgColorResId;
-        private final int iconColorResId;
-
-        public Notification(String title, String message, String time, int iconResId, int bgColorResId, int iconColorResId) {
-            this.title = title;
-            this.message = message;
-            this.time = time;
-            this.iconResId = iconResId;
-            this.bgColorResId = bgColorResId;
-            this.iconColorResId = iconColorResId;
-        }
-
-        public String getTitle() { return title; }
-        public String getMessage() { return message; }
-        public String getTime() { return time; }
-        public int getIconResId() { return iconResId; }
-        public int getBgColorResId() { return bgColorResId; }
-        public int getIconColorResId() { return iconColorResId; }
     }
 
     // Adapter for the RecyclerView
@@ -154,15 +144,27 @@ public class DoctorNotificationsActivity extends AppCompatActivity {
 
             public void bind(final Notification notification) {
                 tvNotificationTitle.setText(notification.getTitle());
-                tvNotificationMessage.setText(notification.getMessage());
+                tvNotificationMessage.setText(notification.getDescription());
                 tvNotificationTime.setText(notification.getTime());
-                ivNotificationIcon.setImageResource(notification.getIconResId());
 
-                int bgColor = ContextCompat.getColor(itemView.getContext(), notification.getBgColorResId());
-                int iconColor = ContextCompat.getColor(itemView.getContext(), notification.getIconColorResId());
+                String type = notification.getType() != null ? notification.getType() : "INFO";
+                int iconRes = R.drawable.ic_notification;
+                int bgColorRes = R.color.notif_blue_bg;
+                int iconColorRes = R.color.notif_blue_icon;
 
-                iconContainer.setCardBackgroundColor(bgColor);
-                ivNotificationIcon.setColorFilter(iconColor);
+                if (type.equalsIgnoreCase("SUCCESS")) {
+                    iconRes = R.drawable.ic_check;
+                    bgColorRes = R.color.notif_green_bg;
+                    iconColorRes = R.color.notif_green_icon;
+                } else if (type.equalsIgnoreCase("ALERT")) {
+                    iconRes = R.drawable.ic_warning;
+                    bgColorRes = R.color.notif_orange_bg;
+                    iconColorRes = R.color.notif_orange_icon;
+                }
+
+                ivNotificationIcon.setImageResource(iconRes);
+                iconContainer.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), bgColorRes));
+                ivNotificationIcon.setColorFilter(ContextCompat.getColor(itemView.getContext(), iconColorRes));
             }
         }
     }
