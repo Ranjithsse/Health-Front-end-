@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    android:background="@color/bg_light">
 
     <!-- Header Toolbar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#2563EB"
+        android:background="@color/primary_blue"
         android:paddingHorizontal="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -61,7 +61,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
                 android:text="AI Tissue Analysis"
-                android:textColor="#1E293B"
+                android:textColor="@color/text_secondary"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -71,7 +71,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:text="Automated extraction from Imaging"
-                android:textColor="#64748B"
+                android:textColor="@color/text_desc"
                 android:textSize="15sp" />
 
             <!-- Summary Cards Row -->
@@ -87,10 +87,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="@color/white"
+                    app:cardBackgroundColor="@color/card_bg"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
-                    app:strokeColor="#E2E8F0"
+                    app:strokeColor="@color/card_stroke"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
@@ -104,14 +104,14 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_accuracy"
-                            app:tint="#2563EB" />
+                            app:tint="@color/primary_blue" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:text="Tissue Density"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_desc"
                             android:textSize="13sp" />
 
                         <TextView
@@ -120,7 +120,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="High"
-                            android:textColor="#0F172A"
+                            android:textColor="@color/text_main"
                             android:textSize="24sp"
                             android:textStyle="bold" />
 
@@ -133,7 +133,7 @@
                             android:paddingHorizontal="14dp"
                             android:paddingVertical="4dp"
                             android:text="Normal"
-                            android:textColor="#10B981"
+                            android:textColor="@color/low_risk_text"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -145,10 +145,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="@color/white"
+                    app:cardBackgroundColor="@color/card_bg"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
-                    app:strokeColor="#E2E8F0"
+                    app:strokeColor="@color/card_stroke"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
@@ -168,7 +168,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:text="Calcification"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_desc"
                             android:textSize="13sp" />
 
                         <TextView
@@ -177,7 +177,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Minimal"
-                            android:textColor="#0F172A"
+                            android:textColor="@color/text_main"
                             android:textSize="24sp"
                             android:textStyle="bold" />
 
@@ -190,7 +190,7 @@
                             android:paddingHorizontal="14dp"
                             android:paddingVertical="4dp"
                             android:text="Optimal"
-                            android:textColor="#2563EB"
+                            android:textColor="@color/primary_blue"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -202,10 +202,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#E2E8F0"
+                app:strokeColor="@color/card_stroke"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -219,14 +219,14 @@
                         android:layout_height="wrap_content"
                         android:padding="20dp"
                         android:text="Tissue Composition"
-                        android:textColor="#1E293B"
+                        android:textColor="@color/text_secondary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#F1F5F9" />
+                        android:background="@color/bg_light" />
 
                     <!-- Healthy Tissue Progress -->
                     <LinearLayout
@@ -245,7 +245,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Healthy Tissue"
-                                android:textColor="#475569"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -254,7 +254,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:text="85%"
-                                android:textColor="#0F172A"
+                                android:textColor="@color/text_main"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
                         </RelativeLayout>
@@ -264,8 +264,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:progress="85"
-                            app:indicatorColor="#10B981"
-                            app:trackColor="#F1F5F9"
+                            app:indicatorColor="@color/low_risk_text"
+                            app:trackColor="@color/bg_light"
                             app:trackCornerRadius="4dp"
                             app:trackThickness="8dp" />
                     </LinearLayout>
@@ -287,7 +287,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Fibrous Tissue"
-                                android:textColor="#475569"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -296,7 +296,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:text="10%"
-                                android:textColor="#0F172A"
+                                android:textColor="@color/text_main"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
                         </RelativeLayout>
@@ -306,8 +306,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:progress="10"
-                            app:indicatorColor="#2563EB"
-                            app:trackColor="#F1F5F9"
+                            app:indicatorColor="@color/primary_blue"
+                            app:trackColor="@color/bg_light"
                             app:trackCornerRadius="4dp"
                             app:trackThickness="8dp" />
                     </LinearLayout>
@@ -329,7 +329,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Inflamed Tissue"
-                                android:textColor="#475569"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -338,7 +338,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:text="5%"
-                                android:textColor="#0F172A"
+                                android:textColor="@color/text_main"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
                         </RelativeLayout>
@@ -349,7 +349,7 @@
                             android:layout_height="wrap_content"
                             android:progress="5"
                             app:indicatorColor="#F59E0B"
-                            app:trackColor="#F1F5F9"
+                            app:trackColor="@color/bg_light"
                             app:trackCornerRadius="4dp"
                             app:trackThickness="8dp" />
                     </LinearLayout>
@@ -365,7 +365,7 @@
         android:id="@+id/bottomActionArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/bg_light"
         android:orientation="vertical"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -378,7 +378,7 @@
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:backgroundTint="#2563EB"
+            app:backgroundTint="@color/primary_blue"
             app:cornerRadius="12dp"
             android:letterSpacing="0"/>
 

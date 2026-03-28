@@ -18,6 +18,15 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply theme before setContentView
+        SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
+        boolean isDark = prefs.getBoolean("dark_mode", false);
+        if (isDark) {
+            androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
@@ -59,7 +68,18 @@ public class SplashActivity extends AppCompatActivity {
     private void navigateToHome(String role) {
         Intent intent;
         if ("PROVIDER".equals(role)) {
-            intent = new Intent(SplashActivity.this, DoctorHomeActivity.class);
+            SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
+            String lastActivity = prefs.getString("last_activity", null);
+            if (lastActivity != null) {
+                try {
+                    Class<?> activityClass = Class.forName(lastActivity);
+                    intent = new Intent(SplashActivity.this, activityClass);
+                } catch (ClassNotFoundException e) {
+                    intent = new Intent(SplashActivity.this, DoctorHomeActivity.class);
+                }
+            } else {
+                intent = new Intent(SplashActivity.this, DoctorHomeActivity.class);
+            }
         } else {
             // Simplified: default to GetStarted flow for other roles until specific homes
             // are built

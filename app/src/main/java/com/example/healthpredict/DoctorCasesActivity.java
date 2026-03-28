@@ -26,7 +26,6 @@ public class DoctorCasesActivity extends AppCompatActivity {
     private TextView tvNoResults;
     private android.widget.LinearLayout caseListContainer;
     private java.util.List<CaseData> allCases = new java.util.ArrayList<>();
-    private final int[] caseItemIds = { R.id.case1, R.id.case2, R.id.case3, R.id.case4, R.id.case5 };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,68 +94,76 @@ public class DoctorCasesActivity extends AppCompatActivity {
     }
 
     private List<CaseData> deduplicateCases(List<CaseData> inputList) {
-        java.util.Map<String, CaseData> map = new java.util.LinkedHashMap<>();
+        // For Cases list, show every unique assessment by its ID
+        java.util.Map<Integer, CaseData> map = new java.util.LinkedHashMap<>();
         for (CaseData data : inputList) {
-            String key = (data.patientId != null ? data.patientId : String.valueOf(data.id)) + "_" + data.date;
-            if (map.containsKey(key)) {
-                CaseData existing = map.get(key);
-                // Prefer Completed status over Pending
-                if (!"Completed".equalsIgnoreCase(existing.status) && "Completed".equalsIgnoreCase(data.status)) {
-                    map.put(key, data);
-                } else if (!"Completed".equalsIgnoreCase(existing.status) && existing.id < data.id) {
-                    // If neither or both are not completed but new one has larger ID, keep newer
-                    map.put(key, data);
-                }
-            } else {
-                map.put(key, data);
-            }
+            map.put(data.id, data);
         }
         
         List<CaseData> result = new java.util.ArrayList<>(map.values());
-        // Reverse to maintain newest first
-        java.util.Collections.reverse(result);
+        // Sort by ID descending (newest first)
+        java.util.Collections.sort(result, (a, b) -> Integer.compare(b.id, a.id));
         return result;
     }
 
     private void updateCasesUI(List<CaseData> cases) {
-        for (int i = 0; i < caseItemIds.length; i++) {
-            View itemView = findViewById(caseItemIds[i]);
-            if (itemView == null) continue;
+        if (caseListContainer == null) return;
+        
+        caseListContainer.removeAllViews();
+        android.view.LayoutInflater inflater = android.view.LayoutInflater.from(this);
 
-            if (i < cases.size()) {
-                CaseData data = cases.get(i);
-                itemView.setVisibility(View.VISIBLE);
+        for (CaseData data : cases) {
+            View itemView = inflater.inflate(R.layout.item_case, caseListContainer, false);
+            
+            TextView tvName = itemView.findViewById(R.id.tvPatientName);
+            TextView tvDetail = itemView.findViewById(R.id.tvPatientDetail);
+            TextView tvStatus = itemView.findViewById(R.id.tvStatus);
+            View cardStatus = itemView.findViewById(R.id.cardStatus);
 
-                TextView tvName = itemView.findViewById(R.id.tvPatientName);
-                TextView tvDetail = itemView.findViewById(R.id.tvPatientDetail);
-                TextView tvStatus = itemView.findViewById(R.id.tvStatus);
-                View cardStatus = itemView.findViewById(R.id.cardStatus);
-
-                String name = data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId;
-                if (tvName != null) tvName.setText(name);
-                if (tvDetail != null) tvDetail.setText(data.patientId + " • " + data.primarySystem);
-                if (tvStatus != null) tvStatus.setText(data.status != null ? data.status : data.riskLevel);
-
-                if (cardStatus instanceof com.google.android.material.card.MaterialCardView) {
-                    updateStatusStyle((com.google.android.material.card.MaterialCardView) cardStatus, tvStatus,
-                            data.status != null ? data.status : data.riskLevel);
-                }
-
-                itemView.setOnClickListener(v -> {
-                    try {
-                        CaseData.getInstance().reset();
-                        CaseData.getInstance().copyFrom(data);
-                        Intent intent = new Intent(DoctorCasesActivity.this, PatientOutcomeActivity.class);
-                        intent.putExtra("PATIENT_NAME", data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId);
-                        intent.putExtra("PATIENT_ID", String.valueOf(data.id));
-                        startActivity(intent);
-                    } catch (Exception e) {
-                        android.widget.Toast.makeText(DoctorCasesActivity.this, "Error: " + e.getMessage(), android.widget.Toast.LENGTH_LONG).show();
-                    }
-                });
+            String name = data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId;
+            if (tvName != null) tvName.setText(name);
+            if (tvDetail != null) tvDetail.setText(data.patientId + " • " + data.primarySystem);
+            
+            // Recalculate risk level based on score for mobile consistency
+            String scoreStr = data.riskScore != null ? data.riskScore.replace("%", "") : "0";
+            int scoreValue = 0;
+            try { scoreValue = Integer.parseInt(scoreStr); } catch (Exception ignored) {}
+            
+            String displayRisk;
+            if (scoreValue > 0) {
+                if (scoreValue <= 45) displayRisk = "Low";
+                else if (scoreValue <= 60) displayRisk = "Moderate";
+                else displayRisk = "High";
             } else {
-                itemView.setVisibility(View.GONE);
+                displayRisk = (data.riskLevel != null && !data.riskLevel.isEmpty()) ? data.riskLevel : "Low";
             }
+
+            String statusText = data.status != null ? data.status : displayRisk;
+            if (tvStatus != null) tvStatus.setText(statusText);
+
+            if (cardStatus instanceof com.google.android.material.card.MaterialCardView) {
+                updateStatusStyle((com.google.android.material.card.MaterialCardView) cardStatus, tvStatus, statusText);
+            }
+
+            itemView.setOnClickListener(v -> {
+                try {
+                    CaseData.getInstance().reset();
+                    CaseData.getInstance().copyFrom(data);
+                    Intent intent = new Intent(DoctorCasesActivity.this, FinalReportActivity.class);
+                    intent.putExtra("PATIENT_NAME", name);
+                    intent.putExtra("PATIENT_ID", String.valueOf(data.id));
+                    startActivity(intent);
+                } catch (Exception e) {
+                    android.widget.Toast.makeText(DoctorCasesActivity.this, "Error: " + e.getMessage(), android.widget.Toast.LENGTH_LONG).show();
+                }
+            });
+
+            itemView.setOnLongClickListener(v -> {
+                showDeleteConfirmationDialog(data);
+                return true;
+            });
+
+            caseListContainer.addView(itemView);
         }
     }
 
@@ -240,4 +247,37 @@ public class DoctorCasesActivity extends AppCompatActivity {
         }
     }
 
+    private void showDeleteConfirmationDialog(CaseData data) {
+        new android.app.AlertDialog.Builder(this)
+            .setTitle("Delete Case")
+            .setMessage("Are you sure you want to delete the case for " + (data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId) + "?")
+            .setPositiveButton("Delete", (dialog, which) -> deleteCaseFromServer(data.id))
+            .setNegativeButton("Cancel", null)
+            .show();
+    }
+
+    private void deleteCaseFromServer(int caseId) {
+        android.app.ProgressDialog progressDialog = new android.app.ProgressDialog(this);
+        progressDialog.setMessage("Deleting case...");
+        progressDialog.show();
+
+        com.example.healthpredict.network.RetrofitClient.getApiService(this).deleteCase(caseId).enqueue(new retrofit2.Callback<Void>() {
+            @Override
+            public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
+                    android.widget.Toast.makeText(DoctorCasesActivity.this, "Case deleted successfully", android.widget.Toast.LENGTH_SHORT).show();
+                    fetchCasesFromServer(); // Refresh list
+                } else {
+                    android.widget.Toast.makeText(DoctorCasesActivity.this, "Failed to delete case", android.widget.Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<Void> call, Throwable t) {
+                progressDialog.dismiss();
+                android.widget.Toast.makeText(DoctorCasesActivity.this, "Error: " + t.getMessage(), android.widget.Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }

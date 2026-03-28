@@ -16,18 +16,17 @@
             android:id="@+id/logoCardPdf"
             android:layout_width="44dp"
             android:layout_height="44dp"
-            app:cardBackgroundColor="#2563EB"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_splash_logo"
-                app:tint="@color/white" />
+                android:src="@drawable/ic_splash_logo" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
@@ -36,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:text="@string/health_monitor"
-            android:textColor="#0F172A"
+            android:textColor="@color/text_main"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/logoCardPdf"
@@ -56,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PATIENT #1024"
-                android:textColor="#0F172A"
+                android:textColor="@color/text_main"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -66,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="Jan 24, 2025"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -75,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
-        android:background="#F1F5F9" />
+        android:background="@color/bg_light" />
 
     <!-- Patient Info Section -->
     <TextView
@@ -83,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Patient Info"
-        android:textColor="#2563EB"
+        android:textColor="@color/primary_blue"
         android:textSize="12sp"
         android:textStyle="bold" />
 
@@ -91,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="6dp"
-        android:background="#E0E7FF" />
+        android:background="@color/followup_bg" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -103,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name: "
-            android:textColor="#94A3B8"
+            android:textColor="@color/text_desc"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -113,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Robert Wilson"
-            android:textColor="#334155"
+            android:textColor="@color/text_main"
             android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/tvLabelNamePdf"
@@ -125,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:text="Age: "
-            android:textColor="#94A3B8"
+            android:textColor="@color/text_desc"
             android:textSize="13sp"
             app:layout_constraintStart_toEndOf="@+id/tvValueNamePdf"
             app:layout_constraintTop_toTopOf="parent" />
@@ -135,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="45"
-            android:textColor="#334155"
+            android:textColor="@color/text_main"
             android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/tvLabelAgePdf"
@@ -147,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Gender: "
-            android:textColor="#94A3B8"
+            android:textColor="@color/text_desc"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLabelNamePdf" />
@@ -157,7 +156,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Male"
-            android:textColor="#334155"
+            android:textColor="@color/text_main"
             android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/tvLabelGenderPdf"
@@ -170,7 +169,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="AI Prediction"
-        android:textColor="#2563EB"
+        android:textColor="@color/primary_blue"
         android:textSize="12sp"
         android:textStyle="bold" />
 
@@ -178,14 +177,14 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="6dp"
-        android:background="#E0E7FF" />
+        android:background="@color/followup_bg" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardPredictionPdf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:cardBackgroundColor="#F0FDF4"
+        app:cardBackgroundColor="@color/low_risk_bg"
         app:cardCornerRadius="8dp"
         app:cardElevation="0dp">
 
@@ -201,7 +200,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingMultiplier="1.2"
                 android:text="98.2% Stability Probability\n(1-Year)"
-                android:textColor="#166534"
+                android:textColor="@color/low_risk_text"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -211,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Risk Level: Low"
-                android:textColor="#166534"
+                android:textColor="@color/low_risk_text"
                 android:textSize="13sp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -222,7 +221,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Clinical Plan"
-        android:textColor="#2563EB"
+        android:textColor="@color/primary_blue"
         android:textSize="12sp"
         android:textStyle="bold" />
 
@@ -230,7 +229,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="6dp"
-        android:background="#E0E7FF" />
+        android:background="@color/followup_bg" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -243,7 +242,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Protocol: ACE Inhibitors"
-            android:textColor="#334155"
+            android:textColor="@color/text_main"
             android:textSize="13sp"
             android:textStyle="bold" />
 
@@ -253,7 +252,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Intervention: Non-Invasive"
-            android:textColor="#334155"
+            android:textColor="@color/text_main"
             android:textSize="13sp"
             android:textStyle="bold" />
 
@@ -263,7 +262,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Monitoring: Standard"
-            android:textColor="#334155"
+            android:textColor="@color/text_main"
             android:textSize="13sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -274,7 +273,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Provider Notes"
-        android:textColor="#2563EB"
+        android:textColor="@color/primary_blue"
         android:textSize="12sp"
         android:textStyle="bold" />
 
@@ -282,7 +281,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="6dp"
-        android:background="#E0E7FF" />
+        android:background="@color/followup_bg" />
 
     <TextView
         android:id="@+id/tvProviderNotesPdf"
@@ -291,7 +290,7 @@
         android:layout_marginTop="12dp"
         android:lineSpacingExtra="4dp"
         android:text="No notes added."
-        android:textColor="#64748B"
+        android:textColor="@color/text_desc"
         android:textSize="13sp" />
 
 </LinearLayout>

@@ -185,7 +185,7 @@ public class DoctorHomeActivity extends AppCompatActivity {
             }
         }
 
-        updateStatsDisplay(totalPatients, monthlyPatients);
+        updateStatsDisplay(history);
         
         // Also fetch from server to get accurate doctor name
         ApiService apiService = RetrofitClient.getApiService(this);
@@ -214,10 +214,47 @@ public class DoctorHomeActivity extends AppCompatActivity {
         });
     }
 
-    private void updateStatsDisplay(int totalPatients, int monthlyPatients) {
+    private void updateStatsDisplay(List<CaseData> history) {
+        SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
+        String userEmail = prefs.getString("user_email", "anonymous");
+        
+        // Dynamic Accuracy Calculation
+        double totalAccuracy = 0;
+        int accuracyCount = 0;
+        if (history != null) {
+            for (CaseData data : history) {
+                if (data.accuracy != null && !data.accuracy.isEmpty()) {
+                    try {
+                        String cleanAcc = data.accuracy.replace("%", "").trim();
+                        totalAccuracy += Double.parseDouble(cleanAcc);
+                        accuracyCount++;
+                    } catch (Exception ignored) {}
+                }
+            }
+        }
+        
+        String displayAccuracy = "94.2%"; // Enhanced default baseline
+        if (accuracyCount > 0) {
+            displayAccuracy = String.format("%.1f%%", totalAccuracy / accuracyCount);
+        }
+
+        // Persistent Monthly Count from StatsManager
+        int monthlyPatients = StatsManager.getInstance().getMonthlyCount(this, userEmail);
+        int totalPatients = history != null ? history.size() : 0;
+ 
+        // Healing Logic: If count is inflated due to previous sync bug (e.g., > total and history is small)
+        if (monthlyPatients > totalPatients && totalPatients < 10 && monthlyPatients > 20) {
+            StatsManager.getInstance().clearAllStats(this);
+            // Re-initialize for this month based on existing history (as a one-time fix)
+            for (int i = 0; i < totalPatients; i++) {
+                StatsManager.getInstance().incrementMonthlyCount(this, userEmail);
+            }
+            monthlyPatients = StatsManager.getInstance().getMonthlyCount(this, userEmail);
+        }
+
         View stat1 = findViewById(R.id.stat1);
         if (stat1 != null) {
-            ((TextView) stat1.findViewById(R.id.tvStatValue)).setText("94.2%");
+            ((TextView) stat1.findViewById(R.id.tvStatValue)).setText(displayAccuracy);
             ((TextView) stat1.findViewById(R.id.tvStatLabel)).setText("Accuracy");
             ((ImageView) stat1.findViewById(R.id.ivStatIcon)).setImageResource(R.drawable.ic_accuracy);
         }
@@ -245,7 +282,18 @@ public class DoctorHomeActivity extends AppCompatActivity {
             public void onResponse(Call<List<CaseData>> call, Response<List<CaseData>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<CaseData> serverCases = deduplicateCases(response.body());
+                    
+                    // Sync with HistoryManager
+                    HistoryManager hm = HistoryManager.getInstance();
+                    hm.clearHistory(DoctorHomeActivity.this);
+                    for (CaseData c : serverCases) {
+                        hm.addCase(DoctorHomeActivity.this, c);
+                    }
+                    
                     updateRecentPatientsUI(serverCases);
+                    
+                    // Refresh stats using the newly synced history
+                    setupStats();
                 } else {
                     HistoryManager.getInstance().init(DoctorHomeActivity.this);
                     updateRecentPatientsUI(deduplicateCases(HistoryManager.getInstance().getCaseHistory()));
@@ -261,14 +309,14 @@ public class DoctorHomeActivity extends AppCompatActivity {
     }
 
     private List<CaseData> deduplicateCases(List<CaseData> inputList) {
+        // Keep unique patients, but always take their most recent assessment (highest ID)
         java.util.Map<String, CaseData> map = new java.util.LinkedHashMap<>();
         for (CaseData data : inputList) {
-            String key = (data.patientId != null ? data.patientId : String.valueOf(data.id)) + "_" + data.date;
+            String key = (data.patientId != null && !data.patientId.isEmpty()) ? data.patientId : String.valueOf(data.id);
             if (map.containsKey(key)) {
                 CaseData existing = map.get(key);
-                if (!"Completed".equalsIgnoreCase(existing.status) && "Completed".equalsIgnoreCase(data.status)) {
-                    map.put(key, data);
-                } else if (!"Completed".equalsIgnoreCase(existing.status) && existing.id < data.id) {
+                // Prefer the newer record (higher ID)
+                if (data.id > existing.id) {
                     map.put(key, data);
                 }
             } else {
@@ -277,7 +325,8 @@ public class DoctorHomeActivity extends AppCompatActivity {
         }
         
         List<CaseData> result = new java.util.ArrayList<>(map.values());
-        java.util.Collections.reverse(result);
+        // Sort by ID descending to show newest assessments first across all patients
+        java.util.Collections.sort(result, (a, b) -> Integer.compare(b.id, a.id));
         return result;
     }
 

@@ -50,6 +50,12 @@ public class DoctorSignUpActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (!fullName.matches("[a-zA-Z\\s]+")) {
+                    etFullName.setError("Full Name should contain only letters.");
+                    etFullName.requestFocus();
+                    return;
+                }
+
                 if (hospital.isEmpty()) {
                     etHospital.setError("Hospital name is required");
                     etHospital.requestFocus();
@@ -68,8 +74,10 @@ public class DoctorSignUpActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    etEmail.setError("Please enter a valid email");
+                // Strict domain validation (Gmail & Saveetha)
+                String emailPattern = "^[a-zA-Z0-9._%+-]+@(gmail\\.com|saveetha\\.com)$";
+                if (!email.matches(emailPattern)) {
+                    etEmail.setError("Please enter a valid Gmail (@gmail.com) or Saveetha (@saveetha.com) address.");
                     etEmail.requestFocus();
                     return;
                 }
@@ -80,14 +88,25 @@ public class DoctorSignUpActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (password.length() < 6) {
-                    etPassword.setError("Password must be at least 6 characters");
+                // Password validation: at least one uppercase, one special character, and one number
+                if (password.length() < 8) {
+                    etPassword.setError("Password must be at least 8 characters");
+                    etPassword.requestFocus();
+                    return;
+                }
+
+                boolean hasUppercase = !password.equals(password.toLowerCase());
+                boolean hasNumber = password.matches(".*\\d.*");
+                boolean hasSpecial = password.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
+
+                if (!hasUppercase || !hasNumber || !hasSpecial) {
+                    etPassword.setError("Password must contain at least one uppercase letter, one number, and one special character");
                     etPassword.requestFocus();
                     return;
                 }
 
                 if (!cbTerms.isChecked()) {
-                    Toast.makeText(DoctorSignUpActivity.this, "Please agree to the Terms and Conditions",
+                    Toast.makeText(DoctorSignUpActivity.this, "Please accept Terms and Conditions.",
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -125,9 +144,12 @@ public class DoctorSignUpActivity extends AppCompatActivity {
                                     // Reset Retrofit to use the new token
                                     RetrofitClient.resetRetrofitInstance();
 
-                                    Toast.makeText(DoctorSignUpActivity.this, "Account created successfully!",
-                                            Toast.LENGTH_SHORT).show();
+                                    // Clear local history to ensure the new user starts fresh
+                                    HistoryManager.getInstance().clearHistory(DoctorSignUpActivity.this);
 
+                                    Toast.makeText(DoctorSignUpActivity.this, "Signup Successful",
+                                            Toast.LENGTH_SHORT).show();
+                                    
                                     // Navigate to DoctorHomeActivity
                                     Intent intent = new Intent(DoctorSignUpActivity.this, DoctorHomeActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

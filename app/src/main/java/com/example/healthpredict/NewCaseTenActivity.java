@@ -13,11 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.card.MaterialCardView;
 import com.example.healthpredict.network.RetrofitClient;
 import com.example.healthpredict.network.ApiService;
+import com.example.healthpredict.network.PredictionResponse;
 import android.app.ProgressDialog;
 import android.widget.Toast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import com.bumptech.glide.Glide;
 
 public class NewCaseTenActivity extends AppCompatActivity {
 
@@ -84,7 +86,12 @@ public class NewCaseTenActivity extends AppCompatActivity {
         if (fileUriString != null) {
             Uri fileUri = Uri.parse(fileUriString);
             if (ivDicomImage != null) {
-                ivDicomImage.setImageURI(fileUri);
+                // Use Glide for robust loading of local URIs and Network URLs
+                Glide.with(this)
+                     .load(fileUri)
+                     .placeholder(R.drawable.ic_brain) 
+                     .error(R.drawable.ic_warning_outline)
+                     .into(ivDicomImage);
                 ivDicomImage.setVisibility(View.VISIBLE);
             }
         }
@@ -204,24 +211,29 @@ public class NewCaseTenActivity extends AppCompatActivity {
 
         int caseId = CaseData.getInstance().id;
         ApiService apiService = RetrofitClient.getRetrofitInstance(this).create(ApiService.class);
-        apiService.tissueAnalysis(caseId).enqueue(new Callback<CaseData>() {
+        apiService.tissueAnalysis(caseId).enqueue(new Callback<PredictionResponse>() {
             @Override
-            public void onResponse(Call<CaseData> call, Response<CaseData> response) {
+            public void onResponse(Call<PredictionResponse> call, Response<PredictionResponse> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful() && response.body() != null) {
-                    CaseData data = response.body();
-                    CaseData.getInstance().copyFrom(data);
-                    
-                    // Trigger local notification
-                    LocalNotificationManager.getInstance(NewCaseTenActivity.this).addNotification(new Notification(
-                            "Risk Assessment Complete",
-                            "AI analysis for " + data.patientName + " (#" + data.patientId + ") is ready.",
-                            "Just now",
-                            "SUCCESS"
-                    ));
+                    CaseData data = response.body().caseData;
+                    if (data != null) {
+                        CaseData.getInstance().copyFrom(data);
+                        
+                        // Trigger local notification
+                        LocalNotificationManager.getInstance(NewCaseTenActivity.this).addNotification(new Notification(
+                                "Risk Assessment Complete",
+                                "AI analysis for " + data.patientName + " (#" + data.patientId + ") is ready.",
+                                "Just now",
+                                "SUCCESS"
+                        ));
 
-                    Intent intent = new Intent(NewCaseTenActivity.this, NewCaseElevenActivity.class);
-                    startActivity(intent);
+                        Intent intent = new Intent(NewCaseTenActivity.this, NewCaseElevenActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(NewCaseTenActivity.this, "Analysis failed: No data returned",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(NewCaseTenActivity.this, "Analysis failed: " + response.message(),
                             Toast.LENGTH_SHORT).show();
@@ -229,7 +241,7 @@ public class NewCaseTenActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<CaseData> call, Throwable t) {
+            public void onFailure(Call<PredictionResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(NewCaseTenActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }

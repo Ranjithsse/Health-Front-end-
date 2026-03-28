@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    android:background="@color/bg_light">
 
     <!-- Header Toolbar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#2563EB"
+        android:background="@color/primary_blue"
         android:paddingHorizontal="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -58,7 +58,7 @@
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:layout_marginTop="24dp"
-                app:cardBackgroundColor="#E0E7FF"
+                app:cardBackgroundColor="@color/followup_bg"
                 app:cardCornerRadius="48dp"
                 app:cardElevation="0dp">
 
@@ -67,7 +67,7 @@
                     android:layout_height="44dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_download"
-                    app:tint="#2563EB" />
+                    app:tint="@color/primary_blue" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Download Report"
-                android:textColor="#0F172A"
+                android:textColor="@color/text_main"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="Patient #1024 - Robert Wilson"
-                android:textColor="#64748B"
+                android:textColor="@color/text_desc"
                 android:textSize="15sp" />
 
             <!-- PDF Card -->
@@ -93,10 +93,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
-                app:strokeColor="#F1F5F9"
+                app:strokeColor="@color/card_stroke"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -109,7 +109,7 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        app:cardBackgroundColor="#FEE2E2"
+                        app:cardBackgroundColor="@color/high_risk_bg"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="0dp">
 
@@ -130,7 +130,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Full Assessment.pdf"
-                            android:textColor="#0F172A"
+                            android:textColor="@color/text_main"
                             android:textSize="17sp"
                             android:textStyle="bold" />
 
@@ -139,7 +139,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="2.4 MB • PDF Document"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_desc"
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -150,10 +150,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:cardBackgroundColor="#F8FAFC"
+                app:cardBackgroundColor="@color/bg_light"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#E2E8F0"
+                app:strokeColor="@color/card_stroke"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="This report includes:"
-                        android:textColor="#64748B"
+                        android:textColor="@color/text_desc"
                         android:textSize="15sp" />
 
                     <LinearLayout
@@ -185,13 +185,13 @@
                             <View
                                 android:layout_width="4dp"
                                 android:layout_height="4dp"
-                                android:background="#94A3B8" />
+                                android:background="@color/text_desc" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:text="Patient Demographics"
-                                android:textColor="#475569"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="15sp" />
                         </LinearLayout>
 
@@ -205,13 +205,13 @@
                             <View
                                 android:layout_width="4dp"
                                 android:layout_height="4dp"
-                                android:background="#94A3B8" />
+                                android:background="@color/text_desc" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:text="Medical \u0026 Dental History"
-                                android:textColor="#475569"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="15sp" />
                         </LinearLayout>
 
@@ -225,13 +225,13 @@
                             <View
                                 android:layout_width="4dp"
                                 android:layout_height="4dp"
-                                android:background="#94A3B8" />
+                                android:background="@color/text_desc" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:text="AI Risk Analysis \u0026 Score"
-                                android:textColor="#475569"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="15sp" />
                         </LinearLayout>
 
@@ -245,13 +245,13 @@
                             <View
                                 android:layout_width="4dp"
                                 android:layout_height="4dp"
-                                android:background="#94A3B8" />
+                                android:background="@color/text_desc" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:text="Treatment Recommendations"
-                                android:textColor="#475569"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="15sp" />
                         </LinearLayout>
 
@@ -264,13 +264,13 @@
                             <View
                                 android:layout_width="4dp"
                                 android:layout_height="4dp"
-                                android:background="#94A3B8" />
+                                android:background="@color/text_desc" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:text="Imaging Summary"
-                                android:textColor="#475569"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="15sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -287,7 +287,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:backgroundTint="#2563EB"
+                app:backgroundTint="@color/primary_blue"
                 app:cornerRadius="12dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -299,11 +299,11 @@
                 android:layout_marginBottom="24dp"
                 android:text="Cancel"
                 android:textAllCaps="false"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:cornerRadius="12dp"
-                app:strokeColor="#E2E8F0"
+                app:strokeColor="@color/card_stroke"
                 app:strokeWidth="1dp" />
 
         </LinearLayout>
@@ -314,7 +314,7 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/white"
+        android:background="@color/bg_light"
         android:elevation="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -333,12 +333,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -356,12 +356,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_cases"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cases"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -379,12 +379,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_reports"
-                app:tint="#2563EB" />
+                app:tint="@color/primary_blue" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reports"
-                android:textColor="#2563EB"
+                android:textColor="@color/primary_blue"
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -403,12 +403,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_profile"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profile"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 

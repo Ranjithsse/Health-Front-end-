@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
+        android:name=".HealthPredictApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -58,7 +59,8 @@
 
         <activity
             android:name=".DoctorSignUpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".DoctorPassResetActivity"
@@ -197,10 +199,6 @@
 
         <activity
             android:name=".NewCaseTwelveActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".NewCaseThirteenActivity"
             android:exported="false" />
 
         <activity

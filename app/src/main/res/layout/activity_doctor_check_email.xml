@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/bg_light"
     android:padding="24dp">
 
     <ImageView
@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="#10B981" />
+        app:tint="@color/low_risk_text" />
 
     <TextView
         android:id="@+id/tvCheckEmail"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Check your email"
-        android:textColor="#0F172A"
+        android:textColor="@color/text_main"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="We've sent password reset instructions to\n"
-        android:textColor="#94A3B8"
+        android:textColor="@color/text_desc"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="user@example.com"
-        android:textColor="#0F172A"
+        android:textColor="@color/text_main"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:backgroundTint="#2563EB"
+        app:backgroundTint="@color/primary_blue"
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

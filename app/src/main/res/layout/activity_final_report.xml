@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    android:background="@color/bg_light">
 
     <!-- Header Toolbar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#2563EB"
+        android:background="@color/primary_blue"
         android:paddingHorizontal="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Health Report"
-                    android:textColor="#0F172A"
+                    android:textColor="@color/text_main"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,7 @@
                         android:contentDescription="@string/desc_back"
                         android:focusable="true"
                         android:src="@drawable/ic_download"
-                        app:tint="#475569" />
+                        app:tint="@color/text_secondary" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:strokeWidth="0dp">
@@ -114,19 +114,18 @@
                             android:id="@+id/logoCard"
                             android:layout_width="44dp"
                             android:layout_height="44dp"
-                            app:cardBackgroundColor="#2563EB"
+                            app:cardBackgroundColor="@android:color/transparent"
                             app:cardCornerRadius="8dp"
                             app:cardElevation="0dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
                                 android:layout_gravity="center"
                                 android:contentDescription="@string/desc_logo"
-                                android:src="@drawable/ic_splash_logo"
-                                app:tint="@color/white" />
+                                android:src="@drawable/ic_splash_logo" />
                         </com.google.android.material.card.MaterialCardView>
 
                         <TextView
@@ -135,7 +134,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:text="@string/health_monitor"
-                            android:textColor="#0F172A"
+                            android:textColor="@color/text_main"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/logoCard"
@@ -155,7 +154,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="PATIENT #1024"
-                                android:textColor="#0F172A"
+                                android:textColor="@color/text_main"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
 
@@ -165,7 +164,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:text="Jan 24, 2025"
-                                android:textColor="#94A3B8"
+                                android:textColor="@color/text_desc"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -174,23 +173,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="20dp"
-                        android:background="#F1F5F9" />
+                        android:background="@color/bg_light" />
 
-                    <!-- Patient Info Section -->
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
+                        android:background="@color/followup_bg"
+                        android:padding="10dp"
                         android:text="Patient Info"
-                        android:textColor="#2563EB"
-                        android:textSize="12sp"
+                        android:textColor="@color/primary_blue"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="6dp"
-                        android:background="#E0E7FF" />
+                        android:background="@color/followup_bg" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -202,7 +202,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Name: "
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_desc"
                             android:textSize="13sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -212,7 +212,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Robert Wilson"
-                            android:textColor="#334155"
+                            android:textColor="@color/text_main"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintBaseline_toBaselineOf="@+id/tvLabelName"
@@ -224,7 +224,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="48dp"
                             android:text="Age: "
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_desc"
                             android:textSize="13sp"
                             app:layout_constraintStart_toEndOf="@+id/tvValueName"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -234,7 +234,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="45"
-                            android:textColor="#334155"
+                            android:textColor="@color/text_main"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintBaseline_toBaselineOf="@+id/tvLabelAge"
@@ -246,7 +246,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:text="Gender: "
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_desc"
                             android:textSize="13sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tvLabelName" />
@@ -256,37 +256,40 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Male"
-                            android:textColor="#334155"
+                            android:textColor="@color/text_main"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintBaseline_toBaselineOf="@+id/tvLabelGender"
                             app:layout_constraintStart_toEndOf="@+id/tvLabelGender" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <!-- AI Prediction Section -->
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="28dp"
+                        android:background="@color/followup_bg"
+                        android:padding="10dp"
                         android:text="AI Prediction"
-                        android:textColor="#2563EB"
-                        android:textSize="12sp"
+                        android:textColor="@color/primary_blue"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="6dp"
-                        android:background="#E0E7FF" />
+                        android:background="@color/followup_bg" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardPrediction"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        app:cardBackgroundColor="#F0FDF4"
+                        app:cardBackgroundColor="@color/low_risk_bg"
                         app:cardCornerRadius="8dp"
-                        app:cardElevation="0dp">
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/low_risk_text"
+                        app:strokeWidth="1dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -300,7 +303,7 @@
                                 android:layout_height="wrap_content"
                                 android:lineSpacingMultiplier="1.2"
                                 android:text="98.2% Stability Probability\n(1-Year)"
-                                android:textColor="#166534"
+                                android:textColor="@color/low_risk_text"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
@@ -310,26 +313,28 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:text="Risk Level: Low"
-                                android:textColor="#166534"
+                                android:textColor="@color/low_risk_text"
                                 android:textSize="13sp" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Plan Section -->
+
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="28dp"
+                        android:background="@color/followup_bg"
+                        android:padding="10dp"
                         android:text="Clinical Plan"
-                        android:textColor="#2563EB"
-                        android:textSize="12sp"
+                        android:textColor="@color/primary_blue"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="6dp"
-                        android:background="#E0E7FF" />
+                        android:background="@color/followup_bg" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -342,7 +347,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Protocol: ACE Inhibitors"
-                            android:textColor="#334155"
+                            android:textColor="@color/text_main"
                             android:textSize="13sp"
                             android:textStyle="bold" />
 
@@ -352,7 +357,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Intervention: Non-Invasive"
-                            android:textColor="#334155"
+                            android:textColor="@color/text_main"
                             android:textSize="13sp"
                             android:textStyle="bold" />
 
@@ -362,26 +367,27 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Monitoring: Standard"
-                            android:textColor="#334155"
+                            android:textColor="@color/text_main"
                             android:textSize="13sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <!-- Provider Notes Section -->
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="28dp"
+                        android:background="@color/followup_bg"
+                        android:padding="10dp"
                         android:text="Provider Notes"
-                        android:textColor="#2563EB"
-                        android:textSize="12sp"
+                        android:textColor="@color/primary_blue"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="6dp"
-                        android:background="#E0E7FF" />
+                        android:background="@color/followup_bg" />
 
                     <TextView
                         android:id="@+id/tvProviderNotes"
@@ -390,7 +396,7 @@
                         android:layout_marginTop="12dp"
                         android:lineSpacingExtra="4dp"
                         android:text="No notes added."
-                        android:textColor="#64748B"
+                        android:textColor="@color/text_desc"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -407,7 +413,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:backgroundTint="#2563EB"
+                app:backgroundTint="@color/primary_blue"
                 app:cornerRadius="12dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -419,11 +425,11 @@
                 android:layout_marginBottom="24dp"
                 android:text="Back to Dashboard"
                 android:textAllCaps="false"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:cornerRadius="12dp"
-                app:strokeColor="#E2E8F0"
+                app:strokeColor="@color/card_stroke"
                 app:strokeWidth="1dp" />
 
         </LinearLayout>
@@ -434,7 +440,7 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/white"
+        android:background="@color/bg_light"
         android:elevation="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -454,12 +460,12 @@
                 android:layout_height="24dp"
                 android:contentDescription="@string/nav_home"
                 android:src="@drawable/ic_home"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nav_home"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -478,12 +484,12 @@
                 android:layout_height="24dp"
                 android:contentDescription="@string/nav_cases"
                 android:src="@drawable/ic_cases"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nav_cases"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -502,12 +508,12 @@
                 android:layout_height="24dp"
                 android:contentDescription="@string/nav_reports"
                 android:src="@drawable/ic_reports"
-                app:tint="#2563EB" />
+                app:tint="@color/primary_blue" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nav_reports"
-                android:textColor="#2563EB"
+                android:textColor="@color/primary_blue"
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -527,12 +533,12 @@
                 android:layout_height="24dp"
                 android:contentDescription="@string/nav_profile"
                 android:src="@drawable/ic_profile"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nav_profile"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 

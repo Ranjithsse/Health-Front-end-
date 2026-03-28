@@ -55,4 +55,8 @@
     <string name="intervention_format">Intervention: %1$s</string>
     <string name="monitoring_format">Monitoring: %1$s</string>
     <string name="report_detail_format">%1$s • %2$s</string>
+
+    <string name="total_patients">Total Patients</string>
+    <string name="this_month">This Month</string>
+    <string name="avg_accuracy">Avg. Accuracy</string>
 </resources>

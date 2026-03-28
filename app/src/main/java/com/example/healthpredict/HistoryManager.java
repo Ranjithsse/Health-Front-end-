@@ -61,10 +61,25 @@ public class HistoryManager {
         
         // Save dynamically
         saveHistory(context);
+
+        // Update persistent monthly statistics
+        // if (existingIndex == -1) {
+        //     SharedPreferences userPrefs = context.getSharedPreferences("HealthPredictPrefs", Context.MODE_PRIVATE);
+        //     String userEmail = userPrefs.getString("user_email", "anonymous");
+        //     StatsManager.getInstance().incrementMonthlyCount(context, userEmail);
+        // }
     }
 
     public List<CaseData> getCaseHistory() {
         return caseHistory;
+    }
+
+    public void clearHistory(Context context) {
+        caseHistory.clear();
+        if (context != null) {
+            SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+            prefs.edit().clear().apply();
+        }
     }
 
     private void saveHistory(Context context) {

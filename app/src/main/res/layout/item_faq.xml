@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="@color/card_bg"
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
-    app:strokeColor="#E2E8F0"
+    app:strokeColor="@color/card_stroke"
     app:strokeWidth="1dp"
     android:clickable="true"
     android:focusable="true"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="Question Title"
-            android:textColor="#1E293B"
+            android:textColor="@color/text_secondary"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/ivChevron"
@@ -39,14 +39,14 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvFaqTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvFaqTitle"
-            app:tint="#94A3B8" />
+            app:tint="@color/text_desc" />
 
         <View
             android:id="@+id/vDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="#F1F5F9"
+            android:background="@color/bg_light"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/tvFaqTitle" />
 
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:lineSpacingMultiplier="1.4"
-            android:textColor="#64748B"
+            android:textColor="@color/text_desc"
             android:textSize="14sp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"

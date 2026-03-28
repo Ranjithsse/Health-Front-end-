@@ -40,10 +40,14 @@ public class NewCaseTwentyActivity extends AppCompatActivity {
             tvSummaryFiles.setText(data.fileUri.isEmpty() ? "No files uploaded" : data.fileUri);
         }
         if (tvSummaryPlan != null) {
-            String plan = data.treatmentType + ", " + data.interventionType;
+            StringBuilder plan = new StringBuilder();
+            plan.append(data.primaryMedication);
+            if (!data.dosage.isEmpty()) plan.append(" (").append(data.dosage).append("mg)");
+            if (!data.duration.isEmpty()) plan.append(" for ").append(data.duration).append(" weeks");
+            plan.append("\n").append(data.treatmentType).append(", ").append(data.interventionType);
             if (data.adjuvantTherapyRequired)
-                plan += ", Adjuvant Required";
-            tvSummaryPlan.setText(plan);
+                plan.append(", Adjuvant Required");
+            tvSummaryPlan.setText(plan.toString());
         }
 
         btnBackHeader.setOnClickListener(new View.OnClickListener() {

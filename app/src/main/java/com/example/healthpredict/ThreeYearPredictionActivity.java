@@ -35,7 +35,7 @@ public class ThreeYearPredictionActivity extends AppCompatActivity {
                 tvProbability.setText(prob);
 
             try {
-                int progress = Integer.parseInt(prob.replace("%", "").trim());
+                int progress = (int) Double.parseDouble(prob.replace("%", "").trim());
                 if (circularProgress != null)
                     circularProgress.setProgress(progress);
             } catch (Exception ignored) {

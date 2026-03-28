@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    android:background="@color/bg_light">
 
     <!-- Header Toolbar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#2563EB"
+        android:background="@color/primary_blue"
         android:paddingHorizontal="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -58,7 +58,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
                 app:strokeWidth="0dp">
@@ -73,7 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Prediction Accuracy Trend"
-                        android:textColor="#0F172A"
+                        android:textColor="@color/text_main"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -84,18 +84,18 @@
                         android:layout_marginTop="24dp">
 
                         <!-- Y-Axis Labels -->
-                        <TextView android:id="@+id/y100" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="100" android:textColor="#94A3B8" android:textSize="12sp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
-                        <TextView android:id="@+id/y95" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="95" android:textColor="#94A3B8" android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/y90" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/y100" />
-                        <TextView android:id="@+id/y90" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="90" android:textColor="#94A3B8" android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/y85" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/y95" />
-                        <TextView android:id="@+id/y85" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="85" android:textColor="#94A3B8" android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/y80" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/y90" />
-                        <TextView android:id="@+id/y80" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="80" android:textColor="#94A3B8" android:textSize="12sp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" />
+                        <TextView android:id="@+id/y100" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="100" android:textColor="@color/text_desc" android:textSize="12sp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+                        <TextView android:id="@+id/y95" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="95" android:textColor="@color/text_desc" android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/y90" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/y100" />
+                        <TextView android:id="@+id/y90" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="90" android:textColor="@color/text_desc" android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/y85" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/y95" />
+                        <TextView android:id="@+id/y85" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="85" android:textColor="@color/text_desc" android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/y80" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/y90" />
+                        <TextView android:id="@+id/y80" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="80" android:textColor="@color/text_desc" android:textSize="12sp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" />
 
                         <!-- Grid Lines -->
-                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="#F1F5F9" app:layout_constraintBottom_toBottomOf="@+id/y100" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y100" android:layout_marginStart="8dp" />
-                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="#F1F5F9" app:layout_constraintBottom_toBottomOf="@+id/y95" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y95" android:layout_marginStart="8dp" />
-                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="#F1F5F9" app:layout_constraintBottom_toBottomOf="@+id/y90" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y90" android:layout_marginStart="8dp" />
-                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="#F1F5F9" app:layout_constraintBottom_toBottomOf="@+id/y85" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y85" android:layout_marginStart="8dp" />
-                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="#F1F5F9" app:layout_constraintBottom_toBottomOf="@+id/y80" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y80" android:layout_marginStart="8dp" />
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="@color/bg_light" app:layout_constraintBottom_toBottomOf="@+id/y100" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y100" android:layout_marginStart="8dp" />
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="@color/bg_light" app:layout_constraintBottom_toBottomOf="@+id/y95" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y95" android:layout_marginStart="8dp" />
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="@color/bg_light" app:layout_constraintBottom_toBottomOf="@+id/y90" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y90" android:layout_marginStart="8dp" />
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="@color/bg_light" app:layout_constraintBottom_toBottomOf="@+id/y85" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y85" android:layout_marginStart="8dp" />
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:background="@color/bg_light" app:layout_constraintBottom_toBottomOf="@+id/y80" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/y80" android:layout_marginStart="8dp" />
 
                         <!-- The Line (Simulated with an image or SVG path if possible, but let's use a Placeholder or complex drawing) -->
                         <!-- For simplicity and exact design, I will use a custom view or a set of circles and lines -->
@@ -119,12 +119,12 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/y80">
-                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Jan" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
-                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Feb" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
-                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Mar" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
-                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Apr" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
-                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="May" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
-                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Jun" android:textColor="#94A3B8" android:textSize="12sp" android:gravity="center" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Jan" android:textColor="@color/text_desc" android:textSize="12sp" android:gravity="center" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Feb" android:textColor="@color/text_desc" android:textSize="12sp" android:gravity="center" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Mar" android:textColor="@color/text_desc" android:textSize="12sp" android:gravity="center" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Apr" android:textColor="@color/text_desc" android:textSize="12sp" android:gravity="center" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="May" android:textColor="@color/text_desc" android:textSize="12sp" android:gravity="center" />
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Jun" android:textColor="@color/text_desc" android:textSize="12sp" android:gravity="center" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -137,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
                 app:strokeWidth="0dp">
@@ -152,7 +152,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Assessments by Category"
-                        android:textColor="#0F172A"
+                        android:textColor="@color/text_main"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -160,7 +160,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="24dp"
                         android:orientation="vertical">
 
                         <!-- Cardiac -->
@@ -168,24 +168,42 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:layout_marginBottom="24dp">
+                            android:layout_marginBottom="18dp">
                             <TextView
-                                android:layout_width="80dp"
+                                android:layout_width="105dp"
                                 android:layout_height="wrap_content"
-                                android:text="Cardiac"
-                                android:textColor="#64748B"
-                                android:textSize="14sp" />
-                            <View
-                                android:id="@+id/viewCardiacFilled"
+                                android:text="Cardiovascular"
+                                android:textColor="@color/text_desc"
+                                android:textSize="12sp"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+                            <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_height="24dp"
-                                android:layout_weight="0.8"
-                                android:background="@drawable/bg_bar_chart" />
-                            <View 
-                                android:id="@+id/viewCardiacEmpty"
-                                android:layout_width="0dp" 
-                                android:layout_height="24dp" 
-                                android:layout_weight="0.2" />
+                                android:layout_height="14dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_bar_chart_track"
+                                android:orientation="horizontal">
+                                <View
+                                    android:id="@+id/viewCardiacFilled"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.4"
+                                    android:background="@drawable/bg_bar_chart_fill" />
+                                <View
+                                    android:id="@+id/viewCardiacEmpty"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.6" />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/tvCardiacPercentage"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:text="0%"
+                                android:textColor="@color/text_main"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:gravity="end" />
                         </LinearLayout>
 
                         <!-- Diabetes -->
@@ -193,24 +211,42 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:layout_marginBottom="24dp">
+                            android:layout_marginBottom="18dp">
                             <TextView
-                                android:layout_width="80dp"
+                                android:layout_width="105dp"
                                 android:layout_height="wrap_content"
-                                android:text="Diabetes"
-                                android:textColor="#64748B"
-                                android:textSize="14sp" />
-                            <View
-                                android:id="@+id/viewDiabetesFilled"
+                                android:text="Endocrine"
+                                android:textColor="@color/text_desc"
+                                android:textSize="12sp"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+                            <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_height="24dp"
-                                android:layout_weight="0.5"
-                                android:background="@drawable/bg_bar_chart" />
-                            <View 
-                                android:id="@+id/viewDiabetesEmpty"
-                                android:layout_width="0dp" 
-                                android:layout_height="24dp" 
-                                android:layout_weight="0.5" />
+                                android:layout_height="14dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_bar_chart_track"
+                                android:orientation="horizontal">
+                                <View
+                                    android:id="@+id/viewDiabetesFilled"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3"
+                                    android:background="@drawable/bg_bar_chart_fill" />
+                                <View
+                                    android:id="@+id/viewDiabetesEmpty"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.7" />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/tvDiabetesPercentage"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:text="0%"
+                                android:textColor="@color/text_main"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:gravity="end" />
                         </LinearLayout>
 
                         <!-- Oncology -->
@@ -218,48 +254,257 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:layout_marginBottom="24dp">
+                            android:layout_marginBottom="18dp">
                             <TextView
-                                android:layout_width="80dp"
+                                android:layout_width="105dp"
                                 android:layout_height="wrap_content"
                                 android:text="Oncology"
-                                android:textColor="#64748B"
-                                android:textSize="14sp" />
-                            <View
-                                android:id="@+id/viewOncologyFilled"
+                                android:textColor="@color/text_desc"
+                                android:textSize="12sp"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+                            <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_height="24dp"
-                                android:layout_weight="0.25"
-                                android:background="@drawable/bg_bar_chart" />
-                            <View 
-                                android:id="@+id/viewOncologyEmpty"
-                                android:layout_width="0dp" 
-                                android:layout_height="24dp" 
-                                android:layout_weight="0.75" />
+                                android:layout_height="14dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_bar_chart_track"
+                                android:orientation="horizontal">
+                                <View
+                                    android:id="@+id/viewOncologyFilled"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.2"
+                                    android:background="@drawable/bg_bar_chart_fill" />
+                                <View
+                                    android:id="@+id/viewOncologyEmpty"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.8" />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/tvOncologyPercentage"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:text="0%"
+                                android:textColor="@color/text_main"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:gravity="end" />
                         </LinearLayout>
 
                         <!-- Renal -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical">
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="18dp">
                             <TextView
-                                android:layout_width="80dp"
+                                android:layout_width="105dp"
                                 android:layout_height="wrap_content"
                                 android:text="Renal"
-                                android:textColor="#64748B"
-                                android:textSize="14sp" />
-                            <View
-                                android:id="@+id/viewRenalFilled"
+                                android:textColor="@color/text_desc"
+                                android:textSize="12sp"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+                            <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_height="24dp"
-                                android:layout_weight="0.15"
-                                android:background="@drawable/bg_bar_chart" />
-                            <View 
-                                android:id="@+id/viewRenalEmpty"
-                                android:layout_width="0dp" 
-                                android:layout_height="24dp" 
-                                android:layout_weight="0.85" />
+                                android:layout_height="14dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_bar_chart_track"
+                                android:orientation="horizontal">
+                                <View
+                                    android:id="@+id/viewRenalFilled"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5"
+                                    android:background="@drawable/bg_bar_chart_fill" />
+                                <View
+                                    android:id="@+id/viewRenalEmpty"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5" />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/tvRenalPercentage"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:text="0%"
+                                android:textColor="@color/text_main"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:gravity="end" />
+                        </LinearLayout>
+
+                        <!-- Respiratory -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="18dp">
+                            <TextView
+                                android:layout_width="105dp"
+                                android:layout_height="wrap_content"
+                                android:text="Respiratory"
+                                android:textColor="@color/text_desc"
+                                android:textSize="12sp"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="14dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_bar_chart_track"
+                                android:orientation="horizontal">
+                                <View
+                                    android:id="@+id/viewRespiratoryFilled"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.1"
+                                    android:background="@drawable/bg_bar_chart_fill" />
+                                <View
+                                    android:id="@+id/viewRespiratoryEmpty"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.9" />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/tvRespiratoryPercentage"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:text="0%"
+                                android:textColor="@color/text_main"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:gravity="end" />
+                        </LinearLayout>
+
+                        <!-- Neurological -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="18dp">
+                            <TextView
+                                android:layout_width="105dp"
+                                android:layout_height="wrap_content"
+                                android:text="Neurological"
+                                android:textColor="@color/text_desc"
+                                android:textSize="12sp"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="14dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_bar_chart_track"
+                                android:orientation="horizontal">
+                                <View
+                                    android:id="@+id/viewNeurologicalFilled"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.1"
+                                    android:background="@drawable/bg_bar_chart_fill" />
+                                <View
+                                    android:id="@+id/viewNeurologicalEmpty"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.9" />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/tvNeurologicalPercentage"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:text="0%"
+                                android:textColor="@color/text_main"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:gravity="end" />
+                        </LinearLayout>
+
+                        <!-- Musculoskeletal -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="18dp">
+                            <TextView
+                                android:layout_width="105dp"
+                                android:layout_height="wrap_content"
+                                android:text="Musculoskeletal"
+                                android:textColor="@color/text_desc"
+                                android:textSize="12sp"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="14dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_bar_chart_track"
+                                android:orientation="horizontal">
+                                <View
+                                    android:id="@+id/viewMusculoskeletalFilled"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.1"
+                                    android:background="@drawable/bg_bar_chart_fill" />
+                                <View
+                                    android:id="@+id/viewMusculoskeletalEmpty"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.9" />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/tvMusculoskeletalPercentage"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:text="0%"
+                                android:textColor="@color/text_main"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:gravity="end" />
+                        </LinearLayout>
+
+                        <!-- Gastrointestinal -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+                            <TextView
+                                android:layout_width="105dp"
+                                android:layout_height="wrap_content"
+                                android:text="Gastrointestinal"
+                                android:textColor="@color/text_desc"
+                                android:textSize="12sp"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="14dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_bar_chart_track"
+                                android:orientation="horizontal">
+                                <View
+                                    android:id="@+id/viewGastrointestinalFilled"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.1"
+                                    android:background="@drawable/bg_bar_chart_fill" />
+                                <View
+                                    android:id="@+id/viewGastrointestinalEmpty"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.9" />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/tvGastrointestinalPercentage"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:text="0%"
+                                android:textColor="@color/text_main"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:gravity="end" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -275,7 +520,7 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/white"
+        android:background="@color/bg_light"
         android:elevation="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -290,12 +535,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -309,12 +554,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_cases"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cases"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -328,12 +573,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_reports"
-                app:tint="#2563EB" />
+                app:tint="@color/primary_blue" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reports"
-                android:textColor="#2563EB"
+                android:textColor="@color/primary_blue"
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -348,12 +593,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_profile"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profile"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 

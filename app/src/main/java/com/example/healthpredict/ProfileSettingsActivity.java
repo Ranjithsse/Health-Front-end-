@@ -29,9 +29,6 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         ImageView btnBack = findViewById(R.id.btnBack);
         MaterialButton btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
         autoCompleteSensitivity = findViewById(R.id.autoCompleteSensitivity);
-        CheckBox cbEmailNotify = findViewById(R.id.cbEmailNotify);
-        CheckBox cbConfidenceIntervals = findViewById(R.id.cbConfidenceIntervals);
-        CheckBox cbExperimentalModels = findViewById(R.id.cbExperimentalModels);
 
         loadSettingsFromServer();
 
@@ -85,15 +82,12 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     }
 
     private void setupCheckboxListeners() {
-        CheckBox cbEmailNotify = findViewById(R.id.cbEmailNotify);
+
         CheckBox cbConfidenceIntervals = findViewById(R.id.cbConfidenceIntervals);
         CheckBox cbExperimentalModels = findViewById(R.id.cbExperimentalModels);
+        com.google.android.material.switchmaterial.SwitchMaterial switchDarkMode = findViewById(R.id.switchDarkMode);
 
-        if (cbEmailNotify != null) {
-            cbEmailNotify.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                updateSettingOnServer("email_notifications", isChecked);
-            });
-        }
+
 
         if (cbConfidenceIntervals != null) {
             cbConfidenceIntervals.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -104,6 +98,21 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         if (cbExperimentalModels != null) {
             cbExperimentalModels.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 updateSettingOnServer("include_experimental_models", isChecked);
+            });
+        }
+
+        if (switchDarkMode != null) {
+            android.content.SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
+            boolean isDark = prefs.getBoolean("dark_mode", false);
+            switchDarkMode.setChecked(isDark);
+
+            switchDarkMode.setOnCheckedChangeListener((view, isChecked) -> {
+                prefs.edit().putBoolean("dark_mode", isChecked).apply();
+                if (isChecked) {
+                    androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES);
+                } else {
+                    androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO);
+                }
             });
         }
     }
@@ -120,10 +129,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                         autoCompleteSensitivity.setText((String) settings.get("prediction_sensitivity"), false);
                     }
 
-                    CheckBox cbEmailNotify = findViewById(R.id.cbEmailNotify);
-                    if (settings.containsKey("email_notifications") && cbEmailNotify != null) {
-                        cbEmailNotify.setChecked((Boolean) settings.get("email_notifications"));
-                    }
+
 
                     CheckBox cbConfidenceIntervals = findViewById(R.id.cbConfidenceIntervals);
                     if (settings.containsKey("show_confidence_intervals") && cbConfidenceIntervals != null) {

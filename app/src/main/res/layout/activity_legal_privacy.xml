@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    android:background="@color/bg_light">
 
     <!-- Header Toolbar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#2563EB"
+        android:background="@color/primary_blue"
         android:paddingHorizontal="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Legal &amp; Ethics"
-                android:textColor="#0F172A"
+                android:textColor="@color/text_main"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -85,7 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Liability Statement"
-                        android:textColor="#1E293B"
+                        android:textColor="@color/text_secondary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -95,7 +95,7 @@
                         android:layout_marginTop="8dp"
                         android:lineSpacingExtra="4dp"
                         android:text="Health Monitor Prediction is a support tool. The treating clinician maintains full responsibility for all medical decisions and outcomes."
-                        android:textColor="#64748B"
+                        android:textColor="@color/text_desc"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -122,7 +122,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Data Privacy"
-                        android:textColor="#1E293B"
+                        android:textColor="@color/text_secondary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -132,7 +132,7 @@
                         android:layout_marginTop="8dp"
                         android:lineSpacingExtra="4dp"
                         android:text="Patient data is processed using end-to-end encryption and stored in HIPAA-compliant servers. Data is retained for 7 years."
-                        android:textColor="#64748B"
+                        android:textColor="@color/text_desc"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -148,7 +148,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/ic_file_pdf"
-                    app:tint="#64748B" />
+                    app:tint="@color/text_desc" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -160,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Algorithm Transparency"
-                        android:textColor="#1E293B"
+                        android:textColor="@color/text_secondary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -170,7 +170,7 @@
                         android:layout_marginTop="8dp"
                         android:lineSpacingExtra="4dp"
                         android:text="The prediction model (v2.4) was trained on a dataset of 54,000 cases with a verified accuracy of 96.5% (AUC 0.94)."
-                        android:textColor="#64748B"
+                        android:textColor="@color/text_desc"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -183,11 +183,11 @@
                 android:layout_marginBottom="32dp"
                 android:text="Back"
                 android:textAllCaps="false"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="16sp"
                 app:backgroundTint="@color/white"
                 app:cornerRadius="12dp"
-                app:strokeColor="#E2E8F0"
+                app:strokeColor="@color/card_stroke"
                 app:strokeWidth="1.5dp" />
 
         </LinearLayout>
@@ -198,7 +198,7 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/white"
+        android:background="@color/bg_light"
         android:elevation="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -217,12 +217,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -240,12 +240,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_cases"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cases"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -263,12 +263,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_reports"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reports"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -286,12 +286,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_profile"
-                app:tint="#2563EB" />
+                app:tint="@color/primary_blue" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profile"
-                android:textColor="#2563EB"
+                android:textColor="@color/primary_blue"
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>

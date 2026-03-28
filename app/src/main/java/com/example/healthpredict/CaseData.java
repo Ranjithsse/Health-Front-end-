@@ -15,10 +15,10 @@ public class CaseData implements Serializable {
     public String status = "";
 
     // Page 1: Assessment
-    @SerializedName("patient_id")
+    @SerializedName("patientId")
     public String patientId = "";
 
-    @SerializedName("patient_name")
+    @SerializedName("patientName")
     public String patientName = "";
 
     @SerializedName("date")
@@ -31,37 +31,40 @@ public class CaseData implements Serializable {
     @SerializedName("age")
     public String age = "";
 
-    @SerializedName("blood_group")
+    @SerializedName("bloodGroup")
     public String bloodGroup = "";
 
-    @SerializedName("smoking_status")
+    @SerializedName("smokingStatus")
     public String smokingStatus = "";
 
+    @SerializedName("bmi")
+    public String bmi = "";
+
     // Page 3: Medical Conditions
-    @SerializedName("medical_conditions")
+    @SerializedName("medicalConditions")
     public List<String> medicalConditions = new ArrayList<>();
 
     // Page 4: Physical Activity
-    @SerializedName("physical_activity")
+    @SerializedName("physicalActivity")
     public String physicalActivity = "";
 
     // Page 5: Primary Body System
-    @SerializedName("primary_system")
+    @SerializedName("primarySystem")
     public String primarySystem = "";
 
     // Page 6: Vitals
-    @SerializedName("blood_pressure")
+    @SerializedName("bloodPressure")
     public String bloodPressure = "";
 
-    @SerializedName("glucose_level")
+    @SerializedName("glucoseLevel")
     public String glucoseLevel = "";
 
     // Page 8 & 9: Files
-    @SerializedName("file_uri")
+    @SerializedName("fileUri")
     public String fileUri = "";
 
     // Page 14: Imaging Parameters
-    @SerializedName("tissue_density")
+    @SerializedName("tissueDensity")
     public String tissueDensity = "Normal";
 
     @SerializedName("calcification")
@@ -74,77 +77,103 @@ public class CaseData implements Serializable {
     public String inflammation = "None";
 
     // Page 15: Medication & Treatment
-    public String primaryMedication = "ACE Inhibitors";
+    @SerializedName("primaryMedication")
+    public String primaryMedication = "";
+
+    @SerializedName("dosage")
     public String dosage = "";
+
+    @SerializedName("duration")
     public String duration = "";
-    public String treatmentType = "Preventative";
+
+    @SerializedName("treatmentType")
+    public String treatmentType = "";
 
     // Page 17: Intervention Type
-    @SerializedName("intervention_type")
+    @SerializedName("interventionType")
     public String interventionType = "Non-Invasive";
 
     // Page 18: Monitoring Level
-    @SerializedName("monitoring_level")
+    @SerializedName("monitoringLevel")
     public String monitoringLevel = "Standard Monitoring";
 
     // Page 19: Adjuvant Therapy
-    @SerializedName("adjuvant_therapy_required")
+    @SerializedName("adjuvantTherapyRequired")
     public boolean adjuvantTherapyRequired = false;
 
     // Tissue breakdown percentages
-    @SerializedName("healthy_tissue_pct")
+    @SerializedName("healthyTissuePct")
     public double healthyTissuePct = 0.0;
 
-    @SerializedName("fibrous_tissue_pct")
+    @SerializedName("fibrousTissuePct")
     public double fibrousTissuePct = 0.0;
 
-    @SerializedName("inflamed_tissue_pct")
+    @SerializedName("inflamedTissuePct")
     public double inflamedTissuePct = 0.0;
 
+    // Micro-Structure / Cell Analysis
+    @SerializedName("cellularity")
+    public String cellularity = "Normal";
+
+    @SerializedName("vascularityPerfusion")
+    public String vascularityPerfusion = "Good";
+
+    @SerializedName("typeACellsPct")
+    public double typeACellsPct = 15.0;
+
+    @SerializedName("typeBCellsPct")
+    public double typeBCellsPct = 60.0;
+
+    @SerializedName("typeCCellsPct")
+    public double typeCCellsPct = 25.0;
+
     // AI Prediction Results
-    @SerializedName("risk_score")
+    @SerializedName("riskScore")
     public String riskScore = "";
 
-    @SerializedName("risk_level")
+    @SerializedName("riskLevel")
     public String riskLevel = "";
 
     @SerializedName("accuracy")
     public String accuracy = "";
 
-    @SerializedName("ai_insight")
+    @SerializedName("aiInsight")
     public String aiInsight = "";
 
     // Multi-Year Outlook Data
-    @SerializedName("one_year_prediction")
+    @SerializedName("oneYearPrediction")
     public String oneYearPrediction = "98.2%";
 
-    @SerializedName("one_year_risk")
+    @SerializedName("oneYearRisk")
     public String oneYearRisk = "Low";
 
-    @SerializedName("one_year_insight")
+    @SerializedName("oneYearInsight")
     public String oneYearInsight = "";
 
-    @SerializedName("three_year_prediction")
+    @SerializedName("threeYearPrediction")
     public String threeYearPrediction = "85.5%";
 
-    @SerializedName("three_year_risk")
+    @SerializedName("threeYearRisk")
     public String threeYearRisk = "Moderate";
 
-    @SerializedName("three_year_insight")
+    @SerializedName("threeYearInsight")
     public String threeYearInsight = "";
 
-    @SerializedName("five_year_prediction")
+    @SerializedName("fiveYearPrediction")
     public String fiveYearPrediction = "72.1%";
 
-    @SerializedName("five_year_risk")
+    @SerializedName("fiveYearRisk")
     public String fiveYearRisk = "Moderate";
 
-    @SerializedName("five_year_insight")
+    @SerializedName("fiveYearInsight")
     public String fiveYearInsight = "";
 
     // Provider Notes
-    @SerializedName("provider_notes")
+    @SerializedName("providerNotes")
     public String providerNotes = "";
+
+    @SerializedName("riskFactors")
+    public java.util.List<java.util.Map<String, String>> riskFactors = new java.util.ArrayList<>();
 
     public CaseData() {
     }
@@ -162,101 +191,113 @@ public class CaseData implements Serializable {
 
         if (other.id != 0)
             this.id = other.id;
-        if (other.status != null && !other.status.isEmpty())
+        if (other.status != null)
             this.status = other.status;
-        if (other.patientId != null && !other.patientId.isEmpty())
+        if (other.patientId != null)
             this.patientId = other.patientId;
-        if (other.patientName != null && !other.patientName.isEmpty())
+        if (other.patientName != null)
             this.patientName = other.patientName;
-        if (other.date != null && !other.date.isEmpty())
+        if (other.date != null)
             this.date = other.date;
-        if (other.gender != null && !other.gender.isEmpty())
+        if (other.gender != null)
             this.gender = other.gender;
-        if (other.age != null && !other.age.isEmpty())
+        if (other.age != null)
             this.age = other.age;
-        if (other.bloodGroup != null && !other.bloodGroup.isEmpty())
+        if (other.bloodGroup != null)
             this.bloodGroup = other.bloodGroup;
-        if (other.smokingStatus != null && !other.smokingStatus.isEmpty())
+        if (other.smokingStatus != null)
             this.smokingStatus = other.smokingStatus;
+        if (other.bmi != null)
+            this.bmi = other.bmi;
 
-        if (other.medicalConditions != null && !other.medicalConditions.isEmpty()) {
+        if (other.medicalConditions != null) {
             this.medicalConditions = new ArrayList<>(other.medicalConditions);
         }
 
-        if (other.physicalActivity != null && !other.physicalActivity.isEmpty())
+        if (other.physicalActivity != null)
             this.physicalActivity = other.physicalActivity;
-        if (other.primarySystem != null && !other.primarySystem.isEmpty())
+        if (other.primarySystem != null)
             this.primarySystem = other.primarySystem;
-        if (other.bloodPressure != null && !other.bloodPressure.isEmpty())
+        if (other.bloodPressure != null)
             this.bloodPressure = other.bloodPressure;
-        if (other.glucoseLevel != null && !other.glucoseLevel.isEmpty())
+        if (other.glucoseLevel != null)
             this.glucoseLevel = other.glucoseLevel;
-        if (other.fileUri != null && !other.fileUri.isEmpty())
+        if (other.fileUri != null)
             this.fileUri = other.fileUri;
 
-        if (other.tissueDensity != null && !other.tissueDensity.isEmpty())
+        if (other.tissueDensity != null)
             this.tissueDensity = other.tissueDensity;
-        if (other.calcification != null && !other.calcification.isEmpty())
+        if (other.calcification != null)
             this.calcification = other.calcification;
-        if (other.vascularity != null && !other.vascularity.isEmpty())
+        if (other.vascularity != null)
             this.vascularity = other.vascularity;
-        if (other.inflammation != null && !other.inflammation.isEmpty())
+        if (other.inflammation != null)
             this.inflammation = other.inflammation;
 
-        if (other.primaryMedication != null && !other.primaryMedication.isEmpty())
+        if (other.primaryMedication != null)
             this.primaryMedication = other.primaryMedication;
-        if (other.dosage != null && !other.dosage.isEmpty())
+        if (other.dosage != null)
             this.dosage = other.dosage;
-        if (other.duration != null && !other.duration.isEmpty())
+        if (other.duration != null)
             this.duration = other.duration;
-        if (other.treatmentType != null && !other.treatmentType.isEmpty())
+        if (other.treatmentType != null)
             this.treatmentType = other.treatmentType;
 
-        if (other.interventionType != null && !other.interventionType.isEmpty())
+        if (other.interventionType != null)
             this.interventionType = other.interventionType;
-        if (other.monitoringLevel != null && !other.monitoringLevel.isEmpty())
+        if (other.monitoringLevel != null)
             this.monitoringLevel = other.monitoringLevel;
         this.adjuvantTherapyRequired = other.adjuvantTherapyRequired;
 
-        if (other.healthyTissuePct != 0.0)
-            this.healthyTissuePct = other.healthyTissuePct;
-        if (other.fibrousTissuePct != 0.0)
-            this.fibrousTissuePct = other.fibrousTissuePct;
-        if (other.inflamedTissuePct != 0.0)
-            this.inflamedTissuePct = other.inflamedTissuePct;
+        // Numeric fields: always copy if from a non-null context (other != null)
+        this.healthyTissuePct = other.healthyTissuePct;
+        this.fibrousTissuePct = other.fibrousTissuePct;
+        this.inflamedTissuePct = other.inflamedTissuePct;
 
-        if (other.riskScore != null && !other.riskScore.isEmpty())
+        if (other.cellularity != null)
+            this.cellularity = other.cellularity;
+        if (other.vascularityPerfusion != null)
+            this.vascularityPerfusion = other.vascularityPerfusion;
+        
+        this.typeACellsPct = other.typeACellsPct;
+        this.typeBCellsPct = other.typeBCellsPct;
+        this.typeCCellsPct = other.typeCCellsPct;
+
+        if (other.riskScore != null)
             this.riskScore = other.riskScore;
-        if (other.riskLevel != null && !other.riskLevel.isEmpty())
+        if (other.riskLevel != null)
             this.riskLevel = other.riskLevel;
-        if (other.accuracy != null && !other.accuracy.isEmpty())
+        if (other.accuracy != null)
             this.accuracy = other.accuracy;
-        if (other.aiInsight != null && !other.aiInsight.isEmpty())
+        if (other.aiInsight != null)
             this.aiInsight = other.aiInsight;
 
-        if (other.oneYearPrediction != null && !other.oneYearPrediction.isEmpty())
+        if (other.oneYearPrediction != null)
             this.oneYearPrediction = other.oneYearPrediction;
-        if (other.oneYearRisk != null && !other.oneYearRisk.isEmpty())
+        if (other.oneYearRisk != null)
             this.oneYearRisk = other.oneYearRisk;
-        if (other.oneYearInsight != null && !other.oneYearInsight.isEmpty())
+        if (other.oneYearInsight != null)
             this.oneYearInsight = other.oneYearInsight;
 
-        if (other.threeYearPrediction != null && !other.threeYearPrediction.isEmpty())
+        if (other.threeYearPrediction != null)
             this.threeYearPrediction = other.threeYearPrediction;
-        if (other.threeYearRisk != null && !other.threeYearRisk.isEmpty())
+        if (other.threeYearRisk != null)
             this.threeYearRisk = other.threeYearRisk;
-        if (other.threeYearInsight != null && !other.threeYearInsight.isEmpty())
+        if (other.threeYearInsight != null)
             this.threeYearInsight = other.threeYearInsight;
 
-        if (other.fiveYearPrediction != null && !other.fiveYearPrediction.isEmpty())
+        if (other.fiveYearPrediction != null)
             this.fiveYearPrediction = other.fiveYearPrediction;
-        if (other.fiveYearRisk != null && !other.fiveYearRisk.isEmpty())
+        if (other.fiveYearRisk != null)
             this.fiveYearRisk = other.fiveYearRisk;
-        if (other.fiveYearInsight != null && !other.fiveYearInsight.isEmpty())
+        if (other.fiveYearInsight != null)
             this.fiveYearInsight = other.fiveYearInsight;
 
-        if (other.providerNotes != null && !other.providerNotes.isEmpty())
+        if (other.providerNotes != null)
             this.providerNotes = other.providerNotes;
+            
+        if (other.riskFactors != null)
+            this.riskFactors = new java.util.ArrayList<>(other.riskFactors);
     }
 
     public void reset() {
@@ -269,6 +310,7 @@ public class CaseData implements Serializable {
         age = "";
         bloodGroup = "";
         smokingStatus = "";
+        bmi = "";
         medicalConditions.clear();
         physicalActivity = "";
         primarySystem = "";
@@ -289,6 +331,11 @@ public class CaseData implements Serializable {
         healthyTissuePct = 0.0;
         fibrousTissuePct = 0.0;
         inflamedTissuePct = 0.0;
+        cellularity = "Normal";
+        vascularityPerfusion = "Good";
+        typeACellsPct = 15.0;
+        typeBCellsPct = 60.0;
+        typeCCellsPct = 25.0;
         riskScore = "";
         riskLevel = "";
         accuracy = "";
@@ -303,5 +350,6 @@ public class CaseData implements Serializable {
         fiveYearPrediction = "72.1%";
         fiveYearRisk = "Moderate";
         fiveYearInsight = "";
+        if (riskFactors != null) riskFactors.clear();
     }
 }

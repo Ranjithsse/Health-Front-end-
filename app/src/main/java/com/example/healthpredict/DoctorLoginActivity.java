@@ -30,7 +30,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
         EditText etPassword = findViewById(R.id.etPassword);
         MaterialButton btnSignIn = findViewById(R.id.btnSignIn);
         TextView tvSignUp = findViewById(R.id.tvSignUp);
-        TextView tvForgotPassword = findViewById(R.id.tvForgotPassword);
+
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,14 +38,29 @@ public class DoctorLoginActivity extends AppCompatActivity {
                 String email = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
 
-                if (email.isEmpty()) {
-                    etEmail.setError("Email is required");
+                // 3. Empty Field Check
+                if (email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(DoctorLoginActivity.this, "Please fill all required fields.", Toast.LENGTH_SHORT).show();
+                    if (email.isEmpty()) {
+                        etEmail.setError("Please fill this field");
+                        etEmail.requestFocus();
+                    } else {
+                        etPassword.setError("Please fill this field");
+                        etPassword.requestFocus();
+                    }
+                    return;
+                }
+
+                // 1. Email Address Validation
+                if (!email.endsWith("@gmail.com")) {
+                    etEmail.setError("Please enter a valid Gmail address (example@gmail.com).");
                     etEmail.requestFocus();
                     return;
                 }
 
-                if (password.isEmpty()) {
-                    etPassword.setError("Password is required");
+                // 2. Password Validation
+                if (password.length() < 8) {
+                    etPassword.setError("Password must be at least 8 characters.");
                     etPassword.requestFocus();
                     return;
                 }
@@ -62,7 +77,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
                                 if (response.isSuccessful() && response.body() != null) {
                                     AuthResponse authResponse = response.body();
 
-                                    // Save session details
+                                    // Clear session details and local managers to prevent data leakage from a previous user
                                     SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = prefs.edit();
                                     editor.putBoolean("is_logged_in", true);
@@ -72,6 +87,11 @@ public class DoctorLoginActivity extends AppCompatActivity {
                                     editor.putString("refresh_token", authResponse.refresh);
                                     editor.apply();
 
+                                    // Clear local caches - they will be repopulated from server in HomeActivity
+                                    HistoryManager.getInstance().clearHistory(DoctorLoginActivity.this);
+                                    LocalNotificationManager.getInstance(DoctorLoginActivity.this).clearNotifications();
+
+                                    // 7. Success
                                     Toast.makeText(DoctorLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT)
                                             .show();
 
@@ -81,8 +101,24 @@ public class DoctorLoginActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(DoctorLoginActivity.this, "Invalid credentials or Server Error",
-                                            Toast.LENGTH_SHORT).show();
+                                    // 4. Wrong Password Handling & 5. Invalid Login
+                                    String errorMessage = "Invalid email or password.";
+                                    try {
+                                        if (response.errorBody() != null) {
+                                            String errorJson = response.errorBody().string();
+                                            if (errorJson.contains("Incorrect password")) {
+                                                errorMessage = "Incorrect password. Please try again.";
+                                                etPassword.setError(errorMessage);
+                                                etPassword.requestFocus();
+                                            } else {
+                                                etEmail.setError(errorMessage);
+                                                etPassword.setError(errorMessage);
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    Toast.makeText(DoctorLoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -113,12 +149,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
             }
         });
 
-        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DoctorLoginActivity.this, DoctorPassResetActivity.class));
-            }
-        });
+
     }
 
     private void showIpConfigDialog() {

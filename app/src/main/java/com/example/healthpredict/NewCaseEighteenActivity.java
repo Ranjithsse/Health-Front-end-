@@ -12,7 +12,7 @@ import com.google.android.material.card.MaterialCardView;
 
 public class NewCaseEighteenActivity extends AppCompatActivity {
 
-    private String selectedMonitoring = "Standard Monitoring";
+    private String selectedMonitoring = "";
     private MaterialCardView cardIntensive, cardStandard;
     private TextView tvIntensiveTitle, tvIntensiveSub, tvStandardTitle, tvStandardSub;
 
@@ -64,6 +64,10 @@ public class NewCaseEighteenActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (selectedMonitoring.isEmpty()) {
+                    android.widget.Toast.makeText(NewCaseEighteenActivity.this, "Please select a Monitoring Schedule", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 CaseData.getInstance().monitoringLevel = selectedMonitoring;
                 startActivity(new Intent(NewCaseEighteenActivity.this, NewCaseNineteenActivity.class));
             }
@@ -76,8 +80,11 @@ public class NewCaseEighteenActivity extends AppCompatActivity {
         if (selectedMonitoring.equals("Intensive Monitoring")) {
             setSelected(cardIntensive, tvIntensiveTitle, tvIntensiveSub);
             setUnselected(cardStandard, tvStandardTitle, tvStandardSub);
-        } else {
+        } else if (selectedMonitoring.equals("Standard Monitoring")) {
             setSelected(cardStandard, tvStandardTitle, tvStandardSub);
+            setUnselected(cardIntensive, tvIntensiveTitle, tvIntensiveSub);
+        } else {
+            setUnselected(cardStandard, tvStandardTitle, tvStandardSub);
             setUnselected(cardIntensive, tvIntensiveTitle, tvIntensiveSub);
         }
     }

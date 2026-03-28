@@ -2,6 +2,7 @@ package com.example.healthpredict;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.healthpredict.network.ApiService;
+import com.example.healthpredict.network.PredictionResponse;
 import com.example.healthpredict.network.RetrofitClient;
 import com.google.android.material.button.MaterialButton;
+import com.example.healthpredict.utils.FileUtils;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import java.io.File;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,12 +56,9 @@ public class NewCaseNineActivity extends AppCompatActivity {
     private void uploadAndCreateCase() {
         CaseData data = CaseData.getInstance();
 
-        // If case already exists on server, just proceed
+        // If case already exists on server, we still need to upload and validate the image
         if (data.id > 0) {
-            Intent intent = new Intent(NewCaseNineActivity.this, NewCaseTenActivity.class);
-            intent.putExtra("FILE_URI", data.fileUri);
-            startActivity(intent);
-            finish();
+            uploadImageFile(data.id);
             return;
         }
 
@@ -72,12 +76,14 @@ public class NewCaseNineActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     // Update singleton with valid ID from server
                     CaseData.getInstance().id = response.body().id;
-
-                    // Proceed to Step 10
-                    Intent intent = new Intent(NewCaseNineActivity.this, NewCaseTenActivity.class);
-                    intent.putExtra("FILE_URI", CaseData.getInstance().fileUri);
-                    startActivity(intent);
-                    finish();
+ 
+                    // Update persistent monthly statistics for dashboard
+                    SharedPreferences userPrefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
+                    String userEmail = userPrefs.getString("user_email", "anonymous");
+                    StatsManager.getInstance().incrementMonthlyCount(NewCaseNineActivity.this, userEmail);
+ 
+                    // Proceed to upload image
+                    uploadImageFile(response.body().id);
                 } else {
                     String errorMsg = "Bad Request";
                     try {
@@ -131,6 +137,73 @@ public class NewCaseNineActivity extends AppCompatActivity {
             tvName.setText(fileName);
         if (tvSize != null)
             tvSize.setText(fileSizeStr);
+    }
+
+    private void uploadImageFile(int caseId) {
+        String uriStr = CaseData.getInstance().fileUri;
+        if (uriStr == null || uriStr.isEmpty()) {
+            Toast.makeText(this, "No image selected for analysis", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        File file = FileUtils.getFileFromUri(this, Uri.parse(uriStr));
+        if (file == null) {
+            Toast.makeText(this, "Failed to process image file", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ProgressDialog uploadProgress = new ProgressDialog(this);
+        uploadProgress.setMessage("Uploading medical imaging...");
+        uploadProgress.setCancelable(false);
+        uploadProgress.show();
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+        ApiService apiService = RetrofitClient.getRetrofitInstance(this).create(ApiService.class);
+        apiService.uploadImage(caseId, body).enqueue(new Callback<PredictionResponse>() {
+            @Override
+            public void onResponse(Call<PredictionResponse> call, Response<PredictionResponse> response) {
+                uploadProgress.dismiss();
+                if (response.isSuccessful() && response.body() != null) {
+                    // Update file URI in singleton with server path
+                    if (response.body().caseData != null) {
+                        CaseData.getInstance().fileUri = response.body().caseData.fileUri;
+                    }
+                    
+                    Intent intent = new Intent(NewCaseNineActivity.this, NewCaseTenActivity.class);
+                    // Pass the local URI for immediate viewing on first load
+                    intent.putExtra("FILE_URI", uriStr);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    // Stay on current page and show descriptive error from server
+                    String errorMessage = "This image cannot be analyzed.";
+                    try {
+                        if (response.errorBody() != null) {
+                            String errorJson = response.errorBody().string();
+                            // Parse {"error": "message"}
+                            org.json.JSONObject obj = new org.json.JSONObject(errorJson);
+                            if (obj.has("error")) {
+                                errorMessage = obj.getString("error");
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    
+                    Toast.makeText(NewCaseNineActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                    // Do NOT navigate to the next page
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PredictionResponse> call, Throwable t) {
+                uploadProgress.dismiss();
+                Toast.makeText(NewCaseNineActivity.this, "Upload error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                // Do NOT navigate to the next page
+            }
+        });
     }
 
     private String formatFileSize(long size) {

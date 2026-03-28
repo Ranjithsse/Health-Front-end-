@@ -43,11 +43,26 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         
         holder.tvName.setText(name);
         holder.tvDetail.setText(data.patientId + " • " + data.primarySystem);
-        holder.tvStatus.setText(data.riskLevel);
+        
+        // Recalculate risk level based on score for mobile consistency
+        String scoreStr = data.riskScore != null ? data.riskScore.replace("%", "") : "0";
+        int scoreValue = 0;
+        try { scoreValue = Integer.parseInt(scoreStr); } catch (Exception ignored) {}
+        
+        String displayRisk;
+        if (scoreValue > 0) {
+            if (scoreValue <= 45) displayRisk = "Low";
+            else if (scoreValue <= 60) displayRisk = "Moderate";
+            else displayRisk = "High";
+        } else {
+            displayRisk = (data.riskLevel != null && !data.riskLevel.isEmpty()) ? data.riskLevel : "Low";
+        }
+        
+        holder.tvStatus.setText(displayRisk);
         holder.tvInitial.setText(name.substring(0, 1).toUpperCase());
 
         // Status Styling
-        updateStatusStyle(holder.cardStatus, holder.tvStatus, data.riskLevel);
+        updateStatusStyle(holder.cardStatus, holder.tvStatus, displayRisk);
 
         holder.itemView.setOnClickListener(v -> listener.onItemClick(data));
     }

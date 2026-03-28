@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/bg_light"
     android:paddingHorizontal="24dp"
     android:paddingTop="48dp"
     android:paddingBottom="24dp">
@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Key Features"
-        android:textColor="#0F172A"
+        android:textColor="@color/text_main"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Comprehensive tools for predictive healthcare."
-        android:textColor="#64748B"
+        android:textColor="@color/text_desc"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvKeyFeatures" />
@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Disease Risk Prediction"
-                    android:textColor="#0F172A"
+                    android:textColor="@color/text_main"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -71,7 +71,7 @@
                     android:layout_marginTop="6dp"
                     android:lineHeight="22sp"
                     android:text="AI-powered assessment of diabetes, hypertension, and cardiovascular disease risk."
-                    android:textColor="#64748B"
+                    android:textColor="@color/text_desc"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
@@ -98,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cancer Early Detection"
-                    android:textColor="#0F172A"
+                    android:textColor="@color/text_main"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -108,7 +108,7 @@
                     android:layout_marginTop="6dp"
                     android:lineHeight="22sp"
                     android:text="Advanced screening analysis for breast, lung, and skin cancer markers."
-                    android:textColor="#64748B"
+                    android:textColor="@color/text_desc"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
@@ -135,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cardiac Risk Analysis"
-                    android:textColor="#0F172A"
+                    android:textColor="@color/text_main"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -145,7 +145,7 @@
                     android:layout_marginTop="6dp"
                     android:lineHeight="22sp"
                     android:text="Predict stroke and heart attack probability using patient biomarkers."
-                    android:textColor="#64748B"
+                    android:textColor="@color/text_desc"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
@@ -172,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chronic Disease Monitoring"
-                    android:textColor="#0F172A"
+                    android:textColor="@color/text_main"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -182,7 +182,7 @@
                     android:layout_marginTop="6dp"
                     android:lineHeight="22sp"
                     android:text="Track kidney disease progression and genetic disorder indicators."
-                    android:textColor="#64748B"
+                    android:textColor="@color/text_desc"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
@@ -199,7 +199,7 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:backgroundTint="#2563EB"
+        app:backgroundTint="@color/primary_blue"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 

@@ -12,7 +12,7 @@ import com.google.android.material.card.MaterialCardView;
 
 public class NewCaseSeventeenActivity extends AppCompatActivity {
 
-    private String selectedIntervention = "Non-Invasive";
+    private String selectedIntervention = "";
     private MaterialCardView cardNonInvasive, cardSurgical;
 
     @Override
@@ -59,6 +59,10 @@ public class NewCaseSeventeenActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (selectedIntervention.isEmpty()) {
+                    android.widget.Toast.makeText(NewCaseSeventeenActivity.this, "Please select an Intervention Type", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 CaseData.getInstance().interventionType = selectedIntervention;
                 startActivity(new Intent(NewCaseSeventeenActivity.this, NewCaseEighteenActivity.class));
             }
@@ -71,9 +75,12 @@ public class NewCaseSeventeenActivity extends AppCompatActivity {
         if (selectedIntervention.equals("Non-Invasive")) {
             setSelected(cardNonInvasive);
             setUnselected(cardSurgical);
-        } else {
+        } else if (selectedIntervention.equals("Surgical Intervention")) {
             setSelected(cardSurgical);
             setUnselected(cardNonInvasive);
+        } else {
+            setUnselected(cardNonInvasive);
+            setUnselected(cardSurgical);
         }
     }
 

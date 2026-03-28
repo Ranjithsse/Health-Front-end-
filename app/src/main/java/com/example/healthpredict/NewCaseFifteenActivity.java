@@ -50,6 +50,17 @@ public class NewCaseFifteenActivity extends AppCompatActivity {
         btnNextDosage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String med = tvSelectedMedication.getText().toString();
+                String type = tvSelectedType.getText().toString();
+
+                if (med.equals("Select Medication") || type.equals("Select Type")) {
+                    android.widget.Toast.makeText(NewCaseFifteenActivity.this, "Please select both Medication and Treatment Type", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                CaseData data = CaseData.getInstance();
+                data.primaryMedication = med;
+                data.treatmentType = type;
                 startActivity(new Intent(NewCaseFifteenActivity.this, NewCaseSixteenActivity.class));
             }
         });

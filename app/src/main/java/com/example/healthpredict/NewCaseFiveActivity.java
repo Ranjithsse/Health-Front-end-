@@ -14,7 +14,7 @@ import java.util.List;
 
 public class NewCaseFiveActivity extends AppCompatActivity {
 
-    private String selectedSystem = "Oncology";
+    private String selectedSystem = "";
     private List<MaterialCardView> systemCards = new ArrayList<>();
     private TextView tvSelectedSystem;
     private CaseData caseData;
@@ -33,6 +33,10 @@ public class NewCaseFiveActivity extends AppCompatActivity {
         View btnNext = findViewById(R.id.btnNext);
         if (btnNext != null) {
             btnNext.setOnClickListener(v -> {
+                if (selectedSystem.isEmpty()) {
+                    android.widget.Toast.makeText(this, "Please select a body system for analysis", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 caseData.primarySystem = selectedSystem;
                 startActivity(new Intent(NewCaseFiveActivity.this, NewCaseSixActivity.class));
             });

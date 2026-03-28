@@ -26,6 +26,9 @@ public class FinalReportActivity extends AppCompatActivity {
         setupToolbar();
         displayReportData();
         setupButtons();
+
+        // Save immediately so statistics are updated even if navigating via bottom nav
+        saveToBackend();
     }
 
     private void setupToolbar() {
@@ -118,16 +121,18 @@ public class FinalReportActivity extends AppCompatActivity {
     private void saveToBackend() {
         CaseData caseData = CaseData.getInstance();
         caseData.status = "Completed"; // Ensure status is definitively marked completed
-        
+
         Toast.makeText(this, "Saving to database...", Toast.LENGTH_SHORT).show();
 
         if (caseData.id > 0) {
             java.util.Map<String, Object> updates = new java.util.HashMap<>();
             try {
-                // Easiest robust way to serialize the whole object to a Map so DRF receives all fields
+                // Easiest robust way to serialize the whole object to a Map so DRF receives all
+                // fields
                 com.google.gson.Gson gson = new com.google.gson.Gson();
                 String json = gson.toJson(caseData);
-                java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<java.util.Map<String, Object>>(){}.getType();
+                java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<java.util.Map<String, Object>>() {
+                }.getType();
                 updates = gson.fromJson(json, type);
             } catch (Exception e) {
                 // Fallback targeted keys if gson fails
@@ -152,7 +157,8 @@ public class FinalReportActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<CaseData> call, Throwable t) {
-                    Toast.makeText(FinalReportActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FinalReportActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT)
+                            .show();
                 }
             });
         } else {
@@ -168,7 +174,8 @@ public class FinalReportActivity extends AppCompatActivity {
         if (navHome != null) {
             navHome.setOnClickListener(v -> {
                 android.content.Intent intent = new android.content.Intent(this, DoctorHomeActivity.class);
-                intent.setFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP | android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 finish();
             });

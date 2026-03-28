@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    android:background="@color/bg_light">
 
     <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#2563EB"
+        android:background="@color/primary_blue"
         android:paddingHorizontal="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -59,10 +59,10 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#F1F5F9"
+                app:strokeColor="@color/card_stroke"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -81,14 +81,14 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_person"
-                            app:tint="#2563EB" />
+                            app:tint="@color/primary_blue" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:text="Account &amp; Practice"
-                            android:textColor="#1E293B"
+                            android:textColor="@color/text_main"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -96,47 +96,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#F1F5F9" />
-
-                    <!-- Email Notifications -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_toStartOf="@+id/cbEmailNotify"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Email Notifications"
-                                android:textColor="#1E293B"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="Daily summaries &amp; high risk alerts"
-                                android:textColor="#64748B"
-                                android:textSize="13sp" />
-                        </LinearLayout>
-
-                        <CheckBox
-                            android:id="@+id/cbEmailNotify"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:checked="true"
-                            android:button="@drawable/custom_checkbox" />
-                    </RelativeLayout>
+                        android:background="@color/bg_light" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -146,10 +106,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#F1F5F9"
+                app:strokeColor="@color/card_stroke"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -168,14 +128,14 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_settings"
-                            app:tint="#2563EB" />
+                            app:tint="@color/primary_blue" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:text="AI Model Configuration"
-                            android:textColor="#1E293B"
+                            android:textColor="@color/text_main"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -183,7 +143,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#F1F5F9" />
+                        android:background="@color/bg_light" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -195,7 +155,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Prediction Sensitivity"
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_desc"
                             android:textSize="14sp" />
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -203,12 +163,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            app:boxBackgroundColor="@color/white"
+                            app:boxBackgroundColor="@color/card_bg"
                             app:boxCornerRadiusBottomEnd="12dp"
                             app:boxCornerRadiusBottomStart="12dp"
                             app:boxCornerRadiusTopEnd="12dp"
                             app:boxCornerRadiusTopStart="12dp"
-                            app:boxStrokeColor="#E2E8F0"
+                            app:boxStrokeColor="@color/bg_light"
                             app:hintEnabled="false">
 
                             <AutoCompleteTextView
@@ -218,7 +178,7 @@
                                 android:inputType="none"
                                 android:padding="16dp"
                                 android:text="Standard (Balanced)"
-                                android:textColor="#1E293B"
+                                android:textColor="@color/text_main"
                                 android:textSize="16sp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -228,21 +188,21 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Adjusts the threshold for risk categorization."
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_desc"
                             android:textSize="12sp" />
 
                         <!-- Show Confidence Intervals -->
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp">
+                            android:layout_marginTop="8dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:text="Show Confidence Intervals"
-                                android:textColor="#334155"
+                                android:textColor="@color/text_main"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -266,7 +226,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:text="Include Experimental Models"
-                                android:textColor="#334155"
+                                android:textColor="@color/text_main"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -283,16 +243,99 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Appearance -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/card_stroke"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_settings"
+                            app:tint="@color/primary_blue" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:text="Appearance"
+                            android:textColor="@color/text_main"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/bg_light" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@+id/switchDarkMode"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Dark Mode"
+                                android:textColor="@color/text_main"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Switch between light and dark themes"
+                                android:textColor="@color/text_desc"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchDarkMode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <!-- Security Zone -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#F1F5F9"
+                app:strokeColor="@color/card_stroke"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -311,14 +354,14 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_check_circle"
-                            app:tint="#2563EB" />
+                            app:tint="@color/primary_blue" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:text="Security Zone"
-                            android:textColor="#1E293B"
+                            android:textColor="@color/text_main"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -326,7 +369,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#F1F5F9" />
+                        android:background="@color/bg_light" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -338,7 +381,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Manage your account security and data retention policies."
-                            android:textColor="#64748B"
+                            android:textColor="@color/text_desc"
                             android:textSize="14sp" />
 
                         <com.google.android.material.button.MaterialButton
@@ -350,7 +393,7 @@
                             android:textAllCaps="false"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            app:backgroundTint="#EF4444"
+                            app:backgroundTint="@color/high_risk_text"
                             app:cornerRadius="12dp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -364,7 +407,7 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/white"
+        android:background="@color/bg_light"
         android:elevation="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -383,12 +426,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -406,12 +449,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_cases"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cases"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -429,12 +472,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_reports"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reports"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -452,12 +495,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_profile"
-                app:tint="#2563EB" />
+                app:tint="@color/primary_blue" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profile"
-                android:textColor="#2563EB"
+                android:textColor="@color/primary_blue"
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>

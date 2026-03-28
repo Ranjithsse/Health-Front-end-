@@ -38,11 +38,17 @@ public class NewCaseSixteenActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String dosage = etDosage.getText().toString().trim();
+                String duration = etDuration.getText().toString().trim();
+
+                if (dosage.isEmpty() || duration.isEmpty()) {
+                    android.widget.Toast.makeText(NewCaseSixteenActivity.this, "Please enter both Dosage and Duration", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 CaseData data = CaseData.getInstance();
-                if (etDosage != null)
-                    data.dosage = etDosage.getText().toString();
-                if (etDuration != null)
-                    data.duration = etDuration.getText().toString();
+                data.dosage = dosage;
+                data.duration = duration;
                 startActivity(new Intent(NewCaseSixteenActivity.this, NewCaseSeventeenActivity.class));
             }
         });

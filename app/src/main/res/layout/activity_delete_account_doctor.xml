@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    android:background="@color/bg_light">
 
     <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#2563EB"
+        android:background="@color/primary_blue"
         android:paddingHorizontal="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Delete Account"
-                android:textColor="#0F172A"
+                android:textColor="@color/text_main"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Warning: This action cannot be undone."
-                android:textColor="#EF4444"
+                android:textColor="@color/high_risk_text"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -82,10 +82,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#FEE2E2"
+                app:strokeColor="@color/high_risk_bg"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -98,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="What will be lost:"
-                        android:textColor="#991B1B"
+                        android:textColor="@color/high_risk_text"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -107,8 +107,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:orientation="horizontal">
-                        <View android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="8dp" android:background="#991B1B"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="All patient records and case history" android:textColor="#991B1B" android:textSize="14sp" />
+                        <View android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="8dp" android:background="@color/high_risk_text"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="All patient records and case history" android:textColor="@color/high_risk_text" android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -116,8 +116,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:orientation="horizontal">
-                        <View android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="8dp" android:background="#991B1B"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Saved reports and analytics" android:textColor="#991B1B" android:textSize="14sp" />
+                        <View android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="8dp" android:background="@color/high_risk_text"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Saved reports and analytics" android:textColor="@color/high_risk_text" android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -125,8 +125,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:orientation="horizontal">
-                        <View android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="8dp" android:background="#991B1B"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Profile settings and preferences" android:textColor="#991B1B" android:textSize="14sp" />
+                        <View android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="8dp" android:background="@color/high_risk_text"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Profile settings and preferences" android:textColor="@color/high_risk_text" android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -134,8 +134,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:orientation="horizontal">
-                        <View android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="8dp" android:background="#991B1B"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Access to AI prediction models" android:textColor="#991B1B" android:textSize="14sp" />
+                        <View android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="8dp" android:background="@color/high_risk_text"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Access to AI prediction models" android:textColor="@color/high_risk_text" android:textSize="14sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="To confirm deletion, please type  DELETE  in the box below."
-                android:textColor="#64748B"
+                android:textColor="@color/text_desc"
                 android:textSize="14sp" />
 
             <EditText
@@ -158,7 +158,7 @@
                 android:hint="DELETE"
                 android:inputType="textCapCharacters"
                 android:paddingHorizontal="16dp"
-                android:textColor="#0F172A"
+                android:textColor="@color/text_main"
                 android:textSize="16sp" />
 
             <com.google.android.material.button.MaterialButton
@@ -170,7 +170,7 @@
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:backgroundTint="#EF4444"
+                app:backgroundTint="@color/high_risk_text"
                 app:cornerRadius="12dp"
                 app:icon="@drawable/ic_logout"
                 app:iconGravity="textStart"
@@ -184,11 +184,11 @@
                 android:layout_marginTop="12dp"
                 android:text="Cancel"
                 android:textAllCaps="false"
-                android:textColor="#64748B"
+                android:textColor="@color/text_desc"
                 android:textSize="16sp"
-                app:backgroundTint="#F1F5F9"
+                app:backgroundTint="@color/bg_light"
                 app:cornerRadius="12dp"
-                app:strokeColor="#CBD5E1"
+                app:strokeColor="@color/text_desc"
                 app:strokeWidth="1dp" />
 
         </LinearLayout>
@@ -199,7 +199,7 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/white"
+        android:background="@color/bg_light"
         android:elevation="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -214,12 +214,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -233,12 +233,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_cases"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cases"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -252,12 +252,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_reports"
-                app:tint="#94A3B8" />
+                app:tint="@color/text_desc" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reports"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -271,12 +271,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_profile"
-                app:tint="#2563EB" />
+                app:tint="@color/primary_blue" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profile"
-                android:textColor="#2563EB"
+                android:textColor="@color/primary_blue"
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>

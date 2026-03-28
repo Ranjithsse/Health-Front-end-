@@ -11,7 +11,7 @@ import com.google.android.material.card.MaterialCardView;
 
 public class NewCaseNineteenActivity extends AppCompatActivity {
 
-    private boolean isAdjuvantTherapyRequired = false;
+    private String selectedTherapy = ""; // Initially nothing selected
     private MaterialCardView cardYes, cardNo;
 
     @Override
@@ -42,7 +42,7 @@ public class NewCaseNineteenActivity extends AppCompatActivity {
         cardYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isAdjuvantTherapyRequired = true;
+                selectedTherapy = "Yes";
                 updateUI();
             }
         });
@@ -50,7 +50,7 @@ public class NewCaseNineteenActivity extends AppCompatActivity {
         cardNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isAdjuvantTherapyRequired = false;
+                selectedTherapy = "No";
                 updateUI();
             }
         });
@@ -58,7 +58,11 @@ public class NewCaseNineteenActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CaseData.getInstance().adjuvantTherapyRequired = isAdjuvantTherapyRequired;
+                if (selectedTherapy.isEmpty()) {
+                    android.widget.Toast.makeText(NewCaseNineteenActivity.this, "Please select whether Adjuvant Therapy is required", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                CaseData.getInstance().adjuvantTherapyRequired = selectedTherapy.equals("Yes");
                 startActivity(new Intent(NewCaseNineteenActivity.this, NewCaseTwentyActivity.class));
             }
         });
@@ -67,12 +71,15 @@ public class NewCaseNineteenActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        if (isAdjuvantTherapyRequired) {
+        if (selectedTherapy.equals("Yes")) {
             setSelected(cardYes);
             setUnselected(cardNo);
-        } else {
+        } else if (selectedTherapy.equals("No")) {
             setSelected(cardNo);
             setUnselected(cardYes);
+        } else {
+            setUnselected(cardYes);
+            setUnselected(cardNo);
         }
     }
 

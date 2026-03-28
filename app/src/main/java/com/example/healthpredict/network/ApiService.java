@@ -33,10 +33,17 @@ public interface ApiService {
     Call<CaseData> updateCase(@retrofit2.http.Path("id") int id, @Body java.util.Map<String, Object> updates);
 
     @POST("api/cases/{id}/predict/")
-    Call<CaseData> predictCase(@retrofit2.http.Path("id") int id);
+    Call<PredictionResponse> predictCase(@retrofit2.http.Path("id") int id);
 
     @POST("api/cases/{id}/tissue-analysis/")
-    Call<CaseData> tissueAnalysis(@retrofit2.http.Path("id") int id);
+    Call<PredictionResponse> tissueAnalysis(@retrofit2.http.Path("id") int id);
+
+    @retrofit2.http.Multipart
+    @POST("api/cases/{case_id}/upload-image/")
+    Call<PredictionResponse> uploadImage(
+            @retrofit2.http.Path("case_id") int caseId,
+            @retrofit2.http.Part okhttp3.MultipartBody.Part file
+    );
 
     @GET("api/explainability/{case_id}/")
     Call<java.util.Map<String, Object>> getExplainability(@retrofit2.http.Path("case_id") int caseId);
@@ -61,4 +68,12 @@ public interface ApiService {
 
     @POST("api/password-reset-confirm/")
     Call<java.util.Map<String, String>> confirmPasswordReset(@Body java.util.Map<String, String> body);
+    @retrofit2.http.DELETE("api/cases/{id}/")
+    Call<Void> deleteCase(@retrofit2.http.Path("id") int id);
+
+    @retrofit2.http.POST("api/notifications/{id}/read/")
+    Call<java.util.Map<String, String>> markNotificationRead(@retrofit2.http.Path("id") int id);
+
+    @retrofit2.http.DELETE("api/delete-account/")
+    Call<Void> deleteAccount();
 }

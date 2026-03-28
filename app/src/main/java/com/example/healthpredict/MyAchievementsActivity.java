@@ -88,11 +88,16 @@ public class MyAchievementsActivity extends AppCompatActivity {
             tvLevelInfo.setText("Level " + level + " • " + specialization);
         }
 
-        if (user.containsKey("xp_points") && user.containsKey("xp_in_level")) {
+        if (user.containsKey("xp_points") && user.containsKey("level")) {
             int totalXp = ((Number) user.get("xp_points")).intValue();
-            int xpInLevel = ((Number) user.get("xp_in_level")).intValue();
-            tvXpProgress.setText(totalXp + "/500 XP"); // Assuming 500 is the next milestone logic for now
-            pbLevelProgress.setProgress(xpInLevel);
+            int currentLevel = ((Number) user.get("level")).intValue();
+            
+            // Example Logic: Each level requires 100 XP more
+            int nextLevelThreshold = currentLevel * 100;
+            
+            tvXpProgress.setText(totalXp + "/" + nextLevelThreshold + " XP");
+            pbLevelProgress.setMax(nextLevelThreshold);
+            pbLevelProgress.setProgress(totalXp);
         }
     }
 

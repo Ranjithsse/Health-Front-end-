@@ -66,8 +66,16 @@ public class LocalNotificationManager {
         return list != null ? list : new ArrayList<>();
     }
 
+    public void replaceNotifications(List<Notification> notifications) {
+        saveNotifications(notifications);
+    }
+
     private void saveNotifications(List<Notification> notifications) {
         String json = gson.toJson(notifications);
         prefs.edit().putString(KEY_NOTIFICATIONS, json).apply();
+    }
+
+    public void clearNotifications() {
+        prefs.edit().clear().apply();
     }
 }

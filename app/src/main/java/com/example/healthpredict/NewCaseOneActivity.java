@@ -42,15 +42,22 @@ public class NewCaseOneActivity extends AppCompatActivity {
         View btnNext = findViewById(R.id.btnNext);
         if (btnNext != null) {
             btnNext.setOnClickListener(v -> {
+                String patientId = etPatientId != null ? etPatientId.getText().toString().trim() : "";
+                String dateStr = tvDate != null ? tvDate.getText().toString().trim() : "";
+
+                if (patientId.isEmpty()) {
+                    android.widget.Toast.makeText(this, "Please enter Patient Name or ID", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (dateStr.isEmpty() || dateStr.equalsIgnoreCase("YYYY-MM-DD")) {
+                    android.widget.Toast.makeText(this, "Please select an assessment date", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 // Save data to singleton
-                if (etPatientId != null) {
-                    String input = etPatientId.getText().toString();
-                    caseData.patientId = input;
-                    caseData.patientName = input; // Since the input is Name / ID
-                }
-                if (tvDate != null) {
-                    caseData.date = tvDate.getText().toString();
-                }
+                caseData.patientId = patientId;
+                caseData.patientName = patientId; // Since the input is Name / ID
+                caseData.date = dateStr;
 
                 // Navigate to activity_new_case_two.xml
                 Intent intent = new Intent(NewCaseOneActivity.this, NewCaseTwoActivity.class);

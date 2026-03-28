@@ -152,23 +152,15 @@ public class ReportsActivity extends AppCompatActivity {
     }
 
     private List<CaseData> deduplicateCases(List<CaseData> inputList) {
-        java.util.Map<String, CaseData> map = new java.util.LinkedHashMap<>();
+        // For Reports, show every unique assessment by its ID
+        java.util.Map<Integer, CaseData> map = new java.util.LinkedHashMap<>();
         for (CaseData data : inputList) {
-            String key = (data.patientId != null ? data.patientId : String.valueOf(data.id)) + "_" + data.date;
-            if (map.containsKey(key)) {
-                CaseData existing = map.get(key);
-                if (!"Completed".equalsIgnoreCase(existing.status) && "Completed".equalsIgnoreCase(data.status)) {
-                    map.put(key, data);
-                } else if (!"Completed".equalsIgnoreCase(existing.status) && existing.id < data.id) {
-                    map.put(key, data);
-                }
-            } else {
-                map.put(key, data);
-            }
+            map.put(data.id, data);
         }
         
         List<CaseData> result = new java.util.ArrayList<>(map.values());
-        java.util.Collections.reverse(result);
+        // Sort by ID descending (newest first)
+        java.util.Collections.sort(result, (a, b) -> Integer.compare(b.id, a.id));
         return result;
     }
 
@@ -224,9 +216,8 @@ public class ReportsActivity extends AppCompatActivity {
 
                 itemView.setOnClickListener(v -> {
                     // Set as current case and view report
-                    CaseData singleton = CaseData.getInstance();
-                    singleton.reset();
-                    copyToSingleton(data, singleton);
+                    CaseData.getInstance().reset();
+                    CaseData.getInstance().copyFrom(data);
                     startActivity(new Intent(ReportsActivity.this, FinalReportActivity.class));
                 });
             } else {
@@ -235,19 +226,4 @@ public class ReportsActivity extends AppCompatActivity {
         }
     }
 
-    private void copyToSingleton(CaseData source, CaseData target) {
-        target.id = source.id;
-        target.status = source.status;
-        target.patientId = source.patientId;
-        target.patientName = source.patientName;
-        target.date = source.date;
-        target.gender = source.gender;
-        target.primarySystem = source.primarySystem;
-        target.riskScore = source.riskScore;
-        target.riskLevel = source.riskLevel;
-        target.accuracy = source.accuracy;
-        target.providerNotes = source.providerNotes;
-        target.interventionType = source.interventionType;
-        target.monitoringLevel = source.monitoringLevel;
-    }
 }

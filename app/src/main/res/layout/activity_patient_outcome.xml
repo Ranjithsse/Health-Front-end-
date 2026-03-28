@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    android:background="@color/bg_light">
 
     <!-- Header Toolbar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#2563EB"
+        android:background="@color/primary_blue"
         android:paddingHorizontal="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Patient Outcome"
-                android:textColor="#0F172A"
+                android:textColor="@color/text_main"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="Record actual clinical outcome for AI training."
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="16sp" />
 
             <!-- Outcome Card -->
@@ -72,10 +72,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#E2E8F0"
+                app:strokeColor="@color/card_stroke"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -89,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Patient #P-1022 (Michael Brown)"
-                        android:textColor="#0F172A"
+                        android:textColor="@color/text_main"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -97,7 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="16dp"
-                        android:background="#F1F5F9" />
+                        android:background="@color/bg_light" />
 
                     <!-- Health Status Dropdown -->
                     <TextView
@@ -105,7 +105,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:text="Health Status"
-                        android:textColor="#64748B"
+                        android:textColor="@color/text_desc"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -124,7 +124,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Successful Recovery"
-                            android:textColor="#0F172A"
+                            android:textColor="@color/text_main"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -145,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:text="Follow-up Date"
-                        android:textColor="#64748B"
+                        android:textColor="@color/text_desc"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -164,7 +164,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="dd-mm-yyyy"
-                            android:textColor="#94A3B8"
+                            android:textColor="@color/text_desc"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -185,7 +185,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:text="Complications"
-                        android:textColor="#64748B"
+                        android:textColor="@color/text_desc"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -198,8 +198,8 @@
                         android:gravity="top"
                         android:hint="None observed..."
                         android:padding="16dp"
-                        android:textColor="#0F172A"
-                        android:textColorHint="#CBD5E1"
+                        android:textColor="@color/text_main"
+                        android:textColorHint="@color/text_desc"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -218,7 +218,7 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:backgroundTint="#2563EB"
+        app:backgroundTint="@color/primary_blue"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 

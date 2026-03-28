@@ -1,11 +1,13 @@
 package com.example.healthpredict;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -16,7 +18,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import java.util.Map;
-import android.widget.Toast;
+import java.util.List;
+import java.util.Locale;
 
 public class DoctorProfileActivity extends AppCompatActivity {
 
@@ -59,7 +62,7 @@ public class DoctorProfileActivity extends AppCompatActivity {
         ApiService apiService = RetrofitClient.getApiService(this);
         apiService.getDashboardStats().enqueue(new Callback<Map<String, Object>>() {
             @Override
-            public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
+            public void onResponse(@NonNull Call<Map<String, Object>> call, @NonNull Response<Map<String, Object>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Map<String, Object> stats = response.body();
                     updateStatsUI(stats);
@@ -68,10 +71,34 @@ public class DoctorProfileActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Map<String, Object>> call, Throwable t) {
-                // Fallback to static
+            public void onFailure(@NonNull Call<Map<String, Object>> call, @NonNull Throwable t) {
+                // Fallback to local stats already handled in setupStats() and onResume()
             }
         });
+    }
+
+    private void updateStatsUI(Map<String, Object> stats) {
+        if (stats == null) return;
+
+        View statPatients = findViewById(R.id.statPatients);
+        if (statPatients != null && stats.containsKey("total_patients")) {
+            Object val = stats.get("total_patients");
+            ((TextView) statPatients.findViewById(R.id.tvStatValue)).setText(String.valueOf(val));
+        }
+
+        View statCases = findViewById(R.id.statCases);
+        if (statCases != null && stats.containsKey("monthly_cases")) {
+            Object val = stats.get("monthly_cases");
+            ((TextView) statCases.findViewById(R.id.tvStatValue)).setText(String.valueOf(val));
+        }
+
+        View statAccuracy = findViewById(R.id.statAccuracy);
+        if (statAccuracy != null && stats.containsKey("accuracy")) {
+            Object val = stats.get("accuracy");
+            String acc = String.valueOf(val);
+            if (!acc.contains("%")) acc += "%";
+            ((TextView) statAccuracy.findViewById(R.id.tvStatValue)).setText(acc);
+        }
     }
 
     private void updateProfileDetails(Map<String, Object> details) {
@@ -82,8 +109,6 @@ public class DoctorProfileActivity extends AppCompatActivity {
             String name = (String) details.get("doctor_name");
             if (name != null && !name.isEmpty()) {
                 tvName.setText(name);
-            } else {
-                tvName.setText(""); // Clear hardcoded placeholder
             }
         }
 
@@ -100,56 +125,86 @@ public class DoctorProfileActivity extends AppCompatActivity {
                     sb.append(" • ");
                 sb.append(hospital);
             }
-
-            // Always update the text view, even if empty, to clear hardcoded placeholder
             tvDetail.setText(sb.toString());
         }
     }
 
-    private void updateStatsUI(Map<String, Object> stats) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshLocalStats();
+    }
+
+    private void refreshLocalStats() {
+        SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
+        String userEmail = prefs.getString("user_email", "anonymous");
+
+        HistoryManager.getInstance().init(this);
+        List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
+
+        // 1. Accuracy
+        double totalAccuracy = 0;
+        int accuracyCount = 0;
+        if (history != null) {
+            for (CaseData data : history) {
+                if (data.accuracy != null && !data.accuracy.isEmpty()) {
+                    try {
+                        String cleanAcc = data.accuracy.replace("%", "").trim();
+                        totalAccuracy += Double.parseDouble(cleanAcc);
+                        accuracyCount++;
+                    } catch (Exception ignored) {}
+                }
+            }
+        }
+        String displayAccuracy = (accuracyCount > 0) 
+            ? String.format(Locale.getDefault(), "%.1f%%", totalAccuracy / accuracyCount) 
+            : "94.2%";
+
+        // 2. Patients
+        int totalPatientsCount = history != null ? history.size() : 0;
+
+        // 3. This Month
+        int monthlyCasesCount = StatsManager.getInstance().getMonthlyCount(this, userEmail);
+
+        // Update UI
         View statPatients = findViewById(R.id.statPatients);
         if (statPatients != null) {
-            Object total = stats.get("total_patients");
-            ((TextView) statPatients.findViewById(R.id.tvStatValue)).setText(String.valueOf(total));
+            ((TextView) statPatients.findViewById(R.id.tvStatValue)).setText(String.valueOf(totalPatientsCount));
         }
 
         View statCases = findViewById(R.id.statCases);
         if (statCases != null) {
-            Object active = stats.get("active_cases");
-            ((TextView) statCases.findViewById(R.id.tvStatValue)).setText(String.valueOf(active));
+            ((TextView) statCases.findViewById(R.id.tvStatValue)).setText(String.valueOf(monthlyCasesCount));
         }
 
         View statAccuracy = findViewById(R.id.statAccuracy);
         if (statAccuracy != null) {
-            String accuracy = (String) stats.get("simulated_accuracy");
-            ((TextView) statAccuracy.findViewById(R.id.tvStatValue)).setText(accuracy);
+            ((TextView) statAccuracy.findViewById(R.id.tvStatValue)).setText(displayAccuracy);
         }
     }
 
     private void setupStats() {
         View statPatients = findViewById(R.id.statPatients);
         if (statPatients != null) {
-            ((ImageView) statPatients.findViewById(R.id.ivStatIcon))
-                    .setImageResource(R.drawable.ic_stat_patients_themed);
-            ((TextView) statPatients.findViewById(R.id.tvStatValue)).setText("128");
-            ((TextView) statPatients.findViewById(R.id.tvStatLabel)).setText("Patients");
+            ((ImageView) statPatients.findViewById(R.id.ivStatIcon)).setImageResource(R.drawable.ic_stat_patients_themed);
+            ((TextView) statPatients.findViewById(R.id.tvStatLabel)).setText(R.string.total_patients);
         }
 
         View statCases = findViewById(R.id.statCases);
         if (statCases != null) {
             ((ImageView) statCases.findViewById(R.id.ivStatIcon)).setImageResource(R.drawable.ic_stat_cases_themed);
-            ((TextView) statCases.findViewById(R.id.tvStatValue)).setText("42");
-            ((TextView) statCases.findViewById(R.id.tvStatLabel)).setText("Active Cases");
+            ((TextView) statCases.findViewById(R.id.tvStatLabel)).setText(R.string.this_month);
         }
 
         View statAccuracy = findViewById(R.id.statAccuracy);
         if (statAccuracy != null) {
-            ((ImageView) statAccuracy.findViewById(R.id.ivStatIcon))
-                    .setImageResource(R.drawable.ic_stat_accuracy_themed);
-            ((TextView) statAccuracy.findViewById(R.id.tvStatValue)).setText("94.2%");
-            ((TextView) statAccuracy.findViewById(R.id.tvStatLabel)).setText("Avg. Prediction Accuracy");
+            ((ImageView) statAccuracy.findViewById(R.id.ivStatIcon)).setImageResource(R.drawable.ic_stat_accuracy_themed);
+            ((TextView) statAccuracy.findViewById(R.id.tvStatLabel)).setText(R.string.avg_accuracy);
         }
+        
+        refreshLocalStats();
     }
+
 
     private void setupMenu() {
         View menuSettings = findViewById(R.id.menuSettings);
@@ -186,6 +241,14 @@ public class DoctorProfileActivity extends AppCompatActivity {
         View btnLogout = findViewById(R.id.btnLogout);
         if (btnLogout != null) {
             btnLogout.setOnClickListener(v -> {
+                SharedPreferences prefs = getSharedPreferences("HealthPredictPrefs", MODE_PRIVATE);
+                prefs.edit()
+                    .putBoolean("is_logged_in", false)
+                    .remove("access_token")
+                    .remove("refresh_token")
+                    .remove("last_activity")
+                    .apply();
+
                 Intent intent = new Intent(this, DoctorLoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

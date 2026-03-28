@@ -21,6 +21,7 @@ public class NewCaseTwoActivity extends AppCompatActivity {
     private CaseData caseData;
     private TextView tvSmokingStatus;
     private EditText etAge;
+    private EditText etBMI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class NewCaseTwoActivity extends AppCompatActivity {
         caseData = CaseData.getInstance();
 
         etAge = findViewById(R.id.etAge);
+        etBMI = findViewById(R.id.etBMI);
         setupToolbar();
         setupGenderSelection();
         setupBloodGroupSelection();
@@ -38,15 +40,37 @@ public class NewCaseTwoActivity extends AppCompatActivity {
         View btnNext = findViewById(R.id.btnNext);
         if (btnNext != null) {
             btnNext.setOnClickListener(v -> {
+                String age = etAge != null ? etAge.getText().toString().trim() : "";
+                String bmi = etBMI != null ? etBMI.getText().toString().trim() : "";
+                String smokingStatus = tvSmokingStatus != null ? tvSmokingStatus.getText().toString().trim() : "";
+
+                if (age.isEmpty()) {
+                    android.widget.Toast.makeText(this, "Please enter patient age", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (selectedGender.isEmpty()) {
+                    android.widget.Toast.makeText(this, "Please select patient gender", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (selectedBloodGroup.isEmpty()) {
+                    android.widget.Toast.makeText(this, "Please select blood group", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (smokingStatus.isEmpty() || smokingStatus.equalsIgnoreCase("Select Smoking Status")) {
+                    android.widget.Toast.makeText(this, "Please select smoking status", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (bmi.isEmpty()) {
+                    android.widget.Toast.makeText(this, "Please enter BMI value", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 // Save data to singleton
                 caseData.gender = selectedGender;
                 caseData.bloodGroup = selectedBloodGroup;
-                if (etAge != null) {
-                    caseData.age = etAge.getText().toString().trim();
-                }
-                if (tvSmokingStatus != null) {
-                    caseData.smokingStatus = tvSmokingStatus.getText().toString();
-                }
+                caseData.age = age;
+                caseData.bmi = bmi;
+                caseData.smokingStatus = smokingStatus;
 
                 Intent intent = new Intent(NewCaseTwoActivity.this, NewCaseThreeActivity.class);
                 startActivity(intent);

@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="24dp">
+    android:background="@color/bg_light"
+    android:fitsSystemWindows="true">
 
     <ScrollView
+        android:id="@+id/signupScrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/footerLayout"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:isScrollContainer="true"
+        android:scrollbars="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:paddingBottom="100dp">
 
             <TextView
                 android:id="@+id/tvCreateAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="36dp"
                 android:text="@string/create_account"
-                android:textColor="#0F172A"
+                android:textColor="@color/text_main"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
@@ -33,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/signup_subtitle"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_desc"
                 android:textSize="16sp" />
 
             <!-- Full Name -->
@@ -42,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/full_name"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -56,8 +60,8 @@
                 android:hint="@string/full_name_hint"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="16dp"
-                android:textColor="#1E293B"
-                android:textColorHint="#CBD5E1"
+                android:textColor="@color/text_secondary"
+                android:textColorHint="@color/text_desc"
                 android:textSize="15sp" />
 
             <!-- Hospital -->
@@ -66,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/hospital_label"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -80,8 +84,8 @@
                 android:hint="@string/hospital_hint"
                 android:inputType="text"
                 android:paddingHorizontal="16dp"
-                android:textColor="#1E293B"
-                android:textColorHint="#CBD5E1"
+                android:textColor="@color/text_secondary"
+                android:textColorHint="@color/text_desc"
                 android:textSize="15sp" />
 
             <!-- Specialization -->
@@ -90,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Specialization"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -103,8 +107,8 @@
                 android:hint="e.g. Cardiology, Internal Medicine"
                 android:inputType="text"
                 android:paddingHorizontal="16dp"
-                android:textColor="#1E293B"
-                android:textColorHint="#CBD5E1"
+                android:textColor="@color/text_secondary"
+                android:textColorHint="@color/text_desc"
                 android:textSize="15sp" />
 
             <!-- Email Address -->
@@ -113,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/email_address"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -127,8 +131,8 @@
                 android:hint="@string/email_hint"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="16dp"
-                android:textColor="#1E293B"
-                android:textColorHint="#CBD5E1"
+                android:textColor="@color/text_secondary"
+                android:textColorHint="@color/text_desc"
                 android:textSize="15sp" />
 
             <!-- Password -->
@@ -137,23 +141,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/password"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/etPassword"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:autofillHints="newPassword"
-                android:background="@drawable/bg_edittext"
-                android:hint="@string/password_signup_hint"
-                android:inputType="textPassword"
-                android:paddingHorizontal="16dp"
-                android:textColor="#1E293B"
-                android:textColorHint="#CBD5E1"
-                android:textSize="15sp" />
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/text_desc">
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:autofillHints="newPassword"
+                    android:background="@drawable/bg_edittext"
+                    android:hint="@string/password_signup_hint"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="16dp"
+                    android:textColor="@color/text_secondary"
+                    android:textColorHint="@color/text_desc"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -165,7 +177,7 @@
                     android:id="@+id/cbTerms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#2563EB" />
+                    android:buttonTint="@color/primary_blue" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -173,7 +185,7 @@
                     android:layout_marginStart="8dp"
                     android:lineSpacingExtra="2dp"
                     android:text="@string/terms_and_conditions"
-                    android:textColor="#64748B"
+                    android:textColor="@color/text_desc"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -187,40 +199,38 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:backgroundTint="#2563EB"
+                app:backgroundTint="@color/primary_blue"
                 app:cornerRadius="12dp" />
+
+            <LinearLayout
+                android:id="@+id/footerLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="60dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/already_have_account"
+                    android:textColor="@color/text_desc"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvSignIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/sign_in"
+                    android:textColor="@color/primary_blue"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:id="@+id/footerLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/already_have_account"
-            android:textColor="#64748B"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tvSignIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="@string/sign_in"
-            android:textColor="#2563EB"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
