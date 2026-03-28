@@ -84,6 +84,29 @@
                 android:textColorHint="#CBD5E1"
                 android:textSize="15sp" />
 
+            <!-- Specialization -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Specialization"
+                android:textColor="#475569"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etSpecialty"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="e.g. Cardiology, Internal Medicine"
+                android:inputType="text"
+                android:paddingHorizontal="16dp"
+                android:textColor="#1E293B"
+                android:textColorHint="#CBD5E1"
+                android:textSize="15sp" />
+
             <!-- Email Address -->
             <TextView
                 android:layout_width="wrap_content"

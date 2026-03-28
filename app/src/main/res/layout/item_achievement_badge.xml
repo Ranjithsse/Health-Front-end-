@@ -5,22 +5,22 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="2dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
     app:strokeColor="#F1F5F9"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:padding="12dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/ivBadgeIconContainer"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
             app:cardBackgroundColor="#FEF9C3"
-            app:cardCornerRadius="32dp"
+            app:cardCornerRadius="26dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +28,8 @@
 
             <ImageView
                 android:id="@+id/ivBadgeIcon"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_star_badge" />
         </com.google.android.material.card.MaterialCardView>
@@ -38,10 +38,10 @@
             android:id="@+id/tvBadgeTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="14dp"
             android:text="Badge Title"
-            android:textColor="#0F172A"
-            android:textSize="19sp"
+            android:textColor="#1E293B"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivBadgeIconContainer"
@@ -51,10 +51,11 @@
             android:id="@+id/tvBadgeDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="1dp"
+            android:alpha="0.7"
             android:text="Badge description goes here."
             android:textColor="#64748B"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvBadgeTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvBadgeTitle" />
@@ -63,11 +64,13 @@
             android:id="@+id/tvBadgeDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
+            android:alpha="0.6"
             android:text="JAN 10, 2025"
             android:textColor="#94A3B8"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:textStyle="bold"
+            android:textAllCaps="true"
             app:layout_constraintStart_toStartOf="@+id/tvBadgeTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvBadgeDesc" />
 

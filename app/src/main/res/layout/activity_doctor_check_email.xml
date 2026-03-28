@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="24dp">
+
+    <ImageView
+        android:id="@+id/ivSuccessCheck"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/bg_circle_green_light"
+        android:contentDescription="@string/desc_success"
+        android:padding="24dp"
+        android:src="@drawable/ic_check_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#10B981" />
+
+    <TextView
+        android:id="@+id/tvCheckEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Check your email"
+        android:textColor="#0F172A"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivSuccessCheck" />
+
+    <TextView
+        android:id="@+id/tvInstructions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="We've sent password reset instructions to\n"
+        android:textColor="#94A3B8"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCheckEmail" />
+        
+    <TextView
+        android:id="@+id/tvEmailAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="user@example.com"
+        android:textColor="#0F172A"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInstructions" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBackToLogin"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="48dp"
+        android:text="Back to Login"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="#2563EB"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailAddress" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

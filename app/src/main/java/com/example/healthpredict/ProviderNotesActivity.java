@@ -47,15 +47,15 @@ public class ProviderNotesActivity extends AppCompatActivity {
                     updates.put("providerNotes", notes);
                     updates.put("status", "Completed"); // Mark as completed when report generated
 
-                    ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+                    ApiService apiService = RetrofitClient.getApiService(ProviderNotesActivity.this);
                     apiService.updateCase(data.id, updates).enqueue(new Callback<CaseData>() {
                         @Override
                         public void onResponse(Call<CaseData> call, Response<CaseData> response) {
                             if (response.isSuccessful()) {
                                 // Add to history locally as well
-                                HistoryManager.getInstance().addCase(data);
-
-                                // Navigate to FinalReportActivity
+                                if (!data.patientName.isEmpty() && !data.primarySystem.isEmpty()) {
+                                HistoryManager.getInstance().addCase(ProviderNotesActivity.this, data);
+                            }      // Navigate to FinalReportActivity
                                 Intent intent = new Intent(ProviderNotesActivity.this, FinalReportActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -73,8 +73,9 @@ public class ProviderNotesActivity extends AppCompatActivity {
                     });
                 } else {
                     // Fallback for local testing if no ID
-                    HistoryManager.getInstance().addCase(data);
-                    Intent intent = new Intent(ProviderNotesActivity.this, FinalReportActivity.class);
+                    if (!data.patientName.isEmpty() && !data.primarySystem.isEmpty()) {
+                    HistoryManager.getInstance().addCase(ProviderNotesActivity.this, data);
+                }    Intent intent = new Intent(ProviderNotesActivity.this, FinalReportActivity.class);
                     startActivity(intent);
                     finish();
                 }

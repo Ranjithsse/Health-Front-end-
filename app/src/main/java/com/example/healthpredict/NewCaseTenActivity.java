@@ -11,6 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.card.MaterialCardView;
+import com.example.healthpredict.network.RetrofitClient;
+import com.example.healthpredict.network.ApiService;
+import android.app.ProgressDialog;
+import android.widget.Toast;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewCaseTenActivity extends AppCompatActivity {
 
@@ -19,7 +26,7 @@ public class NewCaseTenActivity extends AppCompatActivity {
     private TextView tvViewerTitle, tvSliceLabel;
     private View crosshairH, crosshairV;
     private MaterialCardView focusCircle;
-    
+
     private MaterialCardView cardAxial, cardSagittal, cardCoronal;
     private TextView tvAxial, tvSagittal, tvCoronal;
 
@@ -40,7 +47,7 @@ public class NewCaseTenActivity extends AppCompatActivity {
         mockupVisuals = findViewById(R.id.mockupVisuals);
         tvViewerTitle = findViewById(R.id.tvViewerTitle);
         tvSliceLabel = findViewById(R.id.tvSliceLabel);
-        
+
         crosshairH = findViewById(R.id.crosshairH);
         crosshairV = findViewById(R.id.crosshairV);
         focusCircle = findViewById(R.id.focusCircle);
@@ -48,7 +55,7 @@ public class NewCaseTenActivity extends AppCompatActivity {
         cardAxial = findViewById(R.id.cardAxial);
         cardSagittal = findViewById(R.id.cardSagittal);
         cardCoronal = findViewById(R.id.cardCoronal);
-        
+
         tvAxial = findViewById(R.id.tvAxial);
         tvSagittal = findViewById(R.id.tvSagittal);
         tvCoronal = findViewById(R.id.tvCoronal);
@@ -64,11 +71,10 @@ public class NewCaseTenActivity extends AppCompatActivity {
         View btnExtractTissue = findViewById(R.id.btnExtractTissue);
         if (btnExtractTissue != null) {
             btnExtractTissue.setOnClickListener(v -> {
-                Intent intent = new Intent(NewCaseTenActivity.this, NewCaseElevenActivity.class);
-                startActivity(intent);
+                triggerAnalysis();
             });
         }
-        
+
         // Initial state
         updateMode("Axial");
     }
@@ -91,7 +97,8 @@ public class NewCaseTenActivity extends AppCompatActivity {
     }
 
     private void setupZoomSlider() {
-        if (sliderContainer == null || sliderThumb == null) return;
+        if (sliderContainer == null || sliderThumb == null)
+            return;
 
         sliderContainer.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -100,27 +107,30 @@ public class NewCaseTenActivity extends AppCompatActivity {
                 float height = v.getHeight();
 
                 // Constrain y within container bounds
-                if (y < 0) y = 0;
-                if (y > height) y = height;
+                if (y < 0)
+                    y = 0;
+                if (y > height)
+                    y = height;
 
                 // Move the thumb
                 // Center the thumb horizontally and position it vertically at touch point
                 // Note: sliderThumb is inside sliderContainer which is a FrameLayout/CardView
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) sliderThumb.getLayoutParams();
                 params.topMargin = (int) (y - (sliderThumb.getHeight() / 2f));
-                
+
                 // Keep thumb within container
-                if (params.topMargin < 0) params.topMargin = 0;
-                if (params.topMargin > height - sliderThumb.getHeight()) 
+                if (params.topMargin < 0)
+                    params.topMargin = 0;
+                if (params.topMargin > height - sliderThumb.getHeight())
                     params.topMargin = (int) (height - sliderThumb.getHeight());
-                
+
                 sliderThumb.setLayoutParams(params);
 
                 // Calculate zoom level based on thumb position
                 // Top is zoom in (MAX_SCALE), bottom is zoom out (MIN_SCALE)
                 float percentage = 1.0f - (y / height); // 1.0 at top, 0.0 at bottom
                 currentScale = MIN_SCALE + (percentage * (MAX_SCALE - MIN_SCALE));
-                
+
                 updateImageZoom();
 
                 return true;
@@ -184,5 +194,45 @@ public class NewCaseTenActivity extends AppCompatActivity {
         if (btnBack != null) {
             btnBack.setOnClickListener(v -> finish());
         }
+    }
+
+    private void triggerAnalysis() {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Analyzing Medical Imaging...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        int caseId = CaseData.getInstance().id;
+        ApiService apiService = RetrofitClient.getRetrofitInstance(this).create(ApiService.class);
+        apiService.tissueAnalysis(caseId).enqueue(new Callback<CaseData>() {
+            @Override
+            public void onResponse(Call<CaseData> call, Response<CaseData> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful() && response.body() != null) {
+                    CaseData data = response.body();
+                    CaseData.getInstance().copyFrom(data);
+                    
+                    // Trigger local notification
+                    LocalNotificationManager.getInstance(NewCaseTenActivity.this).addNotification(new Notification(
+                            "Risk Assessment Complete",
+                            "AI analysis for " + data.patientName + " (#" + data.patientId + ") is ready.",
+                            "Just now",
+                            "SUCCESS"
+                    ));
+
+                    Intent intent = new Intent(NewCaseTenActivity.this, NewCaseElevenActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(NewCaseTenActivity.this, "Analysis failed: " + response.message(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CaseData> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(NewCaseTenActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

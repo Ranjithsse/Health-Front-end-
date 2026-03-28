@@ -7,28 +7,26 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
-public class DocPasCheckActivity extends AppCompatActivity {
+public class DoctorCheckEmailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doc_pas_check);
+        setContentView(R.layout.activity_doctor_check_email);
 
+        TextView tvEmailAddress = findViewById(R.id.tvEmailAddress);
         MaterialButton btnBackToLogin = findViewById(R.id.btnBackToLogin);
-        TextView tvUserEmail = findViewById(R.id.tvUserEmail);
 
-        // You can set the email dynamically if passed via Intent
         String email = getIntent().getStringExtra("EMAIL");
         if (email != null && !email.isEmpty()) {
-            tvUserEmail.setText(email);
+            tvEmailAddress.setText(email);
         }
 
         btnBackToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // In a real scenario, the user would check their email and click a link.
-                // For this demo, let's assume they've done that and we go to Set New Password screen.
-                Intent intent = new Intent(DocPasCheckActivity.this, DoctorSetNewPasswordActivity.class);
+                Intent intent = new Intent(DoctorCheckEmailActivity.this, DoctorLoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 finish();
             }

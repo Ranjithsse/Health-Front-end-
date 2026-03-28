@@ -8,6 +8,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
+import com.example.healthpredict.network.RetrofitClient;
+import java.util.HashMap;
+import java.util.Map;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DoctorPassResetActivity extends AppCompatActivity {
 
@@ -44,16 +50,33 @@ public class DoctorPassResetActivity extends AppCompatActivity {
                     return;
                 }
 
-                // In a real application, you would trigger a Firebase or backend password reset here.
-                // For example:
-                // FirebaseAuth.getInstance().sendPasswordResetEmail(email)...
+                // Trigger API call
+                btnSendResetLink.setEnabled(false);
+                Map<String, String> requestBody = new HashMap<>();
+                requestBody.put("email", email);
+                
+                RetrofitClient.getApiService(DoctorPassResetActivity.this)
+                        .requestPasswordReset(requestBody)
+                        .enqueue(new Callback<Map<String, String>>() {
+                            @Override
+                            public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
+                                btnSendResetLink.setEnabled(true);
+                                if (response.isSuccessful()) {
+                                    // Navigate to DoctorCheckEmailActivity and pass the email
+                                    Intent intent = new Intent(DoctorPassResetActivity.this, DoctorCheckEmailActivity.class);
+                                    intent.putExtra("EMAIL", email);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(DoctorPassResetActivity.this, "Failed to send reset link", Toast.LENGTH_SHORT).show();
+                                }
+                            }
 
-                Toast.makeText(DoctorPassResetActivity.this, "Reset link sent to " + email, Toast.LENGTH_LONG).show();
-
-                // Navigate to DocPasCheckActivity and pass the email
-                Intent intent = new Intent(DoctorPassResetActivity.this, DocPasCheckActivity.class);
-                intent.putExtra("EMAIL", email);
-                startActivity(intent);
+                            @Override
+                            public void onFailure(Call<Map<String, String>> call, Throwable t) {
+                                btnSendResetLink.setEnabled(true);
+                                Toast.makeText(DoctorPassResetActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
     }

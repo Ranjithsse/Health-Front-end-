@@ -115,6 +115,7 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/tvTissueDensityValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -124,6 +125,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/badgeTissueDensity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
@@ -170,6 +172,7 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/tvCalcificationValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -179,6 +182,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/badgeCalcification"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
@@ -245,6 +249,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/tvHealthyTissuePct"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -255,6 +260,7 @@
                         </RelativeLayout>
 
                         <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/pbHealthyTissue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:progress="85"
@@ -285,6 +291,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/tvFibrousTissuePct"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -295,6 +302,7 @@
                         </RelativeLayout>
 
                         <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/pbFibrousTissue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:progress="10"
@@ -325,6 +333,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/tvInflamedTissuePct"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -335,6 +344,7 @@
                         </RelativeLayout>
 
                         <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/pbInflamedTissue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:progress="5"

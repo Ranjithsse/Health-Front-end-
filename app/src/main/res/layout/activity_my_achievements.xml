@@ -138,7 +138,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ic_analytics"
+                    android:src="@drawable/ic_trending_up"
                     app:tint="#2563EB" />
 
                 <TextView

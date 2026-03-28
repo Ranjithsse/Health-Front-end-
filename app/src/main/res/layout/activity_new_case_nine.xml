@@ -115,6 +115,7 @@
                     app:layout_constraintStart_toEndOf="@+id/ivFileIconContainer"
                     app:layout_constraintTop_toTopOf="parent">
                     <TextView
+                        android:id="@+id/tvFileName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="scan_data.zip"
@@ -122,6 +123,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
                     <TextView
+                        android:id="@+id/tvFileSize"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"

@@ -13,6 +13,7 @@ public class ExportShareActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_export_share);
+        setupBottomNavigation();
 
         ImageView ivBack = findViewById(R.id.ivBack);
         MaterialCardView cardDownloadPdf = findViewById(R.id.cardDownloadPdf);
@@ -31,4 +32,44 @@ public class ExportShareActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void setupBottomNavigation() {
+        android.view.View navHome = findViewById(R.id.navHome);
+        if (navHome != null) {
+            navHome.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(this, DoctorHomeActivity.class);
+                intent.setFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP | android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            });
+        }
+
+        android.view.View navCases = findViewById(R.id.navCases);
+        if (navCases != null) {
+            navCases.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(this, DoctorCasesActivity.class);
+                startActivity(intent);
+                finish();
+            });
+        }
+
+        android.view.View navReports = findViewById(R.id.navReports);
+        if (navReports != null) {
+            navReports.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(this, ReportsActivity.class);
+                startActivity(intent);
+                finish();
+            });
+        }
+
+        android.view.View navProfile = findViewById(R.id.navProfile);
+        if (navProfile != null) {
+            navProfile.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(this, DoctorProfileActivity.class);
+                startActivity(intent);
+                finish();
+            });
+        }
+    }
+
 }

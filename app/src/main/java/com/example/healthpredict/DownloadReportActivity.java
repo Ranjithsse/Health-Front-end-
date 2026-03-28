@@ -19,6 +19,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +59,7 @@ public class DownloadReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download_report);
+        setupBottomNavigation();
 
         createNotificationChannel();
 
@@ -67,19 +70,14 @@ public class DownloadReportActivity extends AppCompatActivity {
 
         findViewById(R.id.btnCancel).setOnClickListener(v -> finish());
 
+        CaseData data = CaseData.getInstance();
+        final String patientName = data.patientName.isEmpty() ? "Robert Wilson" : data.patientName;
+        final String patientId = data.patientId.isEmpty() ? "1024" : data.patientId;
+
         TextView tvPatientDetailHeader = findViewById(R.id.tvPatientDetailHeader);
-        String name = getIntent().getStringExtra("PATIENT_NAME");
-        String id = getIntent().getStringExtra("PATIENT_ID");
-
-        if (name == null) name = "Robert Wilson";
-        if (id == null) id = "1024";
-
         if (tvPatientDetailHeader != null) {
-            tvPatientDetailHeader.setText(String.format("Patient #%s - %s", id, name));
+            tvPatientDetailHeader.setText(String.format("Patient #%s - %s", patientId, patientName));
         }
-
-        final String patientName = name;
-        final String patientId = id;
 
         MaterialButton btnDownloadPdf = findViewById(R.id.btnDownloadPdf);
         if (btnDownloadPdf != null) {
@@ -87,12 +85,13 @@ public class DownloadReportActivity extends AppCompatActivity {
                 Toast.makeText(this, "Generating and downloading report...", Toast.LENGTH_SHORT).show();
                 
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    Uri pdfUri = generateAndSavePdf(patientName, patientId);
+                    Uri pdfUri = generateAndSavePdf();
                     if (pdfUri != null) {
                         checkPermissionAndShowNotification(patientName, pdfUri);
                         Toast.makeText(this, "Report saved to Downloads", Toast.LENGTH_LONG).show();
                         
                         Intent intent = new Intent(DownloadReportActivity.this, DownloadCompleteActivity.class);
+                        intent.putExtra("PDF_URI", pdfUri.toString());
                         startActivity(intent);
                     } else {
                         Toast.makeText(this, "Failed to download report. Check storage space.", Toast.LENGTH_SHORT).show();
@@ -117,29 +116,69 @@ public class DownloadReportActivity extends AppCompatActivity {
         }
     }
 
-    private Uri generateAndSavePdf(String name, String id) {
+    private Uri generateAndSavePdf() {
+        CaseData data = CaseData.getInstance();
+        String name = data.patientName.isEmpty() ? "Robert Wilson" : data.patientName;
+        String id = data.patientId.isEmpty() ? "1024" : data.patientId;
+
+        // Inflate the PDF layout
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View pdfView = inflater.inflate(R.layout.layout_pdf_report, null);
+
+        // Bind data
+        TextView tvPatientIdHeaderPdf = pdfView.findViewById(R.id.tvPatientIdHeaderPdf);
+        TextView tvReportDatePdf = pdfView.findViewById(R.id.tvReportDatePdf);
+        TextView tvValueNamePdf = pdfView.findViewById(R.id.tvValueNamePdf);
+        TextView tvValueAgePdf = pdfView.findViewById(R.id.tvValueAgePdf);
+        TextView tvValueGenderPdf = pdfView.findViewById(R.id.tvValueGenderPdf);
+        TextView tvPredictionTextPdf = pdfView.findViewById(R.id.tvPredictionTextPdf);
+        TextView tvRiskLevelPdf = pdfView.findViewById(R.id.tvRiskLevelPdf);
+        TextView tvProtocolPdf = pdfView.findViewById(R.id.tvProtocolPdf);
+        TextView tvInterventionPdf = pdfView.findViewById(R.id.tvInterventionPdf);
+        TextView tvMonitoringPdf = pdfView.findViewById(R.id.tvMonitoringPdf);
+        TextView tvProviderNotesPdf = pdfView.findViewById(R.id.tvProviderNotesPdf);
+
+        tvPatientIdHeaderPdf.setText("PATIENT #" + id);
+        tvReportDatePdf.setText(data.date.isEmpty() ? java.text.DateFormat.getDateInstance().format(new java.util.Date()) : data.date);
+        tvValueNamePdf.setText(name);
+        tvValueAgePdf.setText(data.age.isEmpty() ? "N/A" : data.age);
+        tvValueGenderPdf.setText(data.gender.isEmpty() ? "N/A" : data.gender);
+        tvPredictionTextPdf.setText(data.oneYearPrediction + " Stability Probability\n(1-Year)");
+        tvRiskLevelPdf.setText("Risk Level: " + (data.oneYearRisk.isEmpty() ? "Low" : data.oneYearRisk));
+        tvProtocolPdf.setText("Protocol: " + (data.primaryMedication.isEmpty() ? "ACE Inhibitors" : data.primaryMedication));
+        tvInterventionPdf.setText("Intervention: " + (data.interventionType.isEmpty() ? "Non-Invasive" : data.interventionType));
+        tvMonitoringPdf.setText("Monitoring: " + (data.monitoringLevel.isEmpty() ? "Standard" : data.monitoringLevel));
+        tvProviderNotesPdf.setText(data.providerNotes.isEmpty() ? "No notes added." : data.providerNotes);
+
+        // Use device screen width so dp and sp scale proportionately 
+        android.util.DisplayMetrics displayMetrics = new android.util.DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int pageWidth = displayMetrics.widthPixels;
+
+        // Measure layout with AT_MOST height to get the actual required height
+        pdfView.measure(
+                View.MeasureSpec.makeMeasureSpec(pageWidth, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        
+        int pageHeight = pdfView.getMeasuredHeight();
+        // Add a little bottom padding
+        pageHeight += 40; 
+        
+        // Safety check: ensure height at least somewhat proportional to A4 if content is tiny
+        int minHeight = (int) (pageWidth * 1.414f);
+        if (pageHeight < minHeight) {
+            pageHeight = minHeight;
+        }
+
+        // Layout the view with its measured height
+        pdfView.layout(0, 0, pageWidth, pageHeight);
+
         PdfDocument document = new PdfDocument();
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create();
         PdfDocument.Page page = document.startPage(pageInfo);
 
         Canvas canvas = page.getCanvas();
-        Paint paint = new Paint();
-
-        paint.setTextSize(16f);
-        paint.setFakeBoldText(true);
-        canvas.drawText("HEALTH PREDICT REPORT", 10, 30, paint);
-
-        paint.setFakeBoldText(false);
-        paint.setTextSize(12f);
-        canvas.drawText("Patient ID: " + id, 10, 60, paint);
-        canvas.drawText("Patient Name: " + name, 10, 80, paint);
-        canvas.drawText("Date: " + java.text.DateFormat.getDateTimeInstance().format(new java.util.Date()), 10, 100, paint);
-        
-        canvas.drawText("Summary:", 10, 140, paint);
-        canvas.drawText("- AI Stability Prediction: 98.2%", 20, 160, paint);
-        canvas.drawText("- Risk Level: Low", 20, 180, paint);
-        canvas.drawText("- Recommended Protocol: ACE Inhibitors", 20, 200, paint);
-
+        pdfView.draw(canvas);
         document.finishPage(page);
 
         String fileName = "HealthReport_" + id + "_" + System.currentTimeMillis() + ".pdf";
@@ -183,6 +222,17 @@ public class DownloadReportActivity extends AppCompatActivity {
     }
 
     private void showDownloadNotification(String patientName, Uri uri) {
+        CaseData data = CaseData.getInstance();
+        String patientId = data.patientId.isEmpty() ? "1024" : data.patientId;
+
+        // Trigger local app notification
+        LocalNotificationManager.getInstance(this).addNotification(new Notification(
+                "Health Report Ready",
+                "PDF report for " + patientName + " (#" + patientId + ") is available for download.",
+                "Just now",
+                "INFO"
+        ));
+
         Intent viewIntent = new Intent(Intent.ACTION_VIEW);
         viewIntent.setDataAndType(uri, "application/pdf");
         viewIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -219,4 +269,44 @@ public class DownloadReportActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void setupBottomNavigation() {
+        android.view.View navHome = findViewById(R.id.navHome);
+        if (navHome != null) {
+            navHome.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(this, DoctorHomeActivity.class);
+                intent.setFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP | android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            });
+        }
+
+        android.view.View navCases = findViewById(R.id.navCases);
+        if (navCases != null) {
+            navCases.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(this, DoctorCasesActivity.class);
+                startActivity(intent);
+                finish();
+            });
+        }
+
+        android.view.View navReports = findViewById(R.id.navReports);
+        if (navReports != null) {
+            navReports.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(this, ReportsActivity.class);
+                startActivity(intent);
+                finish();
+            });
+        }
+
+        android.view.View navProfile = findViewById(R.id.navProfile);
+        if (navProfile != null) {
+            navProfile.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(this, DoctorProfileActivity.class);
+                startActivity(intent);
+                finish();
+            });
+        }
+    }
+
 }

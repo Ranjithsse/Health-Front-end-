@@ -23,6 +23,7 @@ public class ReportsActivity extends AppCompatActivity {
     private EditText etSearchInput;
     private TextView tvNoResults;
     private final int[] reportItemIds = { R.id.report1, R.id.report2, R.id.report3, R.id.report4 };
+    private List<CaseData> allReports = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,9 @@ public class ReportsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        HistoryManager.getInstance().init(this);
+        allReports = HistoryManager.getInstance().getCaseHistory();
+        updateReportsUI(allReports);
         setupRecentReports(); // Refresh when returning
         if (etSearchInput != null) {
             filterReports(etSearchInput.getText().toString());
@@ -98,55 +102,74 @@ public class ReportsActivity extends AppCompatActivity {
     }
 
     private void filterReports(String query) {
-        boolean anyFound = false;
         String lowerQuery = query.toLowerCase().trim();
+        List<CaseData> filteredList = new ArrayList<>();
 
-        for (int id : reportItemIds) {
-            View itemView = findViewById(id);
-            if (itemView != null) {
-                TextView tvName = itemView.findViewById(R.id.tvPatientName);
-                TextView tvDetail = itemView.findViewById(R.id.tvReportDetail);
+        if (lowerQuery.isEmpty()) {
+            filteredList.addAll(allReports);
+        } else {
+            for (CaseData data : allReports) {
+                String name = data.patientName != null ? data.patientName.toLowerCase() : "";
+                String detail = data.primarySystem != null ? data.primarySystem.toLowerCase() : "";
 
-                if (tvName != null && tvDetail != null) {
-                    String name = tvName.getText().toString().toLowerCase();
-                    String detail = tvDetail.getText().toString().toLowerCase();
-
-                    if (lowerQuery.isEmpty() || name.contains(lowerQuery) || detail.contains(lowerQuery)) {
-                        itemView.setVisibility(View.VISIBLE);
-                        anyFound = true;
-                    } else {
-                        itemView.setVisibility(View.GONE);
-                    }
+                if (name.contains(lowerQuery) || detail.contains(lowerQuery)) {
+                    filteredList.add(data);
                 }
             }
         }
 
+        updateReportsUI(filteredList);
+
         if (tvNoResults != null) {
-            tvNoResults.setVisibility(anyFound ? View.GONE : View.VISIBLE);
+            tvNoResults.setVisibility(filteredList.isEmpty() ? View.VISIBLE : View.GONE);
         }
     }
 
     private void setupRecentReports() {
-        ApiService apiService = RetrofitClient.getApiService();
+        ApiService apiService = RetrofitClient.getApiService(this);
         apiService.getCases("Completed").enqueue(new Callback<List<CaseData>>() {
             @Override
             public void onResponse(Call<List<CaseData>> call, Response<List<CaseData>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    updateReportsUI(response.body());
+                    allReports = deduplicateCases(response.body());
+                    updateReportsUI(allReports);
                 } else {
                     // Fallback to local history if server fails
-                    List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
-                    updateReportsUI(history);
+                    HistoryManager.getInstance().init(ReportsActivity.this);
+                    allReports = deduplicateCases(HistoryManager.getInstance().getCaseHistory());
+                    updateReportsUI(allReports);
                 }
             }
 
             @Override
             public void onFailure(Call<List<CaseData>> call, Throwable t) {
                 // Fallback to local history
-                List<CaseData> history = HistoryManager.getInstance().getCaseHistory();
-                updateReportsUI(history);
+                HistoryManager.getInstance().init(ReportsActivity.this);
+                allReports = deduplicateCases(HistoryManager.getInstance().getCaseHistory());
+                updateReportsUI(allReports);
             }
         });
+    }
+
+    private List<CaseData> deduplicateCases(List<CaseData> inputList) {
+        java.util.Map<String, CaseData> map = new java.util.LinkedHashMap<>();
+        for (CaseData data : inputList) {
+            String key = (data.patientId != null ? data.patientId : String.valueOf(data.id)) + "_" + data.date;
+            if (map.containsKey(key)) {
+                CaseData existing = map.get(key);
+                if (!"Completed".equalsIgnoreCase(existing.status) && "Completed".equalsIgnoreCase(data.status)) {
+                    map.put(key, data);
+                } else if (!"Completed".equalsIgnoreCase(existing.status) && existing.id < data.id) {
+                    map.put(key, data);
+                }
+            } else {
+                map.put(key, data);
+            }
+        }
+        
+        List<CaseData> result = new java.util.ArrayList<>(map.values());
+        java.util.Collections.reverse(result);
+        return result;
     }
 
     private void setupBottomNavigation() {
@@ -207,11 +230,7 @@ public class ReportsActivity extends AppCompatActivity {
                     startActivity(new Intent(ReportsActivity.this, FinalReportActivity.class));
                 });
             } else {
-                // If there's no real history but the view is visible (mock data),
-                // we should still allow clicking it to see activity_final_report.xml
-                itemView.setOnClickListener(v -> {
-                    startActivity(new Intent(ReportsActivity.this, FinalReportActivity.class));
-                });
+                itemView.setVisibility(View.GONE);
             }
         }
     }

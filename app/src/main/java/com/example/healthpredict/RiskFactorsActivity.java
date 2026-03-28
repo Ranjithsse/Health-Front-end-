@@ -41,7 +41,7 @@ public class RiskFactorsActivity extends AppCompatActivity {
         if (caseId == 0)
             return;
 
-        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getApiService(this);
         apiService.getExplainability(caseId).enqueue(new Callback<Map<String, Object>>() {
             @Override
             public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {

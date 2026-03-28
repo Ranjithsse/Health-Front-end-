@@ -14,6 +14,7 @@ import com.google.android.material.button.MaterialButton;
 public class NewCaseEightActivity extends AppCompatActivity {
 
     private ActivityResultLauncher<String[]> filePickerLauncher;
+    private View uploadArea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class NewCaseEightActivity extends AppCompatActivity {
 
         ImageView btnBack = findViewById(R.id.btnBack);
         MaterialButton btnUploadAnalyze = findViewById(R.id.btnUploadAnalyze);
-        View uploadArea = findViewById(R.id.uploadArea);
+        uploadArea = findViewById(R.id.uploadArea);
 
         // Initialize file picker
         filePickerLauncher = registerForActivityResult(
@@ -31,14 +32,12 @@ public class NewCaseEightActivity extends AppCompatActivity {
                     if (uri != null) {
                         handleFileSelection(uri);
                     }
-                }
-        );
+                });
 
         btnBack.setOnClickListener(v -> finish());
 
         if (uploadArea != null) {
             uploadArea.setOnClickListener(v -> {
-                // Open file manager for all required formats
                 String[] mimeTypes = {
                         "application/dicom",
                         "image/*",
@@ -53,6 +52,7 @@ public class NewCaseEightActivity extends AppCompatActivity {
 
         btnUploadAnalyze.setOnClickListener(v -> {
             if (CaseData.getInstance().fileUri != null && !CaseData.getInstance().fileUri.isEmpty()) {
+                // If button is clicked here, go to Step 9 (Confirmation)
                 startActivity(new Intent(NewCaseEightActivity.this, NewCaseNineActivity.class));
             } else {
                 Toast.makeText(this, "Please select a file first", Toast.LENGTH_SHORT).show();
@@ -61,12 +61,9 @@ public class NewCaseEightActivity extends AppCompatActivity {
     }
 
     private void handleFileSelection(Uri uri) {
-        // Save the URI to CaseData
         CaseData.getInstance().fileUri = uri.toString();
-        
-        Toast.makeText(this, "File selected successfully!", Toast.LENGTH_SHORT).show();
-        
-        // After "uploading" (selecting), navigate to the next screen as requested
+
+        // Immediately navigate to Step 9 (Confirmation) after selection
         startActivity(new Intent(NewCaseEightActivity.this, NewCaseNineActivity.class));
     }
 }

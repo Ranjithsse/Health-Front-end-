@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Logo and Header Info -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/logoCardPdf"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:cardBackgroundColor="#2563EB"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_splash_logo"
+                app:tint="@color/white" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvHealthMonitorPdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/health_monitor"
+            android:textColor="#0F172A"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/logoCardPdf"
+            app:layout_constraintStart_toEndOf="@+id/logoCardPdf"
+            app:layout_constraintTop_toTopOf="@+id/logoCardPdf" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvPatientIdHeaderPdf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PATIENT #1024"
+                android:textColor="#0F172A"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvReportDatePdf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Jan 24, 2025"
+                android:textColor="#94A3B8"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#F1F5F9" />
+
+    <!-- Patient Info Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Patient Info"
+        android:textColor="#2563EB"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:background="#E0E7FF" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/tvLabelNamePdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name: "
+            android:textColor="#94A3B8"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvValueNamePdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Robert Wilson"
+            android:textColor="#334155"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvLabelNamePdf"
+            app:layout_constraintStart_toEndOf="@+id/tvLabelNamePdf" />
+
+        <TextView
+            android:id="@+id/tvLabelAgePdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:text="Age: "
+            android:textColor="#94A3B8"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@+id/tvValueNamePdf"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvValueAgePdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="45"
+            android:textColor="#334155"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvLabelAgePdf"
+            app:layout_constraintStart_toEndOf="@+id/tvLabelAgePdf" />
+
+        <TextView
+            android:id="@+id/tvLabelGenderPdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Gender: "
+            android:textColor="#94A3B8"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLabelNamePdf" />
+
+        <TextView
+            android:id="@+id/tvValueGenderPdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:textColor="#334155"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvLabelGenderPdf"
+            app:layout_constraintStart_toEndOf="@+id/tvLabelGenderPdf" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- AI Prediction Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="AI Prediction"
+        android:textColor="#2563EB"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:background="#E0E7FF" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardPredictionPdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="#F0FDF4"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvPredictionTextPdf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingMultiplier="1.2"
+                android:text="98.2% Stability Probability\n(1-Year)"
+                android:textColor="#166534"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvRiskLevelPdf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Risk Level: Low"
+                android:textColor="#166534"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Plan Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Clinical Plan"
+        android:textColor="#2563EB"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:background="#E0E7FF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvProtocolPdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Protocol: ACE Inhibitors"
+            android:textColor="#334155"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvInterventionPdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Intervention: Non-Invasive"
+            android:textColor="#334155"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvMonitoringPdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Monitoring: Standard"
+            android:textColor="#334155"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Provider Notes Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Provider Notes"
+        android:textColor="#2563EB"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:background="#E0E7FF" />
+
+    <TextView
+        android:id="@+id/tvProviderNotesPdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:lineSpacingExtra="4dp"
+        android:text="No notes added."
+        android:textColor="#64748B"
+        android:textSize="13sp" />
+
+</LinearLayout>

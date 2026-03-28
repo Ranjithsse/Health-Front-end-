@@ -26,6 +26,7 @@ public class DoctorCasesActivity extends AppCompatActivity {
     private TextView tvNoResults;
     private android.widget.LinearLayout caseListContainer;
     private java.util.List<CaseData> allCases = new java.util.ArrayList<>();
+    private final int[] caseItemIds = { R.id.case1, R.id.case2, R.id.case3, R.id.case4, R.id.case5 };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,15 +68,18 @@ public class DoctorCasesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        HistoryManager.getInstance().init(this);
+        allCases = HistoryManager.getInstance().getCaseHistory();
+        updateCasesUI(allCases);
         fetchCasesFromServer();
     }
 
     private void fetchCasesFromServer() {
-        RetrofitClient.getApiService().getCases(null).enqueue(new Callback<List<CaseData>>() {
+        RetrofitClient.getApiService(this).getCases(null).enqueue(new Callback<List<CaseData>>() {
             @Override
             public void onResponse(Call<List<CaseData>> call, Response<List<CaseData>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    allCases = response.body();
+                    allCases = deduplicateCases(response.body());
                     updateCasesUI(allCases);
                 }
             }
@@ -83,68 +87,91 @@ public class DoctorCasesActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<CaseData>> call, Throwable t) {
                 // Fallback to local history
+                HistoryManager.getInstance().init(DoctorCasesActivity.this);
                 allCases = HistoryManager.getInstance().getCaseHistory();
                 updateCasesUI(allCases);
             }
         });
     }
 
-    private void updateCasesUI(List<CaseData> cases) {
-        if (caseListContainer == null)
-            return;
-        caseListContainer.removeAllViews();
-
-        if (cases.isEmpty()) {
-            tvNoResults.setVisibility(View.VISIBLE);
-            return;
+    private List<CaseData> deduplicateCases(List<CaseData> inputList) {
+        java.util.Map<String, CaseData> map = new java.util.LinkedHashMap<>();
+        for (CaseData data : inputList) {
+            String key = (data.patientId != null ? data.patientId : String.valueOf(data.id)) + "_" + data.date;
+            if (map.containsKey(key)) {
+                CaseData existing = map.get(key);
+                // Prefer Completed status over Pending
+                if (!"Completed".equalsIgnoreCase(existing.status) && "Completed".equalsIgnoreCase(data.status)) {
+                    map.put(key, data);
+                } else if (!"Completed".equalsIgnoreCase(existing.status) && existing.id < data.id) {
+                    // If neither or both are not completed but new one has larger ID, keep newer
+                    map.put(key, data);
+                }
+            } else {
+                map.put(key, data);
+            }
         }
-
-        tvNoResults.setVisibility(View.GONE);
-        for (CaseData data : cases) {
-            addCaseItem(data);
-        }
+        
+        List<CaseData> result = new java.util.ArrayList<>(map.values());
+        // Reverse to maintain newest first
+        java.util.Collections.reverse(result);
+        return result;
     }
 
-    private void addCaseItem(CaseData data) {
-        View caseView = getLayoutInflater().inflate(R.layout.item_case, caseListContainer, false);
+    private void updateCasesUI(List<CaseData> cases) {
+        for (int i = 0; i < caseItemIds.length; i++) {
+            View itemView = findViewById(caseItemIds[i]);
+            if (itemView == null) continue;
 
-        TextView tvName = caseView.findViewById(R.id.tvPatientName);
-        TextView tvDetail = caseView.findViewById(R.id.tvPatientDetail);
-        TextView tvStatus = caseView.findViewById(R.id.tvStatus);
-        View cardStatus = caseView.findViewById(R.id.cardStatus);
+            if (i < cases.size()) {
+                CaseData data = cases.get(i);
+                itemView.setVisibility(View.VISIBLE);
 
-        String name = data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId;
-        tvName.setText(name);
-        tvDetail.setText(data.patientId + " • " + data.primarySystem);
-        tvStatus.setText(data.status != null ? data.status : data.riskLevel);
+                TextView tvName = itemView.findViewById(R.id.tvPatientName);
+                TextView tvDetail = itemView.findViewById(R.id.tvPatientDetail);
+                TextView tvStatus = itemView.findViewById(R.id.tvStatus);
+                View cardStatus = itemView.findViewById(R.id.cardStatus);
 
-        // Style status
-        if (cardStatus instanceof com.google.android.material.card.MaterialCardView) {
-            updateStatusStyle((com.google.android.material.card.MaterialCardView) cardStatus, tvStatus,
-                    data.status != null ? data.status : data.riskLevel);
+                String name = data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId;
+                if (tvName != null) tvName.setText(name);
+                if (tvDetail != null) tvDetail.setText(data.patientId + " • " + data.primarySystem);
+                if (tvStatus != null) tvStatus.setText(data.status != null ? data.status : data.riskLevel);
+
+                if (cardStatus instanceof com.google.android.material.card.MaterialCardView) {
+                    updateStatusStyle((com.google.android.material.card.MaterialCardView) cardStatus, tvStatus,
+                            data.status != null ? data.status : data.riskLevel);
+                }
+
+                itemView.setOnClickListener(v -> {
+                    try {
+                        CaseData.getInstance().reset();
+                        CaseData.getInstance().copyFrom(data);
+                        Intent intent = new Intent(DoctorCasesActivity.this, PatientOutcomeActivity.class);
+                        intent.putExtra("PATIENT_NAME", data.patientName != null && !data.patientName.isEmpty() ? data.patientName : data.patientId);
+                        intent.putExtra("PATIENT_ID", String.valueOf(data.id));
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        android.widget.Toast.makeText(DoctorCasesActivity.this, "Error: " + e.getMessage(), android.widget.Toast.LENGTH_LONG).show();
+                    }
+                });
+            } else {
+                itemView.setVisibility(View.GONE);
+            }
         }
-
-        caseView.setOnClickListener(v -> {
-            CaseData.getInstance().reset();
-            CaseData.getInstance().copyFrom(data);
-            startActivity(new Intent(DoctorCasesActivity.this, PatientOutcomeActivity.class));
-        });
-
-        caseListContainer.addView(caseView);
     }
 
     private void updateStatusStyle(com.google.android.material.card.MaterialCardView card, TextView tv, String status) {
         if (status == null)
             return;
-        if (status.equalsIgnoreCase("Successful Recovery") || status.equalsIgnoreCase("Low")) {
+        if (status.equalsIgnoreCase("Successful Recovery") || status.equalsIgnoreCase("Low") || status.equalsIgnoreCase("Completed")) {
             card.setCardBackgroundColor(Color.parseColor("#E1F9EB"));
-            tv.setTextColor(Color.parseColor("#10B981"));
+            if (tv != null) tv.setTextColor(Color.parseColor("#10B981"));
         } else if (status.equalsIgnoreCase("Condition Declined") || status.equalsIgnoreCase("High")) {
             card.setCardBackgroundColor(Color.parseColor("#FEF2F2"));
-            tv.setTextColor(Color.parseColor("#EF4444"));
+            if (tv != null) tv.setTextColor(Color.parseColor("#EF4444"));
         } else {
             card.setCardBackgroundColor(Color.parseColor("#F1F5F9"));
-            tv.setTextColor(Color.parseColor("#475569"));
+            if (tv != null) tv.setTextColor(Color.parseColor("#475569"));
         }
     }
 
@@ -169,18 +196,25 @@ public class DoctorCasesActivity extends AppCompatActivity {
 
     private void filterCases(String query) {
         String lowerQuery = query.toLowerCase().trim();
-        java.util.List<CaseData> filtered = new java.util.ArrayList<>();
+        List<CaseData> filteredList = new java.util.ArrayList<>();
 
-        for (CaseData data : allCases) {
-            String name = (data.patientName != null ? data.patientName : "").toLowerCase();
-            String id = (data.patientId != null ? data.patientId : "").toLowerCase();
-
-            if (lowerQuery.isEmpty() || name.contains(lowerQuery) || id.contains(lowerQuery)) {
-                filtered.add(data);
+        if (lowerQuery.isEmpty()) {
+            filteredList.addAll(allCases);
+        } else {
+            for (CaseData caseData : allCases) {
+                String name = caseData.patientName != null ? caseData.patientName.toLowerCase() : "";
+                String id = caseData.patientId != null ? caseData.patientId.toLowerCase() : "";
+                if (name.contains(lowerQuery) || id.contains(lowerQuery)) {
+                    filteredList.add(caseData);
+                }
             }
         }
 
-        updateCasesUI(filtered);
+        updateCasesUI(filteredList);
+
+        if (tvNoResults != null) {
+            tvNoResults.setVisibility(filteredList.isEmpty() ? View.VISIBLE : View.GONE);
+        }
     }
 
     private void setupNavigation() {

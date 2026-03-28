@@ -176,11 +176,16 @@
                                 android:textColor="#64748B"
                                 android:textSize="14sp" />
                             <View
+                                android:id="@+id/viewCardiacFilled"
                                 android:layout_width="0dp"
                                 android:layout_height="24dp"
                                 android:layout_weight="0.8"
                                 android:background="@drawable/bg_bar_chart" />
-                            <View android:layout_width="0dp" android:layout_height="24dp" android:layout_weight="0.2" />
+                            <View 
+                                android:id="@+id/viewCardiacEmpty"
+                                android:layout_width="0dp" 
+                                android:layout_height="24dp" 
+                                android:layout_weight="0.2" />
                         </LinearLayout>
 
                         <!-- Diabetes -->
@@ -196,11 +201,16 @@
                                 android:textColor="#64748B"
                                 android:textSize="14sp" />
                             <View
+                                android:id="@+id/viewDiabetesFilled"
                                 android:layout_width="0dp"
                                 android:layout_height="24dp"
                                 android:layout_weight="0.5"
                                 android:background="@drawable/bg_bar_chart" />
-                            <View android:layout_width="0dp" android:layout_height="24dp" android:layout_weight="0.5" />
+                            <View 
+                                android:id="@+id/viewDiabetesEmpty"
+                                android:layout_width="0dp" 
+                                android:layout_height="24dp" 
+                                android:layout_weight="0.5" />
                         </LinearLayout>
 
                         <!-- Oncology -->
@@ -216,11 +226,16 @@
                                 android:textColor="#64748B"
                                 android:textSize="14sp" />
                             <View
+                                android:id="@+id/viewOncologyFilled"
                                 android:layout_width="0dp"
                                 android:layout_height="24dp"
                                 android:layout_weight="0.25"
                                 android:background="@drawable/bg_bar_chart" />
-                            <View android:layout_width="0dp" android:layout_height="24dp" android:layout_weight="0.75" />
+                            <View 
+                                android:id="@+id/viewOncologyEmpty"
+                                android:layout_width="0dp" 
+                                android:layout_height="24dp" 
+                                android:layout_weight="0.75" />
                         </LinearLayout>
 
                         <!-- Renal -->
@@ -235,11 +250,16 @@
                                 android:textColor="#64748B"
                                 android:textSize="14sp" />
                             <View
+                                android:id="@+id/viewRenalFilled"
                                 android:layout_width="0dp"
                                 android:layout_height="24dp"
                                 android:layout_weight="0.15"
                                 android:background="@drawable/bg_bar_chart" />
-                            <View android:layout_width="0dp" android:layout_height="24dp" android:layout_weight="0.85" />
+                            <View 
+                                android:id="@+id/viewRenalEmpty"
+                                android:layout_width="0dp" 
+                                android:layout_height="24dp" 
+                                android:layout_weight="0.85" />
                         </LinearLayout>
 
                     </LinearLayout>

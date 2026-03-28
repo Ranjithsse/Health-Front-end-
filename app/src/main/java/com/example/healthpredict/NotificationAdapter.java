@@ -33,16 +33,22 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.tvTime.setText(notification.getTime());
 
         String type = notification.getType();
+        int iconRes = R.drawable.ic_notification;
+        int bgColor = 0xFFEFF6FF; // notif_blue_bg
+
         if ("SUCCESS".equalsIgnoreCase(type)) {
-            holder.ivIcon.setImageResource(R.drawable.ic_check_circle_fill);
-            holder.iconContainer.setCardBackgroundColor(0xFFE1F9EB);
+            iconRes = R.drawable.ic_check;
+            bgColor = 0xFFE1F9EB; // notif_green_bg
         } else if ("ALERT".equalsIgnoreCase(type)) {
-            holder.ivIcon.setImageResource(R.drawable.ic_alert_circle_fill);
-            holder.iconContainer.setCardBackgroundColor(0xFFFEE2E2);
+            iconRes = R.drawable.ic_warning;
+            bgColor = 0xFFFEF2F2; // notif_orange_bg
         } else if ("INFO".equalsIgnoreCase(type)) {
-            holder.ivIcon.setImageResource(R.drawable.ic_info_circle_fill);
-            holder.iconContainer.setCardBackgroundColor(0xFFE0F2FE);
+            iconRes = R.drawable.ic_download;
+            bgColor = 0xFFEFF6FF; // notif_blue_bg
         }
+
+        holder.ivIcon.setImageResource(iconRes);
+        holder.iconContainer.setCardBackgroundColor(bgColor);
     }
 
     @Override

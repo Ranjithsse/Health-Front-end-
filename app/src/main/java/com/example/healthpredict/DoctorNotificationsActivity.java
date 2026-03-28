@@ -28,6 +28,9 @@ public class DoctorNotificationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_notifications);
 
+        // Mark all as read when opening this activity
+        LocalNotificationManager.getInstance(this).markAllAsRead();
+
         ImageView ivBack = findViewById(R.id.ivBack);
         if (ivBack != null) {
             ivBack.setOnClickListener(v -> finish());
@@ -39,19 +42,8 @@ public class DoctorNotificationsActivity extends AppCompatActivity {
     }
 
     private void fetchNotifications() {
-        RetrofitClient.getApiService().getNotifications().enqueue(new Callback<List<Notification>>() {
-            @Override
-            public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    updateNotifications(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Notification>> call, Throwable t) {
-                // Fallback to empty
-            }
-        });
+        List<Notification> notifications = LocalNotificationManager.getInstance(this).getNotifications();
+        updateNotifications(notifications);
     }
 
     private void updateNotifications(List<Notification> notifications) {
@@ -97,75 +89,6 @@ public class DoctorNotificationsActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, DoctorProfileActivity.class);
                 startActivity(intent);
             });
-        }
-    }
-
-    // Adapter for the RecyclerView
-    static class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
-        private final List<Notification> notifications;
-
-        public NotificationAdapter(List<Notification> notifications) {
-            this.notifications = notifications;
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notification, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Notification notification = notifications.get(position);
-            holder.bind(notification);
-        }
-
-        @Override
-        public int getItemCount() {
-            return notifications.size();
-        }
-
-        static class ViewHolder extends RecyclerView.ViewHolder {
-            private final MaterialCardView iconContainer;
-            private final ImageView ivNotificationIcon;
-            private final TextView tvNotificationTitle;
-            private final TextView tvNotificationMessage;
-            private final TextView tvNotificationTime;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-                iconContainer = itemView.findViewById(R.id.iconContainer);
-                ivNotificationIcon = itemView.findViewById(R.id.ivNotificationIcon);
-                tvNotificationTitle = itemView.findViewById(R.id.tvNotificationTitle);
-                tvNotificationMessage = itemView.findViewById(R.id.tvNotificationMessage);
-                tvNotificationTime = itemView.findViewById(R.id.tvNotificationTime);
-            }
-
-            public void bind(final Notification notification) {
-                tvNotificationTitle.setText(notification.getTitle());
-                tvNotificationMessage.setText(notification.getDescription());
-                tvNotificationTime.setText(notification.getTime());
-
-                String type = notification.getType() != null ? notification.getType() : "INFO";
-                int iconRes = R.drawable.ic_notification;
-                int bgColorRes = R.color.notif_blue_bg;
-                int iconColorRes = R.color.notif_blue_icon;
-
-                if (type.equalsIgnoreCase("SUCCESS")) {
-                    iconRes = R.drawable.ic_check;
-                    bgColorRes = R.color.notif_green_bg;
-                    iconColorRes = R.color.notif_green_icon;
-                } else if (type.equalsIgnoreCase("ALERT")) {
-                    iconRes = R.drawable.ic_warning;
-                    bgColorRes = R.color.notif_orange_bg;
-                    iconColorRes = R.color.notif_orange_icon;
-                }
-
-                ivNotificationIcon.setImageResource(iconRes);
-                iconContainer.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), bgColorRes));
-                ivNotificationIcon.setColorFilter(ContextCompat.getColor(itemView.getContext(), iconColorRes));
-            }
         }
     }
 }

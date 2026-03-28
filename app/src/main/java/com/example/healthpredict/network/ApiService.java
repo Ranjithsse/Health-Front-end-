@@ -35,6 +35,9 @@ public interface ApiService {
     @POST("api/cases/{id}/predict/")
     Call<CaseData> predictCase(@retrofit2.http.Path("id") int id);
 
+    @POST("api/cases/{id}/tissue-analysis/")
+    Call<CaseData> tissueAnalysis(@retrofit2.http.Path("id") int id);
+
     @GET("api/explainability/{case_id}/")
     Call<java.util.Map<String, Object>> getExplainability(@retrofit2.http.Path("case_id") int caseId);
 
@@ -50,6 +53,12 @@ public interface ApiService {
     @GET("api/auth/check/")
     Call<java.util.Map<String, Object>> checkSession();
 
-    @GET("api/achievements/")
+    @GET("api/my-achievements/")
     Call<List<java.util.Map<String, Object>>> getAchievements();
+
+    @POST("api/password-reset-request/")
+    Call<java.util.Map<String, String>> requestPasswordReset(@Body java.util.Map<String, String> body);
+
+    @POST("api/password-reset-confirm/")
+    Call<java.util.Map<String, String>> confirmPasswordReset(@Body java.util.Map<String, String> body);
 }

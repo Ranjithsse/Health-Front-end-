@@ -36,25 +36,68 @@ public class MyAchievementsActivity extends AppCompatActivity {
         }
 
         fetchAchievements();
+        fetchUserStats();
 
-        findViewById(R.id.navHome).setOnClickListener(v -> {
-            startActivity(new Intent(this, DoctorHomeActivity.class));
-            finish();
-        });
+        View navHome = findViewById(R.id.navHome);
+        if (navHome != null)
+            navHome.setOnClickListener(v -> {
+                startActivity(new Intent(this, DoctorHomeActivity.class));
+                finish();
+            });
 
-        findViewById(R.id.navCases).setOnClickListener(v -> {
-            startActivity(new Intent(this, DoctorCasesActivity.class));
-            finish();
-        });
+        View navCases = findViewById(R.id.navCases);
+        if (navCases != null)
+            navCases.setOnClickListener(v -> {
+                startActivity(new Intent(this, DoctorCasesActivity.class));
+                finish();
+            });
 
-        findViewById(R.id.navReports).setOnClickListener(v -> {
-            startActivity(new Intent(this, ReportsActivity.class));
-            finish();
+        View navReports = findViewById(R.id.navReports);
+        if (navReports != null)
+            navReports.setOnClickListener(v -> {
+                startActivity(new Intent(this, ReportsActivity.class));
+                finish();
+            });
+    }
+
+    private void fetchUserStats() {
+        RetrofitClient.getApiService(this).getSettings().enqueue(new Callback<Map<String, Object>>() {
+            @Override
+            public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    updateUserStatsUI(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, Object>> call, Throwable t) {
+            }
         });
     }
 
+    private void updateUserStatsUI(Map<String, Object> user) {
+        TextView tvLevelInfo = findViewById(R.id.tvLevelInfo);
+        TextView tvXpProgress = findViewById(R.id.tvXpProgress);
+        android.widget.ProgressBar pbLevelProgress = findViewById(R.id.pbLevelProgress);
+
+        if (user.containsKey("level")) {
+            Object level = user.get("level");
+            String specialization = (String) user.get("specialization");
+            if (specialization == null || specialization.isEmpty())
+                specialization = "Expert Provider";
+            tvLevelInfo.setText("Level " + level + " • " + specialization);
+        }
+
+        if (user.containsKey("xp_points") && user.containsKey("xp_in_level")) {
+            int totalXp = ((Number) user.get("xp_points")).intValue();
+            int xpInLevel = ((Number) user.get("xp_in_level")).intValue();
+            tvXpProgress.setText(totalXp + "/500 XP"); // Assuming 500 is the next milestone logic for now
+            pbLevelProgress.setProgress(xpInLevel);
+        }
+    }
+
     private void fetchAchievements() {
-        RetrofitClient.getApiService().getAchievements().enqueue(new Callback<List<Map<String, Object>>>() {
+        RetrofitClient.getApiService(this).getAchievements().enqueue(new Callback<List<Map<String, Object>>>() {
             @Override
             public void onResponse(Call<List<Map<String, Object>>> call, Response<List<Map<String, Object>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -69,16 +112,37 @@ public class MyAchievementsActivity extends AppCompatActivity {
         });
     }
 
-    private void updateBadges(List<Map<String, Object>> achievements) {
-        // Simple mapping for this demo/session
-        for (Map<String, Object> achieve : achievements) {
-            String id = (String) achieve.get("achievement_id");
-            String title = (String) achieve.get("title");
-            String desc = (String) achieve.get("description");
-            String color = (String) achieve.get("color_hex");
-            String date = (String) achieve.get("date_earned");
-            if (date == null)
-                date = "Unlocked";
+    private void updateBadges(List<Map<String, Object>> userAchievements) {
+        for (Map<String, Object> userAchieve : userAchievements) {
+            Map<String, Object> details = (Map<String, Object>) userAchieve.get("achievement_details");
+            if (details == null)
+                continue;
+
+            String id = (String) details.get("achievement_id");
+            String title = (String) details.get("title");
+            String desc = (String) details.get("description");
+            String color = (String) details.get("color_hex");
+            String iconSlug = (String) details.get("icon_slug");
+
+            boolean isUnlocked = Boolean.TRUE.equals(userAchieve.get("is_unlocked"));
+            String dateStr = (String) userAchieve.get("date_earned");
+
+            if (isUnlocked && dateStr != null) {
+                try {
+                    // Simple parsing for YYYY-MM-DD
+                    java.text.SimpleDateFormat inFormat = new java.text.SimpleDateFormat("yyyy-MM-dd",
+                            java.util.Locale.US);
+                    java.text.SimpleDateFormat outFormat = new java.text.SimpleDateFormat("MMM dd, yyyy",
+                            java.util.Locale.US);
+                    java.util.Date d = inFormat.parse(dateStr);
+                    dateStr = outFormat.format(d);
+                } catch (Exception e) {
+                    // fallback to original if parsing fails
+                }
+            } else {
+                dateStr = isUnlocked ? "Unlocked" : "Locked";
+                color = "#F1F5F9"; // Light gray for locked
+            }
 
             View badgeView = null;
             if ("first_analysis".equals(id))
@@ -91,32 +155,53 @@ public class MyAchievementsActivity extends AppCompatActivity {
                 badgeView = findViewById(R.id.badgeRiskGuardian);
 
             if (badgeView != null) {
-                setupBadgeItem(badgeView, R.drawable.ic_star_badge, color, title, desc, date);
+                int iconResId = getResources().getIdentifier(iconSlug, "drawable", getPackageName());
+                if (iconResId == 0)
+                    iconResId = R.drawable.ic_star_badge;
+
+                setupBadgeItem(badgeView, iconResId, color, title, desc, dateStr, isUnlocked);
             }
         }
     }
 
-    private void setupBadgeItem(View view, int iconRes, String bgColor, String title, String desc, String date) {
+    private void setupBadgeItem(View view, int iconRes, String bgColor, String title, String desc, String date,
+            boolean isUnlocked) {
         ImageView ivIcon = view.findViewById(R.id.ivBadgeIcon);
         MaterialCardView container = view.findViewById(R.id.ivBadgeIconContainer);
         TextView tvTitle = view.findViewById(R.id.tvBadgeTitle);
         TextView tvDesc = view.findViewById(R.id.tvBadgeDesc);
         TextView tvDate = view.findViewById(R.id.tvBadgeDate);
 
-        if (ivIcon != null)
+        if (ivIcon != null) {
             ivIcon.setImageResource(iconRes);
+            ivIcon.setAlpha(isUnlocked ? 1.0f : 0.4f);
+        }
+
         if (container != null && bgColor != null) {
             try {
+                // Ensure we handle transparency or specific shades if needed
                 container.setCardBackgroundColor(Color.parseColor(bgColor));
             } catch (Exception e) {
-                container.setCardBackgroundColor(Color.parseColor("#FEF9C3"));
+                container.setCardBackgroundColor(Color.parseColor("#F1F5F9"));
             }
         }
-        if (tvTitle != null)
+
+        if (tvTitle != null) {
             tvTitle.setText(title);
-        if (tvDesc != null)
+            tvTitle.setAlpha(isUnlocked ? 1.0f : 0.5f);
+        }
+        if (tvDesc != null) {
             tvDesc.setText(desc);
-        if (tvDate != null)
+            tvDesc.setAlpha(isUnlocked ? 1.0f : 0.5f);
+        }
+        if (tvDate != null) {
             tvDate.setText(date);
+            tvDate.setTextColor(isUnlocked ? Color.parseColor("#94A3B8") : Color.parseColor("#CBD5E1"));
+        }
+
+        // Slightly gray out the whole card if locked
+        if (view instanceof MaterialCardView) {
+            ((MaterialCardView) view).setAlpha(isUnlocked ? 1.0f : 0.8f);
+        }
     }
 }

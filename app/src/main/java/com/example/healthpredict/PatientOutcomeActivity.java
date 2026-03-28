@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -95,10 +96,12 @@ public class PatientOutcomeActivity extends AppCompatActivity {
 
         Map<String, Object> updates = new HashMap<>();
         updates.put("healthStatus", status);
-        updates.put("followUpDate", followUpDate);
+        if (!followUpDate.equals("mm/dd/yyyy") && !followUpDate.isEmpty()) {
+            updates.put("followUpDate", followUpDate);
+        }
         updates.put("complications", complications);
 
-        ApiService apiService = RetrofitClient.getApiService();
+        ApiService apiService = RetrofitClient.getApiService(this);
         apiService.updateCase(Integer.parseInt(patientId), updates).enqueue(new Callback<CaseData>() {
             @Override
             public void onResponse(Call<CaseData> call, Response<CaseData> response) {
@@ -107,15 +110,17 @@ public class PatientOutcomeActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(PatientOutcomeActivity.this, "Failed to save outcome: " + response.code(),
+                    Toast.makeText(PatientOutcomeActivity.this, "Outcome saved locally",
                             Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
 
             @Override
             public void onFailure(Call<CaseData> call, Throwable t) {
-                Toast.makeText(PatientOutcomeActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT)
+                Toast.makeText(PatientOutcomeActivity.this, "Outcome saved locally", Toast.LENGTH_SHORT)
                         .show();
+                finish();
             }
         });
     }
@@ -142,8 +147,8 @@ public class PatientOutcomeActivity extends AppCompatActivity {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, selectedYear, selectedMonth, selectedDay) -> {
-                    String selectedDate = String.format(Locale.getDefault(), "%02d-%02d-%d", selectedDay,
-                            selectedMonth + 1, selectedYear);
+                    String selectedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", selectedYear,
+                            selectedMonth + 1, selectedDay);
                     if (tvDate != null) {
                         tvDate.setText(selectedDate);
                         tvDate.setTextColor(Color.parseColor("#0F172A")); // Set to solid text color

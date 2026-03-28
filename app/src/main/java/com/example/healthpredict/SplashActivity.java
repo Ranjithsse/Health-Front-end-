@@ -33,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
             return;
         }
 
-        RetrofitClient.getApiService().checkSession().enqueue(new Callback<Map<String, Object>>() {
+        RetrofitClient.getApiService(this).checkSession().enqueue(new Callback<Map<String, Object>>() {
             @Override
             public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
                 if (response.isSuccessful() && response.body() != null) {

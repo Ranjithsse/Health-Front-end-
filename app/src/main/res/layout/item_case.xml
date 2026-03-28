@@ -8,7 +8,10 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
     app:strokeColor="#E2E8F0"
-    app:strokeWidth="1dp">
+    app:strokeWidth="1dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:rippleColor="#F1F5F9">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

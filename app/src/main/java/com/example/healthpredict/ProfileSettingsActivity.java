@@ -1,9 +1,7 @@
 package com.example.healthpredict;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -32,8 +30,8 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         MaterialButton btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
         autoCompleteSensitivity = findViewById(R.id.autoCompleteSensitivity);
         CheckBox cbEmailNotify = findViewById(R.id.cbEmailNotify);
-        CheckBox cbConfidenceIntervals = findViewById(R.id.cbConfidenceIntervals); // Assuming ID based on XML
-        CheckBox cbExperimentalModels = findViewById(R.id.cbExperimentalModels); // Assuming ID based on XML
+        CheckBox cbConfidenceIntervals = findViewById(R.id.cbConfidenceIntervals);
+        CheckBox cbExperimentalModels = findViewById(R.id.cbExperimentalModels);
 
         loadSettingsFromServer();
 
@@ -45,8 +43,6 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
         setupSensitivityDropdown();
         setupCheckboxListeners();
-
-        // Bottom Nav Listeners unchanged...
 
         findViewById(R.id.navHome).setOnClickListener(v -> {
             startActivity(new Intent(this, DoctorHomeActivity.class));
@@ -113,7 +109,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     }
 
     private void loadSettingsFromServer() {
-        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getApiService(this);
         apiService.getSettings().enqueue(new Callback<Map<String, Object>>() {
             @Override
             public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
@@ -152,7 +148,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         Map<String, Object> updates = new HashMap<>();
         updates.put(key, value);
 
-        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getApiService(this);
         apiService.updateSettings(updates).enqueue(new Callback<Map<String, Object>>() {
             @Override
             public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {

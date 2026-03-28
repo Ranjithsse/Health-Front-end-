@@ -79,18 +79,20 @@ public class DoctorSearchActivity extends AppCompatActivity {
     }
 
     private void fetchFullHistoryFromServer() {
-        RetrofitClient.getApiService().getCases(null).enqueue(new Callback<List<CaseData>>() {
+        RetrofitClient.getApiService(this).getCases(null).enqueue(new Callback<List<CaseData>>() {
             @Override
             public void onResponse(Call<List<CaseData>> call, Response<List<CaseData>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     fullHistory = response.body();
                 } else {
+                    HistoryManager.getInstance().init(DoctorSearchActivity.this);
                     fullHistory = HistoryManager.getInstance().getCaseHistory();
                 }
             }
 
             @Override
             public void onFailure(Call<List<CaseData>> call, Throwable t) {
+                HistoryManager.getInstance().init(DoctorSearchActivity.this);
                 fullHistory = HistoryManager.getInstance().getCaseHistory();
             }
         });
@@ -146,9 +148,7 @@ public class DoctorSearchActivity extends AppCompatActivity {
     private void onCaseClicked(CaseData data) {
         CaseData.getInstance().reset();
         CaseData.getInstance().copyFrom(data);
-        Intent intent = new Intent(this, PatientDetailActivity.class);
-        intent.putExtra("PATIENT_NAME", data.patientName);
-        intent.putExtra("PATIENT_ID", data.patientId);
+        Intent intent = new Intent(this, FinalReportActivity.class);
         startActivity(intent);
     }
 

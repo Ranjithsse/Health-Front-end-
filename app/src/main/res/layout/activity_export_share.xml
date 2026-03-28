@@ -143,7 +143,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/navHome"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
@@ -162,7 +166,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/navCases"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
@@ -181,7 +189,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/navReports"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
@@ -201,7 +213,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/navProfile"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"

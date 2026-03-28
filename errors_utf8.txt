@@ -1,0 +1,577 @@
+03-15 14:13:44.167 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:13:44.167 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@442d71c
+03-15 14:13:44.187 D/ActivityManager( 2065): unfreezing ProcessRecord{cb39969 9247:com.google.android.adservices.api/u0a357}, reason = moto_freezer, adj = 0, adjType = service, adjSource = ProcessRecord{728455d 8695:com.google.android.googlequicksearchbox:googleapp/u0a255}
+03-15 14:13:44.189 D/ActivityManager( 2065): sync unfroze 9247 com.google.android.adservices.api for 1
+03-15 14:13:44.196 I/ActivityManager( 2065): Start proc 17394:com.google.android.apps.nbu.paisa.user/u0a395 for service {com.google.android.apps.nbu.paisa.user/com.google.android.libraries.notifications.entrypoints.scheduled.ScheduledTaskService}
+03-15 14:13:44.203 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:13:44.203 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:13:44.206 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@6e3584d
+03-15 14:13:44.228 I/ActivityManager( 2065): Start proc 17398:com.google.android.apps.tachyon/u0a274 for service {com.google.android.apps.tachyon/androidx.work.impl.background.systemjob.SystemJobService}
+03-15 14:13:44.231 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:13:44.488 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10395. pid: 17394
+03-15 14:13:44.761 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10274. pid: 17398
+03-15 14:13:45.948 I/ActivityManager( 2065): Start proc 17582:com.google.android.rkpdapp/u0a400 for service {com.google.android.rkpdapp/com.android.rkpdapp.service.RemoteProvisioningService}
+03-15 14:13:45.948 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:13:46.000 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10400. pid: 17582
+03-15 14:13:46.531 I/ActivityManager( 2065): Killing 15050:com.flipkart.android/u0a406 (adj 985, setSvc -10000): empty #31
+03-15 14:13:46.597 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{90f9375 15050:com.flipkart.android/u0a406} thread=android.os.BinderProxy@c09fa5c fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:13:47.538 I/ActivityManager( 2065): Killing 15740:com.google.android.apps.safetyhub/u0a243 (adj 985, setSvc -10000): empty #31
+03-15 14:13:47.578 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{6a3f544 15740:com.google.android.apps.safetyhub/u0a243} thread=android.os.BinderProxy@c2ce59f fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:13:49.815 D/ActivityManager( 2065): unfreezing ProcessRecord{9ed36e0 24849:com.motorola.smartfeed/u0a393}, reason = moto_freezer, adj = 0, adjType = service, adjSource = ProcessRecord{b1f8487 5567:com.motorola.launcher3/u0a318}
+03-15 14:13:49.816 D/ActivityManager( 2065): sync unfroze 24849 com.motorola.smartfeed for 1
+03-15 14:13:50.343 D/ActivityManager( 2065): freezing 17315 com.motorola.securityhub, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:13:50.351 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:13:50.359 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@6bc7391
+03-15 14:13:50.812 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:13:50.812 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@6d2e7f5
+03-15 14:13:50.819 I/ActivityManager( 2065): Killing 15821:com.google.android.youtube/u0a293 (adj 995, setSvc -10000): empty #31
+03-15 14:13:50.821 I/ActivityManager( 2065): Killing 15880:com.android.externalstorage/u0a140 (adj 995, setSvc -10000): empty #32
+03-15 14:13:50.828 I/ActivityManager( 2065): Killing 15874:android.process.media/u0a138 (adj 999, setSvc -10000): empty #31
+03-15 14:13:50.876 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{5d7ee9b 15874:android.process.media/u0a138} thread=android.os.BinderProxy@6f7998a fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:13:50.877 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{abcd977 15880:com.android.externalstorage/u0a140} thread=android.os.BinderProxy@2f09bfb fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:13:50.941 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{82bd4a8 15821:com.google.android.youtube/u0a293} thread=android.os.BinderProxy@f1b1418 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:13:51.573 I/ActivityManager( 2065): Killing 15806:com.google.android.documentsui/u0a141 (adj 995, setSvc -10000): empty #31
+03-15 14:13:51.707 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{8198af4 15806:com.google.android.documentsui/u0a141} thread=android.os.BinderProxy@e5c5cb6 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:13:51.708 W/ActivityManager( 2065): setHasOverlayUi called on unknown pid: 15806
+03-15 14:13:52.933 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:13:52.933 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@c9b1e3e
+03-15 14:13:52.984 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:13:52.984 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@7a8861c
+03-15 14:13:53.063 E/BluetoothPowerStatsCollector( 2065): java.util.concurrent.ExecutionException: java.lang.RuntimeException: error: 11
+03-15 14:13:53.063 E/BluetoothPowerStatsCollector( 2065): Caused by: java.lang.RuntimeException: error: 11
+03-15 14:13:55.141 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:13:55.141 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@1b5d629
+03-15 14:13:55.354 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:13:55.354 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:13:55.371 D/ActivityManager( 2065): freezing 17394 com.google.android.apps.nbu.paisa.user, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:13:55.377 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:13:55.377 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:13:55.458 D/ActivityManager( 2065): unfreezing ProcessRecord{d4e5972 17014:com.google.android.apps.wellbeing/u0a254}, reason = unfreezeTemporarily, adj = 920, adjType = cch-empty, adjSource = null
+03-15 14:13:55.458 D/ActivityManager( 2065): sync unfroze 17014 com.google.android.apps.wellbeing for 3
+03-15 14:13:55.613 D/ActivityManager( 2065): freezing 17398 com.google.android.apps.tachyon, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:13:56.117 D/ActivityManager( 2065): freezing 17582 com.google.android.rkpdapp, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:14:03.072 D/ActivityManager( 2065): freezing 17273 com.motorola.dolby.dolbyui, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:14:03.354 D/ActivityManager( 2065): freezing 15306 com.example.healthpredict, reason = moto_freezer, adj=915, adjType=cch-rec
+03-15 14:14:05.304 D/ActivityManager( 2065): freezing 9247 com.google.android.adservices.api, reason = moto_freezer, adj=915, adjType=service
+03-15 14:14:05.517 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=915, adjType=service
+03-15 14:14:10.747 I/ActivityManager( 2065): Waited long enough for: ServiceRecord{47d48e0 u0 com.whatsapp/.messageservice.messaging.MessageService c:com.whatsapp}
+03-15 14:14:16.582 D/ActivityManager( 2065): freezing 17014 com.google.android.apps.wellbeing, reason = moto_freezer, adj=925, adjType=cch-empty
+03-15 14:14:27.019 D/ActivityManager( 2065): freezing 24849 com.motorola.smartfeed, reason = moto_freezer, adj=900, adjType=cch-client-act
+03-15 14:15:16.035 W/ActivityManager( 2065): Stopping service due to app idle: u0a401 -2m11s82ms com.whatsapp/.messageservice.messaging.MessageService
+03-15 14:15:39.495 D/ActivityManager( 2065): freezing 16384 com.instagram.android, reason = moto_freezer, adj=900, adjType=cch-empty
+03-15 14:15:59.175 D/ActivityManager( 2065): unfreezing ProcessRecord{ee290d4 32160:com.android.vending/u0a250}, reason = moto_freezer, adj = 100, adjType = service, adjSource = ProcessRecord{c050cd3 21529:com.google.android.gms/u0a219}
+03-15 14:15:59.175 D/ActivityManager( 2065): sync unfroze 32160 com.android.vending for 1
+03-15 14:16:03.392 D/ActivityManager( 2065): unfreezing ProcessRecord{a235eea 16759:com.glance.lockscreenM/u0a203}, reason = unfreezeTemporarily, adj = 975, adjType = cch-empty, adjSource = null
+03-15 14:16:03.393 D/ActivityManager( 2065): sync unfroze 16759 com.glance.lockscreenM for 0
+03-15 14:16:03.403 D/ActivityManager( 2065): unfreezing ProcessRecord{cb39969 9247:com.google.android.adservices.api/u0a357}, reason = unfreezeTemporarily, adj = 915, adjType = service, adjSource = ProcessRecord{83ae8bc 15819:com.inmobi.weather/u0a291}
+03-15 14:16:03.403 D/ActivityManager( 2065): sync unfroze 9247 com.google.android.adservices.api for 0
+03-15 14:16:03.403 D/ActivityManager( 2065): unfreezing ProcessRecord{83ae8bc 15819:com.inmobi.weather/u0a291}, reason = unfreezeTemporarily, adj = 985, adjType = cch-empty, adjSource = null
+03-15 14:16:03.403 D/ActivityManager( 2065): sync unfroze 15819 com.inmobi.weather for 0
+03-15 14:16:03.408 D/ActivityManager( 2065): unfreezing ProcessRecord{272d5c6 16523:com.google.android.apps.youtube.music/u0a289}, reason = unfreezeTemporarily, adj = 975, adjType = cch-empty, adjSource = null
+03-15 14:16:03.409 D/ActivityManager( 2065): sync unfroze 16523 com.google.android.apps.youtube.music for 0
+03-15 14:16:03.412 I/ActivityManager( 2065): Start proc 18027:com.docxreader.documentreader.wordoffice/u0a419 for service {com.docxreader.documentreader.wordoffice/com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService}
+03-15 14:16:03.412 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:16:03.500 I/ActivityManager( 2065): Start proc 18046:com.google.android.gms.unstable/u0a219 for service {com.google.android.gms/com.google.android.gms.droidguard.DroidGuardService}
+03-15 14:16:03.500 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:16:03.823 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10219. pid: 18046
+03-15 14:16:04.083 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10419. pid: 18027
+03-15 14:16:06.669 D/ActivityManager( 2065): freezing 15819 com.inmobi.weather, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:16:06.672 D/ActivityManager( 2065): freezing 16759 com.glance.lockscreenM, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:16:09.877 I/ActivityManager( 2065): Killing 16246:com.motorola.appforecast/u0a217 (adj 995, setSvc -10000): empty #31
+03-15 14:16:09.914 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{8de0e4e 16246:com.motorola.appforecast/u0a217} thread=android.os.BinderProxy@12fe799 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:16:13.666 D/ActivityManager( 2065): freezing 9247 com.google.android.adservices.api, reason = moto_freezer, adj=915, adjType=service
+03-15 14:16:14.149 D/ActivityManager( 2065): freezing 16523 com.google.android.apps.youtube.music, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:16:14.498 D/ActivityManager( 2065): freezing 18027 com.docxreader.documentreader.wordoffice, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:16:29.182 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=915, adjType=service
+03-15 14:19:00.288 D/ActivityManager( 2065): unfreezing ProcessRecord{ee290d4 32160:com.android.vending/u0a250}, reason = moto_freezer, adj = 100, adjType = service, adjSource = ProcessRecord{c050cd3 21529:com.google.android.gms/u0a219}
+03-15 14:19:00.289 D/ActivityManager( 2065): sync unfroze 32160 com.android.vending for 1
+03-15 14:19:10.411 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=915, adjType=service
+03-15 14:20:00.296 E/BluetoothPowerStatsCollector( 2065): java.util.concurrent.ExecutionException: java.lang.RuntimeException: error: 11
+03-15 14:20:00.296 E/BluetoothPowerStatsCollector( 2065): Caused by: java.lang.RuntimeException: error: 11
+03-15 14:20:05.697 I/ActivityManager( 2065): Background started FGS: Allowed [callingPackage: com.whatsapp; callingUid: 10401; uidState: SVC ; uidBFSL: n/a; intent: Intent { xflg=0x4 cmp=com.whatsapp/.messaging.service.GcmFGService }; code:PUSH_MESSAGING; tempAllowListReason:<30f9ee5 com.google.android.c2dm.intent.RECEIVE/u0,reasonCode:PUSH_MESSAGING,duration:20000,callingUid:10219>; allowWiu:-1; targetSdkVersion:36; callerTargetSdkVersion:36; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+03-15 14:20:05.717 W/ActivityManager( 2065): Foreground service started from background can not have location/camera/microphone access: service com.whatsapp/.messaging.service.GcmFGService
+03-15 14:20:05.717 I/ActivityManager( 2065): Background started FGS: Allowed [callingPackage: com.whatsapp; callingUid: 10401; uidState: FGS ; uidBFSL: [BFSL]; intent: Intent { cmp=com.whatsapp/.messaging.service.GcmFGService }; code:PROC_STATE_FGS; tempAllowListReason:<30f9ee5 com.google.android.c2dm.intent.RECEIVE/u0,reasonCode:PUSH_MESSAGING,duration:20000,callingUid:10219>; allowWiu:-1; targetSdkVersion:36; callerTargetSdkVersion:36; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+03-15 14:20:06.569 D/ActivityManager( 2065): unfreezing ProcessRecord{5ec7854 15651:android.process.acore/u0a130}, reason = moto_freezer, adj = 200, adjType = provider, adjSource = ProcessRecord{c00086a 12840:com.whatsapp/u0a401}
+03-15 14:20:06.570 D/ActivityManager( 2065): sync unfroze 15651 android.process.acore for 1
+03-15 14:20:06.578 D/ActivityManager( 2065): unfreezing ProcessRecord{ee290d4 32160:com.android.vending/u0a250}, reason = moto_freezer, adj = 100, adjType = service, adjSource = ProcessRecord{c050cd3 21529:com.google.android.gms/u0a219}
+03-15 14:20:06.580 D/ActivityManager( 2065): sync unfroze 32160 com.android.vending for 1
+03-15 14:20:06.956 I/ActivityManager( 2065): Start proc 18223:com.motorola.aicore/u0a182 for content provider {com.motorola.aicore/com.motorola.aicore.contentprovider.ServiceContentProvider}
+03-15 14:20:06.956 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:20:07.439 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10182. pid: 18223
+03-15 14:20:07.487 I/ActivityManager( 2065): Start proc 18255:com.facebook.appmanager/u0a292 for service {com.facebook.appmanager/com.facebook.analytics2.logger.legacy.uploader.LollipopUploadService}
+03-15 14:20:07.487 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:20:07.795 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10292. pid: 18255
+03-15 14:20:08.044 I/ActivityManager( 2065): Start proc 18311:com.facebook.system/u0a251 for content provider {com.facebook.system/com.facebook.oxygen.installer.api.AppManagerApiProvider}
+03-15 14:20:08.044 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:20:08.122 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10251. pid: 18311
+03-15 14:20:08.158 I/ActivityManager( 2065): Start proc 18331:android.process.media/u0a138 for content provider {com.android.providers.downloads/com.android.providers.downloads.DownloadProvider}
+03-15 14:20:08.158 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:20:08.356 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10138. pid: 18331
+03-15 14:20:08.357 D/ActivityManager( 2065): Stop FGS timeout: ServiceRecord{d141e99 u0 com.whatsapp/.messaging.service.GcmFGService c:com.whatsapp}
+03-15 14:20:09.086 I/ActivityManager( 2065): Killing 16247:money.super.payments/u0a439 (adj 995, setSvc -10000): empty #31
+03-15 14:20:09.165 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{10c15a 16247:money.super.payments/u0a439} thread=android.os.BinderProxy@6ff3cdc fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:20:09.170 I/ActivityManager( 2065): Process PhantomProcessRecord {80d3199 16292:16247:webview_zygote/u0a439} died
+03-15 14:20:17.069 D/ActivityManager( 2065): unfreezing ProcessRecord{afefd33 3735:com.jio.myjio/u0a455}, reason = unfreezeTemporarily, adj = 965, adjType = cch-empty, adjSource = null
+03-15 14:20:17.070 D/ActivityManager( 2065): sync unfroze 3735 com.jio.myjio for 0
+03-15 14:20:17.076 D/ActivityManager( 2065): unfreezing ProcessRecord{f69dca 16878:com.google.android.apps.photos/u0a283}, reason = unfreezeTemporarily, adj = 965, adjType = cch-empty, adjSource = null
+03-15 14:20:17.076 D/ActivityManager( 2065): sync unfroze 16878 com.google.android.apps.photos for 0
+03-15 14:20:17.216 D/ActivityManager( 2065): unfreezing ProcessRecord{9ff4800 16908:com.motorola.camera5/u0a216}, reason = moto_freezer, adj = 925, adjType = provider, adjSource = ProcessRecord{f69dca 16878:com.google.android.apps.photos/u0a283}
+03-15 14:20:17.217 D/ActivityManager( 2065): sync unfroze 16908 com.motorola.camera5 for 1
+03-15 14:20:18.993 I/ActivityManager( 2065): Killing 16364:com.android.chrome/u0a264 (adj 900, setSvc -10000): empty #31
+03-15 14:20:19.034 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{d5b6288 16364:com.android.chrome/u0a264} thread=android.os.BinderProxy@cf5ea32 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:20:19.594 D/ActivityManager( 2065): freezing 18255 com.facebook.appmanager, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:20:19.596 D/ActivityManager( 2065): freezing 18311 com.facebook.system, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:20:27.216 D/ActivityManager( 2065): freezing 3735 com.jio.myjio, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:20:27.219 D/ActivityManager( 2065): freezing 16908 com.motorola.camera5, reason = moto_freezer, adj=925, adjType=provider
+03-15 14:20:27.308 D/ActivityManager( 2065): freezing 16878 com.google.android.apps.photos, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:20:33.907 I/ActivityManager( 2065): Killing 16525:org.telegram.messenger/u0a434 (adj 975, setSvc -10000): empty #31
+03-15 14:20:33.993 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{a38c1d9 16525:org.telegram.messenger/u0a434} thread=android.os.BinderProxy@d7ed4da fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:20:43.606 I/ActivityManager( 2065): Killing 16384:com.instagram.android/u0a392 (adj 900, setSvc -10000): empty #31
+03-15 14:20:43.757 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{f5ac4e8 16384:com.instagram.android/u0a392} thread=android.os.BinderProxy@9482c39 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:20:44.012 D/ActivityManager( 2065): freezing 15651 android.process.acore, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:20:47.526 D/ActivityManager( 2065): freezing 18223 com.motorola.aicore, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:20:53.712 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=915, adjType=service
+03-15 14:21:13.040 E/ActivityManager( 2065): Failure starting process com.instagram.android
+03-15 14:21:13.040 E/ActivityManager( 2065): java.lang.RuntimeException: SmartBackground restriction
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.startProcess(ProcessList.java:2586)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.lambda$handleProcessStart$2(ProcessList.java:2360)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.$r8$lambda$7tA7FGK86Ca7_MUb7SZX_VtkDjI(ProcessList.java:0)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList$$ExternalSyntheticLambda6.run(R8$$SyntheticClass:0)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.handleProcessStart(ProcessList.java:2387)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.lambda$startProcessLocked$1(ProcessList.java:2326)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.$r8$lambda$CJ9r0QvrztLxvJRHzZHIx3Om9NE(ProcessList.java:0)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList$$ExternalSyntheticLambda5.run(R8$$SyntheticClass:0)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at android.os.Handler.handleCallback(Handler.java:1037)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at android.os.Handler.dispatchMessage(Handler.java:108)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at android.os.Looper.loopOnce(Looper.java:292)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at android.os.Looper.loop(Looper.java:416)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at android.os.HandlerThread.run(HandlerThread.java:103)
+03-15 14:21:13.040 E/ActivityManager( 2065): 	at com.android.server.ServiceThread.run(ServiceThread.java:49)
+03-15 14:21:13.040 I/ActivityManager( 2065): Force stopping com.instagram.android appid=10392 user=0: start failure
+03-15 14:21:13.045 I/ActivityManager( 2065): Killing 16908:com.motorola.camera5/u0a216 (adj 999, setSvc -10000): empty #31
+03-15 14:21:13.049 I/ActivityManager( 2065):   Force stopping service ServiceRecord{94a24b6 u0 com.instagram.android/com.instagram.jobscheduler.bgfetch.scheduler.IgBgFetchTaskLifeService c:com.instagram.android}
+03-15 14:21:13.051 I/ActivityManager( 2065): Exiting empty application process 0:com.instagram.android/u0a392 (null)
+03-15 14:21:13.055 E/ActivityManager( 2065): Failure starting process com.instagram.android
+03-15 14:21:13.055 E/ActivityManager( 2065): java.lang.RuntimeException: SmartBackground restriction
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.startProcess(ProcessList.java:2586)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.lambda$handleProcessStart$2(ProcessList.java:2360)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.$r8$lambda$7tA7FGK86Ca7_MUb7SZX_VtkDjI(ProcessList.java:0)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList$$ExternalSyntheticLambda6.run(R8$$SyntheticClass:0)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.handleProcessStart(ProcessList.java:2387)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.lambda$startProcessLocked$1(ProcessList.java:2326)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList.$r8$lambda$CJ9r0QvrztLxvJRHzZHIx3Om9NE(ProcessList.java:0)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at com.android.server.am.ProcessList$$ExternalSyntheticLambda5.run(R8$$SyntheticClass:0)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at android.os.Handler.handleCallback(Handler.java:1037)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at android.os.Handler.dispatchMessage(Handler.java:108)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at android.os.Looper.loopOnce(Looper.java:292)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at android.os.Looper.loop(Looper.java:416)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at android.os.HandlerThread.run(HandlerThread.java:103)
+03-15 14:21:13.055 E/ActivityManager( 2065): 	at com.android.server.ServiceThread.run(ServiceThread.java:49)
+03-15 14:21:13.055 I/ActivityManager( 2065): Force stopping com.instagram.android appid=10392 user=0: start failure
+03-15 14:21:13.057 I/ActivityManager( 2065): Exiting empty application process 0:com.instagram.android/u0a392 (null)
+03-15 14:21:13.107 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{9ff4800 16908:com.motorola.camera5/u0a216} thread=android.os.BinderProxy@40134af fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:21:19.050 I/ActivityManager( 2065): Start proc 18381:com.android.chrome/u0a264 for aitune
+03-15 14:21:19.050 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:21:19.069 I/ActivityManager( 2065): Killing 17063:com.motorola.personalize/u0a338 (adj 995, setSvc -10000): empty #31
+03-15 14:21:19.123 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{4803baf 17063:com.motorola.personalize/u0a338} thread=android.os.BinderProxy@82a00ec fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:21:19.124 W/ActivityManager( 2065): Scheduling restart of crashed service com.motorola.personalize/.plugin.LockScreenPluginService in 1000ms for connection
+03-15 14:21:19.125 W/ActivityManager( 2065): pid 2579 com.android.systemui sent binder code 3 with flags 1 to frozen apps and got error -32
+03-15 14:21:19.195 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10264. pid: 18381
+03-15 14:21:24.145 I/ActivityManager( 2065): Start proc 18402:com.motorola.personalize/u0a338 for service {com.motorola.personalize/com.motorola.personalize.plugin.LockScreenPluginService}
+03-15 14:21:24.145 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:21:24.268 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10338. pid: 18402
+03-15 14:21:24.271 I/ActivityManager( 2065): Killing 17097:com.google.android.gm/u0a271 (adj 995, setSvc -10000): empty #31
+03-15 14:21:24.371 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{3cb812f 17097:com.google.android.gm/u0a271} thread=android.os.BinderProxy@a1a53b4 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:21:24.373 D/ActivityManager( 2065): unfreezing ProcessRecord{ee290d4 32160:com.android.vending/u0a250}, reason = moto_freezer, adj = 100, adjType = service, adjSource = ProcessRecord{c050cd3 21529:com.google.android.gms/u0a219}
+03-15 14:21:24.375 D/ActivityManager( 2065): sync unfroze 32160 com.android.vending for 1
+03-15 14:21:26.166 W/ActivityManager( 2065): Stopping service due to app idle: u0a401 -1m20s475ms com.whatsapp/.messageservice.messaging.MessageService
+03-15 14:21:29.175 D/ActivityManager( 2065): freezing 18381 com.android.chrome, reason = moto_freezer, adj=900, adjType=cch-empty
+03-15 14:21:34.487 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=915, adjType=service
+03-15 14:21:43.778 I/ActivityManager( 2065): Start proc 18434:com.instagram.android/u0a392 for aitune
+03-15 14:21:43.778 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:21:44.724 W/ActivityManager( 2065): Background start not allowed: service Intent { xflg=0x4 cmp=com.instagram.android/com.instagram.jobscheduler.bgfetch.scheduler.IgBgFetchTaskLifeService (has extras) } to com.instagram.android/com.instagram.jobscheduler.bgfetch.scheduler.IgBgFetchTaskLifeService from pid=18434 uid=10392 pkg=com.instagram.android startFg?=false
+03-15 14:21:44.809 I/ActivityManager( 2065): Start proc 18568:com.google.android.dialer/u0a213 for service {com.google.android.dialer/androidx.work.impl.background.systemjob.SystemJobService}
+03-15 14:21:44.809 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:21:44.819 I/ActivityManager( 2065): Start proc 18569:com.google.android.gm/u0a271 for service {com.google.android.gm/androidx.work.impl.background.systemjob.SystemJobService}
+03-15 14:21:44.819 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:21:44.856 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10392. pid: 18434
+03-15 14:21:45.076 D/ActivityManager( 2065): unfreezing ProcessRecord{ee290d4 32160:com.android.vending/u0a250}, reason = moto_freezer, adj = 100, adjType = service, adjSource = ProcessRecord{c050cd3 21529:com.google.android.gms/u0a219}
+03-15 14:21:45.077 D/ActivityManager( 2065): sync unfroze 32160 com.android.vending for 1
+03-15 14:21:45.095 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10271. pid: 18569
+03-15 14:21:45.416 I/ActivityManager( 2065): Start proc 18728:com.google.android.tts/u0a275 for service {com.google.android.tts/com.google.android.apps.speech.tts.googletts.service.GoogleTtsService}
+03-15 14:21:45.416 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:21:45.461 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10213. pid: 18568
+03-15 14:21:45.503 I/ActivityManager( 2065): Start proc 18763:com.google.android.projection.gearhead:provider/u0a181 for content provider {com.google.android.projection.gearhead/com.google.android.apps.auto.components.projectionstate.ProjectionStateProvider}
+03-15 14:21:45.503 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:21:45.588 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10275. pid: 18728
+03-15 14:21:45.681 I/ActivityManager( 2065): Killing 17190:com.android.providers.calendar/u0a133 (adj 995, setSvc -10000): empty #31
+03-15 14:21:45.715 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{774832d 17190:com.android.providers.calendar/u0a133} thread=android.os.BinderProxy@1078fd fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:21:45.798 I/ActivityManager( 2065): Killing 17302:com.motorola.moto/u0a221 (adj 985, setSvc -10000): empty #31
+03-15 14:21:45.837 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{d06bbbe 17302:com.motorola.moto/u0a221} thread=android.os.BinderProxy@9ce8169 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:21:45.879 I/ActivityManager( 2065): Killing 17315:com.motorola.securityhub/u0a329 (adj 985, setSvc -10000): empty #31
+03-15 14:21:45.920 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10181. pid: 18763
+03-15 14:21:45.922 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{d8c8496 17315:com.motorola.securityhub/u0a329} thread=android.os.BinderProxy@a86b038 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:21:55.658 D/ActivityManager( 2065): freezing 18569 com.google.android.gm, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:21:55.662 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=915, adjType=service
+03-15 14:21:55.784 D/ActivityManager( 2065): freezing 18568 com.google.android.dialer, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:21:55.903 D/ActivityManager( 2065): freezing 18763 com.google.android.projection.gearhead:provider, reason = moto_freezer, adj=915, adjType=provider
+03-15 14:22:29.730 D/ActivityManager( 2065): unfreezing ProcessRecord{cb39969 9247:com.google.android.adservices.api/u0a357}, reason = moto_freezer, adj = 0, adjType = service, adjSource = ProcessRecord{728455d 8695:com.google.android.googlequicksearchbox:googleapp/u0a255}
+03-15 14:22:29.731 D/ActivityManager( 2065): sync unfroze 9247 com.google.android.adservices.api for 1
+03-15 14:22:29.755 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:22:29.755 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:22:29.773 D/ActivityManager( 2065): unfreezing ProcessRecord{ee290d4 32160:com.android.vending/u0a250}, reason = moto_freezer, adj = 100, adjType = service, adjSource = ProcessRecord{c050cd3 21529:com.google.android.gms/u0a219}
+03-15 14:22:29.774 D/ActivityManager( 2065): sync unfroze 32160 com.android.vending for 1
+03-15 14:22:29.822 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:22:29.825 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@f27cc6
+03-15 14:22:29.828 W/ActivityManager( 2065): Slow operation: 56ms so far, now at startProcess: returned from zygote!
+03-15 14:22:29.828 W/ActivityManager( 2065): Slow operation: 56ms so far, now at startProcess: done updating battery stats
+03-15 14:22:29.828 W/ActivityManager( 2065): Slow operation: 56ms so far, now at startProcess: building log message
+03-15 14:22:29.828 I/ActivityManager( 2065): Start proc 18961:com.google.android.googlequicksearchbox:search/u0a255 for service {com.google.android.googlequicksearchbox/androidx.work.impl.background.systemjob.SystemJobService}
+03-15 14:22:29.828 W/ActivityManager( 2065): Slow operation: 56ms so far, now at startProcess: starting to update pids map
+03-15 14:22:29.828 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:22:29.828 W/ActivityManager( 2065): Slow operation: 56ms so far, now at startProcess: done updating pids map
+03-15 14:22:29.842 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:22:29.842 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:22:29.845 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:22:29.846 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:22:29.939 W/ActivityManager( 2065): Slow operation: 105ms so far, now at startProcess: returned from zygote!
+03-15 14:22:29.939 W/ActivityManager( 2065): Slow operation: 105ms so far, now at startProcess: done updating battery stats
+03-15 14:22:29.939 W/ActivityManager( 2065): Slow operation: 105ms so far, now at startProcess: building log message
+03-15 14:22:29.939 I/ActivityManager( 2065): Start proc 18974:com.google.android.youtube/u0a293 for service {com.google.android.youtube/androidx.work.impl.background.systemjob.SystemJobService}
+03-15 14:22:29.939 W/ActivityManager( 2065): Slow operation: 105ms so far, now at startProcess: starting to update pids map
+03-15 14:22:29.939 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:22:29.939 W/ActivityManager( 2065): Slow operation: 105ms so far, now at startProcess: done updating pids map
+03-15 14:22:30.004 D/ActivityManager( 2065): unfreezing ProcessRecord{4246b67 17273:com.motorola.dolby.dolbyui/u0a170}, reason = unfreezeTemporarily, adj = 995, adjType = cch-empty, adjSource = null
+03-15 14:22:30.005 D/ActivityManager( 2065): sync unfroze 17273 com.motorola.dolby.dolbyui for 3
+03-15 14:22:30.260 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10293. pid: 18974
+03-15 14:22:30.328 W/ActivityManager( 2065): Background start not allowed: service Intent { act=com.whatsapp.messageservice.messaging.MessageService.START xflg=0x4 cmp=com.whatsapp/.messageservice.messaging.MessageService } to com.whatsapp/.messageservice.messaging.MessageService from pid=12840 uid=10401 pkg=com.whatsapp startFg?=false
+03-15 14:22:30.355 I/ActivityManager( 2065): Start proc 19083:com.android.providers.calendar/u0a133 for content provider {com.android.providers.calendar/com.android.providers.calendar.CalendarProvider2}
+03-15 14:22:30.355 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:22:30.415 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10255. pid: 18961
+03-15 14:22:30.433 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10133. pid: 19083
+03-15 14:22:30.813 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:22:30.813 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@30b5895
+03-15 14:22:31.324 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:22:31.324 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@e4c2c3f
+03-15 14:22:31.862 E/BluetoothPowerStatsCollector( 2065): java.util.concurrent.ExecutionException: java.lang.RuntimeException: error: 11
+03-15 14:22:31.862 E/BluetoothPowerStatsCollector( 2065): Caused by: java.lang.RuntimeException: error: 11
+03-15 14:22:32.228 I/ActivityManager( 2065): Killing 17273:com.motorola.dolby.dolbyui/u0a170 (adj 995, setSvc -10000): empty #31
+03-15 14:22:32.270 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{4246b67 17273:com.motorola.dolby.dolbyui/u0a170} thread=android.os.BinderProxy@7c1fedb fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:22:33.047 I/ActivityManager( 2065): Start proc 19229:com.motorola.dolby.dolbyui/u0a170 for broadcast {com.motorola.dolby.dolbyui/com.motorola.dolby.dolbyui.gamemode.GameModeBroadcastReceiver}
+03-15 14:22:33.048 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:22:33.085 D/ActivityManager( 2065): unfreezing ProcessRecord{b6254a9 18223:com.motorola.aicore/u0a182}, reason = moto_freezer, adj = 250, adjType = provider, adjSource = ProcessRecord{7a87f64 4280:com.motorola.uxcore/u0a246}
+03-15 14:22:33.087 D/ActivityManager( 2065): sync unfroze 18223 com.motorola.aicore for 1
+03-15 14:22:33.276 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10170. pid: 19229
+03-15 14:22:33.507 I/ActivityManager( 2065): Start proc 19267:com.motorola.moto/u0a221 for content provider {com.motorola.moto/com.motorola.data.engineprovider.EngineContentProvider}
+03-15 14:22:33.507 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:22:33.641 I/ActivityManager( 2065): Start proc 19280:com.motorola.securityhub/u0a329 for content provider {com.motorola.securityhub/com.motorola.securityhub.provider.SecurityHubProvider}
+03-15 14:22:33.641 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:22:33.788 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10329. pid: 19280
+03-15 14:22:33.866 I/ActivityManager( 2065): Killing 17398:com.google.android.apps.tachyon/u0a274 (adj 995, setSvc -10000): empty #31
+03-15 14:22:33.880 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10221. pid: 19267
+03-15 14:22:33.930 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{8c44b95 17398:com.google.android.apps.tachyon/u0a274} thread=android.os.BinderProxy@4ff4d91 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:22:34.008 I/ActivityManager( 2065): Force stopping com.example.healthpredict appid=10431 user=0: from pid 19316 and uid 2000
+03-15 14:22:34.036 E/ActivityManager( 2065): Unable to freeze binder for 15306: -11
+03-15 14:22:34.037 I/ActivityManager( 2065): Killing 15306:com.example.healthpredict/u0a431 (adj 925, setSvc -10000): stop com.example.healthpredict due to from pid 19316 and uid 2000
+03-15 14:22:34.046 W/ActivityManager( 2065): Invalid packageName: com.example.healthpredict
+03-15 14:22:34.049 I/ActivityManager( 2065): Force stopping com.example.healthpredict appid=10431 user=0: from pid 19317 and uid 2000
+03-15 14:22:34.053 W/ActivityManager( 2065): Invalid packageName: com.example.healthpredict
+03-15 14:22:34.140 W/ActivityManager( 2065): setHasOverlayUi called on unknown pid: 15306
+03-15 14:22:34.140 V/ActivityManager( 2065): Got obituary of 15306:com.example.healthpredict
+03-15 14:22:34.251 I/ActivityManager( 2065): Killing 17582:com.google.android.rkpdapp/u0a400 (adj 995, setSvc -10000): empty #31
+03-15 14:22:34.285 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{9a9db0b 17582:com.google.android.rkpdapp/u0a400} thread=android.os.BinderProxy@8896560 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:22:35.400 I/ActivityManager( 2065): Force stopping com.example.healthpredict appid=10431 user=0: from pid 19346 and uid 2000
+03-15 14:22:35.403 W/ActivityManager( 2065): Invalid packageName: com.example.healthpredict
+03-15 14:22:35.714 I/ActivityManager( 2065): Start proc 19361:com.example.healthpredict/u0a431 for next-top-activity {com.example.healthpredict/com.example.healthpredict.SplashActivity}
+03-15 14:22:35.715 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:22:35.809 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:22:35.809 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@4307f81
+03-15 14:22:36.156 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10431. pid: 19361
+03-15 14:22:36.448 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:22:36.448 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@ea2834d
+03-15 14:22:38.431 W/ActivityManager( 2065): pid 2065 system sent binder code 2 with flags 1 to frozen apps and got error -32
+03-15 14:22:41.370 D/ActivityManager( 2065): freezing 9247 com.google.android.adservices.api, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:22:41.692 I/ActivityManager( 2065): Start proc 19434:com.google.android.gms.ui/u0a219 for service {com.google.android.gms/com.google.android.gms.chimera.UiIntentOperationService}
+03-15 14:22:41.692 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:22:41.829 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10219. pid: 19434
+03-15 14:22:42.644 D/ActivityManager( 2065): freezing 18974 com.google.android.youtube, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:22:49.354 I/ActivityManager( 2065): Killing 17394:com.google.android.apps.nbu.paisa.user/u0a395 (adj 995, setSvc -10000): empty #31
+03-15 14:22:49.358 D/ActivityManager( 2065): freezing 19280 com.motorola.securityhub, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:22:49.449 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{e4cdac6 17394:com.google.android.apps.nbu.paisa.user/u0a395} thread=android.os.BinderProxy@c97f0d4 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:22:49.452 I/ActivityManager( 2065): Process PhantomProcessRecord {a527d 17875:17394:getprop/u0a395} died
+03-15 14:22:50.843 D/ActivityManager( 2065): freezing 19229 com.motorola.dolby.dolbyui, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:22:52.550 D/ActivityManager( 2065): unfreezing ProcessRecord{5d56ea1 19229:com.motorola.dolby.dolbyui/u0a170}, reason = unfreezeTemporarily, adj = 915, adjType = cch-empty, adjSource = null
+03-15 14:22:52.551 D/ActivityManager( 2065): sync unfroze 19229 com.motorola.dolby.dolbyui for 3
+03-15 14:22:59.408 I/ActivityManager( 2065): Killing 17014:com.google.android.apps.wellbeing/u0a254 (adj 995, setSvc -10000): empty #31
+03-15 14:22:59.442 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{d4e5972 17014:com.google.android.apps.wellbeing/u0a254} thread=android.os.BinderProxy@771ba9a fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:23:03.641 I/ActivityManager( 2065): Killing 16056:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a291i337 (adj 995, setSvc -10000): empty #31
+03-15 14:23:03.666 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{6d10d0e 16056:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a291i337} thread=android.os.BinderProxy@d7dfe4a fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:23:03.666 W/ActivityManager( 2065): Scheduling restart of crashed service com.inmobi.weather/org.chromium.content.app.SandboxedProcessService0:0 in 1000ms for connection
+03-15 14:23:04.432 I/ActivityManager( 2065): Killing 16759:com.glance.lockscreenM/u0a203 (adj 985, setSvc -10000): empty #31
+03-15 14:23:04.491 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{a235eea 16759:com.glance.lockscreenM/u0a203} thread=android.os.BinderProxy@ea5b516 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:23:04.679 I/ActivityManager( 2065): Start proc 19543:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0i338 for  {com.inmobi.weather/org.chromium.content.app.SandboxedProcessService0:0}
+03-15 14:23:04.679 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:23:04.739 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 99338. pid: 19543
+03-15 14:23:05.008 I/ActivityManager( 2065): Killing 15819:com.inmobi.weather/u0a291 (adj 999, setSvc -10000): empty #31
+03-15 14:23:05.090 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{83ae8bc 15819:com.inmobi.weather/u0a291} thread=android.os.BinderProxy@9a8e252 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:23:05.130 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{8ae9884 19543:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a291i338} thread=android.os.BinderProxy@c51c4c fromBinderDied=true isKilledByAm=false reason=null
+03-15 14:23:05.130 I/ActivityManager( 2065): Process com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 (pid 19543) has died: fg  SVC
+03-15 14:23:09.468 D/ActivityManager( 2065): freezing 18223 com.motorola.aicore, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:23:14.597 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:23:19.100 D/ActivityManager( 2065): freezing 19229 com.motorola.dolby.dolbyui, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:23:39.790 I/ActivityManager( 2065): Start proc 19616:com.motorola.ccc.ota/u0a298 for service {com.motorola.ccc.ota/androidx.work.impl.background.systemjob.SystemJobService}
+03-15 14:23:39.790 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:23:39.900 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10298. pid: 19616
+03-15 14:23:40.692 I/ActivityManager( 2065): Killing 16523:com.google.android.apps.youtube.music/u0a289 (adj 995, setSvc -10000): empty #31
+03-15 14:23:40.765 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{272d5c6 16523:com.google.android.apps.youtube.music/u0a289} thread=android.os.BinderProxy@138f8db fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:23:42.458 D/ActivityManager( 2065): unfreezing ProcessRecord{ee290d4 32160:com.android.vending/u0a250}, reason = moto_freezer, adj = 100, adjType = service, adjSource = ProcessRecord{c050cd3 21529:com.google.android.gms/u0a219}
+03-15 14:23:42.459 D/ActivityManager( 2065): sync unfroze 32160 com.android.vending for 1
+03-15 14:23:43.525 I/ActivityManager( 2065): Start proc 19646:com.google.android.rkpdapp/u0a400 for service {com.google.android.rkpdapp/androidx.work.impl.background.systemjob.SystemJobService}
+03-15 14:23:43.525 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:23:43.570 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10400. pid: 19646
+03-15 14:23:54.008 D/ActivityManager( 2065): freezing 19646 com.google.android.rkpdapp, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:23:55.562 D/ActivityManager( 2065): unfreezing ProcessRecord{cb39969 9247:com.google.android.adservices.api/u0a357}, reason = moto_freezer, adj = 0, adjType = service, adjSource = ProcessRecord{728455d 8695:com.google.android.googlequicksearchbox:googleapp/u0a255}
+03-15 14:23:55.563 D/ActivityManager( 2065): sync unfroze 9247 com.google.android.adservices.api for 1
+03-15 14:23:55.582 D/ActivityManager( 2065): unfreezing ProcessRecord{289c320 18974:com.google.android.youtube/u0a293}, reason = unfreezeTemporarily, adj = 920, adjType = cch-empty, adjSource = null
+03-15 14:23:55.583 D/ActivityManager( 2065): sync unfroze 18974 com.google.android.youtube for 0
+03-15 14:24:05.668 D/ActivityManager( 2065): freezing 9247 com.google.android.adservices.api, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:24:05.790 D/ActivityManager( 2065): freezing 18974 com.google.android.youtube, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:24:05.938 D/ActivityManager( 2065): unfreezing ProcessRecord{bc106b9 18255:com.facebook.appmanager/u0a292}, reason = unfreezeTemporarily, adj = 975, adjType = cch-empty, adjSource = null
+03-15 14:24:05.939 D/ActivityManager( 2065): sync unfroze 18255 com.facebook.appmanager for 0
+03-15 14:24:07.671 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=915, adjType=service
+03-15 14:24:16.064 D/ActivityManager( 2065): freezing 18255 com.facebook.appmanager, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:24:36.020 I/ActivityManager( 2065): Start proc 19751:com.google.android.apps.messaging/u0a220 for service {com.google.android.apps.messaging/androidx.work.impl.background.systemjob.SystemJobService}
+03-15 14:24:36.020 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:24:36.411 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10220. pid: 19751
+03-15 14:24:36.654 D/ActivityManager( 2065): unfreezing ProcessRecord{ee290d4 32160:com.android.vending/u0a250}, reason = moto_freezer, adj = 100, adjType = service, adjSource = ProcessRecord{c050cd3 21529:com.google.android.gms/u0a219}
+03-15 14:24:36.655 D/ActivityManager( 2065): sync unfroze 32160 com.android.vending for 1
+03-15 14:24:37.065 I/ActivityManager( 2065): Killing 18027:com.docxreader.documentreader.wordoffice/u0a419 (adj 995, setSvc -10000): empty #31
+03-15 14:24:37.133 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{3d1b9ef 18027:com.docxreader.documentreader.wordoffice/u0a419} thread=android.os.BinderProxy@e43b174 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:24:48.389 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=915, adjType=service
+03-15 14:24:50.327 I/ActivityManager( 2065): Killing 15494:com.motorola.freeform/u0a322 (adj 999, setSvc -10000): empty #31
+03-15 14:24:50.393 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{e76aea7 15494:com.motorola.freeform/u0a322} thread=android.os.BinderProxy@e039870 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:24:50.831 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:24:50.832 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@283b5d2
+03-15 14:24:50.857 I/ActivityManager( 2065): Start proc 19872:com.google.android.contacts/u0a269 for service {com.google.android.contacts/androidx.work.impl.background.systemjob.SystemJobService}
+03-15 14:24:50.857 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:24:50.900 D/ActivityManager( 2065): unfreezing ProcessRecord{bc106b9 18255:com.facebook.appmanager/u0a292}, reason = moto_freezer, adj = 250, adjType = provider, adjSource = ProcessRecord{d94f142 6049:com.facebook.services/u0a253}
+03-15 14:24:50.900 D/ActivityManager( 2065): sync unfroze 18255 com.facebook.appmanager for 1
+03-15 14:24:51.076 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:24:51.077 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:24:51.095 D/ActivityManager( 2065): unfreezing ProcessRecord{ee290d4 32160:com.android.vending/u0a250}, reason = moto_freezer, adj = 100, adjType = service, adjSource = ProcessRecord{c050cd3 21529:com.google.android.gms/u0a219}
+03-15 14:24:51.096 D/ActivityManager( 2065): sync unfroze 32160 com.android.vending for 1
+03-15 14:24:51.145 I/ActivityManager( 2065): Start proc 19901:com.google.android.apps.wellbeing/u0a254 for broadcast {com.google.android.apps.wellbeing/com.google.android.apps.wellbeing.fences.screen.ScreenTurningOffReceiver_Receiver}
+03-15 14:24:51.145 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:24:51.264 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10269. pid: 19872
+03-15 14:24:51.279 D/ActivityManager( 2065): unfreezing ProcessRecord{5ec7854 15651:android.process.acore/u0a130}, reason = moto_freezer, adj = 0, adjType = provider, adjSource = ProcessRecord{9ad0615 19872:com.google.android.contacts/u0a269}
+03-15 14:24:51.279 D/ActivityManager( 2065): sync unfroze 15651 android.process.acore for 1
+03-15 14:24:51.401 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10254. pid: 19901
+03-15 14:24:51.523 W/ActivityManager( 2065): Background start not allowed: service Intent { act=com.whatsapp.messageservice.messaging.MessageService.START xflg=0x4 cmp=com.whatsapp/.messageservice.messaging.MessageService } to com.whatsapp/.messageservice.messaging.MessageService from pid=12840 uid=10401 pkg=com.whatsapp startFg?=false
+03-15 14:24:55.360 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:24:55.361 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:24:56.230 D/ActivityManager( 2065): freezing 18434 com.instagram.android, reason = moto_freezer, adj=900, adjType=cch-empty
+03-15 14:25:01.600 D/ActivityManager( 2065): freezing 19872 com.google.android.contacts, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:25:03.251 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:25:08.173 D/ActivityManager( 2065): freezing 15651 android.process.acore, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:25:12.251 D/ActivityManager( 2065): freezing 19901 com.google.android.apps.wellbeing, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:25:16.955 I/ActivityManager( 2065): Killing 18311:com.facebook.system/u0a251 (adj 995, setSvc -10000): empty #31
+03-15 14:25:16.987 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{e76fcd0 18311:com.facebook.system/u0a251} thread=android.os.BinderProxy@b95765c fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:25:27.059 D/ActivityManager( 2065): freezing 18255 com.facebook.appmanager, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:25:33.045 E/BluetoothPowerStatsCollector( 2065): java.util.concurrent.ExecutionException: java.lang.RuntimeException: error: 11
+03-15 14:25:33.045 E/BluetoothPowerStatsCollector( 2065): Caused by: java.lang.RuntimeException: error: 11
+03-15 14:28:00.010 D/ActivityManager( 2065): unfreezing ProcessRecord{bc106b9 18255:com.facebook.appmanager/u0a292}, reason = unfreezeTemporarily, adj = 920, adjType = cch-empty, adjSource = null
+03-15 14:28:00.010 D/ActivityManager( 2065): sync unfroze 18255 com.facebook.appmanager for 0
+03-15 14:28:00.013 D/ActivityManager( 2065): unfreezing ProcessRecord{3a939e2 18569:com.google.android.gm/u0a271}, reason = unfreezeTemporarily, adj = 965, adjType = cch-empty, adjSource = null
+03-15 14:28:00.014 D/ActivityManager( 2065): sync unfroze 18569 com.google.android.gm for 0
+03-15 14:28:00.024 D/ActivityManager( 2065): unfreezing ProcessRecord{afefd33 3735:com.jio.myjio/u0a455}, reason = unfreezeTemporarily, adj = 985, adjType = cch-empty, adjSource = null
+03-15 14:28:00.024 D/ActivityManager( 2065): sync unfroze 3735 com.jio.myjio for 0
+03-15 14:28:00.039 I/ActivityManager( 2065): Start proc 20051:com.glance.lockscreenM/u0a203 for service {com.glance.lockscreenM/androidx.work.impl.background.systemjob.SystemJobService}
+03-15 14:28:00.039 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:28:00.107 I/ActivityManager( 2065): Start proc 20067:com.facebook.system/u0a251 for broadcast {com.facebook.system/com.facebook.oxygen.installer.storage.PeriodicCleanupReceiver}
+03-15 14:28:00.107 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:28:00.179 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10251. pid: 20067
+03-15 14:28:00.512 D/ActivityManager( 2065): unfreezing ProcessRecord{2227d37 18434:com.instagram.android/u0a392}, reason = moto_freezer, adj = 250, adjType = provider, adjSource = ProcessRecord{bc106b9 18255:com.facebook.appmanager/u0a292}
+03-15 14:28:00.513 D/ActivityManager( 2065): sync unfroze 18434 com.instagram.android for 1
+03-15 14:28:00.615 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10203. pid: 20051
+03-15 14:28:00.660 D/ActivityManager( 2065): unfreezing ProcessRecord{ee290d4 32160:com.android.vending/u0a250}, reason = unfreezeTemporarily, adj = 915, adjType = cch-empty, adjSource = null
+03-15 14:28:00.660 D/ActivityManager( 2065): sync unfroze 32160 com.android.vending for 0
+03-15 14:28:00.942 W/ActivityManager( 2065): Background start not allowed: service Intent { act=com.whatsapp.messageservice.messaging.MessageService.START xflg=0x4 cmp=com.whatsapp/.messageservice.messaging.MessageService } to com.whatsapp/.messageservice.messaging.MessageService from pid=12840 uid=10401 pkg=com.whatsapp startFg?=false
+03-15 14:28:01.003 I/ActivityManager( 2065): Killing 18381:com.android.chrome/u0a264 (adj 900, setSvc -10000): empty #31
+03-15 14:28:01.004 I/ActivityManager( 2065): Killing 16878:com.google.android.apps.photos/u0a283 (adj 985, setSvc -10000): empty #32
+03-15 14:28:01.043 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{afbeafd 18381:com.android.chrome/u0a264} thread=android.os.BinderProxy@4cf1fb3 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:28:01.068 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{f69dca 16878:com.google.android.apps.photos/u0a283} thread=android.os.BinderProxy@f4b3970 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:28:03.865 D/ActivityManager( 2065): freezing 20051 com.glance.lockscreenM, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:28:10.235 D/ActivityManager( 2065): freezing 3735 com.jio.myjio, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:28:10.358 D/ActivityManager( 2065): freezing 18569 com.google.android.gm, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:28:12.039 D/ActivityManager( 2065): freezing 18434 com.instagram.android, reason = moto_freezer, adj=900, adjType=cch-empty
+03-15 14:28:12.042 D/ActivityManager( 2065): freezing 18255 com.facebook.appmanager, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:28:12.043 D/ActivityManager( 2065): freezing 20067 com.facebook.system, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:28:14.856 I/ActivityManager( 2065): Killing 18402:com.motorola.personalize/u0a338 (adj 999, setSvc -10000): empty #31
+03-15 14:28:14.929 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:28:14.929 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@4b40ea7
+03-15 14:28:14.936 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:28:14.936 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:28:14.990 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{97b9da2 18402:com.motorola.personalize/u0a338} thread=android.os.BinderProxy@a06c651 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:28:14.991 W/ActivityManager( 2065): Scheduling restart of crashed service com.motorola.personalize/.plugin.LockScreenPluginService in 1000ms for connection
+03-15 14:28:14.991 W/ActivityManager( 2065): pid 2579 com.android.systemui sent binder code 3 with flags 1 to frozen apps and got error -32
+03-15 14:28:15.030 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:28:15.030 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:28:15.033 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:28:15.033 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:28:15.113 D/ActivityManager( 2065): unfreezing ProcessRecord{5ec7854 15651:android.process.acore/u0a130}, reason = moto_freezer, adj = 100, adjType = provider, adjSource = ProcessRecord{9a6cd75 4017:com.google.android.inputmethod.latin/u0a270}
+03-15 14:28:15.114 D/ActivityManager( 2065): sync unfroze 15651 android.process.acore for 1
+03-15 14:28:15.538 D/ActivityManager( 2065): unfreezing ProcessRecord{5d56ea1 19229:com.motorola.dolby.dolbyui/u0a170}, reason = unfreezeTemporarily, adj = 975, adjType = cch-empty, adjSource = null
+03-15 14:28:15.538 D/ActivityManager( 2065): sync unfroze 19229 com.motorola.dolby.dolbyui for 3
+03-15 14:28:16.998 E/BluetoothPowerStatsCollector( 2065): java.util.concurrent.ExecutionException: java.lang.RuntimeException: error: 11
+03-15 14:28:16.998 E/BluetoothPowerStatsCollector( 2065): Caused by: java.lang.RuntimeException: error: 11
+03-15 14:28:20.333 I/ActivityManager( 2065): Force stopping com.example.healthpredict appid=10431 user=0: from pid 20294 and uid 2000
+03-15 14:28:20.334 I/ActivityManager( 2065): Killing 19361:com.example.healthpredict/u0a431 (adj 0, setSvc -10000): stop com.example.healthpredict due to from pid 20294 and uid 2000
+03-15 14:28:20.357 W/ActivityManager( 2065): Invalid packageName: com.example.healthpredict
+03-15 14:28:20.357 I/ActivityManager( 2065): Force stopping com.example.healthpredict appid=10431 user=0: from pid 20296 and uid 2000
+03-15 14:28:20.363 W/ActivityManager( 2065): Invalid packageName: com.example.healthpredict
+03-15 14:28:20.373 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:28:20.373 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@7abd0d7
+03-15 14:28:20.389 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:28:20.389 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@d9321f0
+03-15 14:28:20.405 V/ActivityManager( 2065): Got obituary of 19361:com.example.healthpredict
+03-15 14:28:20.407 W/ActivityManager( 2065): setHasOverlayUi called on unknown pid: 19361
+03-15 14:28:20.912 W/ActivityManager( 2065): pid 2065 system sent binder code 7 with flags 1 to frozen apps and got error -32
+03-15 14:28:20.912 W/WindowManager( 2065): Exception thrown during dispatchAppVisibility Window{e3816de u0 com.example.healthpredict/com.example.healthpredict.DoctorCasesActivity EXITING}
+03-15 14:28:20.912 W/WindowManager( 2065): android.os.DeadObjectException
+03-15 14:28:21.139 I/ActivityManager( 2065): Force stopping com.example.healthpredict appid=10431 user=-1: installPackageLI
+03-15 14:28:21.148 I/ActivityManager( 2065): Force stopping com.example.healthpredict appid=10431 user=0: pkg removed
+03-15 14:28:21.184 I/ActivityManager( 2065): Start proc 20349:com.android.keychain/1000 for service {com.android.keychain/com.android.keychain.KeyChainService}
+03-15 14:28:21.184 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:28:21.254 W/ActivityManager( 2065): Slow operation: 55ms so far, now at startProcess: returned from zygote!
+03-15 14:28:21.255 W/ActivityManager( 2065): Slow operation: 69ms so far, now at startProcess: done updating battery stats
+03-15 14:28:21.255 W/ActivityManager( 2065): Slow operation: 69ms so far, now at startProcess: building log message
+03-15 14:28:21.255 I/ActivityManager( 2065): Start proc 20350:com.android.vending:background/u0a250 for broadcast {com.android.vending/com.google.android.finsky.packagemonitor.backgroundimpl.BackgroundPackageMonitorReceiverImpl$RegisteredReceiver}
+03-15 14:28:21.255 W/ActivityManager( 2065): Slow operation: 69ms so far, now at startProcess: starting to update pids map
+03-15 14:28:21.255 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:28:21.255 W/ActivityManager( 2065): Slow operation: 69ms so far, now at startProcess: done updating pids map
+03-15 14:28:21.272 E/ApplicationManager( 2065): android.content.pm.PackageManager$NameNotFoundException: com.example.healthpredict
+03-15 14:28:21.308 I/ActivityManager( 2065): Start proc 20392:com.motorola.motosecurecore/u0a325 for broadcast {com.motorola.motosecurecore/com.motorola.motosecurecore.listener.PackageChangedReceiver}
+03-15 14:28:21.308 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:28:21.377 I/ActivityManager( 2065): Force stopping com.example.healthpredict appid=10431 user=0: from pid 20409 and uid 2000
+03-15 14:28:21.379 W/ActivityManager( 2065): Invalid packageName: com.example.healthpredict
+03-15 14:28:21.389 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 1000. pid: 20349
+03-15 14:28:21.665 D/ActivityManager( 2065): unfreezing ProcessRecord{965b35a 19901:com.google.android.apps.wellbeing/u0a254}, reason = moto_freezer, adj = 100, adjType = provider, adjSource = ProcessRecord{b1f8487 5567:com.motorola.launcher3/u0a318}
+03-15 14:28:21.665 D/ActivityManager( 2065): sync unfroze 19901 com.google.android.apps.wellbeing for 1
+03-15 14:28:21.839 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10325. pid: 20392
+03-15 14:28:21.886 D/ActivityManager( 2065): unfreezing ProcessRecord{cb39969 9247:com.google.android.adservices.api/u0a357}, reason = moto_freezer, adj = 0, adjType = service, adjSource = ProcessRecord{728455d 8695:com.google.android.googlequicksearchbox:googleapp/u0a255}
+03-15 14:28:21.887 D/ActivityManager( 2065): sync unfroze 9247 com.google.android.adservices.api for 1
+03-15 14:28:21.896 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:28:21.897 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@b812869
+03-15 14:28:22.267 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10250. pid: 20350
+03-15 14:28:22.414 W/ActivityManager( 2065): Slow operation: 85ms so far, now at startProcess: returned from zygote!
+03-15 14:28:22.415 W/ActivityManager( 2065): Slow operation: 86ms so far, now at startProcess: done updating battery stats
+03-15 14:28:22.415 W/ActivityManager( 2065): Slow operation: 86ms so far, now at startProcess: building log message
+03-15 14:28:22.415 I/ActivityManager( 2065): Start proc 20481:com.example.healthpredict/u0a431 for next-top-activity {com.example.healthpredict/com.example.healthpredict.SplashActivity}
+03-15 14:28:22.415 W/ActivityManager( 2065): Slow operation: 86ms so far, now at startProcess: starting to update pids map
+03-15 14:28:22.415 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:28:22.415 W/ActivityManager( 2065): Slow operation: 86ms so far, now at startProcess: done updating pids map
+03-15 14:28:22.530 W/ActivityManager( 2065): Slow operation: 84ms so far, now at attachApplicationLocked: before bindApplication
+03-15 14:28:22.530 W/ActivityManager( 2065): Slow operation: 84ms so far, now at attachApplicationLocked: immediately before bindApplication
+03-15 14:28:22.532 W/ActivityManager( 2065): Slow operation: 86ms so far, now at attachApplicationLocked: immediately after bindApplication
+03-15 14:28:22.532 W/ActivityManager( 2065): Slow operation: 86ms so far, now at attachApplicationLocked: after updateLruProcessLocked
+03-15 14:28:22.533 W/ActivityManager( 2065): Slow operation: 87ms so far, now at attachApplicationLocked: after updateOomAdjLocked
+03-15 14:28:22.601 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:28:22.601 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@5998e00
+03-15 14:28:22.757 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10431. pid: 20481
+03-15 14:28:23.091 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:28:23.091 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@1a0061e
+03-15 14:28:23.726 W/ActivityManager( 2065): pid 2065 system sent binder code 2 with flags 1 to frozen apps and got error -32
+03-15 14:28:33.149 D/ActivityManager( 2065): freezing 9247 com.google.android.adservices.api, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:28:37.963 D/ActivityManager( 2065): freezing 19229 com.motorola.dolby.dolbyui, reason = moto_freezer, adj=975, adjType=cch-empty
+03-15 14:28:38.480 D/ActivityManager( 2065): unfreezing ProcessRecord{5d56ea1 19229:com.motorola.dolby.dolbyui/u0a170}, reason = unfreezeTemporarily, adj = 975, adjType = cch-empty, adjSource = null
+03-15 14:28:38.480 D/ActivityManager( 2065): sync unfroze 19229 com.motorola.dolby.dolbyui for 3
+03-15 14:28:41.959 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.uwb' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:41.966 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.widevine.nonupdatable' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:41.968 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.nfcservices' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.059 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.motorola.motosecure' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.064 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.apex.cts.shim' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.102 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.appsearch' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.117 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.art' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.132 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.bt' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.195 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.mediaprovider' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.233 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.virt' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.235 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.resolv' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.255 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.configinfrastructure' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.256 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.media' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.272 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.vndk.v31' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.280 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.vndk.v33' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.281 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.vndk.v34' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.302 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.crashrecovery' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.331 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.sdkext' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.343 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.adservices' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.346 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.tethering' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.370 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.runtime' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.403 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.cellbroadcast' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.428 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.rkpd' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.593 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.motorola.enterprise' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.651 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.tzdata6' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.681 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.permission' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:42.723 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.wifi' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.375 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.media.swcodec' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.381 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.uprobestats' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.381 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.motorola.modules.factorycustomization' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.390 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.profiling' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.439 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.adbd' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.454 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.i18n' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.467 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.conscrypt' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.500 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.neuralnetworks' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.506 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.ipsec' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.508 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.android.devicelock' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.527 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.ondevicepersonalization' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.554 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.healthfitness' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.608 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.extservices' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.675 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.os.statsd' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:43.705 W/Finsky  (32160): [2] STU: Failed to get storage stats for package 'com.google.android.scheduling' (1601: Error getting stats: android.content.pm.PackageManager.NameNotFoundException)
+03-15 14:28:49.673 I/ActivityManager( 2065): Killing 18763:com.google.android.projection.gearhead:provider/u0a181 (adj 995, setSvc -10000): empty #31
+03-15 14:28:49.718 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{4ff03a0 18763:com.google.android.projection.gearhead:provider/u0a181} thread=android.os.BinderProxy@b2f38e6 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:28:49.719 I/ActivityManager( 2065): Killing 18568:com.google.android.dialer/u0a213 (adj 995, setSvc -10000): depends on provider com.google.android.projection.gearhead/com.google.android.apps.auto.components.projectionstate.ProjectionStateProvider in dying proc com.google.android.projection.gearhead:provider (adj -10000)
+03-15 14:28:49.746 I/ActivityManager( 2065): Killing 19083:com.android.providers.calendar/u0a133 (adj 920, setSvc -10000): empty #31
+03-15 14:28:49.774 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{be5dbc8 19083:com.android.providers.calendar/u0a133} thread=android.os.BinderProxy@b25fd72 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:28:49.782 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{6fa8e56 18568:com.google.android.dialer/u0a213} thread=android.os.BinderProxy@a91d5c3 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:28:49.789 W/ActivityManager( 2065): pid 2065 system sent binder code 2 with flags 1 to frozen apps and got error -32
+03-15 14:28:49.789 I/TextToSpeechManagerPerUserService( 2065): Failed running callback method: android.os.DeadObjectException
+03-15 14:28:49.877 I/ActivityManager( 2065): Killing 18223:com.motorola.aicore/u0a182 (adj 995, setSvc -10000): empty #31
+03-15 14:28:49.924 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{b6254a9 18223:com.motorola.aicore/u0a182} thread=android.os.BinderProxy@6314c35 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:28:52.141 D/ActivityManager( 2065): freezing 15651 android.process.acore, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:28:59.738 D/ActivityManager( 2065): freezing 19229 com.motorola.dolby.dolbyui, reason = moto_freezer, adj=995, adjType=cch-empty
+03-15 14:28:59.828 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:28:59.830 D/ActivityManager( 2065): freezing 20350 com.android.vending:background, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:28:59.849 D/ActivityManager( 2065): freezing 19901 com.google.android.apps.wellbeing, reason = moto_freezer, adj=920, adjType=cch-empty
+03-15 14:28:59.979 D/ActivityManager( 2065): freezing 18728 com.google.android.tts, reason = moto_freezer, adj=915, adjType=cch-empty
+03-15 14:29:01.065 I/ActivityManager( 2065): Start proc 20612:com.android.chrome/u0a264 for aitune
+03-15 14:29:01.065 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:29:01.110 I/ActivityManager( 2065): Killing 19267:com.motorola.moto/u0a221 (adj 999, setSvc -10000): empty #31
+03-15 14:29:01.139 I/ActivityManager( 2065): appDiedLocked: app=ProcessRecord{d2d496a 19267:com.motorola.moto/u0a221} thread=android.os.BinderProxy@8f9c059 fromBinderDied=true isKilledByAm=true reason=null
+03-15 14:29:01.282 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10264. pid: 20612
+03-15 14:29:11.217 D/ActivityManager( 2065): freezing 20612 com.android.chrome, reason = moto_freezer, adj=900, adjType=cch-empty
+03-15 14:29:58.094 D/ActivityManager( 2065): unfreezing ProcessRecord{2227d37 18434:com.instagram.android/u0a392}, reason = unfreezeTemporarily, adj = 900, adjType = cch-empty, adjSource = null
+03-15 14:29:58.096 D/ActivityManager( 2065): sync unfroze 18434 com.instagram.android for 3
+03-15 14:29:58.127 E/msys    (18434): E[N MQTT]onConnectError(562)=>Connect Error: folly::AsyncSocketException: AsyncSocketException: connect failed, type = Socket not open, errno = 103 (Software caused connection abort)
+03-15 14:29:59.508 W/ActivityManager( 2065): Unable to start service Intent { flg=0x4 xflg=0x4 cmp=com.video.fun.app/androidx.work.impl.background.systemjob.SystemJobService } U=0: not found
+03-15 14:29:59.508 W/ActivityManager( 2065): Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@4278669
+03-15 14:29:59.735 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:29:59.736 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:29:59.756 D/ActivityManager( 2065): unfreezing ProcessRecord{ee290d4 32160:com.android.vending/u0a250}, reason = moto_freezer, adj = 100, adjType = service, adjSource = ProcessRecord{c050cd3 21529:com.google.android.gms/u0a219}
+03-15 14:29:59.758 D/ActivityManager( 2065): sync unfroze 32160 com.android.vending for 1
+03-15 14:29:59.758 D/ActivityManager( 2065): unfreezing ProcessRecord{a352d94 20350:com.android.vending:background/u0a250}, reason = moto_freezer, adj = 945, adjType = cch-empty, adjSource = null
+03-15 14:29:59.759 D/ActivityManager( 2065): sync unfroze 20350 com.android.vending:background for 1
+03-15 14:29:59.805 D/ActivityManager( 2065): unfreezing ProcessRecord{965b35a 19901:com.google.android.apps.wellbeing/u0a254}, reason = unfreezeTemporarily, adj = 935, adjType = cch-empty, adjSource = null
+03-15 14:29:59.806 D/ActivityManager( 2065): sync unfroze 19901 com.google.android.apps.wellbeing for 3
+03-15 14:30:00.095 W/ActivityManager( 2065): Background start not allowed: service Intent { act=com.whatsapp.messageservice.messaging.MessageService.START xflg=0x4 cmp=com.whatsapp/.messageservice.messaging.MessageService } to com.whatsapp/.messageservice.messaging.MessageService from pid=12840 uid=10401 pkg=com.whatsapp startFg?=false
+03-15 14:30:03.149 E/msys    (18434): E[N MQTT]onReadError(657)=>Read Error: AsyncSocketException: recv() failed (peer=[2a03:2880:f335:90:face:b00c:0:8e]:443), type = Internal error, errno = 103 (Software caused connection abort)
+03-15 14:30:04.073 E/PersistenceController( 2065): SettingNotFoundException: sv_fingerprint_enabled
+03-15 14:30:04.073 E/PersistenceController( 2065): SettingNotFoundException: sv_face_enabled
+03-15 14:30:04.101 I/ActivityManager( 2065): Start proc 20689:com.motorola.personalize/u0a338 for service {com.motorola.personalize/com.motorola.personalize.plugin.LockScreenPluginService}
+03-15 14:30:04.101 I/ActivityManager( 2065): ProcessObserver broadcast disabled
+03-15 14:30:04.237 I/ActivityManager( 2065): Flag disabled. Ignoring finishAttachApplication from uid: 10338. pid: 20689
+03-15 14:30:04.506 W/System.err( 2579): java.lang.ArithmeticException: divide by zero
+03-15 14:30:04.509 W/System.err( 2579): java.lang.NumberFormatException: For input string: "--"
+03-15 14:30:08.250 D/ActivityManager( 2065): freezing 18434 com.instagram.android, reason = moto_freezer, adj=900, adjType=cch-empty
+03-15 14:30:09.864 D/ActivityManager( 2065): freezing 32160 com.android.vending, reason = moto_freezer, adj=965, adjType=service
+03-15 14:30:09.866 D/ActivityManager( 2065): freezing 20350 com.android.vending:background, reason = moto_freezer, adj=945, adjType=cch-empty
+03-15 14:30:20.928 D/ActivityManager( 2065): freezing 19901 com.google.android.apps.wellbeing, reason = moto_freezer, adj=925, adjType=cch-empty

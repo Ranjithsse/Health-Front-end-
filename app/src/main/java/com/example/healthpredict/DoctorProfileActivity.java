@@ -56,12 +56,14 @@ public class DoctorProfileActivity extends AppCompatActivity {
     }
 
     private void loadStatsFromServer() {
-        ApiService apiService = RetrofitClient.getApiService();
+        ApiService apiService = RetrofitClient.getApiService(this);
         apiService.getDashboardStats().enqueue(new Callback<Map<String, Object>>() {
             @Override
             public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    updateStatsUI(response.body());
+                    Map<String, Object> stats = response.body();
+                    updateStatsUI(stats);
+                    updateProfileDetails(stats);
                 }
             }
 
@@ -70,6 +72,38 @@ public class DoctorProfileActivity extends AppCompatActivity {
                 // Fallback to static
             }
         });
+    }
+
+    private void updateProfileDetails(Map<String, Object> details) {
+        TextView tvName = findViewById(R.id.tvProfileName);
+        TextView tvDetail = findViewById(R.id.tvProfileDetail);
+
+        if (tvName != null) {
+            String name = (String) details.get("doctor_name");
+            if (name != null && !name.isEmpty()) {
+                tvName.setText(name);
+            } else {
+                tvName.setText(""); // Clear hardcoded placeholder
+            }
+        }
+
+        if (tvDetail != null) {
+            String hospital = (String) details.get("hospital_name");
+            String special = (String) details.get("specialization");
+
+            StringBuilder sb = new StringBuilder();
+            if (special != null && !special.isEmpty()) {
+                sb.append(special);
+            }
+            if (hospital != null && !hospital.isEmpty()) {
+                if (sb.length() > 0)
+                    sb.append(" • ");
+                sb.append(hospital);
+            }
+
+            // Always update the text view, even if empty, to clear hardcoded placeholder
+            tvDetail.setText(sb.toString());
+        }
     }
 
     private void updateStatsUI(Map<String, Object> stats) {

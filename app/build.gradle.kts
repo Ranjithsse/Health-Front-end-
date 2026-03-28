@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.healthpredict"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.healthpredict"
@@ -28,6 +28,12 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 

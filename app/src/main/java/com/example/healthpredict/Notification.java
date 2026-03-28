@@ -8,6 +8,7 @@ public class Notification {
     @com.google.gson.annotations.SerializedName("created_at_human")
     private String time;
     private String type; // SUCCESS, INFO, ALERT
+    private boolean isRead = false;
 
     public Notification(String title, String description, String time, String type) {
         this.title = title;
@@ -30,5 +31,13 @@ public class Notification {
 
     public String getType() {
         return type;
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean read) {
+        isRead = read;
     }
 }

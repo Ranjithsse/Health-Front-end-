@@ -7,5 +7,10 @@
     </base-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">10.0.2.2</domain>
+
+        <domain includeSubdomains="true">10.11.176.135</domain>
+        <domain includeSubdomains="true">172.29.245.123</domain>
+        <domain includeSubdomains="true">10.189.172.64</domain>
+        <domain includeSubdomains="true">10.19.162.179</domain>
     </domain-config>
 </network-security-config>

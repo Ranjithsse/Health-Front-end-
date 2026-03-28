@@ -17,6 +17,7 @@
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="reset_password">Reset Password</string>
     <string name="desc_back">Back</string>
+    <string name="desc_success">Success Checkmark</string>
     <string name="reset_password_title">Reset Password</string>
     <string name="reset_password_subtitle">Enter your email to receive instructions</string>
     <string name="send_reset_link">Send Reset Link</string>
