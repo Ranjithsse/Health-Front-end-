@@ -16,7 +16,7 @@ public class RetrofitClient {
     private static String getBaseUrl(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("HealthPredictPrefs", Context.MODE_PRIVATE);
         // Using Android Emulator 10.0.2.2 as the default base URL
-        String defaultUrl = "https://jjgqvztm-8000.inc1.devtunnels.ms/" +
+        String defaultUrl = "http://180.235.121.245:8046/" +
                 "";
         String baseUrl = prefs.getString("server_url", defaultUrl);
 
